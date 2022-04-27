@@ -42,7 +42,6 @@ GIT_EMAIL = os.environ["GIT_EMAIL"]
 
 MPR_URL = "mpr.makedeb.org"
 PROGET_URL = "proget.hunterwittenborn.com"
-PREBUILT_MPR_PKGLIST = f"https://{PROGET_URL}/dists/makedeb/main/binary-all/Packages"
 MPR_ARCHIVE_URL = f"https://{MPR_URL}/packages-meta-ext-v2.json.gz"
 GITHUB_REPO = "makedeb/prebuilt-mpr-v2"
 GITHUB_REPO_URL = f"https://{GITHUB_USERNAME}:{GITHUB_PAT}@github.com/{GITHUB_REPO}"
@@ -64,24 +63,6 @@ def get_mpr_package(pkgname, mpr_packages):
         if pkg["Name"] == pkgname:
             return pkg
 
-def get_latest_version(pkgname, prebuilt_mpr_packages):
-    candidates = []
-
-    for pkg in prebuilt_mpr_packages:
-        if pkg["Package"] == pkgname:
-            candidates += [pkg]
-    
-    if len(candidates) == 0:
-        return None
-    
-    highest_version = candidates[0]["Version"]
-
-    for candidate in candidates:
-        if apt_pkg.version_compare(candidate["Version"], highest_version) > 0:
-            higest_version = candidate["Version"]
-
-    return highest_version
-
 def run_command(*args, **kwargs):
     cmd = subprocess.run(*args, **kwargs, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -89,6 +70,14 @@ def run_command(*args, **kwargs):
         raise BadExitCode(cmd.stderr.decode())
     
     return cmd
+
+def get_prebuilt_mpr_version(pkgname):
+    try:
+        return json.loads(
+            run_command(["git", "show", f"main:packages/{pkgname}"]).stdout.decode()
+        )["version"]
+    except BadExitCode:
+        return None
 
 # Ensure that we stop processing packages if we recieve a SIGINT or SIGTERM.
 sig_interrupt = False
@@ -129,26 +118,6 @@ def main():
     logging.info("Fetching MPR package list...")
     mpr_packages = requests.get(MPR_ARCHIVE_URL).json()
 
-    # Fetch current package list from ProGet.
-    logging.info("Fetching Prebuilt-MPR package list...")
-    pkglist_data = requests.get(PREBUILT_MPR_PKGLIST).text
-
-    # Write the data to a temporary file so we can process it via the apt_pkg.TagFile call.
-    pkglist_file = tempfile.NamedTemporaryFile("w")
-    pkglist_file.write(pkglist_data)
-
-    # Read the pkglist file.
-    prebuilt_mpr_packages = []
-
-    with apt_pkg.TagFile(pkglist_file.name) as file:
-        while file.step():
-            current_pkg = {}
-
-            for key in file.section.keys():
-                current_pkg[key] = file.section[key]
-
-            prebuilt_mpr_packages += [current_pkg]
-
     # Check for packages that need to be updated.
     ood_packages = []
 
@@ -156,8 +125,8 @@ def main():
         pkgname = pkg["Name"]
         mpr_version = pkg["Version"]
 
-        prebuilt_mpr_version = get_latest_version(pkgname, prebuilt_mpr_packages)
-    
+        prebuilt_mpr_version = get_prebuilt_mpr_version(pkgname)
+
         # If a version couldn't be found, that means the package hasen't been added, and we need to run a CI pipeline for it.
         if prebuilt_mpr_version is None:
             ood_packages += [pkgname]
