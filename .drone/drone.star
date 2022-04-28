@@ -13,6 +13,7 @@ def _pipeline(ctx, docker_image):
             "event": event_triggers,
             "branch": ["pkg/*"]
         },
+        "node": {"server": "prebuilt-mpr"},
         "steps": [
             {
                 "name": "build",
