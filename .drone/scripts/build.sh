@@ -19,4 +19,4 @@ git clone "https://mpr.makedeb.org/${pkgname}" -b "ver/${pkgver}"
 
 # Build the package.
 cd "${pkgname}/"
-makedeb -s --no-confirm --skip-pgp-check
+makedeb -s --no-confirm
