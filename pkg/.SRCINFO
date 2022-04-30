@@ -1,0 +1,27 @@
+generated-by = makedeb-makepkg
+
+pkgbase = gotify-server-bin
+	pkgdesc = A simple server for sending and receiving messages
+	pkgver = 2.1.4
+	pkgrel = 1
+	url = https://github.com/gotify/server
+	arch = x86_64
+	license = MIT
+	depends = libc6
+	provides = gotify-server
+	conflicts = gotify-server
+	backup = etc/gotify/config.yml
+	source = https://github.com/gotify/server/releases/download/v2.1.4/gotify-linux-amd64.zip
+	source = https://raw.githubusercontent.com/gotify/server/v2.1.4/config.example.yml
+	source = gotify-deb-defaults.patch
+	source = gotify-server.tmpfiles
+	source = gotify-server.sysusers
+	source = gotify-server.service
+	sha256sums = 98b126e5d934d45b1390b1a1b9136e7690518bfdbb731a75a45a55e86291af4b
+	sha256sums = d6f9716c7f67cfb518f3f50a18cbc950ef3e8e9c8ba1f226654dfdd3bf8226d4
+	sha256sums = 9217eca57733f40a0a5691d962db01ae294f7a32f234bd56003878802106f542
+	sha256sums = 14bd1a9270b089b99d9bbe8ebdd0c208c3f74c7347a792d508ffce75b0e1c641
+	sha256sums = 4fbff6e5ade1ec96cff61b4bc933ef7771f63b6df5c8e43323a8fe4d341a5a4d
+	sha256sums = bcfa3f4cc7ffa44a41ea7247ca4bf879bea6e6e1da79f85ed9bb4141b8501028
+
+pkgname = gotify-server-bin
