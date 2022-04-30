@@ -1,0 +1,32 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+# Maintainer: TwilightBlood <hwengerstickel@pm.me>
+
+
+_pkgname=stoke
+pkgname=$_pkgname-git
+pkgver=1.45.da2970e
+pkgdesc="A MPR helper written in bash."
+pkgrel=2
+depends=('jq')
+arch=('x86_64')
+url="https://github.com/Henryws/$_pkgname"
+provides=('stoke')
+conflicts=('stoke')
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$_pkgname"
+
+  printf "1.%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+
+package() {
+  cd "$_pkgname"
+  install -Dm755 stoke -t "${pkgdir}/usr/bin/"
+  rm -f stoke
+  mv stoke-completions stoke
+  install -Dm755 stoke -t "${pkgdir}/usr/share/bash-completions/completions/"
+
+}

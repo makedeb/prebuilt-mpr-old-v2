@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = stoke-git
+	pkgdesc = A MPR helper written in bash.
+	pkgver = 1.45.da2970e
+	pkgrel = 2
+	url = https://github.com/Henryws/stoke
+	arch = x86_64
+	depends = jq
+	provides = stoke
+	conflicts = stoke
+	source = git+https://github.com/Henryws/stoke.git
+	sha256sums = SKIP
+
+pkgname = stoke-git
