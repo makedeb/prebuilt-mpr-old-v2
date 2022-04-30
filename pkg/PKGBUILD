@@ -1,0 +1,53 @@
+# Maintainer: Keitachikawa <keitachikawa@gmail.com>
+# Comaintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=spotify
+pkgver=1.1.80.699
+#epoch=1
+_commit=gc3dac750
+pkgrel=1
+pkgdesc='A proprietary music streaming service'
+arch=('x86_64')
+license=('custom')
+url='https://www.spotify.com'
+provides=($pkgname)
+conflicts=($pkgname)
+depends=('libasound2' 'libatk-bridge2.0-0' 'libatomic1' 'libcurl3-gnutls' 'libgbm1' 'libgconf-2-4' 'libglib2.0-0' 'libgtk-3-0'
+        'libnss3' 'libssl1.1' 'libxshmfence1' 'libxss1' 'libxtst6' 'xdg-utils')
+
+optdepends=('libavcodec58' 'libavcodec-extra58' 'libavformat58'
+            'libnotify4: Desktop notifications')
+options=('!strip')
+
+source=("http://repository.spotify.com/pool/non-free/s/spotify-client/spotify-client_${pkgver}.${_commit}_amd64.deb"
+        "spotify.protocol"
+        "LICENSE")
+        
+sha256sums=('19f80255b89d768969ff9d6a05d90091a30c05f65eabdd968592d47a7754b80e'
+            'af54f3b90cac46fa100b3f919a9225d10d847617d24aa9af3d832e7689f482c3'
+            '4e8bea31ca27e16cac9c9dcd8f6ec27e1f82b45de86d6fee7a1e77e23f884b92')
+
+package() {
+    cd $srcdir
+
+    tar -xzf 'data.tar.gz' -C "${pkgdir}"
+
+    # we ignore the postinst and prerm because they add the spotify repository 
+    #mkdir -p "${pkgdir}/DEBIAN"
+    #tar -xf 'control.tar.gz' -C "${pkgdir}/DEBIAN"
+    #rm "${pkgdir}/DEBIAN/control"
+
+    for size in 22 24 32 48 64 128 256 512; do
+        install -D -m644 "${pkgdir}/usr/share/spotify/icons/spotify-linux-$size.png" \
+            "${pkgdir}/usr/share/icons/hicolor/${size}x${size}/apps/spotify.png"
+    done
+
+    install -D -m644 "${pkgdir}"/usr/share/spotify/spotify.desktop -t "${pkgdir}"/usr/share/applications
+    
+    # Copy protocol file for KDE
+    install -D -m644 "${srcdir}/spotify.protocol" "${pkgdir}/usr/share/kservices5/spotify.protocol"
+
+    # Install license
+    # https://www.spotify.com/legal/end-user-agreement
+    install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
