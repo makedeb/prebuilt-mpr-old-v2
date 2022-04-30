@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = kotlin
+	pkgdesc = Statically typed programming language that can interoperate with Java
+	pkgver = 1.6.10
+	pkgrel = 1
+	url = https://kotlinlang.org/
+	arch = any
+	license = APACHE Custom
+	makedepends = setconf
+	depends = openjdk-11-jre
+	source = https://github.com/JetBrains/kotlin/releases/download/v1.6.10/kotlin-compiler-1.6.10.zip
+	b2sums = 8f6bbc18ae8fb03b2450a0c0b58fd29c3c08e8c67cac97c4e77eee2b99ae492f2d71f56192dfbed278501c5595b7dc38fbef1842c9ce962a1572b662734d5a8d
+
+pkgname = kotlin

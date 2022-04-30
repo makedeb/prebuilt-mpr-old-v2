@@ -1,0 +1,54 @@
+# Maintainer: Matt Spaulding <matt@mattops.io>
+
+pkgname=kotlin
+pkgver=1.6.10
+pkgrel=1
+pkgdesc='Statically typed programming language that can interoperate with Java'
+arch=(any)
+url='https://kotlinlang.org/'
+license=('APACHE Custom')
+depends=('openjdk-11-jre')
+makedepends=(setconf)
+source=("https://github.com/JetBrains/kotlin/releases/download/v${pkgver/_/-}/kotlin-compiler-${pkgver/_/-}.zip")
+b2sums=('8f6bbc18ae8fb03b2450a0c0b58fd29c3c08e8c67cac97c4e77eee2b99ae492f2d71f56192dfbed278501c5595b7dc38fbef1842c9ce962a1572b662734d5a8d')
+
+prepare() {
+  cd ${pkgname}c/bin
+
+  setconf kotlin      DIR         /usr/bin
+  setconf kotlinc-js  DIR         /usr/bin
+  setconf kotlinc-jvm DIR         /usr/bin
+  setconf kotlinc     KOTLIN_HOME /usr/share/$pkgname
+}
+
+package() {
+  cd ${pkgname}c
+
+  # executables
+  install -Dm755 -t "$pkgdir/usr/bin" bin/kotlin
+  install -Dm755 -t "$pkgdir/usr/bin" bin/kotlinc
+  install -Dm755 -t "$pkgdir/usr/bin" bin/kotlinc-js
+  install -Dm755 -t "$pkgdir/usr/bin" bin/kotlinc-jvm
+
+  # jar files
+  cd lib
+  install -d "$pkgdir/usr/share/$pkgname/lib"
+  for jar in *.jar; do
+    install -Dm644 "$jar" "$pkgdir/usr/share/$pkgname/lib"
+  done
+
+  # licenses
+  cd "$srcdir/${pkgname}c/license"
+  install -d "$pkgdir/usr/share/doc/$pkgname"
+  install -Dm644 LICENSE.txt "$pkgdir/usr/share/doc/$pkgname/copyright"
+  install -Dm644 NOTICE.txt "$pkgdir/usr/share/doc/$pkgname"
+  for txt in third_party/*.txt; do
+    install -Dm644 "$txt" "$pkgdir/usr/share/doc/$pkgname"
+  done
+
+  # build.txt must be installed for "-version" to work
+  cd $srcdir/${pkgname}c
+  install -Dm644 build.txt "$pkgdir/usr/share/$pkgname"
+}
+
+# getver: github.com/JetBrains/kotlin/releases/latest
