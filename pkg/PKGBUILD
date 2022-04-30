@@ -1,0 +1,40 @@
+# Contributor: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Maksym Titenko <titenko.m@gmail.com>
+# Maintainer: Aryan Pathania <aynp>
+
+pkgname=fishui
+pkgver=0.4
+pkgrel=1
+pkgdesc="GUI library based on QQC2 for Cutefish applications"
+arch=('x86_64')
+url="https://github.com/cutefishos/fishui"
+control_fields=("MPR-Package: ${pkgname}")
+license=('GPL')
+depends=(
+'qml-module-qtquick-controls2'
+'qml-module-qtquick2'
+'libc6'
+'libgcc-s1'
+'libkf5windowsystem5'
+'libqt5core5a'
+'libqt5dbus5'
+'libqt5gui5'
+'libqt5qml5'
+'libqt5quick5'
+'libqt5x11extras5'
+'libstdc++6' )
+makedepends=('extra-cmake-modules' 'ninja-build' 'libxcb1-dev' 'libxcb-shape0-dev' 'libxcb-icccm4-dev' 'libkf5windowsystem-dev' 'libqt5x11extras5-dev' 'qtbase5-dev' 'qtbase5-private-dev' 'qtdeclarative5-dev' 'qtquickcontrols2-5-dev' 'qttools5-dev' 'qttools5-dev-tools')
+source=("${pkgname}::git+https://github.com/cutefishos/$pkgname.git")
+md5sums=('SKIP')
+
+build() {
+  cd $pkgname
+
+  cmake -GNinja -DCMAKE_INSTALL_PREFIX=/usr .
+  ninja
+}
+
+package() {
+  cd $pkgname
+  DESTDIR="$pkgdir" ninja install
+}
