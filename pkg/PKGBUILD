@@ -1,0 +1,69 @@
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=p7zip-desktop-git
+_pkgname=p7zip
+pkgver=16.02.2.6211c75
+_pkgver=16.02.2
+pkgrel=2
+pkgdesc="7-Zip is a file archiver with a high compression ratio, this package also includes the graphic frontend for maximum cosiness on the desktop"
+arch=('x86_64')
+url="https://github.com/ErnyTech/p7zip.git"
+license=('LGPL' 'custom: unRAR')
+_base_depends=('libatk-adaptor' 'libgail-common' 'libcanberra-gtk-module'
+                'qt5-style-plugins' 'p7zip')
+bullseye_depends=("${_base_depends[@]}")
+depends=("${_base_depends[@]}" 'overlay-scrollbar' 'overlay-scrollbar-gtk2' )
+makedepends=('git' 'libwxgtk3.0-gtk3-dev' 'python3' 'yasm' 'make' 'sed')
+optdepends=('p7zip-full' 'p7zip-rar')
+provides=('p7zip-desktop')
+conflicts=('p7zip-desktop')
+source=("git+https://github.com/ErnyTech/p7zip.git"
+        "desktop.patch")
+sha256sums=('SKIP' '3975e54a21e81608723dec61492c8042e404dca7bd93816e11f63f25c9994bb2')
+
+pkgver() {
+    cd $srcdir/$_pkgname
+    printf "$_pkgver.%s" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+    cd $srcdir
+    
+    # patches
+    patch -u -i desktop.patch "$srcdir"/$_pkgname/7zFM.desktop
+    
+    cd $_pkgname/Utils
+    
+    sed -i 's/_do_not_use//g' generate.py
+    python3 generate.py
+}
+
+build() {
+    cd $srcdir/$_pkgname
+    make 7zFM 7zG -j$(nproc)
+}
+
+package() {
+    cd $srcdir/$_pkgname
+    
+    make DEST_DIR="$pkgdir" install
+    #make install DEST_DIR="$pkgdir" DEST_HOME="/usr" DEST_MAN="/usr/local/share/man"
+    #make install DEST_DIR="$pkgdir" DEST_HOME="/usr"
+
+    install -D -m644 7zFM.desktop -t "$pkgdir"/usr/local/share/applications
+    install -Dm644 GUI/p7zip_32.png $pkgdir/usr/local/share/icons/hicolor/32x32/apps/p7zip.png
+    
+    sed -i 's|/snap/p7zip-desktop/current||g' "$pkgdir"/usr/local/bin/7zFM
+    sed -i 's|/snap/p7zip-desktop/current||g' "$pkgdir"/usr/local/bin/7zG
+
+    chmod +x "$pkgdir"/usr/local/bin/p7zipForFilemanager
+    
+    install -dm755 "$pkgdir"/usr/local/lib/p7zip/help
+    cp -r DOC/MANUAL/* "$pkgdir"/usr/local/lib/p7zip/help
+    
+    # install right click menus
+    install -dm755 ${pkgdir}/usr/share/kde4/services/ServiceMenus
+    cp GUI/kde4/*.desktop ${pkgdir}/usr/share/kde4/services/ServiceMenus
+    install -dm755 ${pkgdir}/usr/share/kservices5/ServiceMenus
+    cp GUI/kde4/*.desktop ${pkgdir}/usr/share/kservices5/ServiceMenus
+}
