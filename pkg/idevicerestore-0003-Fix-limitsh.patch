@@ -1,0 +1,12 @@
+diff --git a/src/ipsw.c b/src/ipsw.c
+index d1d858b..36876b4 100644
+--- a/src/ipsw.c
++++ b/src/ipsw.c
+@@ -30,6 +30,7 @@
+ #include <unistd.h>
+ #include <errno.h>
+ #include <limits.h>
++#include <linux/limits.h>
+ #include <sys/stat.h>
+ #include <zip.h>
+ #include <openssl/sha.h>

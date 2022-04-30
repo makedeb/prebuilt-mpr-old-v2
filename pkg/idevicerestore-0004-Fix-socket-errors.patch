@@ -1,0 +1,13 @@
+diff --git a/src/socket.c b/src/socket.c
+index 777b23e..78fab80 100644
+--- a/src/socket.c
++++ b/src/socket.c
+@@ -56,6 +56,8 @@ static int wsa_init = 0;
+ #define ETIMEDOUT 138
+ #endif
+ 
++#define _POSIX_C_SOURCE 200112L
++
+ static int verbose = 0;
+ 
+ void socket_set_verbose(int level)

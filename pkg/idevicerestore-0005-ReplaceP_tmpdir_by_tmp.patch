@@ -1,0 +1,13 @@
+diff --git a/src/common.c b/src/common.c
+index a54ae6f..e295796 100644
+--- a/src/common.c
++++ b/src/common.c
+@@ -431,7 +431,7 @@ char *get_temp_filename(const char *prefix)
+ #ifdef WIN32
+ 		tmpdir = "C:\\WINDOWS\\TEMP";
+ #else
+-		tmpdir = P_tmpdir;
++		tmpdir = "/tmp";
+ #endif
+ 	}
+ 	if (!tmpdir || access(tmpdir, W_OK|X_OK) != 0) {

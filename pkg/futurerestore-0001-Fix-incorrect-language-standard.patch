@@ -1,0 +1,26 @@
+From 66a162c41a347e54fbff649979d6ca6ddb6c87ee Mon Sep 17 00:00:00 2001
+From: 0x9fff00 <0x9fff00+git@protonmail.ch>
+Date: Fri, 8 Nov 2019 23:30:28 +0100
+Subject: [PATCH 1/2] Fix incorrect language standard
+
+---
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 1d4d48b..a647cdb 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -28,8 +28,8 @@ esac
+ 
+ # Checks the flags.
+ CFLAGS+=" -DIDEVICERESTORE_NOMAIN=1 -DTSSCHECKER_NOMAIN=1"
+-CXXFLAGS+=" -std=c++11"
+-CFLAGS+=" -std=c11"
++CXXFLAGS+=" -std=gnu++11"
++CFLAGS+=" -std=gnu11"
+ 
+ AC_DEFUN([AX_UNPRECIOUS], [
+     m4_define([_AC_PRECIOUS_VARS], m4_bpatsubst(_AC_PRECIOUS_VARS, [$1], []))
+-- 
+2.30.0

@@ -1,0 +1,92 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+
+_name=futurerestore
+pkgname=$_name-git
+pkgver=1.186.2f0686d
+pkgrel=1
+pkgdesc='iOS upgrade and downgrade tool utilizing SHSH blobs - git version'
+arch=('x86_64')
+url="https://github.com/tihmstar/$_name"
+license=('LGPL3')
+_depends=('libplist-git' 'libzip5' 'libzip-dev' 'curl' 'openssl' 'zlib1g' 'zlib1g-dev')
+depends=("${_depends[@]}" 'libimobiledevice-git' 'libfragmentzip-git' 'libirecovery' 'img4tool' 'libgeneral-fr-git')
+hirsute_depends=("${_depends[@]}" 'libimobiledevice-git' 'libfragmentzip-git' 'libirecovery' 'img4tool-git' 'libgeneral-fr-git')
+makedepends=('git')
+provides=("$_name")
+conflicts=("$_name")
+source=("git+$url.git"
+        'git+https://github.com/tihmstar/tsschecker.git'
+        'git+https://github.com/tihmstar/idevicerestore.git'
+        'git+https://github.com/tihmstar/jssy.git'
+        "$_name-0001-Fix-incorrect-language-standard.patch"
+        "$_name-0002-Ensure-CUSTOM_LOGGING-refers-to-a-file.patch"
+        'tsschecker-0001-Fix-incorrect-language-standard.patch'
+        'tsschecker-0002-Update-libplist-and-libirecovery-names-for-2.2.0-1.0.patch'
+        'idevicerestore-0001-configure.ac-check-for-pthreads.patch'
+        'idevicerestore-0002-Update-libirecovery-and-libplist-names-for-1.0.0-2.2.patch'
+        'idevicerestore-0003-Fix-limitsh.patch'
+        'idevicerestore-0004-Fix-socket-errors.patch'
+        #'idevicerestore-0005-ReplaceP_tmpdir_by_tmp.patch')
+        'idevicerestore-0006-AddFlags.patch')
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            '547ace9e8c05075908727b1ef7e7c67715b32c7ee7a6b28ce744d87f39cc5136'
+            '3d6b46dbf7755894d162990ea98212a6ebf3d508b993d5c96ef40aa8ae0a068c'
+            '3b4cbc67686f730ed17553600cd507000d84805cc82e25a2fa46db22c2ad97e0'
+            'bce5b17258cb3b2c13ceab01133cf28b80ed95ff44b21052d6c8d16e22873244'
+            '1d7cec2c1467cd71f0cf9dbe99bd24f3031f847a4f8e7c5214f24658ec15ea71'
+            '35024ee622568609074abf4eabc650d25882b780fae538ee2a9bb401d599f407'
+            '069d38b43f0eefbb60102f1f30e46eae64221b2339e855d20c7649d184ca1d83'
+            '3327cf654942ae9e56af133b31f3f3046ec6943cf3e8c4af4e41f5c4e5d1f59d'
+            #'ffcf126eaad66e2c1b1165586478a15f23f14975e78b07c3a5b3f84c932ef0f8')
+            '74cb3aea5ddb52ec4703232c70c2863962c13a10765384bcea59a0cd2dfc3adc')
+
+pkgver() {
+  cd "$_name"
+  printf '1.%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd "$_name"
+
+  #git submodule deinit -f --all
+  git submodule init
+  #git config submodule.external/tsschecker.url "$srcdir/tsschecker"
+  #git config submodule.external/idevicerestore.url "$srcdir/idevicerestore"
+  git submodule update
+
+  for p in "$srcdir"/$_name-*.patch; do
+    patch -Np1 -i "$p"
+  done
+
+  cd external/tsschecker
+  git submodule init
+  git config submodule.external/jssy.url "$srcdir/jssy"
+  git submodule update
+  for p in "$srcdir"/tsschecker-*.patch; do
+    patch -Np1 -i "$p"
+  done
+  cd ../..
+
+  cd external/idevicerestore
+  # git checkout 50493ca9bda60d2eee48d0e973dafabf0b2405b9
+  for p in "$srcdir"/idevicerestore-*.patch; do
+    patch -Np1 -i "$p"
+  done
+  cd ../..
+}
+
+build() {
+  cd "$_name"
+
+  ./autogen.sh --prefix=/usr
+  make
+}
+
+package() {
+  cd "$_name"
+
+  make DESTDIR="$pkgdir/" install
+}

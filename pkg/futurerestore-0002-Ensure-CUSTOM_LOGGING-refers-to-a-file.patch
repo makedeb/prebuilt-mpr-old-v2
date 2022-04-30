@@ -1,0 +1,13 @@
+diff --git a/configure.ac b/configure.ac
+index 1d4d48b9..ca137bb8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -81,7 +81,7 @@ else
+ fi
+ AM_CONDITIONAL([HAVE_LIBIPATCHER],[test "x$do_libipatcher" = "xyes"])
+ 
+-AC_DEFINE(CUSTOM_LOGGING, 1, [required for futurerestore])
++AC_DEFINE(CUSTOM_LOGGING, /dev/null, [required for futurerestore])
+ 
+ LT_INIT
+ 

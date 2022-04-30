@@ -1,0 +1,24 @@
+diff --git a/configure.ac b/configure.ac
+index 48eace0..8b870c9 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -35,6 +35,10 @@ AC_PROG_CC
+ AM_PROG_CC_C_O
+ AC_PROG_LIBTOOL
+ 
++# Flags?
++CXXFLAGS+=" -std=gnu++11"
++CFLAGS+=" -std=gnu11"
++
+ # Checks for libraries.
+ PKG_CHECK_MODULES(libirecovery, libirecovery >= $LIBIRECOVERY_VERSION)
+ PKG_CHECK_MODULES(libimobiledevice, libimobiledevice-1.0 >= $LIBIMOBILEDEVICE_VERSION)
+@@ -74,6 +78,8 @@ if test x$ac_cv_func_strsep != xyes; then
+   fi
+ fi
+ 
++
++
+ # check if libimobiledevice has timeout errors
+ AC_CACHE_CHECK(for IDEVICE_E_TIMEOUT in enum idevice_error_t, ac_cv_idevice_error_has_timeout,
+ 	AC_TRY_COMPILE([
