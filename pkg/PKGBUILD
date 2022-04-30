@@ -1,0 +1,36 @@
+# Maintainer:  only_vip <onlyme_vip@protonmail.com>
+pkgname=zotero
+pkgver=6.0.5
+pkgrel=3
+pkgdesc="Zotero Standalone. Is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources."
+arch=('amd64')
+url="https://www.zotero.org/download"
+license=('AGPL3')
+depends=('libdbus-glib-1-2' 'libgtk-3-0' 'libnss3' 'libxt6')
+
+source=("Zotero-${pkgver}_linux_$CARCH.tar.bz2::https://www.zotero.org/download/client/dl?channel=release&platform=linux-$CARCH&version=${pkgver}"
+    "zotero.desktop"
+        "zotero.install")
+sha512sums=("568583c44436d9830e0b9271bfaedf7380556498c757de0bcea07ba97202aa853f92501c9aa755637ba4810d266a43c2ee17a1eedef564d22821e7f4ee337ff0"
+    "e1a0a4ff5cc1b53f13776ca11927d671426b0691e78e74a4adf2166d57bb2ae8ac409cc11a37ce5e2f680fdf05d5bc3849c33a9717aca1bb62d03ae5231a67fb"
+            "f5155d464a1e8fab71b92b62eebe9001788f7baf792413a08634c897c9ff35daadb418a0c11f2980d45ef2c00c0223062b58f46c450b962208e2ccca4d4d6f9e")
+#source_amd64=()
+#sha512sums_amd64=()
+postinst='zotero.install'
+
+
+package() {
+  install -dDm755 "${pkgdir}/usr/"{bin,lib/zotero}
+  mv "$srcdir/Zotero_linux-$CARCH/"* "${pkgdir}/usr/lib/zotero"
+  ln -s "/usr/lib/zotero/zotero" "${pkgdir}/usr/bin/zotero"
+  install -Dm644 "${srcdir}/${pkgname}.desktop" -t "${pkgdir}/usr/share/applications"
+  # Copy zotero icons to a standard location
+  install -Dm644 "${pkgdir}/usr/lib/zotero/chrome/icons/default/default16.png" "${pkgdir}/usr/share/icons/hicolor/16x16/apps/zotero.png"
+  install -Dm644 "${pkgdir}/usr/lib/zotero/chrome/icons/default/default32.png" "${pkgdir}/usr/share/icons/hicolor/32x32/apps/zotero.png"
+  install -Dm644 "${pkgdir}/usr/lib/zotero/chrome/icons/default/default48.png" "${pkgdir}/usr/share/icons/hicolor/48x48/apps/zotero.png"
+  install -Dm644 "${pkgdir}/usr/lib/zotero/chrome/icons/default/default256.png" "${pkgdir}/usr/share/icons/hicolor/256x256/apps/zotero.png"
+  # Disable APP update
+  sed -i '/pref("app.update.enabled", true);/c\pref("app.update.enabled", false);' "${pkgdir}/usr/lib/zotero/defaults/preferences/prefs.js"
+  # No need to keep a shell around when launching Zotero
+  sed -i -r 's/^("\$CALLDIR\/zotero-bin" -app "\$CALLDIR\/application.ini" "\$@")/exec \1/' "${pkgdir}/usr/lib/zotero/zotero"
+}
