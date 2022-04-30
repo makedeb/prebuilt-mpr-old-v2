@@ -1,0 +1,64 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=chadwm-git
+_pkgname=chadwm
+pkgver=1b5198262022.04.14
+pkgrel=5
+pkgdesc="making dwm as beautiful as possible"
+arch=('any')
+depends=('maim' 'xbacklight' 'aptitude' 'tasksel')
+makedepends=('make' 'gcc' 'libx11-dev' 'libxft-dev' 'libxinerama-dev' 'xorg' 'nerd-fonts-jetbrains-mono' 'fonts-material-design-icons-iconfont' 'libimlib2-dev')
+optdepends=('fish: fish keybindings'
+            'fzf-extras: fzf keybindings from junegunn wiki and dotfiles'
+            'tmux: fzf-tmux script for launching fzf in a tmux pane'
+            'zsh: zsh keybindings'
+            'stterm'
+            'st-siduck76-git: siducks st build https://mpr.hunterwittenborn.com/packages/st-siduck76-git/')
+url="https://github.com/siduck/chadwm"
+license=('MIT')
+source=("${_pkgname}::git+https://github.com/siduck/chadwm.git"
+        "autostart"
+        "bar.sh"
+        "Xresources"
+        "dwm.desktop")
+sha512sums=("SKIP"
+            "442c34d6faaf384df39cd4e2f7f653f720da78a7c6dd5be2e848188b33ddd2ce41ade02f805b7a5d629bfbe7ac08c2be6ff58d7982aa8ba727da5cefb2f99bf3"
+            "5ad18ea8f404679f1761f83de69681155a22ab013986f8b5dd68492936e6757d1cf35b4281f6b6204c65ac0a645be85306c7c8302cbc3f1b285081a6e213a043"
+            "aec8a26b5ba51b8d0b89d07e1cd3125ff1e89c6c18253f6e428f5ff16e18ca62ff846b50c0eb8247540a34788788b5669b39aee7b3472f2b110897e7adf05328"
+            "886eb6608fb9b5570c7aa1d6aab40ba5aef8b3bd1444537a2713bcf62bdefac0bfb1bf378fc6bdca9a7293f8e1466dcfefcadd13770ee5097b14a62b8d4e7ccf")
+provides=('dwm')
+conflicts=('dwm')
+# replaces=('dwm')
+#post_install=
+
+pkgver() {
+    cd "${srcdir}/${_pkgname}"
+    _always=$(git describe --always | sed -e 's:-:.:g' -e 's:v::') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+package() {
+  cd ${srcdir}/${_pkgname}/${_pkgname}
+  ## build chadwm
+  make DESTDIR="${pkgdir}" install
+  install -d "${pkgdir}/usr/share/chadwm/"{eww,rofi,scripts}
+  install -d "${pkgdir}/usr/share/chadwm/scripts/bar_themes"
+  # install eww, rofi and scripts folder to /usr/share/chadwm dir
+  cp -vRf "${srcdir}/${_pkgname}/eww/"* "${pkgdir}/usr/share/chadwm/eww/"
+  cp -vRf "${srcdir}/${_pkgname}/rofi/"* "${pkgdir}/usr/share/chadwm/rofi/"
+  cp -vRf "${srcdir}/${_pkgname}/scripts/bar_themes/"* "${pkgdir}/usr/share/chadwm/scripts/bar_themes/"
+  install -D -m755 "${srcdir}/${_pkgname}/scripts/bar.sh" "${pkgdir}/usr/share/chadwm/scripts/bar.sh"
+  install -D -m755 "${srcdir}/${_pkgname}/scripts/autostart" "${pkgdir}/usr/share/chadwm/scripts/autostart"
+  install -D -m755 "${srcdir}/${_pkgname}/scripts/fetch" "${pkgdir}/usr/share/chadwm/scripts/fetch"
+  # install custom autostart script
+  install -Dm755 "${srcdir}/autostart" "${pkgdir}/usr/bin/dwm-autostart"
+  # install and overwrite custom bar.sh script
+  install -Dm755 "${srcdir}/bar.sh" "${pkgdir}/usr/share/chadwm/scripts/bar.sh"
+  install -Dm755 "${srcdir}/Xresources" "${pkgdir}/usr/share/chadwm/Xresources"
+  #install the desktop entry and some docs
+  install -Dm644 "${srcdir}/dwm.desktop" "${pkgdir}/usr/share/xsessions/dwm.desktop"
+  install -Dm644 "${srcdir}/${_pkgname}/keyssheet.md" "${pkgdir}/usr/share/doc/dwm/keyssheet.md"
+  install -Dm644 "${srcdir}/${_pkgname}/LICENSE" "${pkgdir}/usr/share/doc/dwm/LICENSE"
+
+}
