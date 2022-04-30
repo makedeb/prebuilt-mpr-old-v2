@@ -1,0 +1,29 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=ntfd
+pkgver=0.2.2
+pkgrel=3
+pkgdesc="A lightweight notification daemon for fancy desktop integrations"
+arch=('amd64')
+url='https://github.com/kamek-pf/ntfd'
+license=('LGPL3')
+depends=()
+makedepends=()
+#checkdepends=('check')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+# replaces=("${pkgname}")
+postinst="${pkgname}.postinst"
+
+source=(
+  "$url/releases/download/${pkgver}/${pkgname}-${arch}-unknown-linux-musl"
+  "${pkgname}::git+https://github.com/kamek-pf/${pkgname}.git"  )
+sha512sums=(
+  'b9be06c522a8947771a40c635173dce15cf60fcad4fb65a2ddc27b4a3c415beff1d024b58fbed3dda109e9c3470e1d2d608c810976256634695eb9a6d42f0be3'
+  'SKIP')
+
+package() {
+  install -Dm755 "${srcdir}/${pkgname}-${arch}-unknown-linux-musl" "${pkgdir}/usr/bin/ntfd"
+  install -Dm644 "${srcdir}/${pkgname}/README.md" "${pkgdir}/usr/share/doc/ntfd/README.md"
+  install -Dm644 "${srcdir}/${pkgname}/LICENSE" "${pkgdir}/usr/share/doc/ntfd/LICENSE"
+  install -Dm644 "${srcdir}/${pkgname}/config.toml" "${pkgdir}/usr/share/doc/ntfd/config.toml"
+}

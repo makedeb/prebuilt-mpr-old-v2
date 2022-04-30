@@ -1,0 +1,16 @@
+generated-by = makedeb
+pkgname = ntfd
+postinst = ntfd.postinst
+pkgbase = ntfd
+pkgdesc = A lightweight notification daemon for fancy desktop integrations
+pkgrel = 3
+pkgver = 0.2.2
+url = https://github.com/kamek-pf/ntfd
+arch = amd64
+conflicts = ntfd
+license = LGPL3
+provides = ntfd
+source = https://github.com/kamek-pf/ntfd/releases/download/0.2.2/ntfd-amd64-unknown-linux-musl
+source = ntfd::git+https://github.com/kamek-pf/ntfd.git
+sha512sums = b9be06c522a8947771a40c635173dce15cf60fcad4fb65a2ddc27b4a3c415beff1d024b58fbed3dda109e9c3470e1d2d608c810976256634695eb9a6d42f0be3
+sha512sums = SKIP

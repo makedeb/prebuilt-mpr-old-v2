@@ -1,0 +1,11 @@
+#!/bin/bash
+  echo "
+                           ████     ██   ███████   ██████████ ████████   
+                          ░██░██   ░██  ██░░░░░██ ░░░░░██░░░ ░██░░░░░    
+                          ░██░░██  ░██ ██     ░░██    ░██    ░██         
+                          ░██ ░░██ ░██░██      ░██    ░██    ░███████    
+                          ░██  ░░██░██░██      ░██    ░██    ░██░░░░   ██
+                          ░██   ░░████░░██     ██     ░██    ░██      ░░ 
+                          ░██    ░░███ ░░███████      ░██    ░████████ ██
+                          ░░      ░░░   ░░░░░░░       ░░     ░░░░░░░░ ░░ "
+  echo -e "config.toml needs to copied to the home directory manually by the user. documentation related files are installed in the /usr/share/doc/ntfd directory\n\n"
