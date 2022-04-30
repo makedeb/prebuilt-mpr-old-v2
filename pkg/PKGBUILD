@@ -1,0 +1,36 @@
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=openrgb-bin
+pkgver=0.6
+pkgrel=3
+pkgdesc="Open source RGB lighting control that doesn't depend on manufacturer software."
+arch=('i686' 'x86_64')
+url="https://gitlab.com/CalcProgrammer1/OpenRGB"
+license=('GPL2')
+
+depends=('libc6' 'libgcc1' 'libgl1' 'libhidapi-hidraw0' 'libmbedcrypto3' 'libmbedtls12'
+    'libmbedx509-0' 'libqt5core5a' 'libqt5gui5' 'libqt5widgets5' 'libstdc++6' 'libusb-1.0-0' 'udev')
+bullseye_depends=('libc6' 'libgcc-s1' 'libhidapi-hidraw0' 'libmbedcrypto3'
+    'libmbedtls12' 'libmbedx509-0' 'libqt5core5a' 'libqt5gui5'
+    'libqt5widgets5' 'libstdc++6' 'libusb-1.0-0' 'udev')
+optdepends=('i2c-tools: Motherboard & RAM access')
+
+conflicts=('openrgb')
+provides=('openrgb')
+options=('!strip' '!emptydirs')
+
+source_i686=("https://openrgb.org/releases/release_0.6/openrgb_0.6_i386_405ff7f.deb")
+source_x86_64=("https://openrgb.org/releases/release_0.6/openrgb_0.6_amd64_405ff7f.deb")
+bullseye_source_i686=("https://openrgb.org/releases/release_0.6/openrgb_0.6_i386_bullseye_405ff7f.deb")
+bullseye_source_x86_64=("https://openrgb.org/releases/release_0.6/openrgb_0.6_amd64_bullseye_405ff7f.deb")
+
+sha256sums_i686=('065209fe48486e22e76b232ee8f7953fae492c76fe4f4d48c1ebca5d5ed92457')
+bullseye_sha256sums_i686=('853b92b4c849c3c92cb6b9f2e35a3e20adaadf654bbacbd1ad5a378e5dd3f766')
+sha256sums_x86_64=('db1c8ecbf8d4463056c9c9b0f3f30e6a793a5b6855392c8139afa3949c52f841')
+bullseye_sha256sums_x86_64=('352a4329f00cf91ccacca3dc019544c7cb19fae4abbba8d20408a18795c4bdd4')
+
+package(){
+    cd $srcdir
+    msg2 "Extracting data.tar.xz..."
+    tar -xf 'data.tar.xz' -C "${pkgdir}"
+}
