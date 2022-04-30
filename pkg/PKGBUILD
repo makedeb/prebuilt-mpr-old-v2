@@ -1,0 +1,19 @@
+# Maintainer: Ege Öz <ege.oz@tutanota.com> 
+pkgname=tmpmail
+pkgver=1.1.9
+pkgrel=1
+pkgdesc="A temporary email right from your terminal written in POSIX sh"
+arch=('any')
+depends=('w3m' 'curl' 'jq')
+
+source=("https://github.com/sdushantha/tmpmail/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('05c7c7baf3af75b15a198db3a33f0ba4606514a5d0603013c76e34bb767bdad3')
+
+package() {
+	cd ${pkgname}-${pkgver}
+	mkdir -p "${pkgdir}/usr/local/share/man/man1"
+	mkdir -p "${pkgdir}/usr/local/bin"
+
+	install -Dm644 "tmpmail.1" "${pkgdir}/usr/local/share/man/man1/"
+	install -Dm755 "tmpmail" "${pkgdir}/usr/local/bin/"
+}
