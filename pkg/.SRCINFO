@@ -1,0 +1,35 @@
+generated-by = makedeb-makepkg
+
+pkgbase = neovim-bin
+	pkgdesc = Fork of Vim aiming to improve user experience, plugins, and GUIs
+	pkgver = 0.7.0
+	pkgrel = 1
+	url = https://neovim.io
+	arch = x86_64
+	license = custom:neovim
+	depends = libluajit-5.1-2
+	depends = libluajit-5.1-common
+	depends = libmsgpackc2
+	depends = libtermkey1
+	depends = libunibilium4
+	depends = libvterm0
+	depends = lua-luv
+	optdepends = python-neovim: for Python 3 plugin support (see :help python)
+	optdepends = xclip: for clipboard support on X11 (or xsel) (see :help clipboard)
+	optdepends = xsel: for clipboard support on X11 (or xclip) (see :help clipboard)
+	optdepends = wl-clipboard: for clipboard support on wayland (see :help clipboard)
+	provides = neovim
+	provides = neovim-runtime
+	conflicts = neovim
+	conflicts = neovim-git
+	conflicts = neovim-runtime
+	source = https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.tar.gz
+	source = ex
+	source = view
+	source = vimdiff
+	sha256sums = 5b3fced3f185ae1e1497cb5f949597c4065585fc26e7cd25a31f5f791dbd9b59
+	sha256sums = 5d3178628afc39f0318638cad19e9ad06ada89926dfb263e93ab35cc8f60e911
+	sha256sums = 3cb963a264b6cf45749627408b5a62c6945e5e426b595bb5e6a388194c2c1990
+	sha256sums = 1d3123b9d97a4889696ab72db558041b5cca8e26ff51ae557f7842242a7d4ed1
+
+pkgname = neovim-bin
