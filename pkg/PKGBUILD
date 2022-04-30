@@ -1,0 +1,20 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+_pkgname=hyperfine
+pkgname=hyperfine-bin
+pkgver=1.11.0
+pkgrel=1
+pkgdesc="A command-line benchmarking tool"
+arch=('x86_64')
+license=('MIT' 'Apache2')
+url="https://github.com/sharkdp/hyperfine"
+
+source_x86_64=("${url}/releases/download/v${pkgver}/${_pkgname}-v${pkgver}-x86_64-unknown-linux-gnu.tar.gz")
+sha256sums_x86_64=('SKIP')
+
+package() {
+  cd "${_pkgname}-v${pkgver}-x86_64-unknown-linux-gnu"
+
+  install -Dm 755 ./hyperfine                              "${pkgdir}/usr/bin/hyperfine"
+  install -Dm 444 ./hyperfine.1                            "${pkgdir}/usr/share/man/man1/hyperfine.1"
+  install -Dm 555 ./autocomplete/hyperfine.bash-completion "${pkgdir}/usr/share/bash-completion/completions/${_pkgname}"
+}
