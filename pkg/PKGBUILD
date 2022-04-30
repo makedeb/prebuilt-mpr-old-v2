@@ -1,0 +1,27 @@
+# Maintainer: Canony <canony@protonmail.ch>
+# Contributor: Christian Muehlhaeuser <muesli at gmail dot com>
+# Contributor: Stephen Gregoratto <dev@sgregoratto.me>
+
+pkgname=glow-bin
+pkgver=1.4.1
+pkgrel=2
+pkgdesc="Markdown renderer for the CLI"
+arch=('x86_64' 'arm64' 'i386')
+url="https://github.com/charmbracelet/${pkgname%-bin}"
+license=('MIT')
+depends=('libc6')
+provides=("${pkgname%-bin}")
+conflicts=("${pkgname%-bin}")
+source_x86_64=("$url/releases/download/v$pkgver/${pkgname%-bin}_${pkgver}_linux_x86_64.tar.gz")
+source_arm64=("$url/releases/download/v$pkgver/${pkgname%-bin}_${pkgver}_linux_arm64.tar.gz")
+source_i386=("$url/releases/download/v$pkgver/${pkgname%-bin}_${pkgver}_linux_i386.tar.gz")
+sha256sums_x86_64=('ab7b4cf9ae6e20d6c898688c5f33876297f9ef04616cbceff8e0379df9d06321')
+sha256sums_arm64=('f0fd0bc75244875e0e69d1d6bc36e6988b30d90c4bd0c476a611fd8f826c1a51')
+sha256sums_i386=('06c2c30c7d90b6befe26c6fcb1cd9daff0581383fea5665891e9fa46ebdd36f0')
+
+package() {
+    install -Dm755 "${pkgname%-bin}" "$pkgdir/usr/bin/${pkgname%-bin}"
+    install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/${pkgname%-bin}/LICENSE"
+}
+
+# vim:set ts=4 sw=4 et:
