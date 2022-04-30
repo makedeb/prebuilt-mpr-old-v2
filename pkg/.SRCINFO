@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = kubectl-bin
+	pkgdesc = Kubernetes cluster CLI
+	pkgver = 1.23.1
+	pkgrel = 1
+	url = https://github.com/kubernetes/kubectl
+	arch = x86_64
+	license = Apache-2.0
+	provides = kubectl
+	conflicts = kubectl
+	source = https://dl.k8s.io/release/v1.23.1/bin/linux/amd64/kubectl
+	sha512sums = d6829c6c9113d3cfff342a078fb57141e5f4f010737384e9932182d0bedf8b7dc7a5e816d981c4e68fe4925cceab83d6622f4d4a2f016fa925eb194af05e5c2a
+
+pkgname = kubectl-bin

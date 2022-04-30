@@ -1,0 +1,21 @@
+# Maintainer: thesting <fxcw_vacilon@slmail.me>
+# https://storage.googleapis.com/kubernetes-release/release/stable.txt
+pkgname=kubectl-bin
+_pkgname=kubectl
+pkgver=1.23.1
+pkgrel=1
+pkgdesc="Kubernetes cluster CLI"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=()
+optdepends=()
+provides=('kubectl')
+conflicts=('kubectl')
+url="https://github.com/kubernetes/kubectl"
+
+source=("https://dl.k8s.io/release/v${pkgver}/bin/linux/amd64/kubectl")
+sha512sums=('d6829c6c9113d3cfff342a078fb57141e5f4f010737384e9932182d0bedf8b7dc7a5e816d981c4e68fe4925cceab83d6622f4d4a2f016fa925eb194af05e5c2a')
+
+package() {
+	install -Dm755 "${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
+}
