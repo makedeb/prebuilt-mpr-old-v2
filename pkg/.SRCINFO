@@ -1,0 +1,24 @@
+generated-by = makedeb-makepkg
+
+pkgbase = coreutils-freebsd-git
+	pkgdesc = Alternative to GNU coreutils using software from FreeBSD
+	pkgver = 405.03e4e18
+	pkgrel = 1
+	url = https://github.com/dcantrell/bsdutils
+	arch = x86_64
+	license = BSD-3-Clause
+	makedepends = git
+	makedepends = gcc
+	makedepends = g++
+	makedepends = meson
+	makedepends = ninja-build
+	makedepends = flex
+	makedepends = bison
+	makedepends = libtinfo-dev
+	makedepends = libedit-dev
+	makedepends = libssl-dev
+	makedepends = libxo
+	source = git+https://github.com/dcantrell/bsdutils.git
+	sha256sums = SKIP
+
+pkgname = coreutils-freebsd-git

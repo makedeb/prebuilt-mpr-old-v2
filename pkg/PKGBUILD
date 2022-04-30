@@ -1,0 +1,30 @@
+# Maintainer: seerecursion <seerecursion@protonmail.com>
+
+pkgname=coreutils-freebsd-git
+_gitname=bsdutils
+pkgver=405.03e4e18
+pkgrel=1
+pkgdesc="Alternative to GNU coreutils using software from FreeBSD"
+arch=('x86_64')
+url="https://github.com/dcantrell/${_gitname}"
+license=('BSD-3-Clause')
+depends=()
+makedepends=('git' 'gcc' 'g++' 'meson' 'ninja-build' 'flex' 'bison' 'libtinfo-dev' 'libedit-dev' 'libssl-dev' 'libxo')
+source=(git+"https://github.com/dcantrell/${_gitname}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+        cd "${_gitname}"
+        printf "%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+        cd "${_gitname}"
+        meson . build --prefix=/opt/coreutils-freebsd-git
+        ninja -C build
+}
+
+package() {
+        cd "${_gitname}"
+        DESTDIR="${pkgdir}" ninja -C build install
+}
