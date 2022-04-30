@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = bitwarden-bin
+	pkgdesc = A secure and free password manager for all of your devices.
+	pkgver = 1.32.1
+	pkgrel = 1
+	url = https://bitwarden.com
+	arch = x86_64
+	license = GPL-3.0
+	depends = libnotify4
+	depends = libxtst6
+	depends = libnss3
+	depends = libsecret-1-0
+	depends = libxss1
+	source = https://github.com/bitwarden/desktop/releases/download/v1.32.1/Bitwarden-1.32.1-amd64.deb
+	sha256sums = SKIP
+
+pkgname = bitwarden-bin
