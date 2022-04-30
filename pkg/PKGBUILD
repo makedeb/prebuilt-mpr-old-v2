@@ -1,11 +1,10 @@
 # Maintainer: only_vip <onlyme_vip@protonmail.com>
-# co-maintainer: zocker_160 <zocker1600 at posteo dot net>
 pkgname="ungoogled-chromium-linchrome-bin"
 _pkgname="ungoogled-chromium"
-pkgver='100.0.4896.75.r972766'
-__pkgver='100.0.4896.75-r972766'
-_pkgver='100.0.4896.75_1'
-pkgrel=2
+pkgver='101.0.4951.41.r982481'
+__pkgver='101.0.4951.41-r982481'
+_pkgver='101.0.4951.41_1'
+pkgrel=1
 arch=('amd64')
 pkgdesc="Portable Chromium ungoogled (A lightweight approach to removing Google web service dependency) for 64-bit Linux prebuilt binary by macchrome"
 url="https://github.com/macchrome/linchrome"
@@ -16,10 +15,9 @@ options=(!strip)
 source=("${_pkgname}-${_pkgver}.tar.xz::${url}/releases/download/v${__pkgver}-portable-ungoogled-Lin64/${_pkgname}_${_pkgver}.vaapi_linux.tar.xz"
         "ungoogled-chromium.desktop"
         "desktop-icon.patch")
-sha512sums=('6cfa43509e01c273b1ae0a96e96c7da24514d45976e9e65b86da88d6eedeab16b790b04542459dbb0ea41bca47f64fc8523657ad8f84b41c5b2854da50e2dc87'
-            '5ef6de325e3fdc363d4e7049b6f91e85b36c9d38a6c48da619314b172250e3e7d6a7fc4f1e29af9b9e86f8b4e51a72087deb79452fdb7083291f035ec6e61b68'
-            '48439ea12897b6c1182704f3395948146497b43be8d3f746dd95292793172e2f7ba191edbbd6dacaff6291ec7abd920071ddb5b1ed9ca0531f1ed34d8c8a365b')
-
+sha512sums=("ff32e04b5aae7ce73c39c1b9ed4c73d80cbffb0aefacdec3747a7df8df1a26ee68edb977d111dbce51b56eaa454e17b41ee89f96ba52de2202efafd55ec69466"
+            "5ef6de325e3fdc363d4e7049b6f91e85b36c9d38a6c48da619314b172250e3e7d6a7fc4f1e29af9b9e86f8b4e51a72087deb79452fdb7083291f035ec6e61b68"
+            "48439ea12897b6c1182704f3395948146497b43be8d3f746dd95292793172e2f7ba191edbbd6dacaff6291ec7abd920071ddb5b1ed9ca0531f1ed34d8c8a365b")
 package() {
     install -d "${pkgdir}/opt/${_pkgname}" "${pkgdir}/usr/bin"
     install -Dm644 "${srcdir}/${_pkgname}.desktop" -t "${pkgdir}/usr/share/applications"
