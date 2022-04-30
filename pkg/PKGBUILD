@@ -1,0 +1,35 @@
+# Maintainer: Thesting
+pkgname=postman-bin
+_pkgname=postman
+pkgver=9.8.0
+pkgrel=1
+pkgdesc="Build, test, and document your APIs faster"
+provides=('postman')
+conflicts=('postman')
+arch=('x86_64')
+url="https://www.getpostman.com"
+options=(!strip)
+license=('custom')
+source=(
+	"Postman-linux-x64-${pkgver}.tar.gz::https://dl.pstmn.io/download/version/${pkgver}/linux64"
+	"postman.desktop"
+)
+depends=(libxss1 libnss3 libgtk-3-dev)
+sha512sums=('2f7815a236ec301820fac947c3634941085688ae9cd0659108b2ede15fa3373f7e64e9b27553dbe7e1d33d6e5fa7da09fdfaaecff97778eb4fd817e8ddee6727'
+            'f43fb133256f2dfbb9fc35644e92ad2b4acd672fbc4a25e850ebfcee6a9f385e07d3285c3969f6c92351be3a5f90534cae5156dbe6f05346912467854666e39b')
+package() {
+	# Install files
+	install -dm755 "${pkgdir}/opt/"
+	cp -r "Postman" "${pkgdir}/opt/postman"
+	install -dm755 "${pkgdir}/usr/bin"
+	ln -s "/opt/postman/Postman" "${pkgdir}/usr/bin/postman"
+
+	# Desktop file
+	install -D -m644 "postman.desktop" \
+	"${pkgdir}/usr/share/applications/postman.desktop"
+
+	# Icon
+	install -d -m755 "${pkgdir}/usr/share/icons/hicolor/128x128/apps"
+	ln -s "/opt/postman/app/resources/app/assets/icon.png" \
+	"${pkgdir}/usr/share/icons/hicolor/128x128/apps/postman.png"
+}
