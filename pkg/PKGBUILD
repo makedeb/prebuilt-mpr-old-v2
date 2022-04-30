@@ -1,0 +1,45 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=rofi
+pkgver=1.7.3
+pkgrel=2
+pkgdesc='A window switcher, run dialog and dmenu replacement'
+arch=('amd64')
+url='https://github.com/DaveDavenport/rofi'
+license=('MIT')
+depends=('freetype2-demos' 'libjpeg-dev' 'librsvg2-dev' 'libx11-dev' 'libxcb1-dev' 'libxdg-basedir-dev' 'libxft-dev' 'libxkbcommon-dev' 'libxkbcommon-x11-dev' 'libpango1.0-dev' 'libstartup-notification0-dev' 'libglib2.0-dev' 'libcairo2-dev' 'libpango1.0-dev' 'libxkbcommon-dev' 'libgdk-pixbuf2.0-dev' 'libxcb-util0-dev' 'libxcb-xkb-dev' 'libxkbcommon-x11-dev' 'libxcb-ewmh-dev' 'libxcb-icccm4-dev' 'libxcb-cursor-dev' 'libstartup-notification0-dev' 'libxcb-xrm-dev' 'libxcb-randr0-dev' 'libxcb-randr0-dev' 'libxcb-xinerama0-dev' 'libgif-dev')
+makedepends=('git' 'meson' 'flex' 'bison' 'ninja-build' 'ronn' 'doxygen' 'uncrustify' 'cppcheck' 'ohcount' 'autoconf')
+checkdepends=('check')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+# replaces=("${pkgname}")
+
+source=("$url/releases/download/${pkgver}/${pkgname}-${pkgver}.tar.xz")
+sha512sums=('bba9ee25c7ff2168370ad1fd21a2286706f9db1efccdab84c55abd3bfa822ed10d23128388c69c964e81b2c51e1a95b3a3c7ca503a4564d0bdb3a993d8a9553d')
+
+build() {
+  # install -d "${srcdir}/${pkgname}-${pkgver}/build"
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  autoreconf -i
+  ./configure --prefix='/usr/local' --sysconfdir='/etc'
+  make
+  #meson setup build
+  #ninja -C build
+}
+
+check() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  #ninja -C build test
+  LC_ALL=C make check
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make  install install-man  DESTDIR=${pkgdir}
+  #DESTDIR="${pkgdir}" ninja -C build install
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  install -Dm644 "COPYING" "${pkgdir}/usr/share/licenses/rofi/COPYING"
+  install -Dm755 "Examples/i3_empty_workspace.sh" -t "${pkgdir}/usr/share/doc/rofi/examples"
+  install -Dm755 "Examples/i3_switch_workspaces.sh" -t "${pkgdir}/usr/share/doc/rofi/examples"
+  install -Dm755 "Examples/rofi-file-browser.sh" -t "${pkgdir}/usr/share/doc/rofi/examples"
+  install -Dm755 "Examples/test_script_mode.sh" -t "${pkgdir}/usr/share/doc/rofi/examples"
+}
