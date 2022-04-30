@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = go-bin
+	pkgdesc = The Go programming language
+	pkgver = 1.17.7
+	pkgrel = 1
+	url = https://go.dev/
+	arch = x86_64
+	provides = golang-go=1.17.7
+	provides = gccgo-go=1.17.7
+	conflicts = golang-go
+	conflicts = gccgo-go
+	noextract = go-bin-1.17.7.tar.gz
+	options = !strip
+	source = go-bin-1.17.7.tar.gz::https://go.dev//dl/go1.17.7.linux-amd64.tar.gz
+	sha256sums = SKIP
+
+pkgname = go-bin

@@ -1,0 +1,25 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+pkgname=go-bin
+pkgver=1.17.7
+pkgrel=1
+pkgdesc="The Go programming language"
+arch=('x86_64')
+conflicts=('golang-go' 'gccgo-go')
+provides=("golang-go=${pkgver}" "gccgo-go=${pkgver}")
+options=('!strip')
+noextract=("${pkgname}-${pkgver}.tar.gz")
+url="https://go.dev/"
+
+source=("${pkgname}-${pkgver}.tar.gz::${url}/dl/go${pkgver}.linux-amd64.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+    mkdir -p "${pkgdir}/usr/local/"
+    tar -C "${pkgdir}/usr/local/" -xzf "./${pkgname}-${pkgver}.tar.gz"
+    
+    mkdir -p "${pkgdir}/usr/bin/"
+    for i in 'go' 'gofmt'; do
+        ln -s "/usr/local/go/bin/${i}" "${pkgdir}/usr/bin/${i}"
+        chmod 755 "${pkgdir}/usr/local/go/bin/${i}"
+    done
+}
