@@ -23,10 +23,13 @@ sudo chown 'makedeb:makedeb' ./ /var/tmp/prebuilt-mpr/ -R
 # Destroy all files in pkgdir.
 find "${pkgdir}" -mindepth 1 -maxdepth 1 -exec rm -rf '{}' +
 
-# Build the package.
+# Copy files to the packaging directory and build the package.
+# We pass '--pass-env' so that the DEBIAN_FRONTEND variable (which is set in
+# the Drone CI environment automatically in our instance) is exposed to
+# 'sudo apt-get' calls.
 cd pkg/
 find ./ -mindepth 1 -maxdepth 1 -exec cp '{}' "${pkgdir}/{}" -R \;
 cd "${pkgdir}"
-makedeb -s --no-confirm --skip-pgp-check
+makedeb -s --no-confirm --skip-pgp-check --pass-env
 
 # vim: set sw=4 expandtab:
