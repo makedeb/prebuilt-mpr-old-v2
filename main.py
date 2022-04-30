@@ -85,7 +85,28 @@ def run_command(*args, **kwargs):
 
 def get_prebuilt_mpr_version(pkgname):
     try:
-        return run_command(["git", "show", f"origin/pkg/{pkgname}:version.txt"]).stdout.decode()
+        pkgver = None
+        pkgrel = None
+        epoch = None
+        srcinfo = run_command(["git", "show", f"origin/pkg/{pkgname}:pkg/.SRCINFO"]).stdout.decode()
+
+        for line in srcinfo.splitlines():
+            parts = line.replace("\t", "").split(" = ")
+            key = parts[0]
+            value = " = ".join(parts[1:])
+
+            if key == "pkgver":
+                pkgver = value
+            elif key == "pkgrel":
+                pkgrel = value
+            elif key == "epoch":
+                epoch = value
+
+        if epoch is not None:
+            return f"{epoch}:{pkgver}-{pkgrel}"
+        else:
+            return f"{pkgver}-{pkgrel}"
+
     except BadExitCode:
         return None
 
