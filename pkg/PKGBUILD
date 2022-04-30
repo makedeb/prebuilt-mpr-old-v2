@@ -1,0 +1,28 @@
+# original Maintainer: Alexander F. Rødseth <xyproto@archlinux.org>
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=gendesk
+pkgver=1.0.9
+pkgrel=1
+pkgdesc='Utility for generating desktop files'
+arch=('x86_64')
+url='https://gendesk.roboticoverlords.org/'
+license=('MIT')
+makedepends=('golang')
+source=("https://roboticoverlords.org/$pkgname/$pkgname-$pkgver.tar.xz"
+        'https://roboticoverlords.org/images/default.png')
+sha256sums=('892f497c52e5e22db98a5ae098e4daf9bdfbde3b912c74ffb29d758a18902a01'
+            '4d96eded48e536d02e35727c36dc20844c2e44654e81baf78e10aee4eb48e837')
+
+build() {
+  cd $pkgname-$pkgver
+  go build -v -mod=vendor -trimpath -buildmode=pie -ldflags="-s -w -extldflags $LDFLAGS"
+}
+
+package() {
+  cd $pkgname-$pkgver
+  install -Dm755 $pkgname "$pkgdir/usr/bin/$pkgname"
+  install -Dm644 $pkgname.1.gz "$pkgdir/usr/share/man/man1/$pkgname.1.gz"
+  install -Dm644 "$srcdir/default.png" "$pkgdir/usr/share/pixmaps/default.png"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

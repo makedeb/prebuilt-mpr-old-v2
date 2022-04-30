@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = gendesk
+	pkgdesc = Utility for generating desktop files
+	pkgver = 1.0.9
+	pkgrel = 1
+	url = https://gendesk.roboticoverlords.org/
+	arch = x86_64
+	license = MIT
+	makedepends = golang
+	source = https://roboticoverlords.org/gendesk/gendesk-1.0.9.tar.xz
+	source = https://roboticoverlords.org/images/default.png
+	sha256sums = 892f497c52e5e22db98a5ae098e4daf9bdfbde3b912c74ffb29d758a18902a01
+	sha256sums = 4d96eded48e536d02e35727c36dc20844c2e44654e81baf78e10aee4eb48e837
+
+pkgname = gendesk
