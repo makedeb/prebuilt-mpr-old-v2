@@ -1,0 +1,33 @@
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=rehex-git
+_gitname=rehex
+pkgver=872.391ecfc
+pkgrel=2
+pkgdesc="A cross-platform (Windows, Linux, Mac) hex editor for reverse engineering, and everything else (git version)"
+arch=('x86_64')
+url="https://github.com/solemnwarning/rehex"
+license=('GPL2')
+_base_depends=('libjansson4' 'lua5.3' 'liblua5.3-0' 'libwxgtk3.0-gtk3-0v5')
+depends=("${_base_depends[@]}" 'libcapstone3')
+bullseye_depends=("${_base_depends[@]}" 'libcapstone4')
+makedepends=('libjansson-dev' 'libcapstone-dev' 'libwxgtk3.0-gtk3-dev' 'liblua5.3-dev' 'lua5.3' 'git')
+provides=('rehex')
+conflicts=('rehex')
+source=("git://github.com/solemnwarning/rehex.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd ${srcdir}/${_gitname}
+  printf "%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd ${srcdir}/${_gitname}
+  make -j$(nproc)
+}
+
+package() {
+  cd ${srcdir}/${_gitname}
+  make DESTDIR="$pkgdir" prefix="/usr" install
+}

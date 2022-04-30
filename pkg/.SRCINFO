@@ -1,0 +1,31 @@
+generated-by = makedeb-makepkg
+
+pkgbase = rehex-git
+	pkgdesc = A cross-platform (Windows, Linux, Mac) hex editor for reverse engineering, and everything else (git version)
+	pkgver = 872.391ecfc
+	pkgrel = 2
+	url = https://github.com/solemnwarning/rehex
+	arch = x86_64
+	license = GPL2
+	makedepends = libjansson-dev
+	makedepends = libcapstone-dev
+	makedepends = libwxgtk3.0-gtk3-dev
+	makedepends = liblua5.3-dev
+	makedepends = lua5.3
+	makedepends = git
+	depends = libjansson4
+	depends = lua5.3
+	depends = liblua5.3-0
+	depends = libwxgtk3.0-gtk3-0v5
+	depends = libcapstone3
+	provides = rehex
+	conflicts = rehex
+	source = git://github.com/solemnwarning/rehex.git
+	sha256sums = SKIP
+	bullseye_depends = libjansson4
+	bullseye_depends = lua5.3
+	bullseye_depends = liblua5.3-0
+	bullseye_depends = libwxgtk3.0-gtk3-0v5
+	bullseye_depends = libcapstone4
+
+pkgname = rehex-git
