@@ -1,0 +1,17 @@
+generated-by = makedeb-makepkg
+
+pkgbase = mangadesk-bin
+	pkgdesc = Terminal client for MangaDex
+	pkgver = 0.7.7
+	pkgrel = 2
+	url = https://github.com/darylhjd/mangadesk
+	arch = x86_64
+	license = MIT
+	depends = libc6-dev
+	provides = mangadesk
+	conflicts = mangadesk-git
+	conflicts = mangadesk-bin
+	source = mangadesk::https://github.com/darylhjd/mangadesk/releases/download/v0.7.7/mangadesk_v0-7-7_x64
+	sha256sums = dda6d68f5406990676ff44ff0438c39b0ed1635bc1e415510dd02a428d12cf7d
+
+pkgname = mangadesk-bin

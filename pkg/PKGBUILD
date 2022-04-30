@@ -1,0 +1,21 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname="mangadesk-bin"
+_gitname="mangadesk"
+pkgver="0.7.7"
+_pkgver=${pkgver//./-}
+pkgrel="2"
+pkgdesc='Terminal client for MangaDex'
+arch=('x86_64')
+url="https://github.com/darylhjd/mangadesk"
+license=('MIT')
+# according to namcap, this is needed
+depends=('libc6-dev')
+source=("mangadesk"::"${url}/releases/download/v${pkgver}/mangadesk_v${_pkgver}_x64")
+sha256sums=('dda6d68f5406990676ff44ff0438c39b0ed1635bc1e415510dd02a428d12cf7d')
+conflicts=("${_gitname}-git" "${_gitname}-bin")
+provides=("mangadesk")
+
+package() {
+  install -Dm755 "${srcdir}/mangadesk" "${pkgdir}/usr/bin/mangadesk"
+}
