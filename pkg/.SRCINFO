@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = nerd-fonts-inconsolata
+	pkgdesc = Patched font Inconsolata from the nerd-fonts library
+	pkgver = 2.1.0
+	pkgrel = 1
+	url = https://github.com/ryanoasis/nerd-fonts
+	install = nerd-fonts-inconsolata.install
+	arch = any
+	groups = nerd-fonts
+	license = MIT
+	depends = fontconfig
+	provides = nerd-fonts-inconsolata
+	conflicts = nerd-fonts-inconsolata
+	source = https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Inconsolata.zip
+	sha1sums = a788a0d79517d6805a1db31b4e7a52834f44c1bc
+
+pkgname = nerd-fonts-inconsolata

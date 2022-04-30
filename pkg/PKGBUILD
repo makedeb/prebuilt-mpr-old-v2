@@ -1,0 +1,20 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=nerd-fonts-inconsolata
+pkgver=2.1.0
+pkgrel=1
+pkgdesc="Patched font Inconsolata from the nerd-fonts library"
+arch=("any")
+url="https://github.com/ryanoasis/nerd-fonts"
+license=('MIT')
+depends=('fontconfig')
+provides=('nerd-fonts-inconsolata')
+conflicts=('nerd-fonts-inconsolata')
+# replaces=('nerd-fonts-inconsolata')
+install="${pkgname}.install"
+groups=("nerd-fonts")
+source=("https://github.com/ryanoasis/nerd-fonts/releases/download/v$pkgver/Inconsolata.zip")
+sha1sums=('a788a0d79517d6805a1db31b4e7a52834f44c1bc')
+
+package() {
+  find . -iname "*.otf" -not -iname "*Windows Compatible.otf" -execdir install -Dm644 {} "$pkgdir/usr/share/fonts/OTF/{}" \;
+}
