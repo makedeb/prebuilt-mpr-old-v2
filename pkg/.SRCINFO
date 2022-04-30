@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = helm-bin
+	pkgdesc = Tool for managing kubernetes Charts.
+	pkgver = 3.7.2
+	pkgrel = 1
+	url = https://github.com/helm/helm
+	arch = x86_64
+	license = Apache-2.0
+	provides = helm
+	conflicts = helm
+	source = https://get.helm.sh/helm-v3.7.2-linux-amd64.tar.gz
+	sha512sums = 6115c339b8682acbfd965a5f472c512beabaa036e9693d74259d6c354c27b2a934bc3cdfd39db4555efdb82ca2d94dd4fda9ba2c3330cc74bf5a9ae2eec32f0d
+
+pkgname = helm-bin
