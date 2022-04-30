@@ -1,0 +1,47 @@
+# Maintainer: Tarn W. Burton <twburton@gmail.com>
+
+pkgname=cmucl
+pkgver=21d
+pkgrel=1
+pkgdesc="CMU Common Lisp"
+depends=('build-essential' 'gcc-multilib')
+provides=('lisp-compiler')
+makedepends=('sed' 'bc' 'build-essential' 'gcc-multilib' 'time')
+license=('custom')
+#license PublicDomain
+source=("https://common-lisp.net/project/cmucl/downloads/release/${pkgver}/cmucl-src-${pkgver}.tar.bz2"
+        "https://common-lisp.net/project/cmucl/downloads/release/${pkgver}/cmucl-${pkgver}-x86-linux.tar.bz2"
+	'0001-Fix-68-Use-O1-when-compiling-with-gcc-now.patch')
+sha256sums=('657d9332ef0453a513a55c4ed84993ac5157e215efa423d2d7aa432a4bbc4ab4'
+            '45d72d72a3d3b5087561bdc1ae943c8ed445427f3939cc0eb7597dd07eb10d9b'
+            '48ef3fd1038cc0c53c4a5151f5a3eccde1ac58cef28f4dfc8553b5f7977ea9c9')
+url="https://www.cons.org/cmucl/"
+arch=('x86_64')
+
+prepare() {
+  patch -p1 -d "${srcdir}" -i "${srcdir}/0001-Fix-68-Use-O1-when-compiling-with-gcc-now.patch"
+  if [[ $CARCH == "i686" ]]; then
+    sed -i 's|i386\*|i686\*|' "${srcdir}"/bin/build-all.sh
+  fi
+}
+
+build() {
+  cd "${srcdir}"
+  export CMUCLLIB="${srcdir}"/lib/cmucl/lib
+  # Build using binary-dist lisp
+  ./bin/build-all.sh -o "${srcdir}"/bin/lisp -C x86_linux
+}
+
+package() {
+  cd "${srcdir}"
+  # install distribution
+  ./bin/make-dist.sh -I "${pkgdir}"/usr -M share/man/man1 -V ${pkgver} linux-4
+  # move docs
+  mv "${pkgdir}"/usr/doc "${pkgdir}"/usr/share/
+  # backwards compatibility
+  ln -sf lisp "${pkgdir}"/usr/bin/cmucl
+  # license
+  install -D -m644 "${srcdir}"/src/general-info/COPYRIGHTS \
+                   "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+}
+

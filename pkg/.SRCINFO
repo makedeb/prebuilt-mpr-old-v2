@@ -1,0 +1,23 @@
+pkgbase = cmucl
+	pkgdesc = CMU Common Lisp
+	pkgver = 21d
+	pkgrel = 1
+	url = https://www.cons.org/cmucl/
+	arch = x86_64
+	license = custom
+	makedepends = sed
+	makedepends = bc
+	makedepends = build-essential
+	makedepends = gcc-multilib
+	makedepends = time
+	depends = build-essential
+	depends = gcc-multilib
+	provides = lisp-compiler
+	source = https://common-lisp.net/project/cmucl/downloads/release/21d/cmucl-src-21d.tar.bz2
+	source = https://common-lisp.net/project/cmucl/downloads/release/21d/cmucl-21d-x86-linux.tar.bz2
+	source = 0001-Fix-68-Use-O1-when-compiling-with-gcc-now.patch
+	sha256sums = 657d9332ef0453a513a55c4ed84993ac5157e215efa423d2d7aa432a4bbc4ab4
+	sha256sums = 45d72d72a3d3b5087561bdc1ae943c8ed445427f3939cc0eb7597dd07eb10d9b
+	sha256sums = 48ef3fd1038cc0c53c4a5151f5a3eccde1ac58cef28f4dfc8553b5f7977ea9c9
+
+pkgname = cmucl
