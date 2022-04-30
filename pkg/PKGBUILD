@@ -1,0 +1,46 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=neofetch-git
+_pkgname=neofetch
+pkgver=1ccd5d9f2021.12.10
+pkgrel=2
+pkgdesc="A CLI system information tool written in BASH that supports displaying images."
+arch=('any')
+url="https://github.com/dylanaraps/${_pkgname}"
+license=('MIT')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+# replaces=("${_pkgname}")
+depends=('bash')
+optdepends=(
+  'feh: Wallpaper Display'
+  'imagemagick: Image cropping  Thumbnail creation  Take a screenshot'
+  'nitrogen: Wallpaper Display'
+  'w3m-img: Display Images'
+  'catimg: Display Images'
+  'jp2a: Display Images'
+  'ueberzug: Display Images'
+  'sixel: Display Images Note-sixel works only if the terminal supports it'
+  'libcaca0: Display Images'
+  'xdotool: See https://github.com/dylanaraps/neofetch/wiki/Images-in-the-terminal'
+  'xorg-xdpyinfo: Resolution detection (Single Monitor)'
+  'xorg-xprop: Desktop Environment and Window Manager'
+  'xorg-xrandr: Resolution detection (Multi Monitor + Refresh rates)'
+  'xorg-xwininfo: See https://github.com/dylanaraps/neofetch/wiki/Images-in-the-terminal'
+)
+makedepends=('git')
+source=("${pkgname}::git+https://github.com/dylanaraps/neofetch.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd ${pkgname}
+    _always=$(git describe --always | sed -e 's:-:.:g' -e 's:v::') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+package() {
+  cd ${pkgname}
+  make DESTDIR="${pkgdir}" install
+  install -D -m644 "LICENSE.md" "${pkgdir}/usr/share/licenses/neofetch/LICENSE.md"
+}
