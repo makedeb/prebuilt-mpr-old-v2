@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # 'golang-go' from the Debian and Ubuntu repositories depends on 'golang-src',
