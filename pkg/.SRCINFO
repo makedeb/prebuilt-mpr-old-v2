@@ -1,0 +1,29 @@
+generated-by = makedeb-makepkg
+
+pkgbase = vim-runtime-git
+	pkgdesc = Vim the editor. Components used by vim-minimal-git and gvim-git.
+	pkgver = 8.2.4586
+	pkgrel = 1
+	url = http://www.vim.org
+	arch = i686
+	arch = x86_64
+	license = custom:vim
+	makedepends = git
+	makedepends = lua5.4
+	makedepends = liblua5.4-dev
+	makedepends = libgtk2.0-dev
+	makedepends = make
+	makedepends = clang
+	makedepends = ruby
+	makedepends = ruby-dev
+	makedepends = python3-dev
+	makedepends = libperl-dev
+	makedepends = libtool-bin
+	depends = gpm
+	depends = gawk
+	provides = vim-runtime
+	conflicts = vim-runtime
+	source = git+https://github.com/vim/vim.git
+	sha256sums = SKIP
+
+pkgname = vim-runtime-git
