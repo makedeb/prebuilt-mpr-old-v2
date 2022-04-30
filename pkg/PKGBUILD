@@ -1,0 +1,33 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at protonmail dot com>
+
+pkgname='moar'
+_gitname='moar'
+pkgver='1.9.2'
+pkgrel='1'
+pkgdesc="A pager designed to just do the right thing without any configuration."
+arch=('any')
+url='https://github.com/walles/moar'
+license=('BSD')
+makedepends=('golang-go')
+optdepends=('highlight')
+checkdepends=('highlight')
+source=("git+${url}.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+conflicts=("${_gitname}-git" "${_gitname}-bin")
+
+build() {
+  cd "${srcdir}/${_gitname}"
+	go build -ldflags="-X main.versionString=${pkgver}" -o "${pkgname}"
+}
+
+check() {
+  cd "${srcdir}/${_gitname}"
+	go test github.com/walles/moar/m
+}
+
+package() {
+  cd "${srcdir}/${_gitname}"
+
+	install -dm755 "${pkgdir}/usr/bin"
+	install -m755 "moar" "${pkgdir}/usr/bin/moar"
+}

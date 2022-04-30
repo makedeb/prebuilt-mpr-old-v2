@@ -1,0 +1,19 @@
+generated-by = makedeb
+pkgname = moar
+pkgbase = moar
+pkgdesc = A pager designed to just do the right thing without any configuration.
+pkgrel = 1
+pkgver = 1.9.2
+url = https://github.com/walles/moar
+arch = any
+checkdepends = highlight
+conflicts = moar-git
+conflicts = moar-bin
+license = BSD
+makedepends = golang-go
+optdepends = highlight
+source = git+https://github.com/walles/moar.git#tag=v1.9.2
+sha256sums = SKIP
+checkdepends = highlight
+makedepends = golang-go
+optdepends = highlight
