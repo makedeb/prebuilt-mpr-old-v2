@@ -1,0 +1,34 @@
+# Maintainer: only_vip  <onlyme_vip@protonmail.com>
+pkgname=elementary-icons
+_pkgname=icons
+pkgver=6.1.0
+pkgrel=1
+pkgdesc="An original set of vector icons designed specifically for elementary OS and its desktop environment: Pantheon."
+arch=('any')
+url="https://github.com/elementary/icons"
+license=( 'GPL3')
+depends=()
+#buster_depends=(${depends[@]} 'libpcre2-posix0' 'libverto-libev1' )
+#focal_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+#groovy_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+#hirsute_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+makedepends=('meson' 'librsvg2-bin' 'librsvg2-dev' 'libxcursor-dev' 'libxcursor1' 'gettext')
+provides=('elementary-icons')
+conflicts=('elementary-icons')
+# replaces=('elementary-icons')
+source=("${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha512sums=('ef52a56dba7a5bbbe02dda29b601ea6e505f9d367a3b33e8d8db6c137700fcf9378e809c24c7d9f463bd02933a1064f9c8cce6c54330845374319a86ec830adf')
+options=(!strip)
+
+build() {
+  cd ${srcdir}/${_pkgname}-${pkgver}
+  meson build --prefix=/usr
+  cd build
+  ninja 
+}
+
+package() {
+  cd ${srcdir}/${_pkgname}-${pkgver}/build
+  DESTDIR=${pkgdir} ninja install
+  rm "${pkgdir}"/.VolumeIcon*
+}

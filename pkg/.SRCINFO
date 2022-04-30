@@ -1,0 +1,22 @@
+generated-by = makedeb-makepkg
+
+pkgbase = elementary-icons
+	pkgdesc = An original set of vector icons designed specifically for elementary OS and its desktop environment: Pantheon.
+	pkgver = 6.1.0
+	pkgrel = 1
+	url = https://github.com/elementary/icons
+	arch = any
+	license = GPL3
+	makedepends = meson
+	makedepends = librsvg2-bin
+	makedepends = librsvg2-dev
+	makedepends = libxcursor-dev
+	makedepends = libxcursor1
+	makedepends = gettext
+	provides = elementary-icons
+	conflicts = elementary-icons
+	options = !strip
+	source = https://github.com/elementary/icons/archive/refs/tags/6.1.0.tar.gz
+	sha512sums = ef52a56dba7a5bbbe02dda29b601ea6e505f9d367a3b33e8d8db6c137700fcf9378e809c24c7d9f463bd02933a1064f9c8cce6c54330845374319a86ec830adf
+
+pkgname = elementary-icons
