@@ -1,0 +1,29 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+_pkgname=nextcloud-desktop
+pkgname=nextcloud-desktop-bin
+pkgver=3.4.1
+pkgrel=1
+pkgdesc='Desktop sync client for Nextcloud'
+arch=('x86_64')
+license=('GPL2')
+conflicts=("${_pkgname}")
+provides=("${_pkgname}=${pkgver}")
+options=('!strip')
+url='https://nextcloud.com/install/#install-clients'
+
+source=("${_pkgname}-${pkgver}.AppImage::https://github.com/nextcloud/desktop/releases/download/v${pkgver}/Nextcloud-${pkgver}-x86_64.AppImage")
+sha256sums=('SKIP')
+
+prepare() {
+    chmod +x "./${_pkgname}-${pkgver}.AppImage"
+    "./${_pkgname}-${pkgver}.AppImage" --appimage-extract
+}
+
+package() {
+    install -Dm 755 "./${_pkgname}-${pkgver}.AppImage" "${pkgdir}/usr/bin/${_pkgname}"
+
+    cd squashfs-root/
+    sed -i 's|Exec=nextcloud|Exec=nextcloud-desktop|' './com.nextcloud.desktopclient.nextcloud.desktop'
+    install -Dm 644 './com.nextcloud.desktopclient.nextcloud.desktop' "${pkgdir}/usr/share/applications/com.nextcloud.desktopclient.nextcloud.desktop"
+    install -Dm 644 ./Nextcloud.png "${pkgdir}/usr/share/icons/hicolor/512x512/apps/Nextcloud.png"
+}

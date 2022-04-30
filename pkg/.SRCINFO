@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = nextcloud-desktop-bin
+	pkgdesc = Desktop sync client for Nextcloud
+	pkgver = 3.4.1
+	pkgrel = 1
+	url = https://nextcloud.com/install/#install-clients
+	arch = x86_64
+	license = GPL2
+	provides = nextcloud-desktop=3.4.1
+	conflicts = nextcloud-desktop
+	source = nextcloud-desktop-3.4.1.AppImage::https://github.com/nextcloud/desktop/releases/download/v3.4.1/Nextcloud-3.4.1-x86_64.AppImage
+	sha256sums = SKIP
+
+pkgname = nextcloud-desktop-bin
