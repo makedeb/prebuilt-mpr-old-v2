@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = zscroll-git
+	pkgdesc = A text scroller for use with panels
+	pkgver = 1.0.r36.gf849ff4
+	pkgrel = 1
+	url = https://github.com/noctuid/zscroll
+	arch = any
+	license = Simplified BSD
+	makedepends = git
+	depends = python3
+	provides = zscroll
+	source = git://github.com/noctuid/zscroll.git
+	md5sums = SKIP
+
+pkgname = zscroll-git
