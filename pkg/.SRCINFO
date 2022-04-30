@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = lazygit-git
+	pkgdesc = Simple terminal UI for git commands
+	pkgver = 1.2960.f4011643
+	pkgrel = 1
+	url = https://github.com/jesseduffield/lazygit
+	arch = x86_64
+	license = MIT
+	makedepends = golang-go
+	depends = git
+	depends = libc6-dev
+	conflicts = lazygit
+	conflicts = lazygit-bin
+	source = git+https://github.com/jesseduffield/lazygit.git
+	sha256sums = SKIP
+
+pkgname = lazygit-git
