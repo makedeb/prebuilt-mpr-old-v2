@@ -1,0 +1,20 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname='popcorntime-bin'
+provides=('popcorn-time')
+pkgver='0.4.7'
+pkgrel='1'
+pkgdesc="Watch Movies and TV Shows instantly"
+arch=('x86_64')
+depends=('libatomic1' 'libgconf-2-4' 'libcanberra-gtk-module')
+license=('GPL')
+url="https://github.com/popcorn-official/popcorn-desktop"
+
+source=("${url}/releases/download/v${pkgver}/Popcorn-Time-${pkgver}-amd64.deb")
+sha512sums=('9d29bc7a541379b248abc7d4ac4711fa3e6ac2e9645f566d5fba24430b30f1b4c55a7a0ae652f2e57b56f547eda6564a8c0696432ac4cdd099828e0fd3ff010d')
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.xz..."
+    tar -xf 'data.tar.xz' -C "${pkgdir}"
+}

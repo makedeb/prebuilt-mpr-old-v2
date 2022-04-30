@@ -1,0 +1,15 @@
+generated-by = makedeb
+pkgname = popcorntime-bin
+pkgbase = popcorntime-bin
+pkgdesc = Watch Movies and TV Shows instantly
+pkgrel = 1
+pkgver = 0.4.7
+url = https://github.com/popcorn-official/popcorn-desktop
+arch = x86_64
+depends = libatomic1
+depends = libgconf-2-4
+depends = libcanberra-gtk-module
+license = GPL
+provides = popcorn-time
+source = https://github.com/popcorn-official/popcorn-desktop/releases/download/v0.4.7/Popcorn-Time-0.4.7-amd64.deb
+sha512sums = 9d29bc7a541379b248abc7d4ac4711fa3e6ac2e9645f566d5fba24430b30f1b4c55a7a0ae652f2e57b56f547eda6564a8c0696432ac4cdd099828e0fd3ff010d
