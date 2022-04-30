@@ -1,0 +1,54 @@
+# Maintainer: Florian Bach <s1-dur@leseratte10.de>
+
+pkgname=dolphin-emu-git
+provides=('dolphin-emu')
+pkgver=5.0.r14480.gc77a5f7e32
+pkgrel=1
+pkgdesc="Gamecube / Wii emulator"
+arch=('x86_64')
+url="https://dolphin-emu.org"
+license=('GPL')
+depends=(
+    'libopengl0' 'libhidapi-libusb0' 'libpng16-16' 'libxi6' 'liblzo2-2'
+)
+makedepends=(
+    'ca-certificates' 'qtbase5-dev' 'qtbase5-private-dev' 'git' 'cmake' 'make' 'gcc' 'g++' 'pkg-config' 
+    'libavcodec-dev' 'libavformat-dev' 'libavutil-dev' 'libswscale-dev' 'libxi-dev'
+    'libudev-dev' 'libevdev-dev' 'libpugixml-dev' 'libbz2-dev' 'libzstd-dev' 'liblzo2-dev' 'libusb-1.0-0-dev' 'libhidapi-dev' 
+    'libbluetooth-dev' 'libasound2-dev' 'libpulse-dev'
+    
+    )
+optdepends=('pulseaudio: PulseAudio backend')
+source=("git+https://github.com/dolphin-emu/dolphin")
+sha256sums=('SKIP')
+
+prepare() {
+    cd "$srcdir/dolphin"
+    if [ -d 'build/' ]; then rm -rf 'build/'; fi
+	mkdir 'build/'
+}
+
+pkgver() {
+    cd "$srcdir/dolphin" 2>/dev/null
+	git describe --long --tags 2>/dev/null | sed -e 's/-\([^-]*-g[^-]*\)$/-r\1/' -e 's/-/./g'
+}
+
+build() {
+	cd "$srcdir/dolphin"
+	cmake -S '.' -B 'build/' \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX='/usr' \
+		-DUSE_SHARED_ENET=ON \
+		-DDISTRIBUTOR=dur.hunterwittenborn.com
+	make -C 'build/'
+}
+
+package() {
+
+	cd "$srcdir/dolphin"
+	make DESTDIR="$pkgdir" -C 'build/' install
+	install -Dm644 'Data/51-usb-device.rules' "$pkgdir/usr/lib/udev/rules.d/51-usb-device.rules"
+
+	rm -rf "$pkgdir/usr/include"
+	rm -rf "$pkgdir/usr/lib/libdiscord-rpc.a"
+}
