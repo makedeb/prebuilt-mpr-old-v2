@@ -1,0 +1,17 @@
+generated-by = makedeb-makepkg
+
+pkgbase = groovy
+	pkgdesc = Programming language based on Java, inspired by Python, Ruby and Smalltalk
+	pkgver = 3.0.9
+	pkgrel = 1
+	url = http://groovy-lang.org/
+	arch = any
+	license = Apache
+	makedepends = gendesk
+	depends = bash
+	depends = openjdk-11-jre
+	optdepends = groovy-docs: html and pdf documentation for Groovy
+	source = groovy-3.0.9.zip::https://groovy.jfrog.io/ui/api/v1/download?repoKey=dist-release-local&path=groovy-zips%252Fapache-groovy-binary-3.0.9.zip
+	sha256sums = eb34f4ee229b1a424adb87df5b999f66d1b1285694e5332d0800896744c2e421
+
+pkgname = groovy
