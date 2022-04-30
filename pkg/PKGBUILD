@@ -1,0 +1,88 @@
+# Maintainer: Christoph Gysin <christoph.gysin@gmail.com>
+
+pkgname=samsung-unified-driver-common
+pkgver=1.00.39
+pkgrel=5
+pkgdesc='Unified Linux Driver for Samsung printers and scanners.'
+arch=('i686' 'x86_64')
+url="http://www.samsung.com"
+license=('custom:samsung')
+provides=('samsung-unified-driver-printer' 'samsung-unified-driver-scanner' 'samsung-unified-driver-common')
+depends=('libxml2' 'libusb-1.0-0' 'libusbhid-common' 'cups' 'sane' 'ghostscript')
+options=(!strip)
+source=(
+    "http://downloadcenter.samsung.com/content/DR/201704/20170407143829533/uld_V${pkgver}_01.17.tar.gz"
+    "xerox_mfp-smfp.conf")
+sha256sums=('09c166f9b1e11ff312965886387ee31c6980867c67c3d6206680cbae76ae6746'
+            '0fe9a79be837f23b1f2b2000a4b5045e0503fc7afd9cbd1c9eb8406a7465af3d')
+
+_arch=${CARCH/i686/i386}
+
+prepare(){
+    chmod -R u+w "$srcdir"/*
+}
+
+package() {
+    ## EULA
+    mkdir -p "$pkgdir"/usr/share/licenses/$pkgbase
+    cp "$srcdir"/uld/noarch/license/eula.txt "$pkgdir"/usr/share/licenses/$pkgbase/LICENSE
+    cp "$srcdir"/uld/noarch/license/eula-fr.txt "$pkgdir"/usr/share/licenses/$pkgbase
+
+    ## PRINTER
+    #depends=('samsung-unified-driver-common' 'cups' 'ghostscript')
+
+    mkdir -p "$pkgdir"/usr/lib
+    cp "$srcdir"/uld/$_arch/libscmssc.so "$pkgdir"/usr/lib
+
+    mkdir -p "$pkgdir"/usr/lib/cups/backend
+    cp "$srcdir"/uld/$_arch/smfpnetdiscovery "$pkgdir"/usr/lib/cups/backend
+
+    mkdir -p "$pkgdir"/usr/lib/cups/filter
+    cp "$srcdir"/uld/$_arch/pstosecps "$pkgdir"/usr/lib/cups/filter
+    cp "$srcdir"/uld/$_arch/rastertospl "$pkgdir"/usr/lib/cups/filter
+    ln -s rastertospl "$pkgdir"/usr/lib/cups/filter/rastertosplc
+
+    mkdir -p "$pkgdir"/usr/share/ppd/suld
+    for ppd in "$srcdir"/uld/noarch/share/ppd/*.ppd; do
+        gzip < "$ppd" > "$pkgdir"/usr/share/ppd/suld/"${ppd##*/}".gz
+    done
+
+    mkdir -p "$pkgdir"/usr/share/ppd/suld/cms
+    for cts in "$srcdir"/uld/noarch/share/ppd/cms/*.cts; do
+        cp "$cts" "$pkgdir"/usr/share/ppd/suld/cms
+    done
+
+    ## SCANNER
+    #depends=('samsung-unified-driver-common' 'libxml2' 'libusb-1.0-0' 'sane')
+
+    mkdir -p "$pkgdir"/usr/share
+    cp -r "$srcdir"/uld/noarch/share/locale "$pkgdir"/usr/share
+    rm -f "$pkgdir"/usr/share/locale/fr/LC_MESSAGES/install.mo
+
+    mkdir -p "$pkgdir"/etc/sane.d
+    cp "$srcdir"/uld/noarch/etc/smfp.conf "$pkgdir"/etc/sane.d
+    cp "$srcdir"/xerox_mfp-smfp.conf "$pkgdir"/etc/sane.d
+
+    mkdir -p "$pkgdir"/etc/sane.d/dll.d
+    echo smfp > "$pkgdir"/etc/sane.d/dll.d/smfp-scanner
+    echo xerox_mfp-smfp > "$pkgdir"/etc/sane.d/dll.d/smfp-scanner-fix
+
+    mkdir -p "$pkgdir"/usr/lib/sane
+    cp "$srcdir"/uld/$_arch/libsane-smfp.so.1.0.1 "$pkgdir"/usr/lib/sane
+    ln -s libsane-smfp.so.1.0.1 "$pkgdir"/usr/lib/sane/libsane-smfp.so.1
+    ln -s libsane-smfp.so.1 "$pkgdir"/usr/lib/sane/libsane-smfp.so
+
+    mkdir -p "$pkgdir"/usr/lib/udev/rules.d
+    (
+        OEM_FILE="$srcdir"/uld/noarch/oem.conf
+        INSTALL_LOG_FILE=/dev/null
+        source "$srcdir"/uld/noarch/scripting_utils
+        source "$srcdir"/uld/noarch/package_utils
+        source "$srcdir"/uld/noarch/scanner-script.pkg
+        fill_full_template "$srcdir"/uld/noarch/etc/smfp.rules.in "$pkgdir"/usr/lib/udev/rules.d/60_smfp_samsung.rules
+        chmod 644 "$pkgdir"/usr/lib/udev/rules.d/60_smfp_samsung.rules
+
+        mkdir -p "$pkgdir"/opt/samsung/scanner/share
+        cp "$OEM_FILE" "$pkgdir"/opt/samsung/scanner/share
+    )
+}

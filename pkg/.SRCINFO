@@ -1,0 +1,26 @@
+generated-by = makedeb-makepkg
+
+pkgbase = samsung-unified-driver-common
+	pkgdesc = Unified Linux Driver for Samsung printers and scanners.
+	pkgver = 1.00.39
+	pkgrel = 5
+	url = http://www.samsung.com
+	arch = i686
+	arch = x86_64
+	license = custom:samsung
+	depends = libxml2
+	depends = libusb-1.0-0
+	depends = libusbhid-common
+	depends = cups
+	depends = sane
+	depends = ghostscript
+	provides = samsung-unified-driver-printer
+	provides = samsung-unified-driver-scanner
+	provides = samsung-unified-driver-common
+	options = !strip
+	source = http://downloadcenter.samsung.com/content/DR/201704/20170407143829533/uld_V1.00.39_01.17.tar.gz
+	source = xerox_mfp-smfp.conf
+	sha256sums = 09c166f9b1e11ff312965886387ee31c6980867c67c3d6206680cbae76ae6746
+	sha256sums = 0fe9a79be837f23b1f2b2000a4b5045e0503fc7afd9cbd1c9eb8406a7465af3d
+
+pkgname = samsung-unified-driver-common
