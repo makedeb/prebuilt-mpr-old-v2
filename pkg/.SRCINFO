@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = mybrowse
+	pkgdesc = A simple WebKit browser written in Python3 and using GTK3
+	pkgver = 0.5
+	pkgrel = 1
+	url = https://github.com/KaiserBarbarossa/MyBrowse
+	arch = any
+	license = GPL3
+	depends = python3
+	depends = python3-gi
+	depends = gir1.2-webkit2-4.0
+	source = mybrowse-0.5.tar.gz::https://github.com/KaiserBarbarossa/mybrowse/archive/v0.5.tar.gz
+	sha256sums = b5f6f72bd51bbaf44a7eff15d22063ffddfa23b38021d7c20f80f7e91fff1cee
+
+pkgname = mybrowse
