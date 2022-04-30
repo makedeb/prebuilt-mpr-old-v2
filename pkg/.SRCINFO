@@ -1,0 +1,27 @@
+generated-by = makedeb-makepkg
+
+pkgbase = youtube-music-bin
+	pkgdesc = YouTube Music Desktop App bundled with custom plugins (and built-in ad blocker / downloader)
+	pkgver = 1.16.0
+	pkgrel = 1
+	url = https://th-ch.github.io/youtube-music
+	arch = x86_64
+	license = MIT
+	depends = libgtk-3-0
+	depends = libnotify4
+	depends = libnss3
+	depends = libxss1
+	depends = libxtst6
+	depends = xdg-utils
+	depends = libatspi2.0-0
+	depends = libuuid1
+	depends = libsecret-1-0
+	optdepends = libappindicator3-1
+	provides = youtube-music
+	conflicts = youtube-music
+	source = https://github.com/th-ch/youtube-music/releases/download/v1.16.0/youtube-music_1.16.0_amd64.deb
+	source = https://github.com/th-ch/youtube-music/raw/v1.16.0/license
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = youtube-music-bin
