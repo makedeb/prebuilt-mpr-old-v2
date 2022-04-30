@@ -1,0 +1,30 @@
+# Maintainer: Guillaume Fournier-Mayer <giom@mailbox.org>
+        
+pkgname=hcloud
+pkgver=1.29.0
+pkgrel=4
+arch=('any')
+makedepends=('git' 'golang')
+url="https://github.com/hetznercloud/cli.git"
+pkgdesc="A command-line interface for Hetzner Cloud"
+provides=('hcloud')
+sha256sums=('SKIP')
+source=("git+${url}/#tag=v${pkgver}")
+conflicts=("hcloud-cli")
+
+
+prepare(){
+    cd cli/internal/version
+    sed -i "s/was not built properly/v${pkgver}/" version.go
+}
+
+build(){
+    cd cli/
+    go build -o hcloud cmd/hcloud/main.go
+}
+
+package() {
+    cd cli/
+    mkdir -p "${pkgdir}/usr/bin"
+    cp hcloud "${pkgdir}/usr/bin/"
+}

@@ -1,0 +1,4 @@
+*.deb
+cli/
+pkg/
+src/

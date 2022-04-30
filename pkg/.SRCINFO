@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = hcloud
+	pkgdesc = A command-line interface for Hetzner Cloud
+	pkgver = 1.29.0
+	pkgrel = 4
+	url = https://github.com/hetznercloud/cli.git
+	arch = any
+	makedepends = git
+	makedepends = golang
+	provides = hcloud
+	conflicts = hcloud-cli
+	source = git+https://github.com/hetznercloud/cli.git/#tag=v1.29.0
+	sha256sums = SKIP
+
+pkgname = hcloud
