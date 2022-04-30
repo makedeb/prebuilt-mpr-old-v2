@@ -1,0 +1,36 @@
+generated-by = makedeb-makepkg
+
+pkgbase = una-bin
+	pkgdesc = Una is a simple MPR helper.
+	pkgver = 3.1.1
+	pkgrel = 1
+	url = https://github.com/AFK-OS/una
+	arch = any
+	depends = bash
+	depends = bash-completion
+	depends = ncurses-bin
+	depends = python3
+	depends = git
+	depends = wget
+	depends = python3-requests
+	depends = curl
+	depends = coreutils
+	depends = sudo
+	depends = jq
+	depends = gzip
+	depends = zenity
+	depends = git
+	depends = sed
+	depends = sensible-utils
+	depends = asciidoctor
+	provides = una
+	source = https://github.com/AFK-OS/una/raw/main/una
+	source = https://github.com/AFK-OS/una/raw/main/una-completion
+	source = https://github.com/AFK-OS/una/raw/main/una-updater
+	source = https://github.com/AFK-OS/una/raw/main/man/una.8.adoc
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = una-bin

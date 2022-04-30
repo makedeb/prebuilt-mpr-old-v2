@@ -1,0 +1,24 @@
+# Maintainer: Rudra Saraswat <rs2009@ubuntu.com>
+pkgname=una-bin
+pkgver=3.1.1
+pkgrel=1
+url='https://github.com/AFK-OS/una'
+pkgdesc='Una is a simple MPR helper.'
+arch=('any')
+depends=('bash' 'bash-completion' 'ncurses-bin' 'python3' 'git' 'wget' 'python3-requests' 'curl' 'coreutils' 'sudo' 'jq' 'gzip' 'zenity' 'git' 'sed' 'sensible-utils' 'asciidoctor')
+keywords=('makedeb' 'mpr-helper' 'bash')
+provides=('una')
+
+source=('https://github.com/AFK-OS/una/raw/main/una' 'https://github.com/AFK-OS/una/raw/main/una-completion' \
+  'https://github.com/AFK-OS/una/raw/main/una-updater' 'https://github.com/AFK-OS/una/raw/main/man/una.8.adoc')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
+
+package() {
+    install -D -m755 una -t "${pkgdir}/usr/bin"
+    install -D -m755 una-updater -t "${pkgdir}/usr/bin"
+    mkdir -p "${pkgdir}/usr/share/man/man8"
+    asciidoctor -b manpage una.8.adoc -o "${pkgdir}/usr/share/man/man8/una.8"
+    rm -f una && mv una-completion una
+    mkdir -p "${pkgdir}/usr/share/bash-completion/completions"
+    install -D -m755 una -t "${pkgdir}/usr/share/bash-completion/completions" && rm -f una
+}
