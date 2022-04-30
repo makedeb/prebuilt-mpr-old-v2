@@ -1,0 +1,24 @@
+# Maintainer: Nico <d3sox at protonmail dot com>
+pkgname=meson
+pkgver=0.62.1
+pkgrel=1
+pkgdesc="The Meson Build System"
+arch=('x86_64')
+replaces=("meson")
+provides=("meson=$pkgver")
+url="https://mesonbuild.com/"
+license=('Apache')
+depends=('python3-setuptools')
+makedepends=('ninja-build')
+source=("https://github.com/mesonbuild/meson/releases/download/$pkgver/meson-$pkgver.tar.gz")
+sha256sums=('a0f5caa1e70da12d5e63aa6a9504273759b891af36c8d87de381a4ed1380e845')
+
+build() {
+  cd "$srcdir/meson-$pkgver"
+  python3 setup.py build
+}
+
+package() {
+  cd "$srcdir/meson-$pkgver"
+  python3 setup.py install --root="$pkgdir/" --optimize=1 --skip-build --install-layout=deb
+}
