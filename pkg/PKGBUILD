@@ -1,0 +1,42 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org> 
+
+pkgname=firefox-it-bin 
+_pkgname=firefox 
+pkgdesc="Web Browser - (Italian)" 
+pkgrel=2 
+pkgver=99.0.1 
+arch=('amd64') 
+url="https://download.mozilla.org" 
+license=('Mozilla Public License 2.0') 
+provides=('firefox') 
+conflicts=('firefox') 
+source=("https://download-installer.cdn.mozilla.net/pub/firefox/releases/$pkgver/linux-x86_64/it/firefox-$pkgver.tar.bz2" 
+        "firefox.desktop" 
+ 
+        "https://design.firefox.com/product-identity/firefox/firefox/firefox-logo.svg") 
+sha256sums=('SKIP' 
+            'SKIP' 
+            'SKIP') 
+ 
+ 
+package() { 
+
+
+    cd "$srcdir" 
+    mkdir -p "$pkgdir/usr/bin" 
+    install -d -m755 "$pkgdir/usr/lib/$pkgname" 
+    install -Dm644 "$_pkgname.desktop" -t "$pkgdir/usr/share/applications" 
+    cp -r ./firefox/* "$pkgdir/usr/lib/$pkgname" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/firefox" "$pkgdir/usr/bin/firefox" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/16x16/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/32x32/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/48x48/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/64x64/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/128x128/apps" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default16.png" "$pkgdir/usr/share/icons/hicolor/16x16/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default32.png" "$pkgdir/usr/share/icons/hicolor/32x32/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default48.png" "$pkgdir/usr/share/icons/hicolor/48x48/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default64.png" "$pkgdir/usr/share/icons/hicolor/64x64/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default128.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/$_pkgname.png" 
+    install -D -m644 firefox-logo.svg "$pkgdir"/usr/share/icons/hicolor/scalable/apps/$_pkgname.svg 
+}
