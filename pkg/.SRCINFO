@@ -1,0 +1,22 @@
+generated-by = makedeb-makepkg
+
+pkgbase = minecraft-technic-launcher
+	pkgdesc = Choose from thousands of community-made Minecraft modpacks
+	pkgver = 4.725
+	pkgrel = 1
+	url = https://www.technicpack.net/
+	arch = any
+	license = custom
+	makedepends = icoutils
+	depends = default-jre
+	depends = x11-xserver-utils
+	depends = hicolor-icon-theme
+	noextract = TechnicLauncher.jar
+	source = minecraft-technic-launcher-4.725.jar::http://launcher.technicpack.net/launcher4/725/TechnicLauncher.jar
+	source = technic-launcher
+	source = technic-launcher.desktop
+	sha256sums = b8b9dab63a848c219906ea76258987d98cf89df3bffc672bec2f9d491e5b8cf3
+	sha256sums = 11e5cbc3ae9888865c34bec90ce725532a039aa751aefa61cd4703c9f0460397
+	sha256sums = 221da85f9fb535951e490a3feda052c60839883ae0806d7d587b0c64337f3513
+
+pkgname = minecraft-technic-launcher
