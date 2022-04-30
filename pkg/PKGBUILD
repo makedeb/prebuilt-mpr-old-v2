@@ -1,0 +1,34 @@
+# Maintainer: Nico <d3sox at protonmail dot com>
+pkgname=soundux
+pkgver=0.2.7
+pkgrel=1
+pkgdesc="A cross-platform soundboard - stable version"
+arch=('any')
+url="https://soundux.rocks"
+license=('GPL3')
+depends=('libpulse0' 'libwebkit2gtk-4.0-37' 'libwnck-3-0' 'libappindicator3-1' 'lsb-release')
+optdepends=('youtube-dl: downloader integration' 'ffmpeg: downloader integration' 'libpipewire-0.3-0: pipewire backend')
+makedepends=('cmake' 'ninja-build' 'libpulse-dev' 'libpipewire-0.3-dev' 'libx11-dev' 'libxi-dev' 'libwnck-3-dev' 'libappindicator3-dev' 'libwebkit2gtk-4.0-dev' 'libssl-dev')
+source=("https://github.com/Soundux/Soundux/releases/download/$pkgver/soundux-$pkgver.tar.gz")
+sha256sums=('017003fc96f49df30575975f3904c0d8a500e325a9d2bca8c3dc69fed0cab0a7')
+
+build() {
+  cd "${srcdir}/Soundux"
+  mkdir -p build
+  cd build
+  cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
+  ninja
+}
+
+package() {
+  cd "${srcdir}/Soundux/build"
+  DESTDIR="$pkgdir/" ninja install
+  # install binary symlink
+  mkdir -p "${pkgdir}/usr/bin/"
+  ln -sf /opt/soundux/soundux "${pkgdir}/usr/bin/soundux"
+
+  # install doc
+  install -Dm 644 -t "${pkgdir}/usr/share/doc/${pkgname}" "${srcdir}/Soundux/README.md"
+  # install license
+  install -Dm 644 -t "${pkgdir}/usr/share/licenses/${pkgname}" "${srcdir}/Soundux/LICENSE"
+}
