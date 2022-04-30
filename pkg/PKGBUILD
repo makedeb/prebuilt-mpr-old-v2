@@ -1,0 +1,29 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=st-siduck76-git
+_pkgname=st
+pkgver=12022.04.12
+pkgrel=2
+pkgdesc="This is a custom suckless st build and siduck76 have added some additional patches like newterm , rightclick paste , desktop entry ,sixel, live-reload xresources , dynamic cursor etc"
+arch=('any')
+depends=('nerd-fonts-jetbrains-mono')
+makedepends=('build-essential' 'libxft-dev' 'libharfbuzz-dev')
+optdepends=()
+url="https://github.com/siduck76/st"
+license=('MIT')
+source=("${_pkgname}::git+https://github.com/siduck76/${_pkgname}.git")
+sha256sums=("SKIP")
+provides=('st')
+conflicts=('st' 'stterm')
+# replaces=('st')
+
+pkgver() {
+    cd "${srcdir}/${_pkgname}"
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_tag}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+package() {
+  cd ${srcdir}/${_pkgname}
+  make DESTDIR="${pkgdir}" install
+}
