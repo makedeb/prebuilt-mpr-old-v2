@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = ipscan-bin
+	pkgdesc = An open-source and cross-platform network scanner designed to be fast and simple to use.
+	pkgver = 3.8.2
+	pkgrel = 1
+	url = https://github.com/angryip/ipscan
+	arch = x86_64
+	license = GPL-2.0
+	depends = bash
+	provides = ipscan
+	conflicts = ipscan
+	source = ipscan-bin-3.8.2-x86_64.deb::https://github.com/angryip/ipscan/releases/download/3.8.2/ipscan_3.8.2_amd64.deb
+	sha256sums = SKIP
+
+pkgname = ipscan-bin

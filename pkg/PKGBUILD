@@ -1,0 +1,21 @@
+# Maintainer: cindrmon <cindrmon@protonmail.com>
+pkgname=ipscan-bin
+provides=('ipscan')
+conflicts=('ipscan')
+pkgdesc="An open-source and cross-platform network scanner designed to be fast and simple to use."
+pkgver=3.8.2
+pkgrel=1
+arch=('x86_64')
+url="https://github.com/angryip/ipscan"
+license=('GPL-2.0')
+depends=(
+    'bash'
+)
+source=("${pkgname}-${pkgver}-${arch}.deb"::"${url}/releases/download/${pkgver}/ipscan_${pkgver}_amd64.deb")
+sha256sums=('SKIP')
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.xz..."
+    tar -xf 'data.tar.xz' -C "${pkgdir}"
+}
