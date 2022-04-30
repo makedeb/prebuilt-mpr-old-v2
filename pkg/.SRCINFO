@@ -1,0 +1,20 @@
+generated-by = makedeb-makepkg
+
+pkgbase = blobsaver-bin
+	pkgdesc = A cross-platform GUI app for saving SHSH blobs using tsschecker
+	pkgver = 3.0.4
+	pkgrel = 1
+	url = https://github.com/airsquared/blobsaver
+	arch = x86_64
+	license = GPL3
+	depends = openjdk-11-jre
+	depends = bash
+	depends = zlib1g
+	depends = zlib1g-dev
+	optdepends = libimobiledevice: Get plugged in device information
+	optdepends = libirecovery: Utility to talk to iBoot/iBSS via USB
+	provides = blobsaver
+	source = https://github.com/airsquared/blobsaver/releases/download/v3.0.4/blobsaver_3.0.4-1_amd64.deb
+	sha256sums = cac2b0395f626018a63b8915437660d045f8090307460b9532a70fe890ea3a4a
+
+pkgname = blobsaver-bin

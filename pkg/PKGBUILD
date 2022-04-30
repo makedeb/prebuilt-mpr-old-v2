@@ -1,0 +1,29 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+
+pkgname=blobsaver-bin
+_pkgname=blobsaver
+pkgver=3.0.4
+pkgrel=1
+pkgdesc="A cross-platform GUI app for saving SHSH blobs using tsschecker"
+arch=('x86_64')
+url='https://github.com/airsquared/blobsaver'
+license=('GPL3')
+depends=('openjdk-11-jre'
+         'bash'
+         'zlib1g'
+         'zlib1g-dev'
+         )
+provides=('blobsaver')
+optdepends=('libimobiledevice: Get plugged in device information'
+    'libirecovery: Utility to talk to iBoot/iBSS via USB')
+source=("$url/releases/download/v$pkgver/blobsaver_$pkgver-1_amd64.deb")
+sha256sums=('cac2b0395f626018a63b8915437660d045f8090307460b9532a70fe890ea3a4a')
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.gz..."
+    tar -xf "${srcdir}/data.tar.xz" -C "${pkgdir}"
+
+    msg2 "Copying .desktop file..."
+    install -Dm644 "$pkgdir/opt/blobsaver/lib/blobsaver-blobsaver.desktop" "$pkgdir/usr/share/applications/$_pkgname.desktop"
+}
