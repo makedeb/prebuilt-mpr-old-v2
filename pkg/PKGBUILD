@@ -1,0 +1,45 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+  pkgname=compton-tryone-git
+  pkgdesc='tryones patched fork of compton with kawase blur'
+  _gitname=compton
+  pkgver=0.1.beta2.99.g6e49259
+  pkgrel=2
+  arch=("amd64")
+  url="https://github.com/tryone144/compton"
+  license=('MIT')
+  depends=('libx11-dev' 'libxcomposite-dev' 'libxdamage-dev' 'libxfixes-dev' 'libxext-dev' 'libxrender-dev' 'libxrandr-dev' 'libxinerama-dev' 'x11-utils' 'libpcre++-dev' 'libconfig-dev' 'libdrm-dev' 'libgl1-mesa-dev' 'libgles2-mesa-dev' 'libglu1-mesa-dev' 'libdbus-1-dev' 'libxcb1-dev' 'libxcb-damage0-dev' 'libxcb-xfixes0-dev' 'libxcb-shape0-dev' 'libxcb-render-util0-dev' 'libxcb-render0-dev' 'libxcb-randr0-dev' 'libxcb-composite0-dev' 'libxcb-image0-dev' 'libxcb-present-dev' 'libxcb-xinerama0-dev' 'libpixman-1-dev'  'libgl1-mesa-dev' 'libpcre3-dev' 'libevdev-dev' 'uthash-dev' 'libev-dev' 'libx11-xcb-dev' 'libxdg-basedir-dev' 'docbook-xml' 'xsltproc' 'docbook-xsl')
+  makedepends=('git' 'pkg-config' 'make' 'x11proto-dev' 'asciidoc')
+  optdepends=('dbus:          To control compton via D-Bus'
+              'xorg-xwininfo: For compton-trans'
+              'xorg-xprop:    For compton-trans')
+  provides=('compton')
+  conflicts=('compton')
+  # replaces=('compton')
+  source=("${_gitname}::git+https://github.com/tryone144/compton.git")
+  md5sums=("SKIP")
+
+          pkgver() {
+                    cd "${srcdir}/${_gitname}"
+                    #git describe --always | sed -e "s:v::" -e 's/_/./' -e 's/-/./g'
+    _always=$(git describe --always | sed -e 's:-:.:g' -e 's:v::') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+          }
+
+          build() {
+                    cd "${srcdir}/${_gitname}"
+                    make PREFIX=/usr
+                    make docs
+          }
+
+          package() {
+                   cd "${srcdir}/${_gitname}"
+
+                   make PREFIX="${pkgdir}/usr" install
+
+                   # install license
+                   install -D -m644 "LICENSE" "${pkgdir}/usr/share/licenses/${_gitname}/LICENSE"
+                   # example conf
+                   install -D -m644 "compton.sample.conf" "${pkgdir}/etc/xdg/compton.conf.example"
+          }
