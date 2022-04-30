@@ -1,0 +1,47 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org> 
+
+pkgname=seamonkey-it-bin 
+_pkgname=seamonkey 
+pkgdesc="SeaMonkey Internet Suite - (Italian)" 
+pkgrel=1 
+pkgver=2.53.11.1 
+arch=('x86_64') 
+url="https://www.seamonkey-project.org" 
+license=('Mozilla Public License 2.0') 
+provides=('seamonkey') 
+conflicts=('seamonkey') 
+source=("https://download-installer.cdn.mozilla.net/pub/seamonkey/releases/$pkgver/linux-x86_64/it/seamonkey-$pkgver.it.linux-x86_64.tar.bz2" 
+        "seamonkey.desktop" 
+        "seamonkey.svg") 
+sha256sums=('SKIP' 
+            'SKIP' 
+            'SKIP') 
+ 
+ 
+package() { 
+
+
+    cd "$srcdir" 
+    mkdir -p "$pkgdir/usr/bin" 
+    install -d -m755 "$pkgdir/usr/lib/$pkgname" 
+    install -Dm644 "$_pkgname.desktop" -t "$pkgdir/usr/share/applications" 
+    cp -r ./seamonkey/* "$pkgdir/usr/lib/$pkgname" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/seamonkey" "$pkgdir/usr/bin/seamonkey" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/16x16/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/22x22/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/24x24/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/32x32/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/48x48/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/64x64/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/128x128/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/256x256/apps" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default16.png" "$pkgdir/usr/share/icons/hicolor/16x16/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default22.png" "$pkgdir/usr/share/icons/hicolor/22x22/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default24.png" "$pkgdir/usr/share/icons/hicolor/24x24/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default32.png" "$pkgdir/usr/share/icons/hicolor/32x32/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default48.png" "$pkgdir/usr/share/icons/hicolor/48x48/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default64.png" "$pkgdir/usr/share/icons/hicolor/64x64/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default128.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default256.png" "$pkgdir/usr/share/icons/hicolor/256x256/apps/$_pkgname.png" 
+    install -D -m644 seamonkey.svg "$pkgdir"/usr/share/icons/hicolor/scalable/apps/$_pkgname.svg 
+}
