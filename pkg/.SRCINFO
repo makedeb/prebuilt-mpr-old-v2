@@ -1,0 +1,26 @@
+generated-by = makedeb-makepkg
+
+pkgbase = r2modmanplus-bin
+	pkgdesc = A simple and easy to use mod manager for several Unity games using Thunderstore.
+	pkgver = 3.1.27
+	pkgrel = 1
+	url = https://github.com/ebkr/r2modmanPlus
+	arch = x86_64
+	license = MIT
+	depends = libgtk-3-0
+	depends = libnotify4
+	depends = libnss3
+	depends = libxss1
+	depends = libxtst6
+	depends = xdg-utils
+	depends = libatspi2.0-0
+	depends = libuuid1
+	depends = libappindicator3-1
+	depends = libsecret-1-0
+	provides = r2modman
+	conflicts = r2modman
+	replaces = r2modman
+	source = https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.27/r2modman_3.1.27_amd64.deb
+	sha256sums = 4fd7d7883974677cb428c46fd363b5414647928d9c46c0ecdcf544f4e5b3a1be
+
+pkgname = r2modmanplus-bin
