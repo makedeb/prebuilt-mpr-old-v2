@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = socketw
+	pkgdesc = a cross platform streaming socket C++ library
+	pkgver = 3.11.0
+	pkgrel = 1
+	url = http://rigsofrods.github.io/socketw/
+	arch = i686
+	arch = x86_64
+	license = GPL-2
+	depends = libssl-dev
+	source = https://github.com/RigsOfRods/socketw/archive/3.11.0.tar.gz
+	sha512sums = de873c01e0f219c3fbc0630a685843677ec827dd1055f6949bcb942082305caeb7a2cfcf125d49901db784ff4226b200da1f8a59585270d20b70fa7a5a96a29c
+
+pkgname = socketw
