@@ -1,0 +1,32 @@
+generated-by = makedeb-makepkg
+
+pkgbase = alacritty
+	pkgdesc = A cross-platform, GPU-accelerated terminal emulator
+	pkgver = 0.9.0
+	pkgrel = 1
+	url = https://github.com/alacritty/alacritty
+	arch = x86_64
+	license = Apache
+	checkdepends = fonts-dejavu
+	makedepends = cargo
+	makedepends = cmake
+	makedepends = desktop-file-utils
+	makedepends = gdb
+	makedepends = git
+	makedepends = libfontconfig1-dev
+	makedepends = libfreetype6-dev
+	makedepends = libncurses-dev
+	makedepends = libxcb-render0-dev
+	makedepends = libxcb-shape0-dev
+	makedepends = libxcb-xfixes0-dev
+	makedepends = libxcb1-dev
+	makedepends = libxkbcommon-dev
+	makedepends = rustc
+	depends = libx11-xcb1
+	depends = libgl1
+	source = git+https://github.com/alacritty/alacritty.git#tag=v0.9.0
+	sha256sums = SKIP
+
+pkgname = alacritty
+	depends = libx11-xcb1
+	depends = libgl1

@@ -1,0 +1,72 @@
+# Maintainer: Otreblan <otreblain@gmail.com>
+# Contributor: Christian Rebischke <chris.rebischke@archlinux.org>
+# Contributor: Jiachen YANG <farseerfc@archlinux.org>
+# Contributor: kpcyrd <git@rxv.cc>
+# Contributor: quininer <quininer@live.com>
+pkgname='alacritty'
+pkgdesc="A cross-platform, GPU-accelerated terminal emulator"
+pkgver=0.9.0
+pkgrel=1
+arch=('x86_64')
+url="https://github.com/alacritty/alacritty"
+license=('Apache')
+makedepends=(
+  'cargo'
+  'cmake'
+  'desktop-file-utils'
+  'gdb'
+  'git'
+  'libfontconfig1-dev'
+  'libfreetype6-dev'
+  'libncurses-dev'
+  'libxcb-render0-dev'
+  'libxcb-shape0-dev'
+  'libxcb-xfixes0-dev'
+  'libxcb1-dev'
+  'libxkbcommon-dev'
+  'rustc'
+)
+depends=('libx11-xcb1' 'libgl1')
+checkdepends=('fonts-dejavu') # for monospace fontconfig test
+optdepends=()
+source=("git+${url}.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+
+build(){
+  cd "$pkgname"
+  env CARGO_INCREMENTAL=0 cargo build --release --locked
+}
+
+check(){
+  cd "$pkgname"
+  env CARGO_INCREMENTAL=0 cargo test --release --locked
+}
+
+_shlibdeps() {
+  mkdir -p "$pkgdir/debian"
+  touch "$pkgdir/debian/control"
+
+  pushd "$pkgdir" &> /dev/null
+  dpkg-shlibdeps "$@" -O 2> /dev/null |\
+    sed "s/.*Depends=\(.*\)/\1/" |\
+    sed "s/, /\n/g" |\
+    sed "s/\(.*\) (\(.*\) \(.*\))/\1\2\3/g"
+  popd &> /dev/null
+
+  rm -rf "$pkgdir/debian"
+}
+
+package() {
+  cd "$pkgname"
+  desktop-file-install -m 644 --dir "$pkgdir/usr/share/applications/" "extra/linux/Alacritty.desktop"
+  install -D -m755 "target/release/alacritty" "$pkgdir/usr/bin/alacritty"
+  install -D -m644 "extra/alacritty.man" "$pkgdir/usr/share/man/man1/alacritty.1"
+  install -D -m644 "extra/linux/io.alacritty.Alacritty.appdata.xml" "$pkgdir/usr/share/appdata/io.alacritty.Alacritty.appdata.xml"
+  install -D -m644 "alacritty.yml" "$pkgdir/usr/share/doc/alacritty/example/alacritty.yml"
+  install -D -m644 "extra/completions/alacritty.bash" "$pkgdir/usr/share/bash-completion/completions/alacritty"
+  install -D -m644 "extra/completions/_alacritty" "$pkgdir/usr/share/zsh/site-functions/_alacritty"
+  install -D -m644 "extra/completions/alacritty.fish" "$pkgdir/usr/share/fish/vendor_completions.d/alacritty.fish"
+  install -D -m644 "extra/logo/alacritty-term.svg" "$pkgdir/usr/share/pixmaps/Alacritty.svg"
+
+  depends+=($(_shlibdeps "$pkgdir/usr/bin/alacritty"))
+}
