@@ -1,0 +1,34 @@
+# Maintainer: B3HOID <b3holdddd3360@gmail.com>
+pkgname=nvidia-xrun
+pkgver=0.3
+pkgrel=0
+epoch=
+pkgdesc="Script to run dedicated X server with discrete nvidia graphics, uses bumblebee and bbswitch for power management"
+arch=("x86_64")
+url="https://github.com/Witko/nvidia-xrun"
+license=('GPL')
+groups=()
+depends=('bumblebee-nvidia' 'nvidia-driver' 'bbswitch-dkms')
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("https://github.com/B3HOID/nvidia-xrun/archive/refs/tags/master.tar.gz")
+noextract=()
+md5sums=(''SKIP'')
+validpgpkeys=()
+
+package() {
+	cd "nvidia-xrun-master"
+	install -Dm 644 nvidia-xorg.conf "$pkgdir/etc/X11/nvidia-xorg.conf"
+	install -Dm 644 nvidia-xinitrc "$pkgdir/etc/X11/xinit/nvidia-xinitrc"
+	install -Dm 755 nvidia-xrun "$pkgdir/usr/bin/nvidia-xrun"
+	install -dm 555 "$pkgdir/etc/X11/xinit/nvidia-xinitrc.d"
+	install -dm 555 "$pkgdir/etc/X11/nvidia-xorg.conf.d"
+}

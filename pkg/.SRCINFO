@@ -1,0 +1,14 @@
+pkgbase = nvidia-xrun
+	pkgdesc = Script to run dedicated X server with discrete nvidia graphics, uses bumblebee and bbswitch for power management
+	pkgver = 0.3
+	pkgrel = 0
+	url = https://github.com/Witko/nvidia-xrun
+	arch = x86_64
+	license = GPL
+	depends = bumblebee-nvidia
+	depends = nvidia-driver
+	depends = bbswitch-dkms
+	source = https://github.com/B3HOID/nvidia-xrun/archive/refs/tags/master.tar.gz
+	md5sums = SKIP
+
+pkgname = nvidia-xrun
