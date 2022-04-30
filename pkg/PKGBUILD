@@ -1,0 +1,32 @@
+# Maintainer:zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=gource
+pkgver=0.51
+pkgrel=1
+pkgdesc="Software version control visualization"
+license=('GPL3')
+arch=('i686' 'x86_64')
+url="https://gource.io/"
+provides=('gource')
+conflicts=('gource')
+depends=('libsdl2-dev' 'libsdl2-image-dev' 'libpcre3-dev' 'libfreetype6-dev' 'libglew-dev' 'libglm-dev' 'libboost-filesystem-dev'
+        'libpng-dev')
+optdepends=('libtinyxml-dev')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/acaudwell/Gource/releases/download/gource-$pkgver/gource-$pkgver.tar.gz")
+sha256sums=('19a3f888b1825aa7ed46f52cebce5012e3c62439e3d281102f21814c7a58e79a')
+
+#prepare(){
+#    cd ${srcdir}/$pkgname-$pkgver
+#    ./autogen.sh
+#}
+
+build() {
+    cd ${srcdir}/$pkgname-$pkgver
+    ./configure --prefix=/usr
+    make -j$(nproc)
+}
+
+package() {
+    cd ${srcdir}/$pkgname-$pkgver
+    make DESTDIR="$pkgdir" install
+}

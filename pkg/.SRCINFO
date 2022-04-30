@@ -1,0 +1,25 @@
+generated-by = makedeb-makepkg
+
+pkgbase = gource
+	pkgdesc = Software version control visualization
+	pkgver = 0.51
+	pkgrel = 1
+	url = https://gource.io/
+	arch = i686
+	arch = x86_64
+	license = GPL3
+	depends = libsdl2-dev
+	depends = libsdl2-image-dev
+	depends = libpcre3-dev
+	depends = libfreetype6-dev
+	depends = libglew-dev
+	depends = libglm-dev
+	depends = libboost-filesystem-dev
+	depends = libpng-dev
+	optdepends = libtinyxml-dev
+	provides = gource
+	conflicts = gource
+	source = gource-0.51.tar.gz::https://github.com/acaudwell/Gource/releases/download/gource-0.51/gource-0.51.tar.gz
+	sha256sums = 19a3f888b1825aa7ed46f52cebce5012e3c62439e3d281102f21814c7a58e79a
+
+pkgname = gource
