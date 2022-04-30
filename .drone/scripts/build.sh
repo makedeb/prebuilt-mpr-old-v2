@@ -3,6 +3,7 @@ set -eu
 
 # Env vars.
 proget_url='proget.hunterwittenborn.com'
+pkgname="$(echo "${DRONE_BRANCH}" | sed 's|pkg/||')"
 
 # Install needed packages.
 sudo apt update
@@ -19,3 +20,4 @@ sudo chown 'makedeb:makedeb' ./ -R
 # Build the package.
 cd pkg/
 makedeb -s --no-confirm --skip-pgp-check
+cp *.deb "/var/tmp/prebuilt-mpr/${pkgname}/"
