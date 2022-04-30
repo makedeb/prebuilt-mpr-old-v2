@@ -1,0 +1,31 @@
+# This PKGBUILD ported from https://aur.archlinux.org
+# Maintainer(in AUR): Martin Peres <martin.peres[at]free[dot]fr>
+# Contributor(in AUR): Timothée Ravier <tim[at]siosm[dot]fr>
+# Maintainer: Mobin Aydinfar <mobin at mobintestserver dot ir>
+
+pkgname=nouveau-fw
+pkgver=340.32
+pkgrel=1
+pkgdesc="This package provides video & pgraph firmwares for some NVIDIA Chips"
+url='https://nouveau.freedesktop.org/VideoAcceleration.html'
+arch=('any')
+license=('custom')
+makedepends=('python2')
+source=("https://raw.github.com/imirkin/re-vp2/master/extract_firmware.py"
+        "http://us.download.nvidia.com/XFree86/Linux-x86/${pkgver}/NVIDIA-Linux-x86-${pkgver}.run")
+md5sums=('SKIP'
+         '423ea1a6938dbf226bb84504746fc646')
+sha256sums=('SKIP'
+            '1d0489c35c5b332c9b949d9de3c3cbab4ac3a94385aa41e7a7b62ef23f4395f5')
+
+build() {
+  sh NVIDIA-Linux-x86-${pkgver}.run --extract-only
+  python2 extract_firmware.py
+}
+
+package() {
+  install -dm 0755 "${pkgdir}"/usr/lib/firmware/nouveau/
+  cp -a nv* vuc-* "${pkgdir}"/usr/lib/firmware/nouveau/
+}
+
+# vim:set ts=2 sw=2 et:
