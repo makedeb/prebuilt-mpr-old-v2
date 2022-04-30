@@ -1,0 +1,52 @@
+image: alpine/edge
+environment:
+  REPO_NAME: "makedeb-synergy-git"
+secrets:
+  - 911a32c9-a8b4-4d41-9fe0-18df25523b2f
+  - d98dc1cd-6fda-4edc-b1b2-fe047886124c 
+sources:
+  - "https://git.sr.ht/~havi/makedeb-synergy-git"
+tasks:
+  - validate-gh-fingerprint-and-config-github-ssh: |
+      tmp_dir=$(mktemp -d -p $HOME)
+      ssh-keyscan -t rsa github.com > $tmp_dir/github_host
+      ssh-keygen -lf $tmp_dir/github_host > $tmp_dir/github_fingerprint
+      grep -R "nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8" $tmp_dir/github_fingerprint
+      cat $tmp_dir/github_host >> ~/.ssh/known_hosts
+      rm -rf $tmp_dir
+      mkdir -p "${HOME}/.ssh" \
+      && chmod 700 "${HOME}/.ssh" \
+      && ( \
+        echo "Host github.com" ; \
+        echo "  IdentityFile ~/.ssh/911a32c9-a8b4-4d41-9fe0-18df25523b2f" ; \
+        echo "  IdentitiesOnly yes" ; \
+        echo "  BatchMode yes" ; \
+      ) | tee -a "${HOME}/.ssh/config" > /dev/null \
+      && chmod 644 "${HOME}/.ssh/config" ;
+  - mirror-to-github: |
+      cd "${HOME}/${REPO_NAME}" || exit 1 ;
+      git remote add github "git@github.com:da-moon/${REPO_NAME}" \
+      && git config --local user.name "da-moon" \
+      && git config --local user.email "contact@havi.dev" \
+      && git rebase --root -x "git commit --amend --reset-author -CHEAD" \
+      && git push --force --prune github +refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/* master
+  - configure-makedeb-ssh: |
+      mkdir -p "${HOME}/.ssh" \
+      && chmod 700 "${HOME}/.ssh" \
+      && ( \
+        echo "Host mpr.makedeb.org" ; \
+        echo "  IdentityFile ~/.ssh/d98dc1cd-6fda-4edc-b1b2-fe047886124c" ; \
+        echo "  User mpr" ; \
+        echo "  IdentitiesOnly yes" ; \
+        echo "  StrictHostKeyChecking no" ; \
+        echo "  MACs hmac-sha2-512" ; \
+        echo "  UserKnownHostsFile=/dev/null" ; \
+      ) | tee -a "${HOME}/.ssh/config" > /dev/null \
+      && chmod 644 "${HOME}/.ssh/config"
+  - push-to-makedeb: |
+      cd "${HOME}/${REPO_NAME}" || exit 1 ;
+      git remote add mpr "ssh://mpr@mpr.makedeb.org/${REPO_NAME#makedeb-}.git" \
+      && git config --local user.name "alfador" \
+      && git config --local user.email "contact@havi.dev" \
+      && git rebase --root -x "git commit --amend --reset-author -CHEAD" \
+      && git push --force --prune mpr master
