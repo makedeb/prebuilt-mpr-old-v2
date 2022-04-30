@@ -1,0 +1,21 @@
+generated-by = makedeb-makepkg
+
+pkgbase = pastel-bin
+	pkgdesc = A command-line tool to generate, analyze, convert and manipulate colors
+	pkgver = 0.8.1
+	pkgrel = 1
+	url = https://github.com/sharkdp/pastel
+	arch = x86_64
+	license = MIT
+	makedepends = curl
+	makedepends = jq
+	provides = pastel
+	provides = pastel-bin
+	conflicts = pastel
+	conflicts = pastel-git
+	conflicts = pastel-bin
+	options = !strip
+	source_x86_64 = pastel-bin-0.8.1.tar.gz::https://github.com/sharkdp/pastel/releases/download/v0.8.1/pastel-v0.8.1-x86_64-unknown-linux-musl.tar.gz
+	sha512sums_x86_64 = ef8a9e358efd017e356a6b35ca45a39557f3d7353a63c00f9a7e6833dc49eb0c2325cd62f42589f9f427934b44302427d0824f4347140de0bdf6df1d084c99e9
+
+pkgname = pastel-bin

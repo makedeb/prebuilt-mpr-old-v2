@@ -1,0 +1,60 @@
+# vim: ft=sh syntax=sh softtabstop=2 tabstop=2 shiftwidth=2 fenc=utf-8 expandtab
+# Maintainer: alfador <the.alfador@pm.me>
+
+_github_repo="sharkdp/pastel"
+_pkgname="$(basename "${_github_repo}")"
+
+pkgname="${_pkgname}-bin"
+# shellcheck disable=SC2034
+pkgver="0.8.1"
+# shellcheck disable=SC2034
+pkgrel=1
+# shellcheck disable=SC2034
+pkgdesc="A command-line tool to generate, analyze, convert and manipulate colors"
+# [ TODO ] => add other architectures
+# shellcheck disable=SC2034
+arch=("x86_64")
+# shellcheck disable=SC2034
+provides=("${_pkgname}" "${_pkgname}-bin")
+# shellcheck disable=SC2034
+conflicts=("${_pkgname}" "${_pkgname}-git" "${_pkgname}-bin")
+# shellcheck disable=SC2034
+url="https://github.com/${_github_repo}"
+# shellcheck disable=SC2034
+license=("MIT")
+# shellcheck disable=SC2034
+makedepends=("curl" "jq")
+# shellcheck disable=SC2034
+source_x86_64=("${pkgname}-${pkgver}.tar.gz::${url}/releases/download/v${pkgver}/${_pkgname}-v${pkgver}-${CARCH}-unknown-linux-musl.tar.gz")
+# shellcheck disable=SC2034
+sha512sums_x86_64=("ef8a9e358efd017e356a6b35ca45a39557f3d7353a63c00f9a7e6833dc49eb0c2325cd62f42589f9f427934b44302427d0824f4347140de0bdf6df1d084c99e9")
+# shellcheck disable=SC2034
+options=(!strip)
+pkgver() {
+  curl \
+    -sL "https://api.github.com/repos/${_github_repo}/releases/latest" |
+    jq -r '.tag_name' |
+    sed -e 's/v//g'
+}
+# [ NOTE ] => reaming extracted archive directory
+# for naming consistency
+prepare() {
+  _dirname="$(tar -tf "${pkgname}-${pkgver}.tar.gz" | head -n 1 | cut -d/ -f1)"
+  if [ " ${srcdir}/${pkgname}-${pkgver} " != " ${_dirname} " ]; then
+    mv -f "${srcdir}/${_dirname}" "${srcdir}/${pkgname}-${pkgver}"
+  fi
+}
+check() {
+  [ "$("${srcdir}/${pkgname}-${pkgver}/${_pkgname}" --version)" != "${_pkgname} ${pkgver}" ] && return 1 || return 0
+}
+package() {
+  # ─── BINARY ─────────────────────────────────────────────────────────────────────
+  install -Dm755 "${srcdir}/${pkgname}-${pkgver}/${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
+  # ─── README ─────────────────────────────────────────────────────────────────────
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/README.md" "${pkgdir}/usr/share/doc/${_pkgname}/README.md"
+  # ─── LICENSES ───────────────────────────────────────────────────────────────────
+  # [ NOTE ] => since there are two Licences,  decided to choose MIT for the 'copyright' file.
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/LICENSE-MIT" "${pkgdir}/usr/share/doc/${_pkgname}/copyright"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/LICENSE-MIT" "${pkgdir}/usr/share/doc/${_pkgname}/LICENSE-MIT"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/LICENSE-APACHE" "${pkgdir}/usr/share/doc/${_pkgname}/LICENSE-APACHE"
+}
