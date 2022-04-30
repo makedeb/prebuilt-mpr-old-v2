@@ -1,0 +1,20 @@
+pkgbase = libreddit-bin
+	pkgdesc = An alternative private front-end to Reddit
+	pkgver = 0.22.6
+	pkgrel = 1
+	url = https://github.com/spikecodes/libreddit
+	arch = x86_64
+	license = AGPL
+	makedepends = sed
+	provides = libreddit
+	conflicts = libreddit
+	options = !strip
+	options = !emptydirs
+	source = libreddit-0.22.6::https://github.com/spikecodes/libreddit/releases/download/v0.22.6/libreddit
+	source = https://raw.githubusercontent.com/spikecodes/libreddit/v0.22.6/contrib/libreddit.service
+	source = https://raw.githubusercontent.com/spikecodes/libreddit/v0.22.6/contrib/libreddit.conf
+	sha512sums = cfc5720857dfc5e35624e4f6d3a10f4acc2373125db001ab7b2ed6ded8523d1a15128ce24505c73539f56473a7687196182486d1c8e1124cf9174e1acef8ba65
+	sha512sums = 13f92ce4b522b9de3ca80518d0f0212808c497d0d428518697149f8737bec6d4d02f616af81fa67475c60fc87d6373c9af573ed3624ba352736587c25ef5e55e
+	sha512sums = 5dd9ad006cb628559d1b906d5e5874179a14d481be99bc4f5d3407a160a9729eb4fe87d9dae51f68cbc98c56ad13dcaebb350765c798b57aade794ba333ba5e7
+
+pkgname = libreddit-bin
