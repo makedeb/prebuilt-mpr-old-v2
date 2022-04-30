@@ -1,0 +1,17 @@
+generated-by = makedeb
+pkgname = libptytty-bin
+pkgbase = libptytty-bin
+pkgdesc = libptytty is an offspring of rxvt-unicode that handles pty/tty/utmp/wtmp/lastlog handling in mostly OS-independent ways, so it's less of a hassle for you
+pkgrel = 3
+pkgver = 2.0
+url = http://software.schmorp.de/pkg/libptytty.html
+arch = amd64
+conflicts = libptytty
+conflicts = libptytty0
+conflicts = libptytty-dev
+license = GPL
+makedepends = cmake
+provides = libptytty
+source = http://dist.schmorp.de/libptytty/libptytty-2.0.tar.gz
+sha512sums = 9cca5fddbcc4025c2bbe043e3367ac902d0024a34301258dafcf0de70935c055279d88227168d112d0e4c0dc37f1f49e1ea587bd6bddf0b9d92400657bc7be08
+makedepends = cmake

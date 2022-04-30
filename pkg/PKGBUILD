@@ -1,0 +1,35 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=libptytty-bin
+_pkgname=libptytty
+pkgver=2.0
+pkgrel=3
+pkgdesc="libptytty is an offspring of rxvt-unicode that handles pty/tty/utmp/wtmp/lastlog handling in mostly OS-independent ways, so it's less of a hassle for you"
+arch=('amd64')
+url="http://software.schmorp.de/pkg/libptytty.html"
+license=('GPL')
+source=(http://dist.schmorp.de/${_pkgname}/${_pkgname}-${pkgver}.tar.gz)
+makedepends=('cmake')
+provides=('libptytty')
+conflicts=('libptytty' 'libptytty0' 'libptytty-dev')
+sha512sums=('9cca5fddbcc4025c2bbe043e3367ac902d0024a34301258dafcf0de70935c055279d88227168d112d0e4c0dc37f1f49e1ea587bd6bddf0b9d92400657bc7be08')
+build() {
+  install -d "${srcdir}/${_pkgname}-${pkgver}/build"
+  cd "${srcdir}/${_pkgname}-${pkgver}/build"
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DBUILD_SHARED_LIBS=ON \
+        ..
+    cmake --build .
+}
+
+package() {
+  cd ${srcdir}/${_pkgname}-${pkgver}
+    install -Dm755 build/libptytty.so.0 "${pkgdir}/usr/lib/libptytty.so.0"
+    cp -d build/libptytty.so "${pkgdir}/usr/lib/libptytty.so"
+
+    install -Dm644 src/libptytty.h "$pkgdir/usr/include/libptytty.h"
+
+    install -Dm644 doc/libptytty.3 "$pkgdir/usr/share/man/man3/libptytty.3"
+
+    install -Dm644 build/libptytty.pc "$pkgdir/usr/lib/pkgconfig/libptytty.pc"
+}
