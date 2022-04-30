@@ -1,0 +1,18 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+pkgname=hello-world-bin
+pkgver=1.1.1
+pkgrel=1
+arch=('any')
+depends=('bash' 'mangohud' 'potatocat')
+
+source=("https://example.com")
+sha256sums=('SKIP')
+
+package() {
+  mkdir -p "${pkgdir}/usr/bin"
+  echo "#!/usr/bin/env bash" > "${pkgdir}/usr/bin/${pkgname}"
+  echo "echo 'Loading hello-world v1.1.1..." >> "${pkgdir}/usr/bin/${pkgname}"
+  echo "sleep 2" >> "${pkgdir}/usr/bin/${pkgname}"
+  echo "echo 'Hello world!'" >> "${pkgdir}/usr/bin/${pkgname}"
+  chmod 755 "${pkgdir}/usr/bin/${pkgname}"
+}

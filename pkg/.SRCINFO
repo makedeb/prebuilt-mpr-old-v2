@@ -1,0 +1,13 @@
+generated-by = makedeb-makepkg
+
+pkgbase = hello-world-bin
+	pkgver = 1.1.1
+	pkgrel = 1
+	arch = any
+	depends = bash
+	depends = mangohud
+	depends = potatocat
+	source = https://example.com
+	sha256sums = SKIP
+
+pkgname = hello-world-bin
