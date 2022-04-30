@@ -1,0 +1,39 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=reproc
+pkgver=14.2.4
+pkgrel=2
+pkgdesc='Cross-platform library that simplifies working with external CLI applications from C and C++'
+arch=('amd64')
+url='https://github.com/DaanDeMeyer/reproc'
+license=('MIT')
+makedepends=('cmake' 'gcc')
+provides=('reproc')
+conflicts=('reproc')
+# replaces=('reproc')
+source=("${url}/archive/v${pkgver}".tar.gz)
+sha512sums=('c592521960f1950d626261738091d25efdf764ee1a0c72a58c28c66eaebf6073b2c978f1dc2c8dbe89b0be7ec1629a3a45cb1fafa0ebe21b5df8d4d27c992675')
+MAKEFLAGS="-j$(nproc)"
+
+build() {
+  cmake \
+    -S "${pkgname}-${pkgver}" \
+    -B build \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_SHARED_LIBS=ON \
+    -DREPROC++=ON \
+    -DREPROC_TEST=ON \
+    ../
+  cmake --build build
+}
+
+check() {
+  cmake --build build --target test
+}
+
+package() {
+  DESTDIR="${pkgdir}" cmake --install build
+  install -D --mode=644 "${srcdir}/${pkgname}-${pkgver}"/LICENSE \
+    "${pkgdir}"/usr/share/licenses/"${pkgname}"/LICENSE
+}

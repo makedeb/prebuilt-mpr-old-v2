@@ -1,0 +1,17 @@
+generated-by = makedeb
+pkgname = reproc
+pkgbase = reproc
+pkgdesc = Cross-platform library that simplifies working with external CLI applications from C and C++
+pkgrel = 2
+pkgver = 14.2.4
+url = https://github.com/DaanDeMeyer/reproc
+arch = amd64
+conflicts = reproc
+license = MIT
+makedepends = cmake
+makedepends = gcc
+provides = reproc
+source = https://github.com/DaanDeMeyer/reproc/archive/v14.2.4.tar.gz
+sha512sums = c592521960f1950d626261738091d25efdf764ee1a0c72a58c28c66eaebf6073b2c978f1dc2c8dbe89b0be7ec1629a3a45cb1fafa0ebe21b5df8d4d27c992675
+makedepends = cmake
+makedepends = gcc
