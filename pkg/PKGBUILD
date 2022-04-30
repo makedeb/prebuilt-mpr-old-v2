@@ -1,0 +1,44 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+
+_pkgname=libgeneral
+pkgname=$_pkgname-fr-git
+pkgver=1.56.e0d98cb
+pkgrel=1
+pkgdesc="General stuff for tihmstar's projects - git version + patch for futurerestore"
+arch=('x86_64')
+url="https://github.com/tihmstar/$_pkgname"
+license=('LGPL')
+makedepends=('git' 'gettext' 'libevent-pthreads-2.1-7')
+provides=('libgeneral')
+conflicts=('libgeneral')
+source=("git+$url.git"
+       'libgeneral-0001-remove-custom-logging.patch')
+sha256sums=('SKIP'
+            'd772266d4ac53d080f4fe448cb5c15784ab36dc40142996b8e7657a443fa5be8')
+
+pkgver() {
+  cd "$_pkgname"
+
+  printf "1.%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd "$_pkgname"
+
+  for p in "$srcdir"/$_pkgname-*.patch; do
+    patch -Np1 -i "$p"
+  done
+}
+
+build() {
+  cd "$_pkgname"
+
+  ./autogen.sh --prefix=/usr
+  make
+}
+
+package() {
+  cd "$_pkgname"
+
+  make DESTDIR="$pkgdir/" install
+}

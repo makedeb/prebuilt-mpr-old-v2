@@ -1,0 +1,20 @@
+generated-by = makedeb-makepkg
+
+pkgbase = libgeneral-fr-git
+	pkgdesc = General stuff for tihmstar's projects - git version + patch for futurerestore
+	pkgver = 1.56.e0d98cb
+	pkgrel = 1
+	url = https://github.com/tihmstar/libgeneral
+	arch = x86_64
+	license = LGPL
+	makedepends = git
+	makedepends = gettext
+	makedepends = libevent-pthreads-2.1-7
+	provides = libgeneral
+	conflicts = libgeneral
+	source = git+https://github.com/tihmstar/libgeneral.git
+	source = libgeneral-0001-remove-custom-logging.patch
+	sha256sums = SKIP
+	sha256sums = d772266d4ac53d080f4fe448cb5c15784ab36dc40142996b8e7657a443fa5be8
+
+pkgname = libgeneral-fr-git

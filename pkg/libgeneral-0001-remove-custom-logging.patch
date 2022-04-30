@@ -1,0 +1,15 @@
+diff --git a/include/libgeneral/macros.h b/include/libgeneral/macros.h
+index 3aad285..e2cd4c3 100644
+--- a/include/libgeneral/macros.h
++++ b/include/libgeneral/macros.h
+@@ -53,8 +53,8 @@
+ #   else
+ #       define debug(a ...)
+ #   endif
+-#else //CUSTOM_LOGGING
+-#   include CUSTOM_LOGGING
++//#else //CUSTOM_LOGGING
++//#   include CUSTOM_LOGGING
+ #endif //CUSTOM_LOGGING
+ 
+ #define safeFree(ptr) ({if (ptr) {free(ptr); ptr=NULL;}})
