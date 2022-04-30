@@ -1,0 +1,13 @@
+generated-by = makedeb-makepkg
+
+pkgbase = blasphemer
+	pkgdesc = A free Heretic game data file (IWAD)
+	pkgver = 0.1.7
+	pkgrel = 1
+	url = https://github.com/Blasphemer/blasphemer
+	arch = any
+	license = BSD
+	source = https://github.com/Blasphemer/blasphemer/releases/download/v0.1.7/blasphem-0.1.7.zip
+	sha256sums = 7c93e5b6d6133c83cefb171e47502d57d53ecefc1fe38b5a1d2a19160d011488
+
+pkgname = blasphemer

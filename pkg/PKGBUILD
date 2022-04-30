@@ -1,0 +1,20 @@
+# Maintainer: Tobias Zindl <zie.develop@gmail.com>
+# Maintainer: Jan Cholasta <grubber at grubber cz>
+# Contributor: Zohar Malamant <dotfloat gmail com>
+# Contributor: Ronan Rabouin <darkbaboon@gmail.com>
+
+pkgname=blasphemer
+pkgver=0.1.7
+pkgrel=1
+pkgdesc="A free Heretic game data file (IWAD)"
+arch=('any')
+url="https://github.com/Blasphemer/blasphemer"
+license=('BSD')
+source=(https://github.com/Blasphemer/${pkgname}/releases/download/v${pkgver}/blasphem-${pkgver}.zip)
+sha256sums=('7c93e5b6d6133c83cefb171e47502d57d53ecefc1fe38b5a1d2a19160d011488')
+
+package() {
+    install -d "$pkgdir"/{usr,usr/share,usr/share/games,usr/share/games/doom}
+    install -m644 "$srcdir"/blasphem-0.1.7.wad "$pkgdir"/usr/share/games/doom/blasphem.wad
+    #install -D -m644 "$srcdir"/copying "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+}
