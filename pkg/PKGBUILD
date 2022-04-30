@@ -1,0 +1,27 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname="bat-cat-bin"
+pkgver=0.20.0
+pkgrel=2
+arch=('amd64' 'i686' 'arm' 'aarch64')
+pkgdesc="A cat1 clone with wings"
+url="https://github.com/sharkdp/bat"
+makedepends=('cargo')
+license=('Apache-2.0')
+provides=('bat' 'batcat')
+conflicts=('bat' 'batcat')
+#replaces=('bat')
+
+source_amd64=("https://github.com/sharkdp/bat/releases/download/v${pkgver}/bat_${pkgver}_amd64.deb")
+source_aarch64=("https://github.com/sharkdp/bat/releases/download/v${pkgver}/bat_${pkgver}_arm64.deb")
+source_arm=("https://github.com/sharkdp/bat/releases/download/v${pkgver}/bat_${pkgver}_armhf.deb")
+source_i686=("https://github.com/sharkdp/bat/releases/download/v${pkgver}/bat_${pkgver}_i686.deb")
+
+sha512sums_amd64=("4ac8fc0c2cbd9327c84c77c8c3caae5b3585c4a303188b38787950ba32ca81a725b93da1d4228360416da98d7692e16bef61789592fa15f8d72c7869392a4ba7")
+sha512sums_aarch64=("67df351a1a17841f11b736410fd8986f27d81c62f55fc38391cca44ecc4e7c74b10f8dd328b545892a1d10ebb438d3c4061d7692409c3df08df59cc956e2bf1e")
+sha512sums_arm=("af78c161f0d846a93deca8ed6bf2bf0471cf8078d1ecaa0b083a85b827ca5c02f340b4663f7eb44b8de6ad2d021076aa6bc442e5500c39ef4635d72007af9dd4")
+sha512sums_i686=("491663ccd9d8fe8508984d5542872fd8dc97aa499796b2304a48bec3570f613f532a654bd257ddaad937a8e7147070a41d9d7dd1469881f8df364259060ae3ec")
+package() {
+      #Extract data.tar.xz to pkgdir
+         msg2 "Extracting data.tar.gz..."
+    tar -xf "${srcdir}/data.tar.xz" -C "${pkgdir}"
+}
