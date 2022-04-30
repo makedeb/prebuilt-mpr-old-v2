@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = oranchelo-icon-theme
+	pkgdesc = Oranchelo is a flat-design icon theme for XFCE4 based on Super Flat Remix and inspired by Corny icons by Patryk Goworowski.
+	pkgver = 0.9.0
+	pkgrel = 1
+	url = https://github.com/Madh93/oranchelo-icon-theme.git
+	arch = any
+	license = GPL3
+	makedepends = git
+	depends = git
+	depends = hicolor-icon-theme
+	provides = oranchelo-icon-theme
+	conflicts = oranchelo-icon-theme
+	options = !strip
+	source = https://github.com/OrancheloTeam/oranchelo-icon-theme/archive/refs/tags/v0.9.0.tar.gz
+	sha512sums = b39da3b9d6b394d11932fa842224f21905a23dd14ebcf876eca6eab4af836bbb792a599b9251219337f5864f3d0c163dc28e03ac1ef03520c22db298c33d365d
+
+pkgname = oranchelo-icon-theme
