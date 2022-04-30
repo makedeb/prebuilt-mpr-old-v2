@@ -1,0 +1,15 @@
+generated-by = makedeb
+pkgname = gh-bin
+pkgbase = gh-bin
+pkgdesc = GitHub’s official command line tool.
+pkgrel = 1
+pkgver = 2.9.0
+url = https://github.com/cli/cli
+arch = x86_64
+conflicts = gh-git
+conflicts = gh
+depends = git
+license = MIT
+provides = gh
+source = https://github.com/cli/cli/releases/download/v2.9.0/gh_2.9.0_linux_amd64.deb
+sha256sums = 9c44aac535782397f2639e08d6bae442d85af4e149db5a76eca0fe0206a7aa0d
