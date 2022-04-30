@@ -1,0 +1,65 @@
+# Maintainer: Florian Bach <s1-dur@leseratte10.de>
+
+pkgname=wiimms-iso-tools-git
+provides=('wiimms-iso-tools')
+pkgver=3.04a.8427
+pkgrel=1
+pkgdesc="Wii & Gamecube image manipulation tool"
+arch=('x86_64' 'i686')
+url="https://wit.wiimm.de"
+license=('GPL')
+depends=()
+makedepends=(
+    'ca-certificates' 'git' 'make' 'gcc' 'libncurses-dev' 'dpkg-dev' 'gawk'
+    )
+source=("git+https://github.com/Wiimm/wiimms-iso-tools")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/wiimms-iso-tools/project" 2>/dev/null
+	version=$(grep -E "^VERSION_NUM.*\=" Makefile 2>/dev/null | cut -d\= -f2)
+	revision=$(cat revision.sh 2>/dev/null | cut -d\= -f2 )
+	echo $version.$revision
+}
+
+build() {
+	cd "$srcdir/wiimms-iso-tools/project"
+	CFLAGS=-Wno-address-of-packed-member make
+	make gen-doc
+}
+
+_shlibdeps() {
+	pushd "$pkgdir" &> /dev/null
+	mkdir -p "$pkgdir/debian" 2>/dev/null && touch "$pkgdir/debian/control" && (
+	dpkg-shlibdeps "$@" -O 2> /dev/null |\
+		sed "s/.*Depends=\(.*\)/\1/" |\
+		sed "s/, /\n/g" |\
+		sed "s/\(.*\) (\(.*\) \(.*\))/\1\2\3/g"
+	)
+	popd &> /dev/null
+	rm "$pkgdir/debian/control" 2>/dev/null
+	rmdir "$pkgdir/debian" 2>/dev/null
+}
+
+package() {
+
+	cd "$srcdir/wiimms-iso-tools/project/"
+	
+	# Run install script to copy binaries
+	chmod +x install.sh
+	sed -i "s#BASE_PATH=.*#BASE_PATH=$pkgdir/usr/local#g" install.sh
+	sed -i "s#SHARE_PATH=.*#SHARE_PATH=$pkgdir/usr/local/share/wit#g" install.sh
+	./install.sh --no-sudo --make
+
+	# Copy documentation
+	mkdir -p "$pkgdir/usr/share/doc/"
+	cp -r "$srcdir/wiimms-iso-tools/project/doc" "$pkgdir/usr/share/doc/wiimms-iso-tools"
+
+	# Copy license
+	cp "$srcdir/wiimms-iso-tools/project/gpl-2.0.txt" "$pkgdir/usr/share/doc/wiimms-iso-tools/copyright"
+
+	# Check for dependencies.
+	# Some versions of debian apparently use libncurses5, others use libncurses6. 
+	# This means the dependencies can't be hardcoded but need to be checked dynamically after building.
+	depends+=($(_shlibdeps "$pkgdir/usr/local/bin/wit"))
+}

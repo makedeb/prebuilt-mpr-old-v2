@@ -1,0 +1,25 @@
+pkgbase = wiimms-iso-tools-git
+	pkgdesc = Wii & Gamecube image manipulation tool
+	pkgver = 3.04a.8427
+	pkgrel = 1
+	url = https://wit.wiimm.de
+	arch = x86_64
+	arch = i686
+	license = GPL
+	makedepends = ca-certificates
+	makedepends = git
+	makedepends = make
+	makedepends = gcc
+	makedepends = libncurses-dev
+	makedepends = dpkg-dev
+	makedepends = gawk
+	provides = wiimms-iso-tools
+	source = git+https://github.com/Wiimm/wiimms-iso-tools
+	sha256sums = SKIP
+
+pkgname = wiimms-iso-tools-git
+	depends = libc6>=2.28
+	depends = libssl1.1>=1.1.0
+	depends = libtinfo6>=6
+	depends = zlib1g>=1:1.1.4
+
