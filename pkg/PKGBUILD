@@ -1,0 +1,55 @@
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=mangohud
+_gitname=MangoHud
+pkgver=0.6.6
+pkgrel=2
+pkgdesc="A Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more"
+arch=('x86_64' 'i686' 'i386')
+url="https://github.com/flightlessmango/MangoHud"
+license=('MIT')
+provides=('mangohud')
+conflicts=('mangohud')
+depends=('mesa-common-dev' 'libx11-dev' 'libxnvctrl-dev' 'libdbus-1-dev' 'libvulkan1')
+_base_makedepends=('meson' 'ninja-build' 'pkg-config' 'python3-setuptools' 'python3-mako' 'libvulkan-dev'
+            'gcc-multilib' 'g++-multilib')
+makedepends=("${_base_makedepends[@]}" 'glslang')
+impish_makedepends=("${_base_makedepends[@]}" 'glslang-dev')
+source=("$pkgname-$pkgver.tar.xz::https://github.com/flightlessmango/MangoHud/releases/download/v$pkgver/MangoHud-v$pkgver-Source.tar.xz")
+sha256sums=('b9fe2fb53e0a43d0cad5832813129de440e60c186ad39abfa59866df594576e4')
+
+build() {
+    cd "${srcdir}/$_gitname-v$pkgver"
+    
+    meson build/meson64 --libdir lib/mangohud/lib64 --prefix /usr -Dappend_libdir_mangohud=false -Dld_libdir_prefix=true -Dld_libdir_abs=true
+    ninja -C build/meson64
+    
+    export CC="gcc -m32"
+    export CXX="g++ -m32"
+    export PKG_CONFIG_PATH="/usr/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:${PKG_CONFIG_PATH_32}"
+    export LLVM_CONFIG="/usr/bin/llvm-config32"
+    
+    meson build/meson32 --libdir lib/mangohud/lib32 --prefix /usr -Dappend_libdir_mangohud=false -Dld_libdir_prefix=true -Dld_libdir_abs=true
+    ninja -C build/meson32
+}
+
+package() {
+    cd "${srcdir}/$_gitname-v$pkgver"
+
+    DESTDIR="$pkgdir" ninja -C build/meson64 install
+    DESTDIR="$pkgdir" ninja -C build/meson32 install
+    
+    # this is utterly fucking stupid, but who the fuck knows what $LIB is,
+    # so I need to just brute force this nonsense
+    for lib in lib lib64 x86_64 x86_64-linux-gnu lib/x86_64-linux-gnu tls/x86_64
+    do
+        mkdir -p $pkgdir/usr/lib/$pkgname/$lib
+        cp -r $pkgdir/usr/lib/$pkgname/lib64/* $pkgdir/usr/lib/$pkgname/$lib || true
+    done
+    
+    for lib in lib32 i686 i386-linux-gnu i686-linux-gnu lib/i386-linux-gnu lib/i686-linux-gnu lib32/i386-linux-gnu lib32/i686-linux-gnu tls/i686
+    do
+        mkdir -p $pkgdir/usr/lib/$pkgname/$lib
+        cp -r $pkgdir/usr/lib/$pkgname/lib32/* $pkgdir/usr/lib/$pkgname/$lib || true
+    done
+}
