@@ -1,0 +1,26 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=koreader-bin
+_pkgname=koreader
+pkgver=2022.03.1
+pkgrel=2
+pkgdesc="An ebook reader application supporting PDF, DjVu, EPUB, FB2 and many more formats, running on Cervantes, Kindle, Kobo, PocketBook and Android devices"
+arch=("amd64" "aarch64" "armv4" "armv7")
+url="https://github.com/koreader/koreader/"
+license=('AGPL3')
+depends=('libsdl2-2.0-0' 'fonts-noto-hinted' 'fonts-droid-fallback')
+source_amd64=("${url}/releases/download/v${pkgver}/${_pkgname}-${pkgver}-amd64.deb")
+source_aarch64=("${url}/releases/download/v${pkgver}/${_pkgname}-${pkgver}-arm64.deb")
+source_armv4=("${url}/releases/download/v${pkgver}/${_pkgname}-${pkgver}-armel.deb")
+source_armv7=("${url}/releases/download/v${pkgver}/${_pkgname}-${pkgver}-armhf.deb")
+sha512sums_amd64=("9824bbb644805e095525e019a3a4c6dc797291077e7d704ba54bfcadf77e371fcd15faa01aeca49481c0f765b76ec6a544528428cfa597c46c1819ff396b590d")
+sha512sums_aarch64=("0bc9c4da868e0942473a37c933826a00b6f9bdf2460cc1bb3add84b7b4fc7bcc9bd54b7200ee5fd77bf27363636e63f989de35869d871092fd6324a75092fe6f")
+sha512sums_armv4=("43127953ea2046912938b2c56b0481a7d8d98a4887e256227323a3b99c03dd59ce8f9722bd3c49c9426585452d57ee1ebe112f111fe35bba40ec8a16a2c1bef5")
+sha512sums_armv7=("49228261809c577a0756eeebdfe366290d6ff1aecb95f05074b1f19c21447908ee1c29b77842e1c8ffffbd69858081cf74e25b90ebea2db54132694bd78137f4")
+
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+
+package() {
+      #Extract data.tar.xz to pkgdir
+    tar -xvf "${srcdir}/data.tar.xz" -C "${pkgdir}"
+}
