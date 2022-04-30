@@ -1,0 +1,37 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+
+_name=img4tool
+pkgname=$_name-git
+pkgver=1.185.fc1ccfe
+pkgrel=1
+pkgdesc='Tool for manipulating IMG4, IM4M and IM4P files'
+arch=('x86_64')
+url="https://github.com/tihmstar/$_name"
+license=('LGPL3')
+_depends=('libplist-dev' 'openssl')
+depends=("${_depends[@]}" 'libgeneral-git')
+hirsute_depends=("${_depends[@]}" 'libgeneral')
+makedepends=('git' 'lzfse-git')
+provides=("$_name")
+conflicts=("$_name")
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$_name"
+
+  printf '1.%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "$_name"
+
+  ./autogen.sh --prefix=/usr
+  make
+}
+
+package() {
+  cd "$_name"
+
+  make DESTDIR="$pkgdir/" install
+}

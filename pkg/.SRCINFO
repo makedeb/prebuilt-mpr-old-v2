@@ -1,0 +1,25 @@
+generated-by = makedeb-makepkg
+
+pkgbase = img4tool-git
+	pkgdesc = Tool for manipulating IMG4, IM4M and IM4P files
+	pkgver = 1.185.fc1ccfe
+	pkgrel = 1
+	url = https://github.com/tihmstar/img4tool
+	arch = x86_64
+	license = LGPL3
+	makedepends = git
+	makedepends = lzfse-git
+	depends = libplist-dev
+	depends = openssl
+	depends = libgeneral-git
+	provides = img4tool
+	conflicts = img4tool
+	source = git+https://github.com/tihmstar/img4tool.git
+	sha256sums = SKIP
+	_depends = libplist-dev
+	_depends = openssl
+	hirsute_depends = libplist-dev
+	hirsute_depends = openssl
+	hirsute_depends = libgeneral
+
+pkgname = img4tool-git
