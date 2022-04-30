@@ -1,0 +1,22 @@
+generated-by = makedeb-makepkg
+
+pkgbase = noisetorch-bin
+	pkgdesc = Easy to use noise suppression for PulseAudio
+	pkgver = 0.11.4
+	pkgrel = 2
+	url = https://github.com/lawl/NoiseTorch
+	install = noisetorch-bin.install
+	arch = x86_64
+	license = GPL3
+	depends = libpolkit-agent-1-0
+	depends = gir1.2-polkit-1.0
+	provides = noisetorch
+	conflicts = noisetorch-git
+	conflicts = noisetorch
+	options = !strip
+	source = noisetorch-bin-0.11.4.tar.gz::https://github.com/lawl/NoiseTorch/releases/download/0.11.4/NoiseTorch_x64.tgz
+	source = noisetorch-bin.install
+	sha256sums = 4b449db816afdaa8f70e534497f7fa395f901148f99ad0c579f89fb4d67e6edf
+	sha256sums = 84359c186c870220eeb56e9750319bb0c334c1440dd0f974df9e21a4084f80a5
+
+pkgname = noisetorch-bin
