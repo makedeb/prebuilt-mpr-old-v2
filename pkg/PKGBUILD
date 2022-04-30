@@ -1,0 +1,47 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+# AUR Maintainer: Amaan Hashmi-Ubhi <amaanhub at protonmail dot com>
+
+pkgname="mangadesk-git"
+_gitname="mangadesk"
+pkgver=1.197.9d79e16
+pkgrel=3
+pkgdesc='Terminal client for MangaDex'
+arch=('x86_64')
+url="https://github.com/darylhjd/mangadesk"
+license=('MIT')
+# according to namcap, this is needed
+depends=('libc6-dev')
+makedepends=('golang-go')
+source=("git+${url}.git")
+sha512sums=('SKIP')
+conflicts=("${_gitname}" "${_gitname}-bin")
+provides=("mangadesk")
+
+pkgver() {
+  cd "${_gitname}"
+
+  printf "1.%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+
+prepare(){
+  cd "${_gitname}"
+  mkdir -p build/
+}
+
+build() {
+  cd "${_gitname}"
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
+  go get -d ./...
+  go build -o build ./...
+}
+
+package() {
+  cd "${_gitname}"
+  install -Dm755 build/${_gitname} "${pkgdir}"/usr/bin/${_gitname}
+}

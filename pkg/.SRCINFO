@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = mangadesk-git
+	pkgdesc = Terminal client for MangaDex
+	pkgver = 1.197.9d79e16
+	pkgrel = 3
+	url = https://github.com/darylhjd/mangadesk
+	arch = x86_64
+	license = MIT
+	makedepends = golang-go
+	depends = libc6-dev
+	provides = mangadesk
+	conflicts = mangadesk
+	conflicts = mangadesk-bin
+	source = git+https://github.com/darylhjd/mangadesk.git
+	sha512sums = SKIP
+
+pkgname = mangadesk-git
