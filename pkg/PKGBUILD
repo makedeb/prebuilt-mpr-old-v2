@@ -1,0 +1,29 @@
+# Maintainer: seerecursion <seerecursion@protonmail.com>
+
+pkgname=libxo
+pkgver=1.6.0
+pkgrel=1
+pkgdesc="Library to generate text, XML, JSON, and HTML output using a common set of function calls."
+arch=('x86_64')
+url="https://github.com/Juniper/libxo"
+license=('BSD-3-Clause')
+makedepends=('git' 'gcc')
+source=("https://github.com/Juniper/libxo/releases/download/${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha512sums=('3978d0201a7fbdb2618a89f81198f4d0c588cd608ac22fd5282463f17ce4f2238f4cb6915f52637f090e054216fdd2191f95df174d0c83ea44730c8f029cd324')
+
+build() {
+        cd "${pkgname}-${pkgver}"
+        sh ./bin/setup.sh
+        sh ./configure --prefix=/usr
+        make
+}
+
+check() {
+        cd "${pkgname}-${pkgver}"
+        make -k check
+}
+
+package() {
+        cd "${pkgname}-${pkgver}"
+        make DESTDIR="${pkgdir}" install
+}
