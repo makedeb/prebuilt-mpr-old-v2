@@ -1,0 +1,36 @@
+# Maintainer: Canony <canony@protonmail.ch>
+
+pkgname=ltex-ls-bin
+pkgver=15.2.0
+pkgrel=1
+pkgdesc="LTeX Language Server: LSP language server for LanguageTool with support for LaTeX, Markdown, and others "
+_filename="${pkgname%-bin}-${pkgver}"
+arch=('x86_64')
+url="https://github.com/valentjn/${pkgname%-bin}"
+license=('Mozilla Public License 2.0')
+depends=('java-runtime-headless')
+provides=("${pkgname%-bin}")
+conflicts=("${pkgname%-bin}")
+source=("$url/releases/download/$pkgver/${_filename}.tar.gz")
+sha256sums=('ca08c216361a3fd2dce412ee3877b9fa5c9a2a97c3862711efcdec924060a3b2')
+
+package() {
+    echo "Copying executable files to /opt/${pkgname%-bin}"
+    mkdir -p "$pkgdir"/opt/${pkgname%-bin}/{bin,lib}
+    install -Dm755 "${_filename}/bin/ltex-ls" "$pkgdir/opt/${pkgname%-bin}/bin/"
+    install -Dm755 "${_filename}/bin/ltex-cli" "$pkgdir/opt/${pkgname%-bin}/bin/"
+    install -Dm755 "${_filename}/bin/.lsp-cli.json" "$pkgdir/opt/${pkgname%-bin}/bin/"
+    cp -r "${_filename}/lib/" "$pkgdir/opt/${pkgname%-bin}/"
+
+    echo "Making symlink for executables"
+    mkdir -p "$pkgdir/usr/bin"
+    ln -s "/opt/${pkgname%-bin}/bin/ltex-ls" "$pkgdir/usr/bin/"
+    ln -s "/opt/${pkgname%-bin}/bin/ltex-cli" "$pkgdir/usr/bin/"
+    ln -s "/opt/${pkgname%-bin}/bin/.lsp-cli.json" "$pkgdir/usr/bin/"
+
+    echo "Copying misc. files"
+    install -Dm644 "${_filename}/LICENSE.md" "$pkgdir/opt/${pkgname%-bin}/share/licenses/${pkgname%-bin}/LICENSE.md"
+    install -Dm644 "${_filename}/ACKNOWLEDGMENTS.md" "$pkgdir/opt/${pkgname%-bin}/share/licenses/${pkgname%-bin}/ACKNOWLEDGMENTS.md"
+}
+
+# vim:set ts=4 sw=4 et:
