@@ -1,0 +1,20 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname="autokey-gtk-bin"
+pkgver='0.95.10'
+pkgrel='1'
+pkgdesc="desktop automation utility - GTK+ version"
+arch=('any')
+depends=('autokey-common' 'gir1.2-appindicator3-0.1' 'gir1.2-glib-2.0' 'gir1.2-gtk-3.0' 'gir1.2-gtksource-3.0' 'gir1.2-notify-0.7' 'python3-dbus' 'python3-gi' 'zenity' 'python3')
+license=('GPL3')
+url="https://github.com/autokey/autokey"
+provides=('autokey-gtk')
+
+source=("${url}/releases/download/v${pkgver}/autokey-gtk_${pkgver}-0_all.deb")
+sha256sums=('0d9a824ae16d61ff10e0a3a0a5e3f3942b6033f082da8c9bea85ddd1d186ff63')
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.gz..."
+    tar -xf 'data.tar.gz' -C "${pkgdir}"
+}

@@ -1,0 +1,24 @@
+generated-by = makedeb-makepkg
+
+pkgbase = autokey-gtk-bin
+	pkgdesc = desktop automation utility - GTK+ version
+	pkgver = 0.95.10
+	pkgrel = 1
+	url = https://github.com/autokey/autokey
+	arch = any
+	license = GPL3
+	depends = autokey-common
+	depends = gir1.2-appindicator3-0.1
+	depends = gir1.2-glib-2.0
+	depends = gir1.2-gtk-3.0
+	depends = gir1.2-gtksource-3.0
+	depends = gir1.2-notify-0.7
+	depends = python3-dbus
+	depends = python3-gi
+	depends = zenity
+	depends = python3
+	provides = autokey-gtk
+	source = https://github.com/autokey/autokey/releases/download/v0.95.10/autokey-gtk_0.95.10-0_all.deb
+	sha256sums = 0d9a824ae16d61ff10e0a3a0a5e3f3942b6033f082da8c9bea85ddd1d186ff63
+
+pkgname = autokey-gtk-bin
