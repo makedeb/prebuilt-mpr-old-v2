@@ -18,6 +18,6 @@ sudo apt update
 sudo chown 'makedeb:makedeb' ./ /var/tmp/prebuilt-mpr/ -R
 
 # Build the package.
-cd pkg/
+cp ./pkg "/var/tmp/prebuilt-mpr/${pkgname}" -R
+cd "/var/tmp/prebuilt-mpr/${pkgname}"
 makedeb -s --no-confirm --skip-pgp-check
-cp *.deb "/var/tmp/prebuilt-mpr/${pkgname}/"
