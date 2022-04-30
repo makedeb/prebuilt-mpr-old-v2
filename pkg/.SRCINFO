@@ -1,0 +1,22 @@
+pkgbase = blesh-git
+	pkgdesc = Line editor for Bash that adds syntax highlighting, vim-mode, autosuggestions, and more
+	pkgver = 0.4.0devel3.r1618.26aaf87
+	pkgrel = 2
+	url = https://github.com/akinomyoga/ble.sh
+	arch = any
+	license = BSD
+	makedepends = bash
+	makedepends = gawk
+	makedepends = sed
+	makedepends = make
+	makedepends = git
+	depends = bash
+	depends = sed
+	source = git+https://github.com/akinomyoga/ble.sh
+	source = git+https://github.com/akinomyoga/blesh-contrib
+	source = .update-check.sh
+	md5sums = SKIP
+	md5sums = SKIP
+	md5sums = cec7ee39591c75a7d595d0c88a047bdd
+
+pkgname = blesh-git

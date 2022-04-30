@@ -1,0 +1,39 @@
+# Maintainer: yaroslav2424 <julia.schweinz at mailfence dot com>
+# Contributor: capezotte (oc1024 at GitHub)
+# Contributor: Seto (huresche at GitHub)
+# Contributor: Koichi Murase (akinomyoga at GitHub)
+
+pkgname=blesh-git
+_pkgname=ble.sh
+pkgdesc="Line editor for Bash that adds syntax highlighting, vim-mode, autosuggestions, and more"
+pkgver=0.4.0devel3.r1618.26aaf87
+pkgrel=2
+license=(BSD)
+url='https://github.com/akinomyoga/ble.sh'
+depends=(bash sed)
+makedepends=(bash gawk sed make git)
+arch=(any)
+source=("git+$url" "git+${url/%.sh/sh-contrib}" '.update-check.sh')
+md5sums=('SKIP'
+		'SKIP'
+		'c21d3a28d28d3cb731a637a55f6243db')
+
+pkgver() {
+	cd "$_pkgname"
+	printf "%s.r%s.%s" \
+		"$(sed -n 's/-//g;s/^FULLVER[[:space:]]*:=[[:space:]]*//p' GNUmakefile)" \
+		"$(git rev-list --count HEAD)" \
+		"$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+	cd "$_pkgname"
+	git submodule update --init --recursive
+}
+
+package() {
+	# Makes ble-update call an MPR helper
+	install -Dm755 .update-check.sh "$pkgdir"/usr/share/blesh/lib/_package.sh
+	cd "$_pkgname"
+	make install DESTDIR="$pkgdir" PREFIX=/usr
+}
