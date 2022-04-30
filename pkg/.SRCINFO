@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = librewolf-bin-wayland
+	pkgdesc = Web Browser - wayland enabled
+	pkgver = 99.0.1
+	pkgrel = 1
+	url = https://gitlab.com/librewolf-community
+	arch = x86_64
+	license = Mozilla Public License 2.0
+	provides = librewolf
+	conflicts = librewolf
+	source = https://gitlab.com/librewolf-community/browser/linux/-/jobs/2335586062/artifacts/raw/LibreWolf-99.0.1-1.x86_64.tar.bz2
+	source = librewolf.desktop
+	source = https://gitlab.com/librewolf-community/branding/-/raw/master/icon/icon.svg
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = librewolf-bin-wayland

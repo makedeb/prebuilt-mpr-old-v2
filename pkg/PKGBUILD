@@ -1,0 +1,39 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org>
+
+pkgname=librewolf-bin-wayland
+_pkgname=librewolf
+pkgdesc="Web Browser - wayland enabled"
+pkgrel=1
+pkgver=99.0.1
+jobnum=2335586062
+arch=('x86_64')
+url="https://gitlab.com/librewolf-community"
+license=('Mozilla Public License 2.0')
+provides=('librewolf')
+conflicts=('librewolf')
+source=("https://gitlab.com/librewolf-community/browser/linux/-/jobs/$jobnum/artifacts/raw/LibreWolf-$pkgver-$pkgrel.x86_64.tar.bz2"
+        "librewolf.desktop"
+        "$url/branding/-/raw/master/icon/icon.svg")
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
+
+package() {
+    cd "$srcdir"
+    mkdir -p "$pkgdir/usr/bin"
+    install -d -m755 "$pkgdir/usr/lib/$pkgname"
+    install -Dm644 "$_pkgname.desktop" -t "$pkgdir/usr/share/applications"
+    cp -r ./* "$pkgdir/usr/lib/$pkgname"
+    ln -rs "$pkgdir/usr/lib/$pkgname/librewolf" "$pkgdir/usr/bin/librewolf"
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/16x16/apps"
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/32x32/apps"
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/48x48/apps"
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/64x64/apps"
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/128x128/apps"
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default16.png" "$pkgdir/usr/share/icons/hicolor/16x16/apps/$_pkgname.png"
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default32.png" "$pkgdir/usr/share/icons/hicolor/32x32/apps/$_pkgname.png"
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default48.png" "$pkgdir/usr/share/icons/hicolor/48x48/apps/$_pkgname.png"
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default64.png" "$pkgdir/usr/share/icons/hicolor/64x64/apps/$_pkgname.png"
+    ln -rs "$pkgdir/usr/lib/$pkgname/browser/chrome/icons/default/default128.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/$_pkgname.png"
+    install -D -m644 icon.svg "$pkgdir"/usr/share/icons/hicolor/scalable/apps/$_pkgname.svg
+}
