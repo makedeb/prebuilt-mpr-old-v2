@@ -1,0 +1,30 @@
+generated-by = makedeb-makepkg
+
+pkgbase = skim-bin
+	pkgdesc = Fuzzy Finder in rust!
+	pkgver = 0.9.4
+	pkgrel = 1
+	url = https://github.com/lotabout/skim
+	arch = x86_64
+	license = MIT
+	makedepends = curl
+	makedepends = jq
+	optdepends = bash-completion: for supporting autocompletion
+	optdepends = fish: fish keybindings and autocompletion
+	optdepends = zsh: zsh keybindings and autocompletion
+	optdepends = tmux: sk-tmux script for launching skim in a tmux pane
+	optdepends = man: for reading manpages
+	optdepends = vim: plugin
+	provides = skim
+	provides = skim-bin
+	conflicts = skim
+	conflicts = skim-git
+	conflicts = skim-bin
+	options = !strip
+	options = zipman
+	source = sk.tar.gz::https://github.com/lotabout/skim/releases/download/v0.9.4/skim-v0.9.4-x86_64-unknown-linux-musl.tar.gz
+	source = archive.tar.gz::https://github.com/lotabout/skim/archive/refs/tags/v0.9.4.tar.gz
+	sha512sums = b3b587724b7c3bd9d8d65c0e1ba19fcce8e4fdc845d0af006b6ccff7fbe1fe4a875c7a6e30fcafd187cace7b91f0d77704a1cbf40e772f8faa06c015f674a9d7
+	sha512sums = 3e2fd67bb9638d184901106c7c49ec5e81d4388f6c22e9c7eddbbfd16f115fc5beab2d0d6031fee20e439a7a4220efd373dd1ddd82121ce88fc822a6dab5d601
+
+pkgname = skim-bin

@@ -1,0 +1,74 @@
+# vim: ft=sh syntax=sh softtabstop=2 tabstop=2 shiftwidth=2 fenc=utf-8 expandtab
+# Maintainer: alfador <the.alfador@pm.me>
+
+_github_repo="lotabout/skim"
+_pkgname="$(basename "${_github_repo}")"
+
+pkgname="${_pkgname}-bin"
+# shellcheck disable=SC2034
+pkgver="0.9.4"
+# shellcheck disable=SC2034
+pkgrel=1
+# shellcheck disable=SC2034
+pkgdesc="Fuzzy Finder in rust!"
+# shellcheck disable=SC2034
+arch=("x86_64")
+# shellcheck disable=SC2034
+provides=("${_pkgname}" "${_pkgname}-bin")
+# shellcheck disable=SC2034
+conflicts=("${_pkgname}" "${_pkgname}-git" "${_pkgname}-bin")
+# shellcheck disable=SC2034
+url="https://github.com/${_github_repo}"
+# shellcheck disable=SC2034
+license=("MIT")
+# shellcheck disable=SC2034
+makedepends=("curl" "jq")
+# shellcheck disable=SC2034
+optdepends=("bash-completion: for supporting autocompletion"
+            "fish: fish keybindings and autocompletion"
+            "zsh: zsh keybindings and autocompletion"
+            "tmux: sk-tmux script for launching skim in a tmux pane"
+            "man: for reading manpages"
+            "vim: plugin")
+# shellcheck disable=SC2034
+source=("sk.tar.gz::${url}/releases/download/v${pkgver}/${_pkgname}-v${pkgver}-${CARCH}-unknown-linux-musl.tar.gz"
+        "archive.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
+)
+
+sha512sums=("b3b587724b7c3bd9d8d65c0e1ba19fcce8e4fdc845d0af006b6ccff7fbe1fe4a875c7a6e30fcafd187cace7b91f0d77704a1cbf40e772f8faa06c015f674a9d7"
+            "3e2fd67bb9638d184901106c7c49ec5e81d4388f6c22e9c7eddbbfd16f115fc5beab2d0d6031fee20e439a7a4220efd373dd1ddd82121ce88fc822a6dab5d601")
+# shellcheck disable=SC2034
+options=(!strip zipman)
+pkgver() {
+  curl \
+    -sL "https://api.github.com/repos/${_github_repo}/releases/latest" |
+    jq -r '.tag_name' |
+    sed -e 's/v//g'
+}
+
+check() {
+  [ "$("${srcdir}/sk" --version)" != "${pkgver}" ] && return 1 || return 0
+}
+package() {
+  # ─── BINARY ─────────────────────────────────────────────────────────────────────
+  install -Dm755 "${srcdir}/sk" "${pkgdir}/usr/bin/sk"
+  install -Dm755 "${srcdir}/${_pkgname}-${pkgver}/bin/sk-tmux" "${pkgdir}/usr/bin/sk-tmux"
+  # ─── COMPLETIONS ────────────────────────────────────────────────────────────────
+  msg2 'Installing bash completion and keybindings...'
+  install -Dm 644 "${srcdir}/${_pkgname}-${pkgver}/shell/completion.bash" "${pkgdir}/usr/share/bash-completion/completions/sk"
+  install -Dm 755 "${srcdir}/${_pkgname}-${pkgver}/shell/key-bindings.bash" "${pkgdir}/etc/profile.d/sk.bash"
+  msg2 'Installing zsh completion and keybindings...'
+  install -Dm 644 "${srcdir}/${_pkgname}-${pkgver}/shell/completion.zsh" "${pkgdir}/usr/share/zsh/site-functions/_sk"
+  install -Dm 755 "${srcdir}/${_pkgname}-${pkgver}/shell/key-bindings.zsh" "${pkgdir}/etc/profile.d/sk.zsh"
+  msg2 'Installing fish keybindings...'
+  install -Dm 644 "${srcdir}/${_pkgname}-${pkgver}/shell/key-bindings.fish" "${pkgdir}/usr/share/fish/functions/sk.fish"
+  # ─── VIM ────────────────────────────────────────────────────────────────────────
+  msg2 'Installing vim plugin...'
+  install -Dm 644 "${srcdir}/${_pkgname}-${pkgver}/plugin/skim.vim" "${pkgdir}/usr/share/vim/vimfiles/plugin/skim.vim"
+  # ─── README AND MAN PAGES ───────────────────────────────────────────────────────
+  install -Dm644 "${srcdir}/${_pkgname}-${pkgver}/README.md" "${pkgdir}/usr/share/doc/${_pkgname}/README.md"
+  install -Dm644 "${srcdir}/${_pkgname}-${pkgver}/man/man1/sk.1" "${pkgdir}/usr/share/man/man1/sk.1.gz"
+  install -Dm644 "${srcdir}/${_pkgname}-${pkgver}/man/man1/sk-tmux.1" "${pkgdir}/usr/share/man/man1/sk-tmux.1.gz"
+  # ─── LICENSES ───────────────────────────────────────────────────────────────────
+  install -Dm644 "${srcdir}/${_pkgname}-${pkgver}/LICENSE" "${pkgdir}/usr/share/doc/${_pkgname}/copyright"
+}
