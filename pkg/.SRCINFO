@@ -1,0 +1,23 @@
+generated-by = makedeb-makepkg
+
+pkgbase = kas
+	pkgdesc = Setup tool for bitbake based projects
+	pkgver = 2.6.3
+	pkgrel = 1
+	url = https://github.com/siemens/kas
+	arch = any
+	license = CUSTOM
+	makedepends = python-setuptools
+	depends = python3
+	depends = python3-yaml
+	depends = python3-distro
+	depends = python3-jsonschema
+	depends = python-kconfiglib
+	depends = openssh-client
+	depends = git
+	depends = mercurial
+	optdepends = python-colorlog
+	source = kas-2.6.3.tar.gz::https://github.com/siemens/kas/archive/refs/tags/2.6.3.tar.gz
+	sha512sums = 7e09b2a49e92f490f0932da7c7395ff0296124bec1d345e7514bc1b26fc1e9201d4c933829f7ae1eda0f4a62ed929ac794880fa9c4e7084ba4f7534c0367243b
+
+pkgname = kas
