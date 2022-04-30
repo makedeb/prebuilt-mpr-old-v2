@@ -1,0 +1,17 @@
+generated-by = makedeb
+pkgname = waifu2x-ncnn-vulkan-bin
+pkgbase = waifu2x-ncnn-vulkan-bin
+pkgdesc = waifu2x converter ncnn version, runs fast on intel / amd / nvidia GPU with vulkan
+pkgrel = 1
+pkgver = 20220419
+url = https://github.com/nihui/waifu2x-ncnn-vulkan
+arch = x86_64
+conflicts = waifu2x-ncnn-vulkan
+conflicts = waifu2x-ncnn-vulkan-git
+depends = vulkan-icd
+license = MIT
+provides = waifu2x-ncnn-vulkan
+source = https://github.com/nihui/waifu2x-ncnn-vulkan/releases/download/20220419/waifu2x-ncnn-vulkan-20220419-ubuntu.zip
+source = waifu2x-ncnn-vulkan
+sha256sums = cdc1a4d9d5f6b8a549bcec754d43925dffcf4991c4d19c68e5bfb77bf61dc640
+sha256sums = ef1588b9a32583a5adab7279d0d89729105743675c1525c8cb251d1496ae1d4f
