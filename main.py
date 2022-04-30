@@ -186,77 +186,86 @@ def main():
 
     for pkgname in ood_packages:
         check_for_interrupt()
-
-        # Make sure we start from the 'main' branch, so things like new branches are based on that one.
-        logger.info(f"Updating {pkgname}...")
-        version = get_mpr_package(pkgname, mpr_packages)["Version"]
-        tag_version = version.replace(":", "!")
-        target_branch_name = f"pkg/{pkgname}"
-        pr_branch_name = f"pkg-update/{pkgname}"
         
-        # If the Git branch doesn't exist, initialize it and push it to the origin.
-        if target_branch_name not in git_branches:
-            run_command(["git", "switch", "--orphan", target_branch_name])
-
-            # We have to have some kind of file in the repository for PRs to work,
-            # as otherwise GitHub thinks the new empty branch will be a separate
-            # Git history from that of any other branch.
-            pathlib.Path(".gitignore").touch()
-            run_command(["git", "add", ".gitignore"])
-
-            run_command(["git", "commit", "-m", "Initial commit"])
-            run_command(["git", "push", "--set-upstream", "origin", target_branch_name])
-        else:
-            run_command(["git", "checkout", target_branch_name])
-
-        # If the Git branch for package updates doesn't exist, initialize it.
-        #
-        # It's important that this is done from the 'pkg/{pkgname}' branch
-        # from the previous step, as we need a similar Git history in order
-        # for PRs to work properly.
-        if pr_branch_name not in git_branches:
-            run_command(["git", "branch", pr_branch_name])
+        # Run the entire code block in a 'try-except' block so that we can process the next package if an error pops up.
+        try:
+            # Make sure we start from the 'main' branch, so things like new branches are based on that one.
+            logger.info(f"Updating {pkgname}...")
+            version = get_mpr_package(pkgname, mpr_packages)["Version"]
+            tag_version = version.replace(":", "!")
+            target_branch_name = f"pkg/{pkgname}"
+            pr_branch_name = f"pkg-update/{pkgname}"
         
-        run_command(["git", "checkout", pr_branch_name])
+            # If the Git branch doesn't exist, initialize it and push it to the origin.
+            if target_branch_name not in git_branches:
+                run_command(["git", "switch", "--orphan", target_branch_name])
 
-        # If 'pkg/' exists, delete it.
-        if os.path.exists("pkg/"):
-            shutil.rmtree("pkg/")
+                # We have to have some kind of file in the repository for PRs to work,
+                # as otherwise GitHub thinks the new empty branch will be a separate
+                # Git history from that of any other branch.
+                pathlib.Path(".gitignore").touch()
+                run_command(["git", "add", ".gitignore"])
+
+                run_command(["git", "commit", "-m", "Initial commit"])
+                run_command(["git", "push", "--set-upstream", "origin", target_branch_name])
+            else:
+                run_command(["git", "checkout", target_branch_name])
+
+            # If the Git branch for package updates doesn't exist, initialize it.
+            #
+            # It's important that this is done from the 'pkg/{pkgname}' branch
+            # from the previous step, as we need a similar Git history in order
+            # for PRs to work properly.
+            if pr_branch_name not in git_branches:
+                run_command(["git", "branch", pr_branch_name])
         
-        # Clone the files from the MPR into the Git repository.
-        mpr_dir = tempfile.TemporaryDirectory()
-        run_command(["git", "clone", f"https://mpr.makedeb.org/{pkgname}", "-b", f"ver/{tag_version}", mpr_dir.name])
-        shutil.rmtree(f"{mpr_dir.name}/.git")
-        shutil.copytree(mpr_dir.name, "./pkg")
-        shutil.rmtree(mpr_dir.name)
+            run_command(["git", "checkout", pr_branch_name])
 
-        # Set up needed files for the commit.
-        commit_message = f"pkg-update: {pkgname}"
-        shutil.copytree(TEMPLATE_DIRECTORY, "./", dirs_exist_ok=True)
+            # If 'pkg/' exists, delete it.
+            if os.path.exists("pkg/"):
+                shutil.rmtree("pkg/")
         
-        # Add files.
-        run_command(["git", "add", "."])
+            # Clone the files from the MPR into the Git repository.
+            mpr_dir = tempfile.TemporaryDirectory()
+            run_command(["git", "clone", f"https://mpr.makedeb.org/{pkgname}", "-b", f"ver/{tag_version}", mpr_dir.name])
+            shutil.rmtree(f"{mpr_dir.name}/.git")
+            shutil.copytree(mpr_dir.name, "./pkg")
+            shutil.rmtree(mpr_dir.name)
 
-        # If there's a diff, commit and push.
-        if run_command(["git", "diff", "--cached", "--name-only"]).stdout.decode() != "":
-            run_command(["git", "commit", "-m", commit_message])
-            run_command(["git", "push", "--set-upstream", "origin", pr_branch_name])
+            # Set up needed files for the commit.
+            commit_message = f"pkg-update: {pkgname}"
+            shutil.copytree(TEMPLATE_DIRECTORY, "./", dirs_exist_ok=True)
+        
+            # Add files.
+            run_command(["git", "add", "."])
 
-        # If not PR is open for this package, create it.
-        prs = [pull.title for pull in repo.pull_requests()]
+            # If there's a diff, commit and push.
+            if run_command(["git", "diff", "--cached", "--name-only"]).stdout.decode() != "":
+                run_command(["git", "commit", "-m", commit_message])
+                run_command(["git", "push", "--set-upstream", "origin", pr_branch_name])
 
-        if commit_message not in prs:
-            # If we get a ForbiddenError, we've probably encountered a
-            # secondary rate limit and need to wait a bit
-            # before making another request.
-            try:
-                repo.create_pull(commit_message, target_branch_name, pr_branch_name, maintainer_can_modify=True)
-            except github3.exceptions.ForbiddenError as exc:
-                logging.error("Encountered a rate limit. Waiting five minutes before processing more requests...")
-                time.sleep(60*5) # Five minutes.
+            # If not PR is open for this package, create it.
+            prs = [pull.title for pull in repo.pull_requests()]
 
-        # Sleep a few seconds so we don't spam the GitHub API really quickly.
-        time.sleep(5)
+            if commit_message not in prs:
+                # If we get a ForbiddenError, we've probably encountered a
+                # secondary rate limit and need to wait a bit
+                # before making another request.
+                try:
+                    repo.create_pull(commit_message, target_branch_name, pr_branch_name, maintainer_can_modify=True)
+                except github3.exceptions.ForbiddenError as exc:
+                    logger.error("Encountered a rate limit. Waiting five minutes before processing more requests...")
+                    time.sleep(60*5) # Five minutes.
+
+            # Sleep a few seconds so we don't spam the GitHub API really quickly.
+            time.sleep(5)
+
+        except Exception as exc:
+            logger.error(f"Got exception. Restoring Git repository to origin's state and continuing loop.")
+            logger.error(traceback.format_exc())
+            run_command(["git", "fetch", "origin"])
+            run_command(["git", "checkout", "main"])
+            run_command(["git", "reset", "--hard", "origin/main"])
 
 
 # Start running main() on loop.
