@@ -1,0 +1,15 @@
+generated-by = makedeb
+pkgname = buf
+pkgbase = buf
+pkgdesc = A new way of working with Protocol Buffers
+pkgrel = 1
+pkgver = 1.4.0
+url = https://buf.build
+arch = any
+conflicts = buf-git
+conflicts = buf-bin
+license = Apache
+makedepends = golang-go
+source = git+https://github.com/bufbuild/buf.git#tag=v1.4.0
+sha256sums = SKIP
+makedepends = golang-go
