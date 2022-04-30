@@ -1,0 +1,35 @@
+# Maintainer: B3HOID <b3holdddd3360@gmail.com>
+
+pkgname=lutris-git
+pkgver=0.5.8.3.r206.g68c9c1af
+pkgrel=1
+pkgdesc='Open Gaming Platform'
+arch=('any')
+url='https://lutris.net/'
+license=('GPL3')
+depends=('gir1.2-notify-0.7' 'psmisc' 'cabextract' 'unzip' 'p7zip' 'curl' 'fluid-soundfont-gs' 'mesa-utils' 'python3' 'python3-yaml' 'python3-lxml' 'python3-requests' 'gir1.2-webkit2-4.0')
+makedepends=('git' 'meson')
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+source=('git+https://github.com/lutris/lutris.git')
+sha256sums=('SKIP')
+
+pkgver() {
+	cd "$srcdir/${pkgname%-git}"
+	git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+	meson "${pkgname%-git}" build
+	meson compile -C build
+}
+
+#check() {
+#	cd "$srcdir/${pkgname%-git}"
+#	xvfb-run nosetests --cover-erase --with-xunit --xunit-file=nosetests.xml \
+#		--with-coverage --cover-package=lutris --cover-xml-file=coverage.xml
+#}
+
+package() {
+	DESTDIR="$pkgdir" meson install -C build
+}
