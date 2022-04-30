@@ -1,0 +1,29 @@
+# Maintainer: Ashley Chiara <PersonaVinny@protonmail.com>
+pkgname=yafetch-git
+pkgver=1
+pkgrel=2
+pkgdesc='yet another fetch, written in C++'
+arch=('x86_64')
+url='https://gitlab.com/cyberkitty/yafetch'
+license=('GPL2')
+makedepends=('git' 'make' 'g++')
+backup=()
+source=('git+https://gitlab.com/cyberkitty/yafetch.git'
+	'debian.patch')
+sha256sums=('SKIP'
+	    '775a5eb066c5b4de2b1424f774d07227dbca8b3e1cbba69aec801aad65e00755')
+
+prepare() {
+	cd yafetch
+	patch -p1 < ../debian.patch
+}
+
+build() {
+	cd yafetch
+	make
+}
+
+package() {
+	cd yafetch
+	make PREFIX=/usr DESTDIR="${pkgdir}" install
+}
