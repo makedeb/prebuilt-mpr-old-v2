@@ -49,6 +49,7 @@ GITHUB_PAT = os.environ["GITHUB_PAT"]
 GITHUB_USERNAME = os.environ["GITHUB_USERNAME"]
 GIT_NAME = os.environ["GIT_NAME"]
 GIT_EMAIL = os.environ["GIT_EMAIL"]
+TESTING_PACKAGE = os.environ.get("TESTING_PACKAGE")
 
 MPR_URL = "mpr.makedeb.org"
 PROGET_URL = "proget.hunterwittenborn.com"
@@ -149,30 +150,16 @@ def main():
     logger.info("Fetching MPR package list...")
     mpr_packages = requests.get(MPR_ARCHIVE_URL).json()
 
-    # Check for packages that need to be updated.
-    ood_packages = []
+    # If TESTING_PACKAGE is not None, use that.
+    # We use it during local development testing.
+    if TESTING_PACKAGE is not None:
+        testpkg_pkgname, testpkg_pkgver = TESTING_PACKAGE.split("/")
+        mpr_packages = [{"Name": testpkg_pkgname, "Version": testpkg_pkgver}]
 
-    for pkg in mpr_packages:
-        pkgname = pkg["Name"]
-        mpr_version = pkg["Version"]
-
-        prebuilt_mpr_version = get_prebuilt_mpr_version(pkgname)
-
-        # If a version couldn't be found, that means the package hasen't been added,
-        # and we need to run a CI pipeline for it.
-        if prebuilt_mpr_version is None:
-            ood_packages += [pkgname]
-        elif apt_pkg.version_compare(prebuilt_mpr_version, mpr_version) < 0:
-            ood_packages += [pkgname]
-    
     # Make sure the Git repository is up to date.
     logger.info("Making sure Prebuilt-MPR Git repository is up to date...")
     run_command(["git", "fetch", "origin"])
     run_command(["git", "pull", "--all"])
-
-    # For each package that's out of date, create a PR on GitHub.
-    if len(ood_packages) != 0:
-        logger.info(f"Found {len(ood_packages)} out of date packages. Updating packages...")
 
     # 'git branch' doesn't format things nicely to be processed here, so we use 'for-each-ref' instead.
     git_branches = (
@@ -184,17 +171,18 @@ def main():
     # Remove the 'origin/' prefix on the branches.
     git_branches = [branch.replace("origin/", "") for branch in git_branches]
 
-    for pkgname in ood_packages:
+    for pkg in mpr_packages:
         check_for_interrupt()
-        
         # Run the entire code block in a 'try-except' block so that we can process the next package if an error pops up.
         try:
             # Make sure we start from the 'main' branch, so things like new branches are based on that one.
-            logger.info(f"Updating {pkgname}...")
-            version = get_mpr_package(pkgname, mpr_packages)["Version"]
+            pkgname = pkg["Name"]
+            version = pkg["Version"]
             tag_version = version.replace(":", "!")
             target_branch_name = f"pkg/{pkgname}"
             pr_branch_name = f"pkg-update/{pkgname}"
+
+            logger.info(f"Checking %s for updates..." % repr(pkgname))
         
             # If the Git branch doesn't exist, initialize it and push it to the origin.
             if target_branch_name not in git_branches:
@@ -244,10 +232,11 @@ def main():
                 run_command(["git", "commit", "-m", commit_message])
                 run_command(["git", "push", "--set-upstream", "origin", pr_branch_name])
 
-            # If not PR is open for this package, create it.
+            # If no PR is open for this package and there's a diff between the 'pkg/{pkgname}' and 'pkg-update/{pkg}' branches, create it.
             prs = [pull.title for pull in repo.pull_requests()]
+            git_diff = run_command(["git", "diff", target_branch_name, pr_branch_name]).stdout.decode()
 
-            if commit_message not in prs:
+            if git_diff != "" and commit_message not in prs:
                 # If we get a ForbiddenError, we've probably encountered a
                 # secondary rate limit and need to wait a bit
                 # before making another request.

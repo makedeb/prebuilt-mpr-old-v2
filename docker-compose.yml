@@ -3,4 +3,6 @@ services:
   prebuilt-mpr:
     image: proget.hunterwittenborn.com/docker/makedeb/prebuilt-mpr
     build: ./
-    env_file: ./prebuilt-mpr.env
+    env_file:
+      - prebuilt-mpr.env
+      - prebuilt-mpr-override.env
