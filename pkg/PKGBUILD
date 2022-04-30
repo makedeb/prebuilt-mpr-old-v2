@@ -1,0 +1,68 @@
+# vim: ft=sh syntax=sh softtabstop=2 tabstop=2 shiftwidth=2 fenc=utf-8 expandtab
+# Maintainer: alfador <the.alfador@pm.me>
+
+_github_repo="sharkdp/fd"
+_pkgname="$(basename "${_github_repo}")"
+
+pkgname="${_pkgname}-bin"
+# shellcheck disable=SC2034
+pkgver=8.3.0
+# shellcheck disable=SC2034
+pkgrel=1
+# shellcheck disable=SC2034
+pkgdesc="A simple, fast and user-friendly alternative to 'find'"
+# [ TODO ] => add other architectures
+# shellcheck disable=SC2034
+arch=("x86_64")
+# shellcheck disable=SC2034
+provides=("${_pkgname}" "${_pkgname}-bin")
+# shellcheck disable=SC2034
+conflicts=("${_pkgname}" "${_pkgname}-git" "${_pkgname}-bin")
+# shellcheck disable=SC2034
+url="https://github.com/${_github_repo}"
+# shellcheck disable=SC2034
+license=("MIT" "apache")
+# shellcheck disable=SC2034
+makedepends=("curl" "jq")
+# shellcheck disable=SC2034
+optdepends=("bash-completion: for supporting auto completion")
+# shellcheck disable=SC2034
+source_x86_64=("${pkgname}-${pkgver}.tar.gz::${url}/releases/download/v${pkgver}/${_pkgname}-v${pkgver}-${CARCH}-unknown-linux-musl.tar.gz")
+# shellcheck disable=SC2034
+sha512sums_x86_64=("0092c2620e192c376c879b98b06ec243184f88fcaf0f5efc82d4a02b6d6ce0e2c468cd122c136e195a5cd2f05024f9d4f9cf10a016367bf4e2d9e91d1e6f2a7a")
+# shellcheck disable=SC2034
+options=(!strip zipman)
+pkgver() {
+  curl \
+    -sL "https://api.github.com/repos/${_github_repo}/releases/latest" |
+    jq -r '.tag_name' |
+    sed -e 's/v//g'
+}
+# [ NOTE ] => reaming extracted archive directory
+# for naming consistency
+prepare() {
+  rm -rf "${srcdir}/${pkgname}-${pkgver}/${_pkgname}-v${pkgver}-${CARCH}-unknown-linux-musl"
+  _dirname="$(tar -tf "${pkgname}-${pkgver}.tar.gz" | head -n 1 | cut -d/ -f1)"
+  if [ " ${srcdir}/${pkgname}-${pkgver} " != " ${_dirname} " ]; then
+    mv -f "${srcdir}/${_dirname}" "${srcdir}/${pkgname}-${pkgver}"
+  fi
+}
+check() {
+  [ "$("${srcdir}/${pkgname}-${pkgver}/${_pkgname}" --version)" != "${_pkgname} $(pkgver)" ] && return 1 || return 0
+}
+package() {
+  # ─── BINARY ─────────────────────────────────────────────────────────────────────
+  install -Dm755 "${srcdir}/${pkgname}-${pkgver}/${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
+  # ─── COMPLETIONS ────────────────────────────────────────────────────────────────
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/autocomplete/${_pkgname}.bash" "${pkgdir}/usr/share/bash-completion/completions/${_pkgname}"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/autocomplete/${_pkgname}.fish" "${pkgdir}/usr/share/fish/completions/${_pkgname}.fish"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/autocomplete/_${_pkgname}" "${pkgdir}/usr/share/zsh/vendor-completions/_${_pkgname}"
+  # ─── README AND MAN PAGES ───────────────────────────────────────────────────────
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/README.md" "${pkgdir}/usr/share/doc/${_pkgname}/README.md"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/${_pkgname}.1" "${pkgdir}/usr/share/man/man1/${_pkgname}.1.gz"
+  # ─── LICENSES ───────────────────────────────────────────────────────────────────
+  # [ NOTE ] => since there are two Licences,  decided to choose MIT for the 'copyright' file.
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/LICENSE-MIT" "${pkgdir}/usr/share/doc/${_pkgname}/copyright"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/LICENSE-MIT" "${pkgdir}/usr/share/doc/${_pkgname}/LICENSE-MIT"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/LICENSE-APACHE" "${pkgdir}/usr/share/doc/${_pkgname}/LICENSE-APACHE"
+}
