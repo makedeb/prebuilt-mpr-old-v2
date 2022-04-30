@@ -14,11 +14,9 @@ proget_api_key = os.environ["proget_api_key"]
 hw_url = os.environ["hw_url"]
 branch = os.environ["DRONE_BRANCH"]
 distro_codename = os.environ["distro_codename"]
-
 pkgname = branch.replace("pkg/", "")
-build_dir = f"/tmp/prebuilt-mpr/{pkgname}"
 
-os.chdir(f"{build_dir}/pkg")
+os.chdir(f"./pkg")
 
 packages = []
 
@@ -33,7 +31,7 @@ for path in pathlib.Path("./").glob("*"):
 
         packages += [f"{pkgname}_{version}_{arch}.deb"]
 
-os.chdir(build_dir)
+os.chdir("../")
 
 succesful_upload = True
 
