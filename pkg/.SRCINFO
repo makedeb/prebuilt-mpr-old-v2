@@ -1,0 +1,25 @@
+generated-by = makedeb
+pkgname = golang-go
+epoch = 2
+preinst = ./preinst
+pkgbase = golang-go
+pkgdesc = The Go programming language
+pkgrel = 2
+pkgver = 1.18.1
+url = https://go.dev/
+arch = any
+makedepends = gcc
+makedepends = golang-go
+optdepends = r!g++
+optdepends = r!gcc
+optdepends = r!libc6-dev
+optdepends = r!pkg-config
+options = !strip
+source = golang-go-1.18.1::git+https://go.googlesource.com/go/#tag=go1.18.1
+sha256sums = SKIP
+makedepends = gcc
+makedepends = golang-go
+optdepends = r!g++
+optdepends = r!gcc
+optdepends = r!libc6-dev
+optdepends = r!pkg-config
