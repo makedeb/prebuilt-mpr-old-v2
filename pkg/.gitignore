@@ -1,0 +1,12 @@
+wechat_devtools*.exe
+nwjs*.tar.gz
+node*.tar.gz
+
+pkg/
+src/
+
+compiler.tar.gz
+wechat-devtools-*.pkg.tar.xz
+wechat-devtools-*.pkg.tar.zst
+*.deb
+docker*
