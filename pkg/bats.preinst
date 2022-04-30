@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+if [[ "${1}" == "install" ]]; then
+    echo "NOTE: You need to log in and out before the 'bats_load_library' will work properly in your Bats tests. Alternative, you can run 'source /etc/profile' in your current terminal."
+fi
+
+# vim: set syntax=bash sw=4 expandtab:
