@@ -1,0 +1,20 @@
+generated-by = makedeb-makepkg
+
+pkgbase = ffuf-git
+	pkgdesc = Fast web fuzzer written in Go
+	pkgver = 1.3.1.r12.g64860e4
+	pkgrel = 1
+	url = https://github.com/ffuf/ffuf
+	arch = i686
+	arch = x86_64
+	arch = armv6h
+	arch = armv7h
+	arch = aarch64
+	license = MIT
+	makedepends = git
+	makedepends = golang
+	conflicts = ffuf
+	source = ffuf-git::git+https://github.com/ffuf/ffuf.git#branch=master
+	sha256sums = SKIP
+
+pkgname = ffuf-git

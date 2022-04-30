@@ -1,0 +1,48 @@
+# Maintainer: Matt Spaulding <matt@mattops.io>
+
+pkgname=ffuf-git
+pkgver=1.3.1.r12.g64860e4
+pkgrel=1
+pkgdesc="Fast web fuzzer written in Go"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
+url="https://github.com/ffuf/ffuf"
+license=('MIT')
+makedepends=('git' 'golang')
+conflicts=('ffuf')
+source=("$pkgname::git+https://github.com/ffuf/ffuf.git#branch=master")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$pkgname"
+  git describe --long | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+    cd $pkgname
+
+    export CGO_CPPFLAGS="${CPPFLAGS}"
+    export CGO_CFLAGS="${CFLAGS}"
+    export CGO_CXXFLAGS="${CXXFLAGS}"
+    export CGO_LDFLAGS="${LDFLAGS}"
+
+    go build \
+        -trimpath \
+        -buildmode=pie \
+        -mod=readonly \
+        -modcacherw \
+        -ldflags "-linkmode=external
+            -X github.com/ffuf/ffuf/pkg/ffuf.VERSION_APPENDIX= " \
+        -o ffuf
+}
+
+check() {
+    cd $pkgname
+    go test ./...
+}
+
+package() {
+    cd $pkgname
+    install -Dm755 ffuf -t "$pkgdir/usr/bin"
+    mkdir -p "$pkgdir/usr/share/doc/ffuf"
+    install -Dm644 LICENSE "$pkgdir/usr/share/doc/ffuf/copyright"
+}
