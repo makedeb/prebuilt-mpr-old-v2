@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = delta-bin
+	pkgdesc = A syntax-highlighting pager for git
+	pkgver = 0.8.3
+	pkgrel = 1
+	url = https://github.com/dandavison/delta
+	arch = x86_64
+	arch = aarch64
+	license = MIT
+	provides = delta
+	conflicts = delta
+	source_x86_64 = delta-bin-x86_64.tar.gz::https://github.com/dandavison/delta/releases/download/0.8.3/delta-0.8.3-x86_64-unknown-linux-gnu.tar.gz
+	sha512sums_x86_64 = fda389c3bb9168dde81c9c679311bfe79e4ed05a1c5dc0813a022898e503875fa23e18a493d831f5a35b9409ff02716f9e4794544786d7498682ec4bc2fabc0c
+	source_aarch64 = delta-bin-x86_64.tar.gz::https://github.com/dandavison/delta/releases/download/0.8.3/delta-0.8.3-x86_64-unknown-linux-gnu.tar.gz
+	sha512sums_aarch64 = 11a46cb393b678cfbf35bc62b598e87b40d654e6a5d6e9bfd3387b0a51d887ed0d17628f79bf2025c94384ee45b0ff98e13a00f47d6e02c3e72630ff8f70ce14
+
+pkgname = delta-bin
