@@ -1,0 +1,30 @@
+# Maintainer:  only_vip <onlyme_vip@protonmail.com>
+_pkgname=lossless-cut
+pkgname=lossless-cut-bin
+pkgver='3.42.0'
+pkgrel=3
+pkgdesc="Crossplatform GUI tool for lossless trimming,cutting of video,audio files"
+arch=('amd64')
+url="https://github.com/mifi/lossless-cut"
+license=('MIT')
+options=(!strip)
+depends=('libnss3' 'ffmpeg' 'libgtk-3-0')
+provides=('losslesscut')
+conflicts=('losslesscut')
+source=("${pkgname}-${pkgver}.tar.bz2::https://github.com/mifi/lossless-cut/releases/download/v${pkgver}/LosslessCut-linux.tar.bz2"
+               "losslesscut.desktop"
+               "LICENSE"
+               "https://raw.githubusercontent.com/mifi/lossless-cut/master/src/icon.svg")
+sha512sums=('4d47081d97b73d48f0286e316042a6e871a55b8f4e3f8f406ecce73c8bfc349323bb41d995b66c4d3bbf1019826071ad3a00f43727e9dc187a6e10f48add6253'
+                   'cb652bbf5db1b0be463d0d1205de240cd44fbb8b43020bbc2ce716a41b2438b82e9b4a6878cbbd25ccc86b6822bad44d569281afa935b7488a213c743f9736d1'
+                   '5367c35c259222dffba6a99807e59b291a77befee24c9d3be706a03715201da775b48324b71afc5b7293e667c5683a012d998b8cfb239aa80f7a1d5640810bbb'
+                   'aa415de44a12b37d594451eaf814d31a4c3db77cf0d42bba0549c9ea0605b0251480c1cc4b38f14edda818abf984b6b128cb12035651a130b99b9999d826742c')
+
+package() {
+  install -d "${pkgdir}/usr/"{share/losslesscut,bin}
+  cp -vRf "${srcdir}/LosslessCut-linux/"* "${pkgdir}/usr/share/losslesscut" 
+  ln -s "${pkgdir}/usr/share/losslesscut/losslesscut" "${pkgdir}/usr/bin/losslesscut"
+  install -Dm644 "losslesscut.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+  install -Dm644 "icon.svg" "${pkgdir}/usr/share/pixmaps/${_pkgname}.svg"
+  install -Dm644 "LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
