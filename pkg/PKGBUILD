@@ -1,0 +1,26 @@
+# This PKGBIULD ported from https://aur.archlinux.org
+# Maintainer(in AUR): Ali Molaei <ali dot molaei at protonmail dot com>
+# Contributor(in AUR): Mohammadreza Abdollahzadeh <morealaz at gmail dot com>
+# Maintainer: Mobin Aydinfar <mobin at mobintestserver dot ir>
+
+pkgname=vazir-code-fonts
+pkgver=1.1.2
+pkgrel=2
+pkgdesc="A beautiful monospace Persian font based on Vazir and Inconsolata fonts."
+url="https://github.com/rastikerdar/vazir-code-font"
+arch=(any)
+license=('custom')
+provides=('ttf-vazir-code')
+conflicts=('ttf-vazir-code')
+source=("${pkgname}-${pkgver}.zip::${url}/releases/download/v${pkgver}/vazir-code-font-v${pkgver}.zip"
+       "copyright::https://raw.githubusercontent.com/rastikerdar/vazir-code-font/master/LICENSE")
+sha256sums=('5c10819faef1d281db03703a82d498815b3d73b83badfa3100f9bbcd893b071e'
+            'ffc6462e609ff44ad9edcaf172b073039ae47c9fdad79ef3ac7d9808b58950a9')
+
+package() {
+  install -d "${pkgdir}/usr/share/fonts/${pkgname%-fonts}"
+  install -t "${pkgdir}/usr/share/fonts/${pkgname%-fonts}" -m644 ./Vazir-Code*.ttf
+  install -t "${pkgdir}/usr/share/fonts/${pkgname%-fonts}" -m644 ./{Farsi*,Without-Latin}/Vazir-Code*.ttf  
+  install -Dt "${pkgdir}/usr/share/doc/${pkgname}" -m644 ./copyright
+}
+# vim:set ts=2 sw=2 et:
