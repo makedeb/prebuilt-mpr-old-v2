@@ -1,0 +1,91 @@
+# Maintainer:         steiner <daimarstein@pm.me>
+## AUR Maintainer:     barfin <barfin@protonmail.com>
+## AUR Co-Maintainer:  Jaja <jaja@mailbox.org>
+## AUR Co-Maintainer:  floriplum <floriplum@mailbox.org>
+
+## pkginfo
+pkgdesc='A fancy custom distribution of Valves Proton with various patches'
+pkgname=proton-ge-custom-bin
+pkgver=7.10
+pkgrel=1
+arch=('x86_64')
+license=('BSD' 'LGPL' 'zlib' 'MIT' 'MPL' 'custom')
+changelog=changelog.md
+provides=('proton' "proton-ge-custom=${pkgver/_/.}")
+conflicts=('proton-ge-custom-stable-bin' 'proton-ge-custom')
+
+## dependencies
+makedepends=('patch')
+depends=('python3'
+         'libvulkan1'
+         'flac'
+         'speex'
+         'libgstreamer1.0-0'
+         'libgudev-1.0-0'
+         'mpg123'
+         'libtheora0'
+         'ffmpeg'
+         'libopenal1'
+         'va-driver-all'
+         'libvdpau1'
+         'libturbojpeg'
+        )
+optdepends=('kdialog: KDE splash dialog support'
+            'zenity: GNOME splash dialog support'
+            'steam: use proton with steam like intended'
+            'vulkan-driver: driver to be used by DXVK'
+            'winetricks: protonfixes backend - highly recommended'
+            'wine: support for 32bit prefixes'
+            'xboxdrv: gamepad driver service'
+          )
+## makepkg options
+options=(!strip emptydirs)
+
+## fix naming conventions, matching upstream
+_pkgname=${pkgname//-bin/}
+_pkgver="${pkgver//./_}"
+_srcdir="GE-Proton${pkgver//./-}"
+
+## paths and files
+_protondir=/usr/share/steam/compatibilitytools.d/${_pkgname}
+_licensedir=usr/share/licenses/${_pkgname}
+_execfile=usr/bin/proton
+_protoncfg=${_protondir}/user_settings.py
+
+## user edited files to backup
+backup=("${_protoncfg}")
+
+## sources
+url='https://github.com/GloriousEggroll/proton-ge-custom'
+source=("${_pkgname}-${_pkgver}.tar.gz::${url}/releases/download/${_srcdir}/${_srcdir}.tar.gz"
+        "supplementary.tar.zst")
+sha512sums=('1d105a3df5c3fca115f390232dbed0a8f8180fba50027437ab59640277628d0831b3d5c598a585bc1df4ed127638163e3520524553e51650128b70e1b4e1bb3d'
+           'a484c4cd2003057cf0cbbd32ca5d0106e97c75434e7bef34b35be8239ad98a482358852e41e85abedf5b24ac4d0375c8fffc7deee81a9b08c7799a398f23773b')
+
+build() {
+## patches
+sed -i "s|_proton=echo|_proton=/${_protondir}/proton|" "${srcdir}"/launchers/proton.sh
+sed -i -r 's|"GE-Proton.*"|"Proton-GE"|' "${_srcdir}"/compatibilitytool.vdf
+## remove artifacts
+rm "${_srcdir}"/protonfixes/*.tar.xz
+rm -rf "${_srcdir}"/protonfixes/.git*
+## fixes from namcap inspection
+strip --preserve-dates --strip-unneeded "${_srcdir}"/files/bin/wine*
+}
+
+package() {
+## create paths
+install -d "${pkgdir}/${_protondir}/"
+install -d "${pkgdir}/${_licensedir}/"
+install -d "${pkgdir}/$(dirname ${_execfile})/"
+## licenses
+mv "${_srcdir}/LICENSE" "${pkgdir}/${_licensedir}/license"
+mv "${_srcdir}/LICENSE.OFL" "${pkgdir}/${_licensedir}/license_OFL"
+mv "${_srcdir}/PATENTS.AV1" "${pkgdir}/${_licensedir}/license_AV1"
+mv "${_srcdir}/protonfixes/LICENSE" "${pkgdir}/${_licensedir}/license_protonfixes"
+## config files
+install --mode=0775 --group=50 "${srcdir}"/configs/user_settings.py "${pkgdir}/${_protoncfg}"
+## executables
+mv "${_srcdir}"/* "${pkgdir}/${_protondir}"
+install --mode=0755 "${srcdir}"/launchers/proton.sh "${pkgdir}/${_execfile}"
+}
