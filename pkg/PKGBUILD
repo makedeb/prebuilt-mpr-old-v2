@@ -1,0 +1,43 @@
+# Maintainer: Sven Karsten Greiner <sven@sammyshp.de>
+# Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
+# Contributor: Gleidson Echeli <gleidson dot echeli at gmail dot com>
+
+pkgname=umlet-bin
+_pkgname=UMLet
+pkgver=14.3.0
+_pkgver=14_3
+pkgrel=3
+pkgdesc="Free UML Tool for Fast UML Diagrams (standalone version)"
+arch=('any')
+url="https://www.umlet.com"
+license=('GPL')
+depends=('openjdk-11-jre')
+provides=('umlet')
+source=("http://www.umlet.com/umlet_${_pkgver}/umlet-standalone-$pkgver.zip"
+        'UMLet.desktop' 'umlet.png')
+sha256sums=('f4b064ed57ac0640daa31f5d59649a95596fc9290e503734ec4974a9bbecde49'
+            '28c44d22deca552a4e8601995bfa0b11960b499f985cdb7f50bbdcb3340a9bd7'
+            'c4cc77bd9ea22e7c0aa003713d0945337eaa5adc110f82d3f6ae76a8d1ba23cb')
+
+prepare() {
+    cd "$srcdir"/Umlet
+
+    rm umlet.sh
+    rm Umlet.exe
+    rm umlet.desktop
+}
+
+package() {
+    cd "$srcdir"
+    
+    install -D -m644 UMLet.desktop -t "$pkgdir"/usr/share/applications
+    install -D -m644 umlet.png -t "$pkgdir"/usr/share/icons/hicolor/256x256/apps
+    
+    cd "$srcdir"/Umlet
+
+    mkdir -p "$pkgdir"/opt/"$_pkgname"
+    cp -r ./* "$pkgdir"/opt/"$_pkgname"
+    
+    #mkdir -p "$pkgdir"/usr/bin
+    #ln -s "$pkgdir"/opt/"$_pkgname"/umlet.sh "$pkgdir"/usr/bin/umlet
+}

@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = umlet-bin
+	pkgdesc = Free UML Tool for Fast UML Diagrams (standalone version)
+	pkgver = 14.3.0
+	pkgrel = 3
+	url = https://www.umlet.com
+	arch = any
+	license = GPL
+	depends = openjdk-11-jre
+	provides = umlet
+	source = http://www.umlet.com/umlet_14_3/umlet-standalone-14.3.0.zip
+	source = UMLet.desktop
+	source = umlet.png
+	sha256sums = f4b064ed57ac0640daa31f5d59649a95596fc9290e503734ec4974a9bbecde49
+	sha256sums = 28c44d22deca552a4e8601995bfa0b11960b499f985cdb7f50bbdcb3340a9bd7
+	sha256sums = c4cc77bd9ea22e7c0aa003713d0945337eaa5adc110f82d3f6ae76a8d1ba23cb
+
+pkgname = umlet-bin

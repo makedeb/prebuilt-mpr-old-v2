@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Development;
+Comment=Free UML Tool for Fast UML Diagrams
+Encoding=UTF-8
+Exec=java -Dsun.java2d.xrender=f -jar umlet.jar %f
+GenericName=UMLet
+Icon=umlet
+Name=UMLet
+Path=/opt/UMLet
+StartupNotify=true
+Terminal=false
+Type=Application
