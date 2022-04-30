@@ -1,0 +1,17 @@
+diff --git a/config.h b/config.h
+index 75f2e03..4c218bd 100644
+--- a/config.h
++++ b/config.h
+@@ -1,9 +1,9 @@
+ // Specify which ascii art the program uses
+-#include "ascii/tux.h"
++#include "ascii/debian.h"
+ 
+-#define HOSTCOLOR "\033[1;34m"
++#define HOSTCOLOR "\033[1;32m"
+ 
+-#define COLOR "\033[1;36m"
++#define COLOR "\033[1;31m"
+ 
+ // Specify which info to show
+ const std::string (*info[])() = {
