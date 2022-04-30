@@ -1,0 +1,17 @@
+pkgbase = python3-pygls
+	pkgdesc = Pythonic generic implementation of the Language Server Protocol
+	pkgver = 0.11.1
+	pkgrel = 1
+	url = https://github.com/openlawlibrary/pygls
+	arch = any
+	license = APACHE
+	makedepends = python3-setuptools-scm
+	makedepends = python3-toml
+	makedepends = python3-wheel
+	depends = python3-pydantic
+	depends = python3-typeguard
+	source = https://files.pythonhosted.org/packages/source/p/pygls/pygls-0.11.1.tar.gz
+	sha256sums = cb30ccf1eee14760ce1b7167a9d39df9e72368ec7a61accdd6bf0b9c73ea0319
+	b2sums = eba67cbcb7ac46784dc1c70f01e0b35d5ff2ce20fe51a0feb9d4be635576000f97c8b3bfd2bb2b38cf1c88cc9e77a3e998b805b5824ce7c2478c11f4c04af885
+
+pkgname = python3-pygls
