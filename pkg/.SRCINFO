@@ -1,0 +1,22 @@
+pkgbase = mkcert-bin
+	pkgdesc = Simple tool for making locally-trusted development certificates
+	pkgver = 1.4.3
+	pkgrel = 2
+	url = https://github.com/FiloSottile/mkcert
+	arch = aarch64
+	arch = x86_64
+	arch = armv7h
+	license = BSD
+	depends = libnss3-tools
+	provides = mkcert
+	conflicts = mkcert
+	options = !strip
+	options = !emptydirs
+	source_aarch64 = https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-arm64
+	sha256sums_aarch64 = 43c4e3b9e7e6466d397b3d6e221788f83b5b91f826f1040240dbaddfc101ce33
+	source_x86_64 = https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
+	sha256sums_x86_64 = c2b0746528588d2a5dabe7c4394a848909da07e23ca3f2393375e9baa3931649
+	source_armv7h = https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-arm
+	sha256sums_armv7h = b982ade61b6781f17afc210914116d8078af3ebb631facd28a944033018d41d2
+
+pkgname = mkcert-bin

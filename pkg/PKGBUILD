@@ -1,0 +1,34 @@
+# Maintainer: SZanko, szanko at protonmail dot com
+
+_pkgname=mkcert
+pkgname=${_pkgname}-bin
+pkgver=1.4.3
+pkgrel=2
+pkgdesc='Simple tool for making locally-trusted development certificates'
+arch=('aarch64' 'x86_64' 'armv7h')
+url='https://github.com/FiloSottile/mkcert'
+license=('BSD')
+depends=('libnss3-tools')
+options=('!strip' '!emptydirs')
+source_aarch64=("${url}/releases/download/v${pkgver}/${_pkgname}-v${pkgver}-linux-arm64")
+source_x86_64=("${url}/releases/download/v${pkgver}/${_pkgname}-v${pkgver}-linux-amd64")
+source_armv7h=("${url}/releases/download/v${pkgver}/${_pkgname}-v${pkgver}-linux-arm")
+sha256sums_aarch64=('43c4e3b9e7e6466d397b3d6e221788f83b5b91f826f1040240dbaddfc101ce33')
+sha256sums_x86_64=('c2b0746528588d2a5dabe7c4394a848909da07e23ca3f2393375e9baa3931649')
+sha256sums_armv7h=('b982ade61b6781f17afc210914116d8078af3ebb631facd28a944033018d41d2')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+
+package() {
+  if [[ "$CARCH" == "x86_64" ]]; then
+    tmparch="amd64"
+  fi
+  if [[ "$CARCH" == "aarch64" ]]; then
+    tmparch="arm64"
+  fi
+  if [[ "$CARCH" == "armv7h" ]]; then
+    tmparch="arm"
+  fi
+  mv "${_pkgname}-v${pkgver}-linux-${tmparch}" ${_pkgname}
+  install -Dm755 "${_pkgname}" "$pkgdir/usr/bin/${_pkgname}"
+}
