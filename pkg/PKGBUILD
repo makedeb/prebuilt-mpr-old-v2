@@ -1,0 +1,22 @@
+# Maintainer:  Rafael Auyer <auyer@rcpassos.me>
+
+pkgname=eksctl-bin
+pkgver=0.77.0
+pkgrel=1
+pkgdesc='The official CLI for Amazon EKS'
+arch=('x86_64')
+url="https://github.com/weaveworks/eksctl"
+license=('Apache-2.0')
+depends=()
+optdepends=()
+provides=('eksctl')
+conflicts=('eksctl')
+
+source=(
+	"https://github.com/weaveworks/eksctl/releases/download/v${pkgver}/eksctl_Linux_amd64.tar.gz"
+)
+sha512sums=('01778b442f4d47645d36b4c4df4fb547e577849065dee00997321504759efcd5b3fd58953ad744b4645c526c2bedf932db006061e197252e1fdff82231936739')
+
+package() {
+	install -Dm755 "eksctl" "$pkgdir/usr/local/bin/eksctl"
+}

@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = eksctl-bin
+	pkgdesc = The official CLI for Amazon EKS
+	pkgver = 0.77.0
+	pkgrel = 1
+	url = https://github.com/weaveworks/eksctl
+	arch = x86_64
+	license = Apache-2.0
+	provides = eksctl
+	conflicts = eksctl
+	source = https://github.com/weaveworks/eksctl/releases/download/v0.77.0/eksctl_Linux_amd64.tar.gz
+	sha512sums = 01778b442f4d47645d36b4c4df4fb547e577849065dee00997321504759efcd5b3fd58953ad744b4645c526c2bedf932db006061e197252e1fdff82231936739
+
+pkgname = eksctl-bin
