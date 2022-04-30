@@ -1,0 +1,21 @@
+generated-by = makedeb-makepkg
+
+pkgbase = bsptab-git
+	pkgdesc = Suckless tabbed integration into bspwm
+	pkgver = 460.2.11.ge997b892022.02.17
+	pkgrel = 1
+	url = https://github.com/albertored11/bsptab
+	arch = any
+	license = MIT
+	makedepends = git
+	depends = bspwm
+	depends = tabbed
+	depends = bash
+	depends = awk
+	depends = xdotool
+	provides = bsptab
+	conflicts = bsptab
+	source = bsptab::git+https://github.com/albertored11/bsptab.git
+	md5sums = SKIP
+
+pkgname = bsptab-git

@@ -1,0 +1,29 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+_pkgname=bsptab
+pkgname=${_pkgname}-git
+pkgver=460.2.11.ge997b892022.02.17
+pkgrel=1
+pkgdesc='Suckless tabbed integration into bspwm'
+arch=('any')
+url='https://github.com/albertored11/bsptab'
+license=('MIT')
+depends=('bspwm' 'tabbed' 'bash' 'awk' 'xdotool')
+makedepends=('git')
+provides=('bsptab')
+conflicts=('bsptab')
+source=("${_pkgname}::git+${url}.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd ${_pkgname}
+    _tag=$(git describe --tags | sed -e 's:-:.:g') # tag is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_tag}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+package() {
+  cd ${_pkgname}
+  make PREFIX=/usr DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+}
