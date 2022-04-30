@@ -1,0 +1,20 @@
+generated-by = makedeb-makepkg
+
+pkgbase = hstr-git
+	pkgdesc = Bash and Zsh shell history suggest box - easily view, navigate, search and manage your command history
+	pkgver = 2.5.r5.ge4d35c1
+	pkgrel = 1
+	url = https://github.com/dvorka/hstr
+	arch = x86_64
+	license = Apache
+	makedepends = git
+	makedepends = pkg-config
+	makedepends = libncursesw5-dev
+	makedepends = libreadline-dev
+	makedepends = build-essential
+	provides = hstr
+	conflicts = hstr
+	source = hstr-git::git+https://github.com/dvorka/hstr.git
+	sha256sums = SKIP
+
+pkgname = hstr-git

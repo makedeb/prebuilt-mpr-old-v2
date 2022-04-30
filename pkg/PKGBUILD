@@ -1,0 +1,40 @@
+# Maintainer: keitachikawa (aeres 99 at gmail dot com)
+pkgname=hstr-git
+pkgver=2.5.r5.ge4d35c1
+pkgrel=1
+pkgdesc="Bash and Zsh shell history suggest box - easily view, navigate, search and manage your command history"
+arch=('x86_64')
+url="https://github.com/dvorka/hstr"
+license=('Apache')
+makedepends=('git' 'pkg-config' 'libncursesw5-dev' 'libreadline-dev' 'build-essential')
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+source=("$pkgname::git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  git -C $pkgname describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  sed -i "s|<ncursesw/curses.h>|<curses.h>|g" $pkgname/src/include/hstr{,_curses}.h
+}
+
+build() {
+  cd $pkgname/build/tarball
+  ./tarball-automake.sh
+
+  CFLAGS=${CFLAGS/-Werror=format-security/}
+  CXXFLAGS=${CXXFLAGS/-Werror=format-security/}
+
+  cd ../..
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  install -Dm644 $pkgname/{Changelog,README.md} -t "$pkgdir/usr/share/doc/${pkgname%-git}"
+  make -C $pkgname DESTDIR="$pkgdir/" install
+  rm -f "$pkgdir/usr/bin/hh"
+}
+
