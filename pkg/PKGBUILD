@@ -1,0 +1,25 @@
+# Maintainer: TwilightBlood <hwengerstickel@pm.me>
+pkgname=pacstall
+pkgver=1.7.2
+pkgrel=3
+pkgdesc="Pacstall is the AUR alternative for Ubuntu"
+arch=('x86_64')
+provides=("pacstall" "pacstall-bin")
+url="https://pacstall.dev"
+license=('GPL-3.0-only')
+makedepends=('wget' 'stow' 'build-essential' 'unzip' 'bc' 'tree')
+optdepends=('axel')
+source=("https://github.com/pacstall/pacstall/archive/refs/tags/1.7.2.zip")
+sha256sums=('b2cebc9ef58919a9828cd502eb0459b856743ccca2901af4aacaf8aeb36a6d14')
+
+package() {
+  cd "$srcdir"
+  cd pacstall-1.7.2
+  mkdir -p "${pkgdir}/var/log/pacstall/error_log"
+  install -Dm755 pacstall "${pkgdir}/bin"
+  install -Dm755 misc/scripts/* "${pkgdir}/usr/share/pacstall/scripts"
+  install -Dm755 misc/completions/bash "${pkgdir}/usr/share/bash-completion/completions"
+  install -Dm755 misc/completions/fish "${pkgdir}/usr/share/fish/vendor_completions.d"
+  install -Dm755 misc/pacstall.8.gz "${pkgdir}/usr/share/man/man8"
+  echo "https://raw.githubusercontent.com/pacstall/pacstall-programs/master" > "${pkgdir}/usr/share/pacstall/repo/pacstallrepo.txt"
+}
