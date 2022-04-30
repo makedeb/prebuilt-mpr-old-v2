@@ -1,0 +1,23 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at protonmail dot com>
+
+pkgname='schildichat-desktop-bin'
+provides=('schildichat-desktop')
+_pkgver='1.10.4-sc.1'
+pkgver=${_pkgver//-/.}
+pkgrel='1'
+pkgdesc="A Matrix Client based on Element with a more traditional instant messaging experience"
+arch=('x86_64')
+depends=('libgtk-3-0' 'libnotify4' 'libnss3' 'libxss1' 'libxtst6' 'xdg-utils' 'libatspi2.0-0' 'libuuid1' 'libsecret-1-0' 'libsqlcipher0')
+replaces=('schildichat-desktop')
+conflicts=('schildichat-desktop' 'schildichat-desktop-git')
+license=('Apache')
+url="https://github.com/SchildiChat/schildichat-desktop"
+
+source=("${url}/releases/download/v${_pkgver}/schildichat-desktop_${_pkgver}_amd64.deb")
+sha256sums=('aa65d855feb278f7bd6928542a5e4c949af842395b449829c6a9363dd1eccdc8')
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.xz..."
+    tar -xf 'data.tar.xz' -C "${pkgdir}"
+}

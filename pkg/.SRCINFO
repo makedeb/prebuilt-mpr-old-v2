@@ -1,0 +1,27 @@
+generated-by = makedeb-makepkg
+
+pkgbase = schildichat-desktop-bin
+	pkgdesc = A Matrix Client based on Element with a more traditional instant messaging experience
+	pkgver = 1.10.4.sc.1
+	pkgrel = 1
+	url = https://github.com/SchildiChat/schildichat-desktop
+	arch = x86_64
+	license = Apache
+	depends = libgtk-3-0
+	depends = libnotify4
+	depends = libnss3
+	depends = libxss1
+	depends = libxtst6
+	depends = xdg-utils
+	depends = libatspi2.0-0
+	depends = libuuid1
+	depends = libsecret-1-0
+	depends = libsqlcipher0
+	provides = schildichat-desktop
+	conflicts = schildichat-desktop
+	conflicts = schildichat-desktop-git
+	replaces = schildichat-desktop
+	source = https://github.com/SchildiChat/schildichat-desktop/releases/download/v1.10.4-sc.1/schildichat-desktop_1.10.4-sc.1_amd64.deb
+	sha256sums = aa65d855feb278f7bd6928542a5e4c949af842395b449829c6a9363dd1eccdc8
+
+pkgname = schildichat-desktop-bin
