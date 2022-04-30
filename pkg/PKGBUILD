@@ -1,0 +1,37 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+# Contributor: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname='pingo'
+pkgver='1.00a14'
+pkgrel='1'
+pkgdesc='Lossless and lossy image optimizer for PNG/JPEG/WebP/APNG (uses wine)'
+arch=('x86_64')
+url='https://css-ig.net/pingo'
+license=('unknown')
+depends=('wine')
+source=("${pkgname}-${pkgver}.zip"::'https://css-ig.net/bin/pingo-win64.zip'
+        'pingo.sh')
+sha256sums=('030160cff020119f0d3df28ef259fb4bf4b1e468cebda00ede758d28aa49ad40'
+            '089b57d77443a41e576f16eb1f577d604aef24613b9b33dad183df728fa41e3f')
+
+_useragent="User-Agent: Mozilla/5.0 (X11; Linux ${CARCH}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"
+
+DLAGENTS=("https::/usr/bin/curl \
+              -gqb '' -LC - --retry 3 --retry-delay 3 \
+              -H Upgrade-Insecure-Requests:\ 1 \
+              -H ${_useragent// /\\ } \
+              -H Referer:\ https://www.css-ig.net/pingo \
+              --compressed \
+              --output %o \
+              %u")
+
+#prepare() {
+    # nothing to see here
+#}
+
+package() {
+    cd ${srcdir}
+
+    install -D -m755 pingo.sh ${pkgdir}/usr/bin/${pkgname}
+    install -D -m644 pingo.exe -t ${pkgdir}/opt/${pkgname}
+}

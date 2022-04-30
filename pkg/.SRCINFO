@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = pingo
+	pkgdesc = Lossless and lossy image optimizer for PNG/JPEG/WebP/APNG (uses wine)
+	pkgver = 1.00a14
+	pkgrel = 1
+	url = https://css-ig.net/pingo
+	arch = x86_64
+	license = unknown
+	depends = wine
+	source = pingo-1.00a14.zip::https://css-ig.net/bin/pingo-win64.zip
+	source = pingo.sh
+	sha256sums = 030160cff020119f0d3df28ef259fb4bf4b1e468cebda00ede758d28aa49ad40
+	sha256sums = 089b57d77443a41e576f16eb1f577d604aef24613b9b33dad183df728fa41e3f
+
+pkgname = pingo
