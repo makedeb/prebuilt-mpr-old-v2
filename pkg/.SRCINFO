@@ -1,0 +1,20 @@
+generated-by = makedeb-makepkg
+
+pkgbase = pplatex
+	pkgdesc = A tool to reformat the output of latex and friends into readable messages.
+	pkgver = 1.0.rc3
+	pkgrel = 2
+	url = https://github.com/stefanhepp/pplatex
+	arch = x86_64
+	license = GPL3
+	makedepends = cmake
+	makedepends = libpcre3-dev
+	makedepends = dpkg-dev
+	source = pplatex-1.0.rc3.tar.gz::https://github.com/stefanhepp/pplatex/archive/pplatex-1.0-rc3.tar.gz
+	sha256sums = 83376ca3a92a21cf002ba1e5c7c09686d4c0c83c5af93d0118c4270437945dc7
+
+pkgname = pplatex
+	depends = libc6>=2.33
+	depends = libgcc-s1>=3.3.1
+	depends = libpcre3
+	depends = libstdc++6>=5.2
