@@ -1,0 +1,6 @@
+#!/bin/bash
+  echo -n "Updating font cache... "
+  fc-cache -f > /dev/null
+  mkfontscale /usr/share/fonts/TTF
+  mkfontdir /usr/share/fonts/TTF
+  echo "done."

@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = ttf-weather-icons-bin
+	pkgdesc = Icon font with 222 weather themed icons
+	pkgver = 2.0.12
+	pkgrel = 1
+	url = https://erikflowers.github.io/weather-icons/
+	arch = any
+	license = custom:"OFL"
+	license = MIT
+	provides = weather-icons
+	conflicts = weather-icons
+	source = ttf-weather-icons-2.0.12.tar.gz::https://github.com/erikflowers/weather-icons/archive/refs/tags/2.0.12.tar.gz
+	sha512sums = 6b5f155233077d281f3837f59b82d37e5f6cc08eff47be1b8313a84235c1e64c12aa0bebc68569e525334cc8e1cca0b2860a9de2fee7583c38f2b284f6fd7782
+
+pkgname = ttf-weather-icons-bin

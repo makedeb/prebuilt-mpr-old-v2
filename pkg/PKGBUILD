@@ -1,0 +1,21 @@
+# Maintainer:  only_vip <onlyme_vip@protonmail.com>
+pkgname=ttf-weather-icons-bin
+_pkgname=weather-icons
+pkgver=2.0.12
+pkgrel=1
+pkgdesc="Icon font with 222 weather themed icons"
+url="https://erikflowers.github.io/weather-icons/"
+license=('custom:"OFL"' 'MIT')
+arch=('any')
+conflicts=("weather-icons")
+provides=("weather-icons")
+postinst="${pkgname}.postinst"
+postrm="${pkgname}.postrm"
+# replaces=("weather-icons")
+source=("ttf-weather-icons-$pkgver.tar.gz::https://github.com/erikflowers/weather-icons/archive/refs/tags/$pkgver.tar.gz")
+sha512sums=('6b5f155233077d281f3837f59b82d37e5f6cc08eff47be1b8313a84235c1e64c12aa0bebc68569e525334cc8e1cca0b2860a9de2fee7583c38f2b284f6fd7782')
+
+package() {
+  install -d  "$pkgdir/usr/share/fonts/TTF"
+  install -Dm644 "${_pkgname}-${pkgver}/font/"*.ttf "$pkgdir/usr/share/fonts/TTF/"
+}
