@@ -3,6 +3,8 @@ set -eu
 
 # Env vars.
 proget_url='proget.hunterwittenborn.com'
+pkgname="$(echo "${DRONE_BRANCH}" | sed 's|pkg/||')"
+pkgdir="/var/tmp/prebuilt-mpr/${pkgname}"
 
 # Install needed packages.
 sudo apt update
@@ -13,9 +15,11 @@ curl -q "https://${proget_url}/debian-feeds/prebuilt-mpr.pub" | gpg --dearmor | 
 echo "deb [signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://${proget_url} prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
 sudo apt update
 
-# Set perms on current directory, since Drone CI clones under 'root' by default.
-sudo chown 'makedeb:makedeb' ./ -R
+# Set perms on current directory and pkgdir, since Drone CI clones under 'root' by default.
+sudo chown 'makedeb:makedeb' ./ /var/tmp/prebuilt-mpr/ -R
 
 # Build the package.
 cd pkg/
+find ./ -mindepth 1 -maxdepth 1 -exec cp '{}' "${pkgdir}/{}" -R \;
+cd "/var/tmp/prebuilt-mpr/${pkgname}"
 makedeb -s --no-confirm --skip-pgp-check
