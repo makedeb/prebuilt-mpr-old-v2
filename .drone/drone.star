@@ -3,6 +3,7 @@ def main(ctx):
         "name": "build-and-deploy",
         "kind": "pipeline",
         "type": "exec",
+        "trigger": {"branch": ["main"]},
         "node": {"server": "homelab"},
         "steps": [
             {
