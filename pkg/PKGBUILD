@@ -1,0 +1,62 @@
+# Maintainer: Jan Claußen <jan dot claussen 10 at web dot de>
+
+pkgname=latte-dock-git
+_gitname=latte-dock
+pkgver=5863.6e1c45d0
+pkgrel=1
+pkgdesc='Latte is a dock based on plasma frameworks that provides an elegant and intuitive experience for your tasks and plasmoids'
+arch=('x86_64')
+url='https://invent.kde.org/plasma/latte-dock'
+license=('GPL')
+depends=('cmake'
+	     'extra-cmake-modules'
+		 'qtdeclarative5-dev'
+		 'libqt5x11extras5-dev'
+		 'libkf5iconthemes-dev'
+		 'libkf5plasma-dev'
+		 'libkf5windowsystem-dev'
+		 'libkf5declarative-dev'
+		 'libkf5xmlgui-dev'
+		 'libkf5activities-dev'
+		 'build-essential'
+		 'libxcb-util-dev'
+		 'libkf5wayland-dev'
+		 'git'
+		 'gettext'
+		 'libkf5archive-dev'
+		 'libkf5notifications-dev'
+		 'libxcb-util0-dev'
+		 'libsm-dev'
+		 'libkf5crash-dev'
+		 'libkf5newstuff-dev'
+		 'libxcb-shape0-dev'
+		 'libxcb-randr0-dev'
+		 'libx11-dev'
+		 'libx11-xcb-dev'
+		 'kirigami2-dev')
+optdepends=('libunity: quicklists, counters, and progress bars for apps using libunity')
+makedepends=('git' 'cmake' 'extra-cmake-modules' 'python3')
+conflicts=('latte-dock')
+provides=('latte-dock')
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+
+   cd ${_gitname}
+   printf "%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+
+   cd ${_gitname}
+   mkdir build && cd build
+   cmake -DCMAKE_INSTALL_PREFIX=/usr \
+         -DCMAKE_BUILD_TYPE=Master ..
+}
+
+package() {
+
+   make -C ${_gitname}/build DESTDIR=${pkgdir} install
+}
+
