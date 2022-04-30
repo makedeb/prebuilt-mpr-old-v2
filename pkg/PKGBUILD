@@ -1,0 +1,14 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org>
+pkgname=black-bin
+pkgver=22.1.0
+pkgrel=1
+pkgdesc="The uncompromising Python code formatter"
+arch=('x86_64')
+url='https://black.readthedocs.io/en/stable/'
+
+source=("black-${pkgver}::https://github.com/psf/black/releases/download/${pkgver}/black_linux")
+sha256sums=('SKIP')
+
+package() {
+    install -Dm 755 "black-${pkgver}" "${pkgdir}/usr/bin/black"
+}

@@ -1,0 +1,12 @@
+generated-by = makedeb-makepkg
+
+pkgbase = black-bin
+	pkgdesc = The uncompromising Python code formatter
+	pkgver = 22.1.0
+	pkgrel = 1
+	url = https://black.readthedocs.io/en/stable/
+	arch = x86_64
+	source = black-22.1.0::https://github.com/psf/black/releases/download/22.1.0/black_linux
+	sha256sums = SKIP
+
+pkgname = black-bin
