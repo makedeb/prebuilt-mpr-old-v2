@@ -1,0 +1,15 @@
+# Maintainer: Rudra Saraswat <rs2009@ubuntu.com>
+
+pkgname='hello-shell'
+pkgver='1.0.0'
+pkgrel='1'
+arch=('x86_64')
+pkgdesc='Hello world package using bash.'
+depends=('bash' 'coreutils')
+
+package() {
+  mkdir -p "${pkgdir}/usr/bin"
+  echo '#!/usr/bin/env bash' > "${pkgdir}/usr/bin/${pkgname}"
+  echo 'echo "Hello world!"' > "${pkgdir}/usr/bin/${pkgname}"
+  chmod 755 "${pkgdir}/usr/bin/${pkgname}"
+}

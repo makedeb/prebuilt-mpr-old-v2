@@ -1,0 +1,11 @@
+generated-by = makedeb-makepkg
+
+pkgbase = hello-shell
+	pkgdesc = Hello world package using bash.
+	pkgver = 1.0.0
+	pkgrel = 1
+	arch = x86_64
+	depends = bash
+	depends = coreutils
+
+pkgname = hello-shell
