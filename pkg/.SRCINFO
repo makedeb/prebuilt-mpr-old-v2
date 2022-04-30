@@ -1,0 +1,21 @@
+generated-by = makedeb-makepkg
+
+pkgbase = glab-git
+	pkgdesc = An open-source command line interface for Gitlab
+	pkgver = 1.22.0.37.gf405b97
+	pkgrel = 1
+	url = <https://github.com/profclems/glab
+	arch = i686
+	arch = x86_64
+	arch = arm
+	arch = aarch64
+	license = GPL
+	makedepends = git
+	makedepends = make
+	depends = golang
+	provides = glab
+	replaces = glab
+	source = git+https://github.com/profclems/glab.git
+	sha256sums = SKIP
+
+pkgname = glab-git

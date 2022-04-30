@@ -1,0 +1,45 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Jan Claussen <jan dot claussen10 at web dot de>
+_pkgname=glab
+pkgname='glab-git'
+pkgver=1.22.0.37.gf405b97
+pkgrel=1
+pkgdesc='An open-source command line interface for Gitlab'
+arch=('i686' 'x86_64' 'arm' 'aarch64')
+url='<https://github.com/profclems/glab'
+license=('GPL')
+depends=('golang')
+makedepends=('git' 'make')
+provides=('glab')
+replaces=('glab')
+source=('git+https://github.com/profclems/glab.git')
+sha256sums=('SKIP')
+
+pkgver() {
+	cd "$_pkgname"
+    git describe --tags | sed 's/^v//;s/-/./g'
+}
+
+
+
+build() {
+	cd "$_pkgname"
+	make
+}
+
+package() {
+	cd "$_pkgname"
+
+	install -D -m755 \
+        "bin/glab" \
+        "$pkgdir/usr/bin/glab"
+
+	install -D -m644 \
+		"$srcdir/$_pkgname/LICENSE" \
+		"${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+}
+
