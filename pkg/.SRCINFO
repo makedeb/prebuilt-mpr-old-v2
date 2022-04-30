@@ -1,0 +1,29 @@
+generated-by = makedeb-makepkg
+
+pkgbase = tsschecker-git
+	pkgdesc = a powerful tool to check tss signing status of various [Apple] devices and firmwares
+	pkgver = 1.322.bc858e7
+	pkgrel = 1
+	url = https://github.com/tihmstar/tsschecker
+	arch = i686
+	arch = x86_64
+	license = LGPL3
+	makedepends = git
+	depends = libfragmentzip-git
+	depends = libirecovery-git
+	depends = curl
+	depends = libplist-dev
+	provides = tsschecker
+	conflicts = tsschecker
+	source = git+https://github.com/tihmstar/tsschecker
+	source = git+https://github.com/tihmstar/jssy
+	md5sums = SKIP
+	md5sums = SKIP
+	_depends = curl
+	_depends = libplist-dev
+	hirsute_depends = libfragmentzip
+	hirsute_depends = libirecovery
+	hirsute_depends = curl
+	hirsute_depends = libplist-dev
+
+pkgname = tsschecker-git
