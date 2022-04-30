@@ -1,0 +1,68 @@
+# Maintainer: Florian Bach <s1-dur@leseratte10.de>
+
+pkgname=wiimms-szs-tools-git
+provides=('wiimms-szs-tools')
+pkgver=2.26a.8462
+pkgrel=2
+pkgdesc="Mario Kart Wii file manipulation toolset"
+arch=('x86_64' 'i686')
+url="https://szs.wiimm.de"
+license=('GPL')
+depends=()
+makedepends=(
+    'ca-certificates' 'git' 'make' 'gcc' 'libpng-dev' 'libncurses-dev' 'gawk' 'bzip2' 'xxd' 'dpkg-dev'
+    )
+source=("git+https://github.com/Wiimm/wiimms-szs-tools")
+sha256sums=('SKIP')
+
+prepare() {
+    cd "$srcdir/wiimms-szs-tools"
+}
+
+pkgver() {
+    cd "$srcdir/wiimms-szs-tools/project" 2>/dev/null
+	version=$(grep -E "^VERSION_NUM.*\=" Makefile | cut -d\= -f2)
+	revision=$(cat revision.sh | cut -d\= -f2 )
+	echo $version.$revision
+}
+
+build() {
+	cd "$srcdir/wiimms-szs-tools/project"
+	CFLAGS=-Wno-address-of-packed-member make
+	make gen-doc
+}
+
+_shlibdeps() {
+	pushd "$pkgdir" &> /dev/null
+	mkdir -p "$pkgdir/debian" 2>/dev/null && touch "$pkgdir/debian/control" && (
+	dpkg-shlibdeps "$@" -O 2> /dev/null |\
+		sed "s/.*Depends=\(.*\)/\1/" |\
+		sed "s/, /\n/g" |\
+		sed "s/\(.*\) (\(.*\) \(.*\))/\1\2\3/g"
+	)
+	popd &> /dev/null
+	rm "$pkgdir/debian/control" 2>/dev/null
+	rmdir "$pkgdir/debian" 2>/dev/null
+}
+
+package() {
+
+	cd "$srcdir/wiimms-szs-tools/project/"
+	
+	# Run install script to copy binaries
+	chmod +x install.sh
+	sed -i "s#BASE_PATH=.*#BASE_PATH=$pkgdir/usr/local#g" install.sh
+	./install.sh --no-sudo --make
+
+	# Copy documentation
+	mkdir -p "$pkgdir/usr/share/doc/"
+	cp -r "$srcdir/wiimms-szs-tools/project/doc" "$pkgdir/usr/share/doc/wiimms-szs-tools"
+
+	# Copy license
+	cp "$srcdir/wiimms-szs-tools/project/gpl-2.0.txt" "$pkgdir/usr/share/doc/wiimms-szs-tools/copyright"
+
+	# Check for dependencies.
+	# Some versions of debian apparently use libncurses5, others use libncurses6. 
+	# This means the dependencies can't be hardcoded but need to be checked dynamically after building.
+	depends+=($(_shlibdeps "$pkgdir/usr/local/bin/wszst"))
+}

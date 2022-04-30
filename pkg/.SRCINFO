@@ -1,0 +1,28 @@
+pkgbase = wiimms-szs-tools-git
+	pkgdesc = Mario Kart Wii file manipulation toolset
+	pkgver = 2.26a.8462
+	pkgrel = 2
+	url = https://szs.wiimm.de
+	arch = x86_64
+	arch = i686
+	license = GPL
+	makedepends = ca-certificates
+	makedepends = git
+	makedepends = make
+	makedepends = gcc
+	makedepends = libpng-dev
+	makedepends = libncurses-dev
+	makedepends = gawk
+	makedepends = bzip2
+	makedepends = xxd
+	makedepends = dpkg-dev
+	provides = wiimms-szs-tools
+	source = git+https://github.com/Wiimm/wiimms-szs-tools
+	sha256sums = SKIP
+
+pkgname = wiimms-szs-tools-git
+	depends = libc6>=2.29
+	depends = libpng16-16>=1.6.2-1
+	depends = libssl1.1>=1.1.0
+	depends = libtinfo6>=6
+
