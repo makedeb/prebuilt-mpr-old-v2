@@ -1,0 +1,19 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+
+pkgname=kitty-terminfo
+pkgdesc='Terminfo for kitty, an OpenGL-based terminal emulator'
+depends=('ncurses-bin')
+pkgver=0.23.1
+pkgrel=1
+arch=('x86_64')
+url="https://github.com/kovidgoyal/kitty"
+license=('GPL3')
+
+source=("https://github.com/kovidgoyal/kitty/releases/download/v${pkgver}/kitty-${pkgver}-x86_64.txz")
+sha256sums=("a82c30fd77c1ccb90df1a26a75cbfe7c97b3f969a7d6bd754edfc20ee8279b24")
+
+package() {
+
+  mkdir -p "$pkgdir/usr/share/terminfo"
+  install -Dm 644 "${srcdir}/share/terminfo/x/xterm-kitty" "${pkgdir}/usr/share/terminfo/x/xterm-kitty" 
+}
