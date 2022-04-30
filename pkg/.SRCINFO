@@ -1,0 +1,39 @@
+generated-by = makedeb-makepkg
+
+pkgbase = gamehub-git
+	pkgdesc = Games manager, downloader, library that supports GOG, Steam and Humble Bundle
+	pkgver = 0.16.1.18.dev.r0.gf5aa1ff
+	pkgrel = 3
+	url = https://tkashkin.github.io/projects/gamehub/
+	arch = i686
+	arch = x86_64
+	arch = armv6h
+	arch = armv7h
+	arch = aarch64
+	license = GPL3
+	makedepends = git
+	makedepends = meson
+	makedepends = ninja-build
+	makedepends = valac
+	depends = libgtk-3-dev
+	depends = gconf2
+	depends = libgee-0.8-2
+	depends = libgee-0.8-dev
+	depends = libsoup2.4-1
+	depends = libsoup2.4-dev
+	depends = libjson-glib-dev
+	depends = libjson-glib-1.0-0
+	depends = sqlite
+	depends = webkit2gtk-driver
+	depends = libmanette-0.2-0
+	depends = libmanette-0.2-dev
+	depends = libxtst6
+	depends = libxtst-dev
+	provides = gamehub
+	conflicts = gamehub
+	options = !strip
+	options = debug
+	source = git+https://github.com/tkashkin/GameHub.git#branch=dev
+	sha256sums = SKIP
+
+pkgname = gamehub-git

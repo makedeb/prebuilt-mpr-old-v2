@@ -1,0 +1,38 @@
+# Maintainer: Rudra Saraswat <rs2009@ubuntu.com> -> https://github.com/RudraSaraswat1
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Maintainer: tkashkin
+# Maintainer: neuromancer
+# Contributor: friday
+# Contributor: Helder Bertoldo <helder.bertoldo@gmail.com>
+
+pkgname=gamehub-git
+pkgver=0.16.1.18.dev.r0.gf5aa1ff
+pkgrel=3
+pkgdesc="Games manager, downloader, library that supports GOG, Steam and Humble Bundle"
+arch=(i686 x86_64 armv6h armv7h aarch64)
+url="https://tkashkin.github.io/projects/gamehub/"
+license=(GPL3)
+depends=(libgtk-3-dev gconf2 libgee-0.8-2 libgee-0.8-dev libsoup2.4-1 libsoup2.4-dev libjson-glib-dev libjson-glib-1.0-0 sqlite webkit2gtk-driver libmanette-0.2-0 libmanette-0.2-dev libxtst6 libxtst-dev)
+makedepends=(git meson ninja-build valac)
+provides=(gamehub)
+conflicts=(gamehub)
+options=(!strip debug)
+source=("git+https://github.com/tkashkin/GameHub.git#branch=dev")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "GameHub"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "GameHub"
+  #CFLAGS="$CFLAGS -O0" meson . build --prefix=/usr -Ddistro=arch --buildtype=debug
+  meson . build --prefix=/usr -Ddistro=arch --buildtype=debug
+  ninja -C build
+}
+
+package() {
+  cd "GameHub"
+  DESTDIR="${pkgdir}" ninja -C build install
+}
