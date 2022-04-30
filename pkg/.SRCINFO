@@ -1,0 +1,25 @@
+generated-by = makedeb-makepkg
+
+pkgbase = sd-bin
+	pkgdesc = Intuitive find & replace CLI (sed alternative)
+	pkgver = 0.7.6
+	pkgrel = 1
+	url = https://github.com/chmln/sd
+	arch = x86_64
+	license = MIT
+	makedepends = curl
+	makedepends = jq
+	provides = sd
+	provides = sd-bin
+	conflicts = sd
+	conflicts = sd-git
+	conflicts = sd-bin
+	options = !strip
+	source = sd-bin-0.7.6::https://github.com/chmln/sd/releases/download/v0.7.6/sd-v0.7.6-x86_64-unknown-linux-musl
+	source = https://raw.githubusercontent.com/chmln/sd/v0.7.6/LICENSE
+	source = https://raw.githubusercontent.com/chmln/sd/v0.7.6/README.md
+	sha512sums = 87d8e91433c6a31ac40826d36b361c78c67e34b5c39c1dc7dac16fb572f69282bf7df398a7fd41f94b38530542740facde1ff23916ed84e9233a0cdb404d9f2c
+	sha512sums = e11f691193ed373bdb21b5d698b0a0ecf91716b885896fe46e4849e38be55593367c378faac37518820b04793b301bc2f601efeb80d5ae5834d5a998f0aa80cd
+	sha512sums = 536050ba0a3f746d2ae22fbbabcb69d46c32ccf28e279048193bc8ff62d52faa36fdcf343a32a87d9578e69d27e222149b59b3a72d62a9d2520a950cec8aa374
+
+pkgname = sd-bin
