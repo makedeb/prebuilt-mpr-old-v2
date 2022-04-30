@@ -1,0 +1,19 @@
+generated-by = makedeb
+pkgname = rsfetch-git
+pkgbase = rsfetch-git
+pkgdesc = Fast 5ms execution time and somewhat minimal fetch program written in Rust
+pkgrel = 2
+pkgver = 16c2e1db2021.01.21
+url = https://github.com/rsfetch/rsfetch
+arch = amd64
+conflicts = rsfetch
+license = MIT
+makedepends = rustc
+makedepends = cargo
+makedepends = libssl-dev
+provides = rsfetch
+source = rsfetch-git::git+https://github.com/rsfetch/rsfetch#branch=master
+sha512sums = SKIP
+makedepends = rustc
+makedepends = cargo
+makedepends = libssl-dev
