@@ -1,0 +1,12 @@
+generated-by = makedeb-makepkg
+
+pkgbase = hardened-malloc-light
+	pkgdesc = Hardened memory allocator from GraphaneOS project - Optimized to minimize breakages
+	pkgver = 11
+	pkgrel = 1
+	arch = any
+	makedepends = gcc
+	source = https://github.com/GrapheneOS/hardened_malloc/archive/refs/tags/11.tar.gz
+	sha256sums = 14331990899b91f9323230c280d66f0d1a77c386eb5d206d4cd0d8b5683098da
+
+pkgname = hardened-malloc-light
