@@ -1,0 +1,33 @@
+# Maintainer: Ricardo Band <email@ricardo.band>
+pkgname=quadlet
+pkgver=0.2.1
+pkgrel=1
+pkgdesc="An opinionated tool for easily running podman system containers under systemd"
+arch=(x86_64)
+url="https://github.com/containers/quadlet"
+license=("GPL2")
+depends=("systemd" "podman")
+makedepends=("meson" "libglib2.0-dev" "gcc")
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/containers/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('768fb658f1ca670cf1532cff89d3d0505e47738f07353495e88b6af4918c338f')
+
+build() {
+    cd $srcdir/${pkgname}-${pkgver}
+
+    meson "$srcdir/${pkgname}-${pkgver}" "build"
+    meson compile -C "build"
+}
+
+check() {
+    cd $srcdir/${pkgname}-${pkgver}
+
+    meson test -C "build"
+}
+
+package() {
+    cd $srcdir/${pkgname}-${pkgver}
+
+    meson install -C "build" --destdir "$pkgdir"
+    install -vDm644 "README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
+    cp -vr "docs" "examples" "$pkgdir/usr/share/doc/$pkgname"
+}

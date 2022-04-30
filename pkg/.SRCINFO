@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = quadlet
+	pkgdesc = An opinionated tool for easily running podman system containers under systemd
+	pkgver = 0.2.1
+	pkgrel = 1
+	url = https://github.com/containers/quadlet
+	arch = x86_64
+	license = GPL2
+	makedepends = meson
+	makedepends = libglib2.0-dev
+	makedepends = gcc
+	depends = systemd
+	depends = podman
+	source = quadlet-0.2.1.tar.gz::https://github.com/containers/quadlet/archive/refs/tags/0.2.1.tar.gz
+	sha256sums = 768fb658f1ca670cf1532cff89d3d0505e47738f07353495e88b6af4918c338f
+
+pkgname = quadlet
