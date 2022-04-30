@@ -1,0 +1,28 @@
+generated-by = makedeb-makepkg
+
+pkgbase = yt-dlp-bin
+	pkgdesc = A youtube-dl fork with additional features and fixes
+	pkgver = 2022.04.08
+	pkgrel = 1
+	url = https://github.com/yt-dlp/yt-dlp
+	arch = any
+	license = Unlicense
+	makedepends = git
+	makedepends = glibc-source
+	makedepends = pandoc
+	makedepends = python3-setuptools
+	depends = python3
+	depends = python3-mutagen
+	depends = python3-pycryptodome
+	depends = python3-websockets
+	optdepends = ffmpeg: for video post-processing
+	optdepends = rtmpdump: for rtmp streams support
+	optdepends = atomicparsley: for embedding thumbnails into m4a files
+	optdepends = aria2: for using aria2 as external downloader
+	provides = yt-dlp
+	conflicts = yt-dlp
+	options = !strip
+	source = https://github.com/yt-dlp/yt-dlp/archive/2022.04.08.tar.gz
+	sha512sums = dbe647da8f7181fe6a9b369458bca4f9081f7096a2844211ff9bb32b62582106b25888704d2770f6dd97458c870d2682aa3e758cf022b2b5b47844636cc9abe5
+
+pkgname = yt-dlp-bin

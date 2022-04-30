@@ -1,0 +1,38 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=yt-dlp-bin
+_pkgname=yt-dlp
+pkgver=2022.04.08
+pkgrel=1
+pkgdesc='A youtube-dl fork with additional features and fixes'
+arch=('any')
+url="https://github.com/yt-dlp/yt-dlp"
+license=('Unlicense')
+depends=('python3' 'python3-mutagen' 'python3-pycryptodome' 'python3-websockets')
+makedepends=('git' 'glibc-source' 'pandoc' 'python3-setuptools')
+optdepends=('ffmpeg: for video post-processing'
+            'rtmpdump: for rtmp streams support'
+            'atomicparsley: for embedding thumbnails into m4a files'
+            'aria2: for using aria2 as external downloader')
+provides=('yt-dlp')
+conflicts=('yt-dlp')
+source=("https://github.com/yt-dlp/yt-dlp/archive/${pkgver}.tar.gz")
+sha512sums=('dbe647da8f7181fe6a9b369458bca4f9081f7096a2844211ff9bb32b62582106b25888704d2770f6dd97458c870d2682aa3e758cf022b2b5b47844636cc9abe5')
+options=(!strip)
+
+prepare() {
+    cd "${_pkgname}-$pkgver"
+    sed -i 's|etc/bash_completion.d|share/bash-completion/completions|' setup.py
+    sed -i 's|etc/fish/completions|share/fish/vendor_completions.d|' setup.py
+}
+
+build() {
+    cd "${_pkgname}-$pkgver"
+    make PREFIX="${pkgdir}/usr" README.txt yt-dlp.1 completion-bash completion-zsh completion-fish
+    export PYTHONHASHSEED=0
+    python3 setup.py build
+}
+
+package() {
+    cd "${_pkgname}-$pkgver"
+    python3 setup.py install --root="${pkgdir}/" --optimize=1 --skip-build
+}
