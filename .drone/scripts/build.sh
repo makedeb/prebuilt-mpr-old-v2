@@ -24,6 +24,5 @@ find "${pkgdir}" -mindepth 1 -maxdepth 1 -exec rm -rf '{}' +
 # Build the package.
 cd pkg/
 find ./ -mindepth 1 -maxdepth 1 -exec cp '{}' "${pkgdir}/{}" -R \;
-cd "/var/tmp/prebuilt-mpr/${pkgname}"
-find /var/tmp/prebuilt-mpr
+cd "${pkgdir}"
 makedeb -s --no-confirm --skip-pgp-check
