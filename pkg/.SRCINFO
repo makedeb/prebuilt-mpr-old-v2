@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = libgeneral-git
+	pkgdesc = General stuff for tihmstar's projects - git version
+	pkgver = 1.56.e0d98cb
+	pkgrel = 1
+	url = https://github.com/tihmstar/libgeneral
+	arch = x86_64
+	license = LGPL
+	makedepends = git
+	makedepends = gettext
+	makedepends = libevent-pthreads-2.1-7
+	provides = libgeneral
+	conflicts = libgeneral
+	source = git+https://github.com/tihmstar/libgeneral.git
+	sha256sums = SKIP
+
+pkgname = libgeneral-git
