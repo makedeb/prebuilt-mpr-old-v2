@@ -1,0 +1,51 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at protonmail dot com>
+
+pkgname='obsidian-bin'
+provides=('obsidian')
+pkgver='0.14.6'
+pkgrel='1'
+pkgdesc="Obsidian is a powerful knowledge base that works on top of a local folder of plain text Markdown files"
+arch=('x86_64')
+makedepends=('imagemagick')
+depends=('libgtk-3-0' 'libnotify4' 'libnss3' 'libxss1' 'libxtst6' 'xdg-utils' 'libatspi2.0-0' 'libuuid1' 'libappindicator3-1' 'libsecret-1-0')
+license=('custom:Commercial')
+url="https://obsidian.md/"
+
+source=("https://github.com/obsidianmd/obsidian-releases/releases/download/v${pkgver}/obsidian-${pkgver}.tar.gz"
+        "obsidian.desktop"
+        "obsidian.png")
+sha256sums=('2a2780135dd22181c3a174eace4d5063e4cf8f017d2d1ce57e6d72160f61b137'
+            '754925a0032345aa1510c596ffcbd6de3e0b26581fe34176196e5c67ccbd9209'
+            'd1dd32c6e74beb3108af5813030389bcf5d67c2e6bdfe0038a1cb7df190d02f9')
+
+build() {
+    # please remember to put your icons in your tar releases
+    cd "${srcdir}"
+    mkdir -p "./icons/hicolor/16x16/apps/"
+    convert "./obsidian.png" -resize 16x16 "./icons/hicolor/16x16/apps/obsidian.png"
+    mkdir -p "./icons/hicolor/32x32/apps/"
+    convert "./obsidian.png" -resize 32x32 "./icons/hicolor/32x32/apps/obsidian.png"
+    mkdir -p "./icons/hicolor/48x48/apps/"
+    convert "./obsidian.png" -resize 48x48 "./icons/hicolor/48x48/apps/obsidian.png"
+    mkdir -p "./icons/hicolor/64x64/apps/"
+    convert "./obsidian.png" -resize 64x64 "./icons/hicolor/64x64/apps/obsidian.png"
+    mkdir -p "./icons/hicolor/128x128/apps/"
+    convert "./obsidian.png" -resize 128x128 "./icons/hicolor/128x128/apps/obsidian.png"
+    mkdir -p "./icons/hicolor/256x256/apps/"
+    convert "./obsidian.png" -resize 256x256 "./icons/hicolor/256x256/apps/obsidian.png"
+    mkdir -p "./icons/hicolor/512x512/apps/"
+    convert "./obsidian.png" -resize 512x512 "./icons/hicolor/512x512/apps/obsidian.png"
+    mkdir -p "./icons/hicolor/1024x1024/apps/"
+    cp "./obsidian.png" "./icons/hicolor/1024x1024/apps/obsidian.png"
+}
+
+package() {
+    mkdir -p "${pkgdir}/opt/Obsidian/"
+    mkdir -p "${pkgdir}/usr/share/applications/"
+    # moving the actual application to opt
+    cp -a "${srcdir}/obsidian-${pkgver}/." "${pkgdir}/opt/Obsidian/"
+    # moving the desktop file
+    cp "${srcdir}/obsidian.desktop" "${pkgdir}/usr/share/applications/obsidian.desktop"
+    # moving the icons
+    cp -a "${srcdir}/icons/" "${pkgdir}/usr/share/"
+}
