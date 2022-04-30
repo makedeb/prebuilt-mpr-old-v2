@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = seamonkey-en-us-bin
+	pkgdesc = SeaMonkey Internet Suite - (English (American))
+	pkgver = 2.53.11.1
+	pkgrel = 1
+	url = https://www.seamonkey-project.org
+	arch = x86_64
+	license = Mozilla Public License 2.0
+	provides = seamonkey
+	conflicts = seamonkey
+	source = https://download-installer.cdn.mozilla.net/pub/seamonkey/releases/2.53.11.1/linux-x86_64/en-US/seamonkey-2.53.11.1.en-US.linux-x86_64.tar.bz2
+	source = seamonkey.desktop
+	source = seamonkey.svg
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = seamonkey-en-us-bin
