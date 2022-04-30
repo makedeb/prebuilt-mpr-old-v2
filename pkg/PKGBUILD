@@ -1,0 +1,45 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=fzf-tab-completion-git
+_pkgname=${pkgname%-git}
+pkgver=1edbccc22021.11.13
+pkgrel=2
+pkgdesc="Tab completion using fzf in zsh, bash, GNU readline apps (e.g. python, php -a etc.)"
+arch=('i686' 'amd64')
+url="https://github.com/lincheney/fzf-tab-completion"
+license=('GPL3')
+depends=('rl-custom-function' 'fzf')
+makedepends=('rustc' 'cargo')
+provides=("fzf-tab-completion")
+conflicts=("fzf-tab-completion")
+# replaces=("fzf-tab-completion")
+postinst="${pkgname}.postinst"
+source=("${_pkgname}::git+https://github.com/lincheney/${_pkgname}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  #printf "%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    _always=$(git describe --always | sed -e 's:-:.:g' -e 's:v::') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+build() {
+  cd "${srcdir}/${_pkgname}"
+  (cd readline && cargo build --release)
+}
+
+check() {
+  cd "${srcdir}/${_pkgname}"
+  (cd readline && cargo test --release)
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}"
+  install -D -m755 "readline/bin/rl_custom_complete" "${pkgdir}/usr/bin/rl_custom_complete"
+  install -D -m755 "readline/target/release/librl_custom_complete.so" "${pkgdir}/usr/lib/librl_custom_complete.so"
+  install -D -m755 "bash/fzf-bash-completion.sh" "${pkgdir}/usr/share/${_pkgname}/bash/fzf-bash-completion.sh"
+  install -D -m755 "zsh/fzf-zsh-completion.sh" "${pkgdir}/usr/share/${_pkgname}/zsh/fzf-zsh-completion.sh"
+  install -D -m644 "README.md" "${pkgdir}/usr/share/doc/${_pkgname}/README.md"
+}
