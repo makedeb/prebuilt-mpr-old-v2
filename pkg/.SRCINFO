@@ -1,0 +1,17 @@
+pkgbase = firmware-nouveau
+	pkgdesc = This package provides video & pgraph firmwares for all NVIDIA chipsets that need them
+	pkgver = 340.108
+	pkgrel = 1
+	url = http://nouveau.freedesktop.org/wiki/
+	install = .INSTALL
+	arch = any
+	license = custom
+	depends = initramfs-tools
+	source = https://raw.github.com/envytools/firmware/master/extract_firmware.py
+	source = https://us.download.nvidia.com/XFree86/Linux-x86/340.108/NVIDIA-Linux-x86-340.108.run
+	md5sums = SKIP
+	md5sums = ffa278e613337e638fd10de41dae3630
+	sha256sums = SKIP
+	sha256sums = 2032aad612d9f3af1aecf979cfdfe423d79aa76929ef8bf8d3a403076f507cca
+
+pkgname = firmware-nouveau

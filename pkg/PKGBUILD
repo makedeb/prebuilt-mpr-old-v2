@@ -1,0 +1,30 @@
+# Maintainer: JCWasmx86 <JCWasmx86[at]t-online[dot]de>
+### Copied from AUR (nouveau-fw) ###
+# Maintainer: Martin Peres <martin.peres[at]free[dot]fr>
+# Contributor: Timothée Ravier <tim[at]siosm[dot]fr>
+
+pkgname=firmware-nouveau
+pkgver=340.108
+pkgrel=1
+pkgdesc="This package provides video & pgraph firmwares for all NVIDIA chipsets that need them"
+url='http://nouveau.freedesktop.org/wiki/'
+install=.INSTALL
+arch=('any')
+license=('custom')
+depends=('initramfs-tools')
+source=("https://raw.github.com/envytools/firmware/master/extract_firmware.py"
+        "https://us.download.nvidia.com/XFree86/Linux-x86/${pkgver}/NVIDIA-Linux-x86-${pkgver}.run")
+md5sums=('SKIP'
+         'ffa278e613337e638fd10de41dae3630')
+sha256sums=('SKIP'
+            '2032aad612d9f3af1aecf979cfdfe423d79aa76929ef8bf8d3a403076f507cca')
+
+build() {
+  sh NVIDIA-Linux-x86-${pkgver}.run --extract-only
+  python3 extract_firmware.py
+}
+
+package() {
+  install -dm 0755 "${pkgdir}"/lib/firmware/nouveau/
+  cp -a nv* vuc-* "${pkgdir}"/lib/firmware/nouveau/
+}
