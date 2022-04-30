@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+# -- vim: filetype=sh syntax=sh softtabstop=2 tabstop=2 shiftwidth=2 fileencoding=utf-8 smartindent autoindent expandtab
+# Maintainer: alfador <contact@havi.dev>
+pkgname="bat-extras-git"
+pkgver=2021.08.21.r1.g8ad00bd
+pkgrel=1
+pkgdesc="Bash scripts that integrate bat with various command line tools."
+arch=('i686' 'x86_64' 'armv7h' 'armv6h' 'aarch64')
+depends=(
+  'bash'
+  'git'
+  'ripgrep'
+  'man-db'
+  "bat"
+)
+makedepends=(
+  # used in check()
+  "gawk"
+)
+optdepends=(
+  'ncurses: optional for batdiff script'
+  'git-delta: optional for batdiff script'
+  'fzf: optional for batman script'
+  'exa: optional for batpipe script'
+  'entr: optional for batwatch script'
+  'prettier: various code formatting for prettybat script'
+  'shfmt: bash formatting for prettybat script'
+  'rustfmt: Rust formatting for prettybat script'
+  'clang: C / C++ / Objective-C formatting for prettybat script'
+  'black: Python formatting for prettybat script'
+)
+url="https://github.com/eth-p/bat-extras"
+license=('MIT')
+source=(
+  "git+${url}.git"
+  'git+https://github.com/eth-p/best.git'
+  'git+https://github.com/eth-p/best-tests.git'
+)
+sha512sums=(
+  'SKIP'
+  'SKIP'
+  'SKIP'
+)
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+
+pkgver() {
+  cd "$srcdir/${pkgname%-git}"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+prepare() {
+  cd "$srcdir/${pkgname%-git}"
+  git submodule init .test-framework
+  git config submodule.best.url "$srcdir/best"
+  git submodule update
+
+  cd .test-framework
+  git submodule init tests
+  git config submodule.best-tests.url "$srcdir/best-tests"
+  git submodule update
+}
+
+build() {
+  cd "$srcdir/${pkgname%-git}"
+  ./build.sh --minify=none --no-verify
+}
+
+check() {
+  cd "$srcdir/${pkgname%-git}"
+  if [ -z "$(command -v bat)" ] && [ -n "$(command -v batcat)" ]; then
+    ln -sf "$(command -v batcat)" "./bat"
+    export PATH="$PATH:$(pwd)"
+  fi
+  ./test.sh --verbose
+  [ -r "./bat" ] && rm "./bat"
+}
+package() {
+  cd "$srcdir/${pkgname%-git}"
+  install -Dm755 bin/* -t "$pkgdir/usr/bin"
+  install -Dm644 doc/* -t "$pkgdir/usr/share/doc/${pkgname%-git}"
+  install -Dm644 "LICENSE.md" "${pkgdir}/usr/share/licenses/${pkgname%-git}/copyright"
+  install -Dm644 man/* -t "$pkgdir/usr/share/man/man1"
+}
+# Based on: https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=bat-extras
