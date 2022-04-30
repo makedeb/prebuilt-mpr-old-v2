@@ -1,0 +1,22 @@
+# Maintainer:  only_vip <onlyme_vip@protonmail.com>
+pkgname='zentile-bin'
+_pkgname='zentile'
+pkgver=0.1.1
+pkgrel=3
+pkgdesc="On-demand tiling for Openbox, Xfce and other EWMH Complaint Window Managers."
+arch=('amd64' 'i686')
+url="https://github.com/blrsn/$_pkgname"
+license=(MIT)
+depends=()
+optdepends=()
+provides=('zentile')
+conflicts=('zentile')
+# replaces=('zentile')
+source_amd64=("zentile::${url}/releases/download/v${pkgver}/${_pkgname}_linux_amd64")
+sha512sums_amd64=('6b940624607f1591ffe903b7fdfcf670bee0379d862539ccc695e4a60e8b24e999f4212a1b589c0d3613d8b972ea7d7286888b714eb14bba3ae17d1e8133cc26')
+source_i686=("zentile::${url}/releases/download/v${pkgver}/${_pkgname}_linux_386")
+sha512sums_i686=('ddf747d4a14ee9098e7dc667aa0ca8255ab145d6215a119eb0acb1f937e259ce8dc61a402408dacb33f4dbed0ece3702f99e1229807584002817c28e873f2ac2')
+
+package() {
+  install -Dm755 "${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
+}
