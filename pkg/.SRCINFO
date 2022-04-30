@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = python3-sphinx-argparse-cli
+	pkgdesc = Render CLI arguments (sub-commands friendly) defined by argparse module
+	pkgver = 1.7.0
+	pkgrel = 1
+	url = https://github.com/gaborbernat/sphinx-argparse-cli
+	arch = any
+	license = MIT
+	makedepends = python3-setuptools-scm
+	makedepends = python3-toml
+	depends = python3
+	depends = python3-sphinx
+	depends = python3-docutils-stubs
+	source = python3-sphinx-argparse-cli-1.7.0.tar.gz::https://github.com/gaborbernat/sphinx-argparse-cli/archive/1.7.0.tar.gz
+	sha512sums = 0293245fdab15088b95ccfc5cc078c7a795f31772cba78899feadb32a740997e11998c58dc06524ad5109f277b48db64a9e9a087c99a843276dadd4b188652a0
+
+pkgname = python3-sphinx-argparse-cli
