@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo ':: Ensure "${GOPATH}/bin" has been added to your PATH. e.g:'
+echo "   echo 'export PATH=\"\${PATH}:\$(go env GOPATH)/bin\" ;' >> \"\${HOME}/.bashrc\""

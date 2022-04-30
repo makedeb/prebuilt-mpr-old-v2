@@ -1,0 +1,23 @@
+generated-by = makedeb-makepkg
+
+pkgbase = go-git
+	pkgdesc = Latest stable core compiler tools for the Go programming language.
+	pkgver = 1.17.5
+	pkgrel = 1
+	epoch = 1
+	url = https://golang.org
+	arch = x86_64
+	license = BSD
+	makedepends = git
+	makedepends = perl
+	makedepends = golang-go
+	makedepends = netbase
+	options = !strip
+	options = staticlibs
+	source = go::git+https://go.googlesource.com/go#branch=master
+	md5sums = SKIP
+
+pkgname = go-git
+	provides = go
+	conflicts = go
+	conflicts = golang-go

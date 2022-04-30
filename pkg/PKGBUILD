@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# Maintainer: alfador <contact@havi.dev>
+_pkgname="go"
+_branch="master"
+# shellcheck disable=SC2034
+pkgname="${_pkgname}-git"
+# shellcheck disable=SC2034
+pkgver=1.17.5
+# shellcheck disable=SC2034
+pkgrel=1
+# shellcheck disable=SC2034
+epoch=1
+# shellcheck disable=SC2034
+pkgdesc='Latest stable core compiler tools for the Go programming language.'
+# shellcheck disable=SC2034
+arch=("x86_64")
+# shellcheck disable=SC2034
+url='https://golang.org'
+# shellcheck disable=SC2034
+license=("BSD")
+# shellcheck disable=SC2034
+makedepends=(
+  "git"
+  "perl"
+  "golang-go" # Go is a self-hosting compiler so we install a base version for the build.
+  "netbase" # Required for tests
+)
+# shellcheck disable=SC2034
+options=(!strip staticlibs)
+# shellcheck disable=SC2034
+source=("${_pkgname}::git+https://go.googlesource.com/go#branch=${_branch}")
+# shellcheck disable=SC2034
+md5sums=('SKIP')
+postinst=post.install
+# ────────────────────────────────────────────────────────────────────────────────
+export GOOS="linux"
+export GOARCH="amd64"
+export GOROOT_FINAL="/usr/lib/go"
+export GOROOT_BOOTSTRAP="/usr/lib/go"
+# ────────────────────────────────────────────────────────────────────────────────
+prepare() {
+  cd "${_pkgname}" || exit 1
+  git reset --hard
+  git fetch --all --tags
+  git clean -xdf
+  git checkout "tags/go${pkgver}"
+}
+pkgver() {
+  cd "${_pkgname}" || exit 1
+  git tag |
+      grep 'go' |
+      grep -vP '(rc|beta)' |
+      sed 's/go//g' |
+      sort -bt. -k1,1 -k2,2n -k3,3n -k4,4n -k5,5n |
+      tail -n1
+}
+build() {
+  export GO_LDFLAGS="-buildmode=pie"
+  # shellcheck disable=SC2154
+  export GOPATH="${srcdir}"
+  export GOROOT="${srcdir}/go"
+  export GOBIN="${GOROOT}/bin"
+  cd  "${GOROOT}/src" || exit 1
+  ./make.bash -v
+}
+
+# check() {
+#   # shellcheck disable=SC2154
+#   export GOPATH="${srcdir}"
+#   export GOROOT="${srcdir}/go"
+#   export GOBIN="${GOROOT}/bin"
+#   export PATH="${GOROOT}/bin:${PATH}"
+#   export GO_TEST_TIMEOUT_SCALE="2"
+#   cd "${GOROOT}/src" || exit 1
+#   ./run.bash --no-rebuild -v -v -v -k
+# }
+
+package() {
+  # shellcheck disable=SC2034
+  provides=("go")
+  # shellcheck disable=SC2034
+  conflicts=("go" "golang-go")
+  cd "${_pkgname}" || exit 1
+  # ─── COPYING GO SOURCE FILES ────────────────────────────────────────────────────
+  # shellcheck disable=SC2154
+  install -d "${pkgdir}/usr/bin" "${pkgdir}/usr/lib/go" "${pkgdir}/usr/share/doc/go"
+  cp -a "bin" "pkg" "src" "lib" "misc" "${pkgdir}/usr/lib/go"
+  cp -r "doc/"* "${pkgdir}/usr/share/doc/go"
+  # ─── LINKING BINARIES ───────────────────────────────────────────────────────────
+  ln -sf "/usr/lib/go/bin/go" "${pkgdir}/usr/bin/go"
+  ln -sf "/usr/lib/go/bin/gofmt" "${pkgdir}/usr/bin/gofmt"
+  # ─── DOCUMENTS AND MANPAGES ─────────────────────────────────────────────────────
+  ln -sf "/usr/share/doc/go" "${pkgdir}/usr/lib/go/doc"
+  install -Dm644 "VERSION" "${pkgdir}/usr/lib/go/VERSION"
+  # ─── LICENCE ────────────────────────────────────────────────────────────────────
+  install -Dm644 "LICENSE" "${pkgdir}/usr/share/licenses/go/copyright"
+  # ─── CLEANUP ────────────────────────────────────────────────────────────────────
+  rm -rf "${pkgdir}/usr/lib/go/pkg/bootstrap"
+  rm -rf "${pkgdir}/usr/lib/go/pkg/tool/*/api"
+}
+# [ NOTE ] => This pkgbuild is based on
+# - https://aur.archlinux.org/packages/go-git
+# - https://git.alpinelinux.org/aports/tree/community/go/APKBUILD
