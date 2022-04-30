@@ -1,0 +1,14 @@
+generated-by = makedeb-makepkg
+
+pkgbase = disfetch
+	pkgdesc = Yet another *nix distro fetching program, but less complex.
+	pkgver = 2.15
+	pkgrel = 1
+	url = https://github.com/llathasa-veleth/disfetch
+	arch = any
+	license = MIT
+	depends = bash>=4.0.0
+	source = disfetch-2.15.tar.gz::https://github.com/llathasa-veleth/disfetch/archive/2.15.tar.gz
+	sha256sums = 2926083db6197cb946f182b4cf1ecbc061e9b0327dd92ab090999a5ed10cbb29
+
+pkgname = disfetch
