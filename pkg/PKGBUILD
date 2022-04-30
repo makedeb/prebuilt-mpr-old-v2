@@ -1,0 +1,63 @@
+# Maintainer: Tarn W. Burton <twburton@gmail.com>
+_qlver=2021-02-13
+_srcname=clasp
+pkgname=cando-git
+pkgver=0.4.2.r4924.gfb017d54b
+pkgrel=1
+pkgdesc="Computer Aided Nanostructure Design and Optimization"
+arch=('x86_64')
+url="https://github.com/cando-developers/cando"
+license=('LGPL')
+options+=(!strip)
+depends=('libbsd0' 'libelf1' 'libffi-dev' 'libgmp10' 'libgmpxx4ldbl'
+         'libncurses6' 'libnetcdf18' 'llvm-13' 'clang-13' 'python3' 'python-is-python3'
+         'zlib1g')
+makedepends=('git' 'libboost-graph-dev' 'libbsd-dev' 'libelf-dev' 'libexpat1-dev'
+             'libffi-dev' 'libgc-dev' 'libgmp-dev' 'libncurses-dev' 'build-essential'
+             'libnetcdf-dev' 'llvm-13' 'llvm-13-dev' 'clang-13' 'libclang-13-dev' 'python3' 'python-is-python3' 'sbcl'
+             'zlib1g-dev')
+provides=('lisp-compiler' 'cando')
+source=('git://github.com/clasp-developers/clasp.git#commit=fb017d54bf984ca1c8e1787e364813f7875991a5'
+        'git://github.com/clasp-developers/seqan-clasp.git'
+        'git://github.com/cando-developers/cando.git'
+        "https://github.com/quicklisp/quicklisp-client/archive/refs/tags/version-$_qlver.tar.gz"
+        'wscript.config'
+        'clasp.sh')
+sha512sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            '8efec9d46f0008c9f2fab387837f5a02d60ebb9f4a83106142ae954bc322b99bd48f9e91e2107dda188d679e27ddb5f48e444adfa98e6c15cf454923dfccadd5'
+            '236dce22337b0b56bf54867fc8d42d86ecedfa6097825c0798a235c950fb2e6c3f44f0630efdfcb241e1e3f8f5f080be30bc07961bf7dd8aa888784d7372cf01'
+            '1624ca5ba9502afbcfe8c603590c884c3081162a94f86eded74ec8f1e2a1a2ca03694e2bef4190473b6c34230a478b2e95a87b5c458ff60028ca9b740cc173cd')
+
+pkgver() {
+  cd "$_srcname"
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "$_srcname"
+  git submodule add -f $srcdir/seqan-clasp extensions/seqan-clasp
+  git submodule add -f $srcdir/cando extensions/cando
+}
+
+build() {
+  cd "$_srcname/"
+  cp ../wscript.config .
+  ./waf configure --enable-jupyter
+  CLASP_QUICKLISP_DIRECTORY=$srcdir/quicklisp-client-version-$_qlver ./waf build_dboehmprecise
+}
+
+package() {
+  cd "$_srcname/"
+  ./waf install_dboehmprecise --destdir "$pkgdir"
+  install -o root -m 755 ../clasp.sh "$pkgdir/usr/bin/clasp"
+  CLASP_QUICKLISP_DIRECTORY=$srcdir/quicklisp-client-version-$_qlver CLASP_FEATURES=ignore-extensions ./build/boehmprecise/iclasp-boehmprecise -N -l 'quicklisp:setup.lisp' -e '(ql:quickload :common-lisp-jupyter)' -e "(clj:install :use-implementation t :system t :bin-path \"/usr/bin/clasp\" :prefix \"$pkgdir\")"
+  CLASP_QUICKLISP_DIRECTORY=$srcdir/quicklisp-client-version-$_qlver ./build/boehmprecise/icando-boehmprecise -N -e '(ql:quickload :cando-jupyter)' -e "(cando-jupyter:install :system t :bin-path \"/usr/bin/icando\" :prefix \"$pkgdir\")" \
+    -e "(cando-jupyter:install :system t :image t :bin-path \"/usr/bin/cando\" :prefix \"$pkgdir\")"
+  sed -i '/"\/usr\/bin\/clasp",.*/a     "--load", "quicklisp:setup.lisp",' $pkgdir/usr/share/jupyter/kernels/common-lisp_clasp/kernel.json
+  mkdir -p "$pkgdir/usr/lib/clasp/src/lisp/modules/quicklisp"
+  cp -ra $srcdir/quicklisp-client-version-$_qlver/* "$pkgdir/usr/lib/clasp/src/lisp/modules/quicklisp/"
+  chmod a+w "$pkgdir/usr/lib/clasp/src/lisp/modules/quicklisp/local-projects/system-index.txt"
+}
+
