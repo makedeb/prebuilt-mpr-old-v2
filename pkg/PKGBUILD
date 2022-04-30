@@ -1,0 +1,27 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+
+_pkgname=docker-compose
+pkgname=docker-compose-bin
+pkgver=1.29.2
+pkgrel=1
+pkgdesc="Define and run multi-container applications with Docker"
+arch=('x86_64')
+conflicts=('docker-compose')
+url="https://docs.docker.com/compose/"
+
+_giturl="https://github.com/docker/compose"
+
+source=("${_pkgname}-${pkgver}::${_giturl}/releases/download/${pkgver}/docker-compose-Linux-x86_64"
+        "${_pkgname}::git+${_giturl}#tag=${pkgver}")
+
+sha256sums=('f3f10cf3dbb8107e9ba2ea5f23c1d2159ff7321d16f0a23051d68d8e2547b323'
+            'SKIP')
+
+package() {
+  # Install Docker Compose binary
+  install -Dm 755 "${_pkgname}-${pkgver}" "${pkgdir}/usr/bin/${_pkgname}"
+
+  # Copy completions
+  install -Dm 744 "${srcdir}/${_pkgname}/contrib/completion/bash/${_pkgname}" \
+                  "${pkgdir}/usr/share/bash-completion/completions/${_pkgname}"
+}

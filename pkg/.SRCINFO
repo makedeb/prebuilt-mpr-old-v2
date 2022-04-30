@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = docker-compose-bin
+	pkgdesc = Define and run multi-container applications with Docker
+	pkgver = 1.29.2
+	pkgrel = 1
+	url = https://docs.docker.com/compose/
+	arch = x86_64
+	conflicts = docker-compose
+	source = docker-compose-1.29.2::https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+	source = docker-compose::git+https://github.com/docker/compose#tag=1.29.2
+	sha256sums = f3f10cf3dbb8107e9ba2ea5f23c1d2159ff7321d16f0a23051d68d8e2547b323
+	sha256sums = SKIP
+
+pkgname = docker-compose-bin
