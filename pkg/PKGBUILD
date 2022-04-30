@@ -1,0 +1,29 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=dunst
+pkgver=1.8.1
+pkgrel=2
+pkgdesc="Lightweight and customizable notification daemon"
+arch=('amd64')
+url="https://dunst-project.org/"
+license=('BSD')
+makedepends=('git' 'perl' 'wayland-protocols' 'libnotify-dev' 'libxss-dev' 'libxdg-basedir-dev' 'libghc-pango-dev' 'libxinerama-dev' 'libxrandr-dev' 'libwayland-client++0' 'libwayland-client-extra++0' 'libwayland-client0' 'libwayland-dev' 'libdbus-1-dev')
+provides=('dunst' 'notification-daemon' 'dunstify')
+conflicts=('dunst' 'dunstify')
+# replaces=('dunst')
+source=("https://github.com/dunst-project/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
+sha512sums=("bd8605844eacb24ec1beafbd62be1defa8ff9f6fc2e93a4746acaba483e86d0fa3937045c20dbba71c46310102d8878c8ec987a3081328b02a09d7f9fde974d9")
+MAKEFLAGS="-j$(nproc)"
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 dunstify
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" PREFIX=/usr install
+  install -Dm755 "dunstify" "${pkgdir}/usr/bin/dunstify"
+  install -Dm755 "contrib/dunst_espeak.sh" "${pkgdir}/usr/bin/dunst_espeak.sh"
+  install -Dm644 "LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
