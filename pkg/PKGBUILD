@@ -1,0 +1,60 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+
+pkgname=pyenv
+pkgver=2.0.7
+pkgrel=1
+pkgdesc="Easily switch between multiple versions of Python"
+arch=('any')
+license=('MIT')
+depends=('bash'
+         'make'
+         'build-essential'
+         'libssl-dev'
+         'zlib1g-dev'
+         'libbz2-dev'
+         'libreadline-dev'
+         'libsqlite3-dev'
+         'wget'
+         'curl'
+         'llvm'
+         'libncursesw5-dev'
+         'xz-utils'
+         'tk-dev'
+         'libxml2-dev'
+         'libxmlsec1-dev'
+         'libffi-dev'
+         'liblzma-dev')
+url="https://github.com/pyenv/pyenv"
+
+source=("${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+prepare() {
+  # Set the 'PYENV_ROOT' and 'PATH' variables when running pyenv
+  local sed_string
+  sed_string='\nPYENV_ROOT="${HOME}/.pyenv"'
+  sed_string+='\nPATH="${PYENV_ROOT}:${PATH}"\n'
+
+  sed -i "1s|.*|&${sed_string}|" "${pkgname}-${pkgver}/libexec/pyenv"
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+
+  # Install pyenv binaries.
+  find libexec/ -type f -exec install -Dm 755 "{}" "${pkgdir}/usr/share/pyenv/{}" \;
+
+  install -Dd 755 "${pkgdir}/usr/bin/"
+  ln -s "/usr/share/pyenv/libexec/pyenv" "${pkgdir}/usr/bin/pyenv"
+
+  # Install pyenv plugins.
+  # We process the files for each plugin folder separately
+  # so we don't add extra files in 'plugins/' such as '.gitignore'.
+  for i in plugins/*; do
+    install -Dd 755 "${i}"
+    find "${i}" -type f -exec install -Dm 755 "{}" "${pkgdir}/usr/share/pyenv/{}" \;
+  done
+
+  # Install Bash completion.
+  install -Dm 444 "completions/${pkgname}.bash" "${pkgdir}/usr/share/bash-completion/completions/${pkgname}"
+}

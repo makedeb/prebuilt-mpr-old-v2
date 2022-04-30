@@ -1,0 +1,31 @@
+generated-by = makedeb-makepkg
+
+pkgbase = pyenv
+	pkgdesc = Easily switch between multiple versions of Python
+	pkgver = 2.0.7
+	pkgrel = 1
+	url = https://github.com/pyenv/pyenv
+	arch = any
+	license = MIT
+	depends = bash
+	depends = make
+	depends = build-essential
+	depends = libssl-dev
+	depends = zlib1g-dev
+	depends = libbz2-dev
+	depends = libreadline-dev
+	depends = libsqlite3-dev
+	depends = wget
+	depends = curl
+	depends = llvm
+	depends = libncursesw5-dev
+	depends = xz-utils
+	depends = tk-dev
+	depends = libxml2-dev
+	depends = libxmlsec1-dev
+	depends = libffi-dev
+	depends = liblzma-dev
+	source = https://github.com/pyenv/pyenv/archive/refs/tags/v2.0.7.tar.gz
+	sha256sums = SKIP
+
+pkgname = pyenv
