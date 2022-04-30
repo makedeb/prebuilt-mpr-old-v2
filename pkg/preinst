@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+set -e
+
+# 'golang-go' from the Debian and Ubuntu repositories depends on 'golang-src',
+# which has '/usr/lib/go' set up as a symlink. We have '/usr/lib/go' set up as
+# a folder in our package, so dpkg won't unpack our folder when 'golang-src' is
+# installed.
+#
+# See Debian policy 6.6, number 4 for details.
+if [[ -L '/usr/lib/go' ]]; then
+    rm '/usr/lib/go'
+fi
+
+# vim: set syntax=bash ts=4 sw=4 expandtab:
