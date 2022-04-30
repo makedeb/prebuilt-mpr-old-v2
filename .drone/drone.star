@@ -2,6 +2,7 @@ def _pipeline(ctx, distro_codename, docker_image):
     event_triggers = ["push", "custom"]
     branch = ctx.build.branch
     pkgname = branch.replace("pkg/", "")
+    volume_path = "/var/tmp/prebuilt-mpr/" + pkgname + "/" + distro_codename
 
     if branch.endswith("-git"):
         event_triggers += ["cron"]
@@ -15,15 +16,18 @@ def _pipeline(ctx, distro_codename, docker_image):
                 "event": event_triggers,
                 "branch": ["pkg/*"]
             },
-            "volumes": [{"name": "pkgdir", "host": {"path": "/var/tmp/prebuilt-mpr/" + pkgname}}],
+            "volumes": [{"name": "pkgdir", "host": {"path": volume_path}}],
             "node": {"server": "prebuilt-mpr"},
             "steps": [{
                 "name": "build",
                 "image": docker_image,
                 "pull": "always",
+                "environment": {
+                    "distro_codename": distro_codename
+                },
     	        "volumes": [{
                     "name": "pkgdir",
-                    "path": "/var/tmp/prebuilt-mpr/" + pkgname
+                    "path": volume_path
                 }],
                 "commands": [".drone/scripts/build.sh"]
             }]
@@ -38,7 +42,7 @@ def _pipeline(ctx, distro_codename, docker_image):
                 "branch": ["pkg/*"]
             },
             "depends_on": [distro_codename + "-build"],
-            "volumes": [{"name": "pkgdir", "host": {"path": "/var/tmp/prebuilt-mpr/" + pkgname}}],
+            "volumes": [{"name": "pkgdir", "host": {"path": volume_path}}],
             "node": {"server": "prebuilt-mpr"},
             "steps": [{
                 "name": "publish",
@@ -50,7 +54,7 @@ def _pipeline(ctx, distro_codename, docker_image):
                 },
 		"volumes": [{
                     "name": "pkgdir",
-                    "path": "/tmp/prebuilt-mpr"
+                    "path": volume_path
                 }],
                 "commands": [
                     "sudo apt install python3 python3-apt python3-requests -y",
