@@ -1,0 +1,49 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+# AUR Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
+# AUR Maintainer: Caleb Maclennan <caleb@alerque.com>
+# AUR Contributor: Fredy García <frealgagu at gmail dot com>
+# AUR Contributor: fuero <fuerob@gmail.com>
+
+pkgname="lazygit"
+_gitname="lazygit"
+pkgver="0.34"
+pkgrel="1"
+pkgdesc='Simple terminal UI for git commands'
+url='https://github.com/jesseduffield/lazygit'
+arch=('x86_64')
+license=('MIT')
+depends=('git' 'libc6-dev')
+makedepends=('golang-go')
+source=("git+${url}.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+conflicts=("${_gitname}-git" "${_gitname}-bin")
+
+build() {
+  cd ${_gitname}
+
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw -x -v"
+
+  go build \
+    -ldflags "\
+      -linkmode external \
+      -extldflags '${LDFLAGS}' \
+      -X main.date=$(date --date=@${SOURCE_DATE_EPOCH} -u +%Y-%m-%dT%H:%M:%SZ) \
+      -X main.buildSource=binaryRelease \
+      -X main.version=${pkgver} \
+      -X main.commit=v${pkgver} \
+    "
+}
+
+package() {
+  cd ${_gitname}
+  install -Dm 755 lazygit -t "${pkgdir}/usr/bin"
+  install -Dm 644 README*.md -t "${pkgdir}/usr/share/doc/${_gitname}"
+  cp -r docs/* -t "${pkgdir}/usr/share/doc/${_gitname}"
+  install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${_gitname}"
+}
+
+# vim: ts=2 sw=2 et:
