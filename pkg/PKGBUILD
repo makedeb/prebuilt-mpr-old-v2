@@ -1,0 +1,87 @@
+# Contributor: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Maksym Titenko <titenko.m@gmail.com>
+
+pkgname=cutefish-core
+pkgver=0.4
+pkgrel=1
+pkgdesc="System components and backend of CutefishOS"
+arch=('x86_64')
+url="https://github.com/cutefishos/core"
+control_fields=("MPR-Package: ${pkgname}")
+license=('GPL')
+groups=('cutefish')
+depends=(
+'fishui'
+'libcutefish'
+'qml-module-qtquick-controls2'
+'qml-module-qtquick2'
+'qml-module-qtquick-layouts'
+'qml-module-qt-labs-platform'
+'qml-module-qt-labs-settings'
+'qml-module-qtqml'
+'qml-module-qtquick-window2'
+'qml-module-qtquick-shapes'
+'libc6'
+'libgcc-s1'
+'libkf5windowsystem5'
+'libpolkit-qt5-1-1'
+'libpulse0'
+'libqt5core5a'
+'libqt5dbus5'
+'libqt5gui5'
+'libqt5qml5'
+'libqt5quick5'
+'libqt5widgets5'
+'libqt5x11extras5'
+'libstdc++6'
+'libx11-6'
+'libxcb-composite0'
+'libxcb-damage0'
+'libxcb-image0'
+'libxcb-util1'
+'libxcb1'
+'libxcursor1'
+'libxi6'
+'libxtst6')
+makedepends=(
+'extra-cmake-modules'
+'ninja-build'
+'pkg-config'
+'xserver-xorg-input-libinput-dev'
+'libxcb1-dev'
+'libxcb-randr0-dev'
+'libxcb-keysyms1-dev'
+'libxcursor-dev'
+'libxcb-xfixes0-dev'
+'libxcb-damage0-dev'
+'libxcb-composite0-dev'
+'libxcb-shm0-dev'
+'libxcb-util-dev'
+'libxcb-image0-dev'
+'libxtst-dev'
+'libsm-dev'
+'libpulse-dev'
+'libpolkit-qt5-1-dev'
+'libpolkit-agent-1-dev'
+'libkf5windowsystem-dev'
+'libkf5globalaccel-dev'
+'libqt5x11extras5-dev'
+'qtbase5-dev'
+'qtdeclarative5-dev'
+'qtquickcontrols2-5-dev'
+'qttools5-dev'
+'qttools5-dev-tools')
+source=("${pkgname}::git+https://github.com/cutefishos/core.git")
+md5sums=('SKIP')
+
+build() {
+  cd ${pkgname}
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr .
+  make
+}
+
+package() {
+  cd ${pkgname}
+  make DESTDIR="$pkgdir" install
+}
