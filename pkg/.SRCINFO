@@ -1,0 +1,26 @@
+generated-by = makedeb-makepkg
+
+pkgbase = vkvg
+	pkgdesc = Vulkan 2D graphics library following the Cairo API
+	pkgver = 0.3.0
+	pkgrel = 1
+	url = https://github.com/jpbruyere/vkvg
+	arch = x86_64
+	license = MIT
+	makedepends = cmake
+	makedepends = git
+	makedepends = xxd
+	makedepends = libvulkan-dev
+	makedepends = libfontconfig-dev
+	makedepends = libfreetype-dev
+	makedepends = libharfbuzz-dev
+	depends = libvulkan1
+	depends = libfontconfig1
+	depends = libfreetype6
+	depends = libharfbuzz0b
+	optdepends = libglfw3-dev: enable build tests
+	options = !strip
+	source = vkvg-0.3.0::git+https://github.com/jpbruyere/vkvg#tag=v0.3.0-beta
+	sha256sums = SKIP
+
+pkgname = vkvg
