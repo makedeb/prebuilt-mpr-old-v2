@@ -1,0 +1,32 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+# AUR Maintainer: Winston Astrachan <winston dot astrachan at gmail dot com>
+# AUR Contributor: Ibrahim Tunali <ibrahimtunali at gmail dot com>
+
+pkgname="git-secret"
+_gitname="git-secret"
+pkgver="0.4.0"
+pkgrel="2"
+pkgdesc="A bash-tool to store your private data inside a git repository"
+arch=('any')
+url="https://github.com/sobolevn/git-secret"
+license=('MIT')
+depends=('git' 'gnupg')
+source=("git+${url}.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+conflicts=("${_gitname}-git" "${_gitname}-bin")
+
+build() {
+    cd "${srcdir}/${_gitname}"
+    make clean
+    make build -j$(nproc)
+}
+
+package() {
+    cd "$srcdir"
+
+    cd "${_gitname}"
+    install -Dm755 git-secret "$pkgdir/usr/bin/git-secret"
+    install -Dm644 man/man1/*.1 -t "$pkgdir/usr/share/man/man1/"
+    install -Dm644 man/man7/*.7 -t "$pkgdir/usr/share/man/man7/"
+}
