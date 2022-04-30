@@ -1,0 +1,28 @@
+# Maintainer: yaroslav2424 <julia dog schweinz cat mailfence dog com>
+# Contributor "wizard-28 <wiz28@pm.me>", for the .pacscript in pacstall
+
+pkgname="dust-bin"
+_name="dust"
+pkgver="0.8.0"
+pkgrel="2"
+pkgdesc="A more intuitive version of du in rust"
+license=('Apache 2.0')
+_tarball="dust-v${pkgver}-x86_64-unknown-linux-musl.tar.gz"
+url="https://github.com/bootandy/dust"
+source=("${url}/releases/download/v${pkgver}/${_tarball}")
+arch=('x86_64')
+conflicts=("${_name}" "${_name}-git" "${_name}-deb" "${_name}-app")
+sha256sums=("7be13b7c83d0853c1ac4a456d356b762f319955c63b6c0af5be28d44a7ae6cda")
+
+package() {
+  tar xf "${_tarball}" -c "${pkgdir}"
+
+  # install license
+  install -dm644 "${_tarball%.tar.gz}/license" -t "${pkgdir}/usr/share/licenses/${_name}"
+
+  ## install doc
+  install -dm644 "${_tarball%.tar.gz}/readme.md" -t "${pkgdir}/usr/share/doc/${_name}"
+
+  # install binary
+  install -dm755 "${_tarball%.tar.gz}/${_name}" "${pkgdir}/usr/bin/${_name}"
+}
