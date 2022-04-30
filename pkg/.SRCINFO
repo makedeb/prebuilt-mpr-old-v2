@@ -1,0 +1,23 @@
+generated-by = makedeb-makepkg
+
+pkgbase = rigsofrods-bin
+	pkgdesc = An open source vehicle simulator based on soft-body physics
+	pkgver = 2021.10
+	pkgrel = 1
+	url = https://www.rigsofrods.org
+	arch = x86_64
+	license = GPLv3
+	depends = libopenal1
+	depends = nvidia-cg-toolkit
+	conflicts = rigsofrods
+	conflicts = rigsofrods-git
+	source = https://update.rigsofrods.org/rigs-of-rods-linux-2021.10.zip
+	source = rigsofrods-bin
+	source = RoR.desktop
+	source = rigsofrods.png
+	sha256sums = ed99d592ab316c75bdd4275f639e18b471a7392e1c9a14e535eebabc4175dd43
+	sha256sums = f05e8e28d104253aac6547701443e6ecf2f0abc0d2d374b7e8e36a3753ba2ddb
+	sha256sums = 473e0ea8dcc709442651a599287030f52cb1b525e4fbceaf952d0f65840ca801
+	sha256sums = 2715769eea6f61c3257c937f224bca809ba373336b6db284e52e0e56a45df114
+
+pkgname = rigsofrods-bin

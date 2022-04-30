@@ -1,0 +1,30 @@
+# Maintainer: Edgar <Edgar{at}AnotherFoxGuy.com>
+
+pkgname=rigsofrods-bin
+pkgver=2021.10
+pkgrel=1
+pkgdesc='An open source vehicle simulator based on soft-body physics'
+arch=('x86_64')
+url='https://www.rigsofrods.org'
+license=('GPLv3')
+depends=('libopenal1' 'nvidia-cg-toolkit')
+conflicts=('rigsofrods' 'rigsofrods-git')
+source=('https://update.rigsofrods.org/rigs-of-rods-linux-2021.10.zip' 'rigsofrods-bin' 'RoR.desktop' 'rigsofrods.png')
+sha256sums=('ed99d592ab316c75bdd4275f639e18b471a7392e1c9a14e535eebabc4175dd43'
+  'f05e8e28d104253aac6547701443e6ecf2f0abc0d2d374b7e8e36a3753ba2ddb'
+  '473e0ea8dcc709442651a599287030f52cb1b525e4fbceaf952d0f65840ca801'
+  '2715769eea6f61c3257c937f224bca809ba373336b6db284e52e0e56a45df114')
+
+package() {
+  cd "$srcdir"
+  install -dm755 "$pkgdir/opt/rigsofrods-bin"
+  cp -r content "${pkgdir}/opt/rigsofrods-bin/content"
+  cp -r languages "${pkgdir}/opt/rigsofrods-bin/languages"
+  cp -r lib "${pkgdir}/opt/rigsofrods-bin/lib"
+  cp -r resources "${pkgdir}/opt/rigsofrods-bin/resources"
+  cp plugins.cfg "${pkgdir}/opt/rigsofrods-bin/plugins.cfg"
+  cp RoR "${pkgdir}/opt/rigsofrods-bin/RoR"
+  install -Dm755 rigsofrods-bin "$pkgdir/usr/bin/rigsofrods-bin"
+  install -Dm755 RoR.desktop "$pkgdir/usr/share/applications/RoR.desktop"
+  install -Dm755 rigsofrods.png "$pkgdir/usr/share/pixmaps/rigsofrods.png"
+}
