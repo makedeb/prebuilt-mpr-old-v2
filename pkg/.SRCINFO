@@ -1,0 +1,17 @@
+pkgbase = python3-pyxdg
+	pkgdesc = Python library to access freedesktop.org standards
+	pkgver = 0.27
+	pkgrel = 2
+	url = http://freedesktop.org/Software/pyxdg
+	arch = any
+	license = LGPL
+	makedepends = python3-setuptools
+	depends = python3
+	provides = python3-xdg
+	conflicts = python3-xdg
+	replaces = python3-xdg<0.26-5
+	source = https://files.pythonhosted.org/packages/source/p/pyxdg/pyxdg-0.27.tar.gz
+	validpgpkeys = 6391296E3F25C0A721C1F1AFAF88B3AC5DECB224
+	sha1sums = e4afee88cc156da408e10508a1a21b16082781b0
+
+pkgname = python3-pyxdg

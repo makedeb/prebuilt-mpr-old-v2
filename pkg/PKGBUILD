@@ -1,0 +1,33 @@
+# Maintainer: SZanko szanko at protonmail dot com
+# Contributor: Lukas Fleischer <lfleischer@archlinux.org>
+# Contributor: Hugo Doria <hugo@archlinux.org>
+# Contributor: Mario A. Vazquez <mario_vazq@hotmail.com>
+
+_pkgname=pyxdg
+pkgname=python3-${_pkgname}
+pkgver=0.27
+pkgrel=2
+pkgdesc="Python library to access freedesktop.org standards"
+arch=('any')
+url="http://freedesktop.org/Software/pyxdg"
+license=("LGPL")
+makedepends=('python3-setuptools')
+depends=('python3')
+conflicts=('python3-xdg')
+provides=('python3-xdg')
+replaces=('python3-xdg<0.26-5')
+source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/${_pkgname}/${_pkgname}-${pkgver}.tar.gz")
+sha1sums=('e4afee88cc156da408e10508a1a21b16082781b0')
+validpgpkeys=('6391296E3F25C0A721C1F1AFAF88B3AC5DECB224') # Thomas Kluyver
+
+build() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python3 setup.py build
+}
+
+package(){
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python3 setup.py install --root="${pkgdir}" --skip-build --optimize=1 --install-layout=deb
+  mv COPYING copyright
+  install -Dm644 copyright -t "${pkgdir}/usr/share/doc/${pkgname}"
+}
