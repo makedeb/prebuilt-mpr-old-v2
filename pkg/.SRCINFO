@@ -1,0 +1,29 @@
+generated-by = makedeb-makepkg
+
+pkgbase = onedrive-abraunegg
+	pkgdesc = Free OneDrive client written in D - abraunegg's fork. Follows the releases on https://github.com/abraunegg/onedrive/releases
+	pkgver = 2.4.16
+	pkgrel = 1
+	url = https://github.com/abraunegg/onedrive
+	arch = x86_64
+	license = GPL
+	makedepends = ldc
+	depends = curl
+	depends = libnotify4
+	depends = libnotify-dev
+	depends = sqlite
+	depends = git
+	depends = pkg-config
+	depends = libsqlite3-dev
+	depends = build-essential
+	depends = libcurl4-openssl-dev
+	provides = onedrive=2.4.16
+	conflicts = onedrive
+	conflicts = onedrive-abraunegg-git
+	conflicts = onedrive-bin
+	conflicts = onedrive-git
+	conflicts = onedrive-fork-git
+	source = https://github.com/abraunegg/onedrive/archive/v2.4.16.tar.gz
+	sha256sums = 8824f1530ef874d68d221e2684cdab0c730feba7d1a47ed29903cd46d67eaaa2
+
+pkgname = onedrive-abraunegg

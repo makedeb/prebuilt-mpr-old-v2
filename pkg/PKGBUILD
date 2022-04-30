@@ -1,0 +1,28 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org>
+
+_pkgname=onedrive
+pkgname=$_pkgname-abraunegg
+pkgver=2.4.16
+pkgrel=1
+epoch=
+pkgdesc="Free OneDrive client written in D - abraunegg's fork. Follows the releases on https://github.com/abraunegg/onedrive/releases"
+arch=('x86_64')
+url="https://github.com/abraunegg/onedrive"
+license=('GPL')
+conflicts=('onedrive' 'onedrive-abraunegg-git' 'onedrive-bin' 'onedrive-git' 'onedrive-fork-git')
+source=("https://github.com/abraunegg/onedrive/archive/v$pkgver.tar.gz")
+provides=("onedrive=$pkgver")
+depends=('curl' 'libnotify4' 'libnotify-dev' 'sqlite' 'git' 'pkg-config' 'libsqlite3-dev' 'build-essential' 'libcurl4-openssl-dev')
+makedepends=('ldc')
+
+build() {
+	cd "$_pkgname-$pkgver"
+        ./configure --sysconfdir=/etc --prefix=/usr --with-systemdsystemunitdir=/usr/lib/systemd/system --with-systemduserunitdir=/usr/lib/systemd/user --enable-notifications --enable-completions --with-zsh-completion-dir=/usr/share/zsh/site-functions --with-fish-completion-dir=/usr/share/fish/vendor_completions.d --with-bash-completion-dir=/usr/share/bash-completion/completions
+        make
+}
+
+package() {
+	cd "$_pkgname-$pkgver"
+	make DESTDIR=$pkgdir PREFIX=/usr install
+}
+sha256sums=('8824f1530ef874d68d221e2684cdab0c730feba7d1a47ed29903cd46d67eaaa2')
