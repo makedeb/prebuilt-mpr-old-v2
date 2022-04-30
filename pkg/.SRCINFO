@@ -1,0 +1,35 @@
+generated-by = makedeb-makepkg
+
+pkgbase = flacon-git
+	pkgdesc = An Audio File Encoder. Extracts audio tracks from an audio CD image to separate tracks.
+	pkgver = 1.753.5133e4a
+	pkgrel = 2
+	url = https://flacon.github.io/
+	arch = i686
+	arch = x86_64
+	arch = aarch64
+	license = LGPL2.1
+	makedepends = cmake
+	makedepends = icu-devtools
+	makedepends = qtbase5-dev-tools
+	depends = hicolor-icon-theme
+	depends = qtbase5-dev
+	depends = libuchardet-dev
+	depends = ffmpeg
+	depends = libtag1-dev
+	optdepends = flac: For FLAC support
+	optdepends = lame: For MP3 support
+	optdepends = mac: For APE support
+	optdepends = mp3gain: For MP3 Replay Gain support
+	optdepends = opus-tools: For OPUS support
+	optdepends = sox: For SoX support
+	optdepends = ttaenc: For TrueAudio support
+	optdepends = vorbis-tools: For OGG support
+	optdepends = vorbisgain: For OGG Replay Gain support
+	optdepends = wavpack: For WavPack support
+	conflicts = flacon
+	conflicts = flacon-bin
+	source = git+https://github.com/flacon/flacon.git#branch=master
+	sha256sums = SKIP
+
+pkgname = flacon-git

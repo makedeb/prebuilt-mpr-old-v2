@@ -1,0 +1,56 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+#
+# AUR Maintainer: ValHue <vhuelamo at gmail dot com>
+# AUR Contributor: satanselbow <igdfpm at gmail dot com>
+# AUR Contributor: Artem Sereda <overmind88 at gmail dot com>
+#
+pkgname="flacon-git"
+_gitname="flacon"
+pkgver=1.753.5133e4a
+pkgrel=2
+pkgdesc="An Audio File Encoder. Extracts audio tracks from an audio CD image to separate tracks."
+arch=('i686' 'x86_64' 'aarch64')
+url="https://flacon.github.io/"
+_url="https://github.com/${_gitname}"
+license=('LGPL2.1')
+makedepends=('cmake' 'icu-devtools' 'qtbase5-dev-tools')
+depends=('hicolor-icon-theme' 'qtbase5-dev' 'libuchardet-dev' 'ffmpeg' 'libtag1-dev')
+optdepends=('flac: For FLAC support'
+            'lame: For MP3 support'
+            'mac: For APE support'
+            'mp3gain: For MP3 Replay Gain support'
+            'opus-tools: For OPUS support'
+            'sox: For SoX support'
+            'ttaenc: For TrueAudio support'
+            'vorbis-tools: For OGG support'
+            'vorbisgain: For OGG Replay Gain support'
+            'wavpack: For WavPack support'
+)
+
+source=("git+https://github.com/flacon/flacon.git#branch=master")
+sha256sums=('SKIP')
+conflicts=("${_gitname}" "${_gitname}-bin")
+
+pkgver() {
+  cd "${_gitname}"
+
+  printf "1.%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)" | sed 's|^v||'
+}
+
+
+build() {
+    cd "${srcdir}/${_gitname}"
+    mkdir -p build
+
+    cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+    make -j$(nproc)
+}
+
+package() {
+    cd "${srcdir}/${_gitname}/build"
+    install -D -m644 ../LICENSE "${pkgdir}/usr/share/licenses/${_gitname}/LICENSE"
+    make DESTDIR="${pkgdir}" install
+}
+
+# vim: set ts=4 sw=4 et syn=sh ft=sh:
