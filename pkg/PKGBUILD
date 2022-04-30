@@ -1,0 +1,36 @@
+# Maintainer: Maksym Titenko <titenko.m@gmail.com>
+# Contributor: Hunter Wittenborn <hunter@hunterwittenborn.com>
+
+pkgname=mpm
+pkgver=3.7.1
+pkgrel=1
+pkgdesc="Fully-featured reference MPR helper"
+arch=('any')
+depends=('jq' 'curl')
+url="https://github.com/cutefishos-ubuntu/mpm"
+options=('emptydirs')
+control_fields=("MPR-Package: ${pkgname}")
+
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+    mkdir -p "${pkgdir}/usr/bin/"
+
+    echo '#!/usr/bin/env bash' > "${pkgdir}/usr/bin/mpm"
+
+    # Copy mpm functions and entrypoint into mpm file
+    cd "${pkgname}-${pkgver}"
+    for i in $(find "src/functions" -type f); do
+        cat "${i}" >> "${pkgdir}/usr/bin/mpm"
+    done
+    cat "src/mpm.sh" >> "${pkgdir}/usr/bin/mpm"
+
+    chmod 555 "${pkgdir}/usr/bin/mpm"
+
+    # Remove testing commands
+    sed -i 's|.*# REMOVE AT PACKAGING||g' "${pkgdir}/usr/bin/mpm"
+
+    # Set package version
+    sed -i "s|mpm_version=.*|mpm_version='${pkgver}-${pkgrel}'|" "${pkgdir}/usr/bin/mpm"
+    }
