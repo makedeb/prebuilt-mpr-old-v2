@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = lariza
+	pkgdesc = Simple WebKit2GTK+ Browser
+	pkgver = 21.06
+	pkgrel = 1
+	url = https://www.uninformativ.de/git/lariza
+	arch = i686
+	arch = x86_64
+	license = MIT
+	depends = build-essential
+	depends = libgtk-3-dev
+	depends = libglib2.0-dev
+	depends = libwebkit2gtk-4.0-37
+	depends = libwebkit2gtk-4.0-dev
+	source = https://www.uninformativ.de/git/lariza/archives/lariza-v21.06.tar.gz
+	sha256sums = 9faf06a8f4d87b3a63eb3c1e22dcbc7d8361c054357637ae7e870b9212372a13
+
+pkgname = lariza
