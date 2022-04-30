@@ -1,0 +1,32 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=shell-color-scripts
+_pkgname=shell-color-scripts
+pkgver=1.0.r52.3dbdfac
+pkgrel=2
+pkgdesc="A CLI for the collection of terminal color scripts. Included 52 beautiful terminal color scripts."
+arch=('i686' 'amd64')
+url="https://gitlab.com/dwt1/shell-color-scripts.git"
+license=('MIT')
+depends=('binutils')
+optdepends=('bash' 'zsh')
+provides=('shell-color-scripts')
+conflicts=('shell-color-scripts')
+# replaces=('shell-color-scripts')
+source=("git+$url")
+sha256sums=("SKIP")
+
+pkgver() {
+	cd "${_pkgname}"
+	printf "1.0.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package() {
+    install -Dm644 "${srcdir}/${_pkgname}/zsh_completion/_colorscript" -t "${pkgdir}/usr/share/zsh/site-functions"
+    install -Dm755 "${srcdir}/${_pkgname}/zsh_completion/_colorscript" -t "${pkgdir}/opt/${pkgname}/zsh_completion"
+    install -Dm644 "${srcdir}/${_pkgname}/colorscript.1" "${pkgdir}/usr/man/man1/colorscript.1"
+    install -Dm755 "${srcdir}/${_pkgname}/colorscript.sh" "${pkgdir}/usr/bin/colorscript"
+    mkdir -p "${pkgdir}/opt/${pkgname}/colorscripts"
+    cp -vRr "${srcdir}/${_pkgname}/colorscripts" "${pkgdir}/opt/${pkgname}"
+    install -Dm644 "${srcdir}/${_pkgname}/README.md" "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+    install -Dm644 "${srcdir}/${_pkgname}/LICENSE"  "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+ }
