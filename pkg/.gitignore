@@ -1,0 +1,6 @@
+/gzdoom
+/pkg/
+/src/
+/*.deb
+/*.tar.*
+/*.pkg.tar.*
