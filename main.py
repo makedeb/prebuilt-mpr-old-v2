@@ -253,12 +253,12 @@ def main():
                 # before making another request.
                 try:
                     repo.create_pull(commit_message, target_branch_name, pr_branch_name, maintainer_can_modify=True)
+                    # Sleep a few seconds so we don't spam the GitHub API really quickly.
+                    time.sleep(5)
                 except github3.exceptions.ForbiddenError as exc:
                     logger.error("Encountered a rate limit. Waiting five minutes before processing more requests...")
                     time.sleep(60*5) # Five minutes.
 
-            # Sleep a few seconds so we don't spam the GitHub API really quickly.
-            time.sleep(5)
 
         except Exception as exc:
             logger.error(f"Got exception. Restoring Git repository to origin's state and continuing loop.")
