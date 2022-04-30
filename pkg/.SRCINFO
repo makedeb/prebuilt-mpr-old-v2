@@ -1,0 +1,26 @@
+generated-by = makedeb-makepkg
+
+pkgbase = keeweb-desktop-bin
+	pkgdesc = Free cross-platform password manager compatible with KeePass
+	pkgver = 1.18.7
+	pkgrel = 1
+	url = https://keeweb.info
+	arch = x86_64
+	license = custom: MIT
+	depends = libgconf-2-4
+	depends = gnome-keyring
+	depends = libxtst6
+	depends = libx11-6
+	depends = libatspi2.0-0
+	depends = libappindicator1
+	provides = keeweb
+	source = keeweb-desktop-bin-1.18.7.deb::https://github.com/keeweb/keeweb/releases/download/v1.18.7/KeeWeb-1.18.7.linux.x64.deb
+	sha256sums = fd4faf9f94cb214f7f27a711163b807721b39700b4e26a782f65f6113a7e6521
+	bullseye_depends = libgconf-2-4
+	bullseye_depends = gnome-keyring
+	bullseye_depends = libxtst6
+	bullseye_depends = libx11-6
+	bullseye_depends = libatspi2.0-0
+	bullseye_depends = libayatana-appindicator1
+
+pkgname = keeweb-desktop-bin

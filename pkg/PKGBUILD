@@ -1,0 +1,25 @@
+# Maintainer: Closey <sam dot w dot close at gmail dot com>
+
+pkgname=keeweb-desktop-bin
+pkgver=1.18.7
+pkgrel=1
+pkgdesc="Free cross-platform password manager compatible with KeePass"
+arch=("x86_64")
+url="https://keeweb.info"
+license=("custom: MIT")
+
+_base_depends=('libgconf-2-4' 'gnome-keyring' 'libxtst6' 'libx11-6' 'libatspi2.0-0')
+depends=("${_base_depends[@]}" 'libappindicator1')
+bullseye_depends=("${_base_depends[@]}" 'libayatana-appindicator1')
+
+provides=("keeweb")
+source=("$pkgname-$pkgver.deb::https://github.com/keeweb/keeweb/releases/download/v$pkgver/KeeWeb-$pkgver.linux.x64.deb")
+sha256sums=("fd4faf9f94cb214f7f27a711163b807721b39700b4e26a782f65f6113a7e6521")
+
+prepare() {
+  tar -xf data.tar.gz
+}
+
+package() {
+  mv usr "$pkgdir"
+}
