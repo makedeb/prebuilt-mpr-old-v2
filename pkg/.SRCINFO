@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = coreutils-freebsd-extra-git
+	pkgdesc = GNU coreutils alternative - programs missing in FreeBSD (bsdutils)
+	pkgver = 9.66541d3
+	pkgrel = 1
+	url = https://github.com/chimera-linux/bsdutils-extra
+	arch = x86_64
+	license = BSD-2-Clause
+	makedepends = git
+	makedepends = gcc
+	makedepends = g++
+	makedepends = meson
+	makedepends = ninja-build
+	makedepends = libssl-dev
+	source = git+https://github.com/chimera-linux/bsdutils-extra.git
+	sha256sums = SKIP
+
+pkgname = coreutils-freebsd-extra-git

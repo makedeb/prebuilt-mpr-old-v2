@@ -1,0 +1,30 @@
+# Maintainer: seerecursion <seerecursion@protonmail.com>
+
+pkgname=coreutils-freebsd-extra-git
+_gitname=bsdutils-extra
+pkgver=9.66541d3
+pkgrel=1
+pkgdesc="GNU coreutils alternative - programs missing in FreeBSD (bsdutils)"
+arch=('x86_64')
+url="https://github.com/chimera-linux/${_gitname}"
+license=('BSD-2-Clause')
+depends=()
+makedepends=('git' 'gcc' 'g++' 'meson' 'ninja-build' 'libssl-dev')
+source=(git+"https://github.com/chimera-linux/${_gitname}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+        cd "${_gitname}"
+        printf "%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+        cd "${_gitname}"
+        meson . build --prefix=/opt/coreutils-freebsd-extra-git
+        ninja -C build
+}
+
+package() {
+        cd "${_gitname}"
+        DESTDIR="${pkgdir}" ninja -C build install
+}
