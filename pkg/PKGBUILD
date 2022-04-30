@@ -1,0 +1,51 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org>
+pkgname=viper-browser-bin
+_pkgname=viper-browser
+__pkgname=Viper_Browser
+provides=('viper-browser')
+conflicts=('viper-browser')
+pkgver=1
+pkgrel=1
+pkgdesc="Viper Browser - A powerful yet lightweight web browser built with the Qt framework - binary"
+arch=('x86_64')
+license=('MIT')
+depends=('fuse2fs' 'libaom3' 'libasound2' 'libavformat58' 'libbrotli1' 'libcap2' 'libcodec2-1.0' 'libdav1d5' 'libdbus-1-3' \
+         'libdouble-conversion3' 'libevent-2.1-7' 'libfribidi0' 'libgl1' 'libglib2.0-dev' 'libgomp1' 'libgpg-error0' 'libgraphite2-3' \
+         'libgsm1' 'libgssapi-krb5-2' 'libhogweed6' 'libicu67' 'libidn2-0' 'libjpeg62-turbo' 'libkeyutils1' 'liblcms2-2' 'liblz4-1' 'liblzma5' \
+         'libmd0' 'libmd4c0' 'libmfx1' 'libminizip1' 'libmount1' 'libmp3lame0' 'libmpg123-0' 'libnorm1' 'libnss3' 'libopenjp2-7' 'libopus0' \
+         'libp11-kit0' 'libpangoft2-1.0-0' 'libpcre2-8-0' 'libpcre2-16-0' 'libpcre3' 'libpgm-5.3-0' 'libpixman-1-0' 'libqt5positioning5' \
+         'libqt5qmlmodels5' 'libqt5svg5' 'libqt5webchannel5' 'libqt5webenginewidgets5' 'libre2-9' 'librsvg2-2' 'libshine3' 'libsnappy1v5' \
+         'libsodium23' 'libspeex1' 'libssl1.1' 'libswresample3' 'libtasn1-6' 'libthai0' 'libtheora0' 'libtwolame0' 'libva-drm2' 'libva-x11-2' \
+         'libvdpau1' 'libvorbisenc2' 'libvorbisfile3' 'libvpx7' 'libwebpdemux2' 'libwebpmux3' 'libx11-xcb1' 'libx264-160' 'libx265-199' 'libxau6' \
+         'libxcb-render0' 'libxcb-shm0' 'libxcomposite1' 'libxdamage1' 'libxdmcp6' 'libxrandr2' 'libxslt1.1' 'libxtst6' 'libxvidcore4' 'libzstd1' \
+         'libzvbi0' 'ocl-icd-libopencl1')
+options=(!strip)
+url="https://github.com/LeFroid/Viper-Browser"
+_filename="${__pkgname}-${pkgver}-x86_64.AppImage"
+
+source=(
+  ${url}/releases/download/continuous/${__pkgname}-${pkgver}-x86_64.AppImage
+  https://raw.githubusercontent.com/LeFroid/Viper-Browser/master/LICENSE
+)
+sha512sums=(
+  SKIP
+  SKIP
+)
+
+package() {
+    cd "$srcdir"
+    chmod +x $_filename
+    ./$_filename --appimage-extract > /dev/null 2>&1
+    cp -r squashfs-root/* ./
+    mkdir -p "$pkgdir/usr/bin"
+    install -D -m755 "usr/bin/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
+    mkdir -p "$pkgdir/usr/lib/x86_64-linux-gnu/$_pkgname/plugins/"
+    install -D -m644 "usr/lib/x86_64-linux-gnu/$_pkgname/plugins/libCredentialStoreSecret.so" "$pkgdir/usr/lib/x86_64-linux-gnu/$_pkgname/plugins/libCredentialStoreSecret.so"
+    ln -rs "$pkgdir/usr/share/qt5/translations" "$pkgdir/usr/translations"
+    sed -i -E "s|Exec=viper-browser %u|Exec=QT_QPA_PLATFORM=xcb viper-browser|" usr/share/applications/$_pkgname.desktop
+    install -Dm644 "usr/share/applications/$_pkgname.desktop" -t "$pkgdir/usr/share/applications"
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/64x64/apps"
+    install -D -m644 "usr/share/icons/hicolor/64x64/apps/$_pkgname.png" "$pkgdir/usr/share/icons/hicolor/64x64/apps/$_pkgname.png"
+    # install license file
+    install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
