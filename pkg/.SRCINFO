@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = python3-i3ipc
+	pkgdesc = An improved Python library to control i3wm
+	pkgver = 2.2.1
+	pkgrel = 2
+	url = https://github.com/altdesktop/i3ipc-python
+	arch = any
+	license = BSD
+	makedepends = python-setuptools
+	depends = python3
+	depends = python3-xlib
+	conflicts = i3ipc-python
+	replaces = i3ipc-python
+	source = python3-i3ipc-2.2.1.tar.gz::https://github.com/altdesktop/i3ipc-python/archive/v2.2.1.tar.gz
+	sha256sums = 54af180fac6e3e16c65747884ae4479f0df034c45ed02523f8300f98c99eb29e
+
+pkgname = python3-i3ipc
