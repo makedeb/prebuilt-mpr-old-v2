@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = betterbird-bin-wayland
+	pkgdesc = Betterbird is a fine-tuned version of Mozilla Thunderbird, Thunderbird on steroids, if you will. - wayland enabled version
+	pkgver = 91.8.0
+	pkgrel = 1
+	url = https://www.betterbird.eu/index.html
+	arch = x86_64
+	license = MPL2
+	provides = betterbird
+	conflicts = betterbird
+	source = https://www.betterbird.eu/downloads/LinuxArchive/betterbird-91.8.0-bb29.en-US.linux-x86_64.tar.bz2
+	source = betterbird.desktop
+	source = betterbird.svg
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = betterbird-bin-wayland
