@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = musikcube-bin
+	pkgdesc = A terminal-based cross-platform music player, audio engine, metadata indexer, and server
+	pkgver = 0.97.0
+	pkgrel = 1
+	url = https://github.com/clangen/musikcube
+	arch = x86_64
+	license = BSD
+	provides = musikcube
+	conflicts = musikcube
+	source = https://github.com/clangen/musikcube/releases/download/0.97.0/musikcube_standalone_0.97.0_x86_64.deb
+	sha256sums = SKIP
+
+pkgname = musikcube-bin

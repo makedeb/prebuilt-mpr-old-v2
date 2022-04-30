@@ -1,0 +1,19 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org>
+
+pkgname=musikcube-bin
+_pkgname=musikcube
+pkgver=0.97.0
+pkgrel=1
+pkgdesc='A terminal-based cross-platform music player, audio engine, metadata indexer, and server'
+arch=('x86_64')
+url="https://github.com/clangen/${_pkgname}"
+license=('BSD')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+
+source=("https://github.com/clangen/musikcube/releases/download/${pkgver}/${_pkgname}_standalone_${pkgver}_x86_64.deb")
+sha256sums=('SKIP')
+
+package(){
+  bsdtar xfv data.tar.gz -C "$pkgdir"
+}
