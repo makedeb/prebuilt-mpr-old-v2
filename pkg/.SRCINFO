@@ -1,0 +1,37 @@
+generated-by = makedeb-makepkg
+
+pkgbase = discord
+	pkgdesc = Chat for Communities and Friends
+	pkgver = 0.0.17
+	pkgrel = 3
+	url = https://discord.com
+	arch = x86_64
+	license = custom
+	depends = libc6
+	depends = libasound2
+	depends = libatomic1
+	depends = libgconf-2-4
+	depends = libnotify4
+	depends = libnspr4
+	depends = libnss3
+	depends = libstdc++6
+	depends = libxss1
+	depends = libxtst6
+	depends = libc++1
+	depends = libappindicator1
+	source = discord::https://dl.discordapp.net/apps/linux/0.0.17/discord-0.0.17.deb
+	sha256sums = cd08f5a06d2b1b04304df1151e66005c609a34b87f830182a9c8c6301b4f3cf6
+	bullseye_depends = libc6
+	bullseye_depends = libasound2
+	bullseye_depends = libatomic1
+	bullseye_depends = libgconf-2-4
+	bullseye_depends = libnotify4
+	bullseye_depends = libnspr4
+	bullseye_depends = libnss3
+	bullseye_depends = libstdc++6
+	bullseye_depends = libxss1
+	bullseye_depends = libxtst6
+	bullseye_depends = libc++1
+	bullseye_depends = libayatana-appindicator1
+
+pkgname = discord
