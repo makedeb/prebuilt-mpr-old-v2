@@ -1,0 +1,21 @@
+# Maintainer: only_vip  <onlyme_vip@protonmail.com>
+pkgname=papirus-icon-theme
+pkgver=20220302
+pkgrel=1
+pkgdesc="Papirus icon theme for Linux"
+url="https://github.com/PapirusDevelopmentTeam/papirus-icon-theme"
+arch=('any')
+depends=('hicolor-icon-theme')
+optdepends=('filezilla-theme-papirus' 'libreoffice-style-papirus')
+conflicts=('papirus-icon-theme')
+replaces=('papirus-gtk-icon-theme' 'papirus-kde-icon-theme')
+options=(!strip)
+source=("${pkgname}-${pkgver}::${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha512sums=('54793eb6b890931cc2e11c741b0144c485b8446673c8568eb95cf2a546d14d68bf8446d22953d63ee19c2ccd072dfa2d6443bb401a03e81c56c5776e4d30145d')
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+
+    msg2 'Copying icons to $pkgdir...'
+    make DESTDIR="${pkgdir}" install
+}
