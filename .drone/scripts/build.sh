@@ -25,4 +25,5 @@ find "${pkgdir}" -mindepth 1 -maxdepth 1 -exec rm -rf '{}' +
 cd pkg/
 find ./ -mindepth 1 -maxdepth 1 -exec cp '{}' "${pkgdir}/{}" -R \;
 cd "/var/tmp/prebuilt-mpr/${pkgname}"
+find /var/tmp/prebuilt-mpr
 makedeb -s --no-confirm --skip-pgp-check
