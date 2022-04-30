@@ -1,0 +1,25 @@
+generated-by = makedeb-makepkg
+
+pkgbase = projectlibre-bin
+	pkgdesc = ProjectLibre is an open source project management software
+	pkgver = 1.9.3
+	pkgrel = 1
+	url = http://www.projectlibre.org
+	arch = any
+	license = CPAL
+	depends = default-jre
+	provides = projectlibre
+	conflicts = projectlibre
+	options = !strip
+	source = https://netcologne.dl.sourceforge.net/project/projectlibre/ProjectLibre/1.9.3/projectlibre-1.9.3.tar.gz
+	source = projectlibre.png
+	source = projectlibre.desktop
+	source = projectlibre.patch
+	source = projectlibre.xml
+	sha512sums = fa96123dc51c3a145cbdfbe1e6a8612a50d793e7aa254fd72265cea4adbf84953a1d730fe4fc8cbd2369c2b713728862a27aa3ed9fa9693569bfa775ab9db18b
+	sha512sums = db6e87e74fac3274be34b36cd9daf7231f06e19096cfbe2feeb616c1ae1a60ffc838a81b45b94621d806e00ef5e220391f1d1be3148f9895aa467fdbcac62843
+	sha512sums = 58c780b2860b0e5b9be5e70443b1bfc02af166d7f73c311ff915de503553160b11e8c564e980af0fe9ebbbf0301d51449a32adfe55afb0d6324f8da470b276fb
+	sha512sums = b97031bc43194131d443d9bc4a419a37b279bada7e47a48bd2dfa5c5d5ae750191e9753e6cdbcd31db3cae0799a671b5230d6f64692b48bbe5a14b553a238722
+	sha512sums = 5556daafbdfa02173ee42de64d534ac0debfc62ffa77ecf73b0fd67a70829e3283c34967f351cb2274b35a8e91c3c745011f2999139147a87229c9a0a9573ef1
+
+pkgname = projectlibre-bin

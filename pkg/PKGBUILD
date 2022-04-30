@@ -1,0 +1,51 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+
+pkgname=projectlibre-bin
+_pkgname=projectlibre
+pkgver=1.9.3
+pkgrel=1
+pkgdesc="ProjectLibre is an open source project management software"
+arch=('any')
+url="http://www.projectlibre.org"
+license=('CPAL')
+depends=('default-jre')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+options=(!strip)
+source=("https://netcologne.dl.sourceforge.net/project/projectlibre/ProjectLibre/${pkgver}/projectlibre-${pkgver}.tar.gz"
+        "projectlibre.png"
+        "projectlibre.desktop"
+        "projectlibre.patch"
+        "projectlibre.xml")
+sha512sums=('fa96123dc51c3a145cbdfbe1e6a8612a50d793e7aa254fd72265cea4adbf84953a1d730fe4fc8cbd2369c2b713728862a27aa3ed9fa9693569bfa775ab9db18b'
+            'db6e87e74fac3274be34b36cd9daf7231f06e19096cfbe2feeb616c1ae1a60ffc838a81b45b94621d806e00ef5e220391f1d1be3148f9895aa467fdbcac62843'
+            '58c780b2860b0e5b9be5e70443b1bfc02af166d7f73c311ff915de503553160b11e8c564e980af0fe9ebbbf0301d51449a32adfe55afb0d6324f8da470b276fb'
+            'b97031bc43194131d443d9bc4a419a37b279bada7e47a48bd2dfa5c5d5ae750191e9753e6cdbcd31db3cae0799a671b5230d6f64692b48bbe5a14b553a238722'
+            '5556daafbdfa02173ee42de64d534ac0debfc62ffa77ecf73b0fd67a70829e3283c34967f351cb2274b35a8e91c3c745011f2999139147a87229c9a0a9573ef1')
+
+build() {
+    cd "${srcdir}/${_pkgname}-${pkgver}/"
+    patch < ${srcdir}/projectlibre.patch
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}-${pkgver}/"
+
+    # Dirs
+    install -dm 755 "${pkgdir}"/usr/bin
+    install -dm 755 "${pkgdir}"/usr/share/pixmaps
+    install -dm 755 "${pkgdir}"/usr/share/applications
+    install -dm 755 "${pkgdir}"/usr/share/mime/packages
+    install -dm 755 "${pkgdir}"/usr/share/doc/projectlibre/license/third-party
+    install -dm 755 "${pkgdir}"/usr/share/projectlibre/lib
+
+    #Files
+    install -m644 "${srcdir}/${_pkgname}-${pkgver}/projectlibre.jar" "${pkgdir}/usr/share/projectlibre/"
+    install -m644 "${srcdir}/${_pkgname}-${pkgver}/lib/"*.jar "${pkgdir}/usr/share/projectlibre/lib"
+    install -m755 "${srcdir}/${_pkgname}-${pkgver}/projectlibre.sh" "${pkgdir}/usr/bin/projectlibre"
+    install -m644 "${srcdir}/${_pkgname}-${pkgver}/license/"{index.html,index_html_0.gif,license.rtf} "${pkgdir}/usr/share/doc/projectlibre/license"
+    install -m644 "${srcdir}/${_pkgname}-${pkgver}/license/third-party/"* "${pkgdir}/usr/share/doc/projectlibre/license/third-party"
+    install -m644 "${srcdir}/projectlibre.png" "${pkgdir}/usr/share/pixmaps"
+    install -m644 "${srcdir}/projectlibre.desktop" "${pkgdir}/usr/share/applications"
+    install -m644 "${srcdir}/projectlibre.xml" "${pkgdir}/usr/share/mime/packages/"
+}
