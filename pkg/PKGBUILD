@@ -1,0 +1,43 @@
+# Maintainer: cindrmon <cindrmon@protonmail.com>
+pkgname=emacs
+provides=('emacs')
+conflicts=('emacs')
+pkgdesc="The extensible, customizable, self-documenting real-time display editor."
+pkgver=27.2
+pkgrel=1
+arch=('x86_64')
+url="https://www.gnu.org/software/emacs/emacs.html"
+license=("GPL3")
+depends=(
+    'bash'
+    'libxpm-dev'
+    'libjpeg-dev'
+    'libgif-dev'
+    'libtiff-dev'
+    'libgnutls28-dev'
+    'libx11-dev'
+    'libgtk-3-dev'
+    'libncurses-dev'
+)
+
+source=("https://mirror.ossplanet.net/gnu/emacs/${pkgname}-${pkgver}.tar.xz")
+sha256sums=('SKIP')
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib \
+            --localstatedir=/var
+    make
+}
+
+package() {
+    cd ${srcdir}/${pkgname}-${pkgver}
+    make DESTDIR=${pkgdir} install
+
+    # remove conflict with ctags package
+    mv ${pkgdir}/usr/bin/{ctags,ctags.emacs}
+    mv ${pkgdir}/usr/share/man/man1/{ctags.1.gz,ctags.emacs.1}
+
+    # fix user/root permissions on usr/share files
+    find ${pkgdir}/usr/share/emacs/${pkgver} -exec chown root:root {} \;
+}

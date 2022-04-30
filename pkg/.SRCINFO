@@ -1,0 +1,24 @@
+generated-by = makedeb-makepkg
+
+pkgbase = emacs
+	pkgdesc = The extensible, customizable, self-documenting real-time display editor.
+	pkgver = 27.2
+	pkgrel = 1
+	url = https://www.gnu.org/software/emacs/emacs.html
+	arch = x86_64
+	license = GPL3
+	depends = bash
+	depends = libxpm-dev
+	depends = libjpeg-dev
+	depends = libgif-dev
+	depends = libtiff-dev
+	depends = libgnutls28-dev
+	depends = libx11-dev
+	depends = libgtk-3-dev
+	depends = libncurses-dev
+	provides = emacs
+	conflicts = emacs
+	source = https://mirror.ossplanet.net/gnu/emacs/emacs-27.2.tar.xz
+	sha256sums = SKIP
+
+pkgname = emacs
