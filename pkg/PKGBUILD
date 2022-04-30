@@ -1,0 +1,91 @@
+# Maintainer: Sam L. Yes <samlukeyes123@gmail.com>
+
+pkgname=libcamera-git
+pkgver=0.0.0r3518.dd8b1723
+pkgrel=2
+pkgdesc='A complex camera support library for Linux, Android, and ChromeOS'
+arch=('x86_64' 'aarch64')
+url='https://libcamera.org/'
+provides=('libcamera-dev' 'libcamera-tools' 'libcamera0')
+conflicts=('libcamera-dev' 'libcamera-tools' 'libcamera0')
+makedepends=(
+  'python3-yaml' 'python3-ply' 'python3-jinja2' 'libgnutls28-dev' 'openssl' 'git' 
+  'libudev-dev'                                                         # for device hotplug enumeration
+  'libgstreamer1.0-dev' 'libgstreamer-plugins-base1.0-dev'              # for gstreamer support
+  'qtbase5-dev' 'libqt5core5a' 'libqt5gui5' 'libqt5widgets5' 'qttools5-dev-tools' 'libtiff-dev' # for 'qcam'
+  'libevent-dev'                                                        # for 'cam' & 'lc-compliance'
+  
+  'meson' 'ninja-build' 'pkg-config'
+  'g++'
+)
+makedepends_arm64=(
+  'libboost-dev'                                                        # for Raspberry Pi
+)
+depends=(
+  'libudev1'                                                # for device hotplug enumeration
+  'libgstreamer1.0-0' 'libgstreamer-plugins-base1.0-0'      # for gstreamer support
+  'libc6'
+)
+optdepends=(
+  'libqt5core5a' 'libqt5gui5' 'libqt5widgets5' 'libtiffxx5' # for 'qcam'
+)
+license=('LGPL')
+options=('!docs')
+source=('git+https://git.libcamera.org/libcamera/libcamera.git')
+md5sums=('SKIP')
+_licensedir=/usr/share/doc/${pkgname}/copyright/
+
+# prepare() {
+#   sed -i 's|py_compile=True,||' ${srcdir}/libcamera/utils/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.py
+# }
+
+pkgver() {
+  cd libcamera
+  # https://wiki.archlinux.org/title/VCS_package_guidelines#Git
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "0.0.0r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+build() {
+    cd "${srcdir}/libcamera"
+
+    case $(uname -m) in
+        arm64)
+            _ipas=raspberrypi,rkisp1,vimc
+            _pipelines=$_ipas,simple,uvcvideo
+            ;;
+        *)
+            _ipas=ipu3,vimc
+            _pipelines=$_ipas,uvcvideo
+            ;;
+    esac
+
+    meson build --prefix=/usr \
+        -Dwerror=false \
+        -Dv4l2=true \
+        -Dipas=$_ipas \
+        -Dpipelines=$_pipelines \
+        -Ddocumentation=disabled \
+
+    ninja -C build
+}
+
+#check() {
+#  cd ${srcdir}/libcamera
+#  meson test -C build
+#}
+
+package() {
+    cd "$srcdir/libcamera"
+    DESTDIR="${pkgdir}" ninja -C build install
+
+    # Install licenses
+    install -d ${pkgdir}/${_licensedir}/LICENSES
+    install -m644 COPYING.rst ${pkgdir}/${_licensedir}
+    install -m644 LICENSES/* ${pkgdir}/${_licensedir}/LICENSES
+
+    # Fix permission
+    chmod -x ${pkgdir}/usr/lib/x86_64-linux-gnu/{,libcamera/}*.so*
+}
