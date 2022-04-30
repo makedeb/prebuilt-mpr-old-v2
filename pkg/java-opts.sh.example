@@ -1,0 +1,9 @@
+#
+# If you want to set your own java settings when running BurpSuite
+# then install this file in your home directory under
+# ~/.config/burpsuite/java-opts.sh and the JAVA_OPTS variable will
+# be sourced when BurpSuite starts
+#
+
+JAVA_OPTS="-Xms4g -Xmx4g -Dsun.java2d.uiScale=2.0"
+

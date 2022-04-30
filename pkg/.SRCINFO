@@ -1,0 +1,25 @@
+generated-by = makedeb-makepkg
+
+pkgbase = burpsuite
+	pkgdesc = An integrated platform for performing security testing of web applications (free edition)
+	pkgver = 2022.1.1
+	pkgrel = 1
+	url = https://portswigger.net/burp/
+	arch = any
+	license = custom
+	depends = openjdk-11-jre
+	noextract = burpsuite-2022.1.1.jar
+	source = burpsuite-2022.1.1.jar::https://portswigger.net/burp/releases/download?product=community&version=2022.1.1&type=Jar
+	source = LICENSE
+	source = burpsuite.desktop
+	source = icon64.png
+	source = burpsuite
+	source = java-opts.sh.example
+	sha256sums = cdcd69af4d49af1d3584d4a0b7fc52f14185d28fe5ab465f6432943678b801bc
+	sha256sums = a1146672de7084a1cddc5b7dab4d18b3530c194bd6e45a2b0ac04b579751ca30
+	sha256sums = 1686e36d4dac6de1c97695fb07b6c58f62d1ff128cbc98e642cc8b6f5db3e2bc
+	sha256sums = d31232a7dbdab9d5723f12aa25c52d13fd46ef2e8837a85fb9a08c3a7f151541
+	sha256sums = 13fcd2512391abef602ee1c5c232b8c8083f23bdd5af82640b98a46ef6cef050
+	sha256sums = 7cbc620d908f1ffaece855db0a899dfcb3e47f4957a36dbb49bbde0bbac052bb
+
+pkgname = burpsuite

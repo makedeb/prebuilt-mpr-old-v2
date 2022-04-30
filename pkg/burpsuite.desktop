@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Burp Suite Community Edition
+Exec=/usr/bin/burpsuite
+Icon=burpsuite
+Comment=Burp Suite is an integrated platform for attacking web applications
+Categories=Development;Security
+Terminal=false
+MimeType=application/x-extension-iml;

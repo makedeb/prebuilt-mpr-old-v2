@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ -f ~/.config/burpsuite/java-opts.sh ] && . ~/.config/burpsuite/java-opts.sh
+
+exec $JAVA_HOME/bin/java --illegal-access=permit $JAVA_OPTS -jar /usr/share/burpsuite/burpsuite.jar $@

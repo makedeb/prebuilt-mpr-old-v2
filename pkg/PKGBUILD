@@ -1,0 +1,38 @@
+# Maintainer: Matt Spaulding <matt@mattops.io>
+
+pkgname=burpsuite
+pkgver=2022.1.1
+pkgrel=1
+pkgdesc="An integrated platform for performing security testing of web applications (free edition)"
+url="https://portswigger.net/burp/"
+depends=('openjdk-11-jre')
+arch=('any')
+license=('custom')
+noextract=("${pkgname}-${pkgver}.jar")
+source=("${pkgname}-${pkgver}.jar::https://portswigger.net/burp/releases/download?product=community&version=${pkgver}&type=Jar"
+        LICENSE
+        burpsuite.desktop
+        icon64.png
+        burpsuite
+        java-opts.sh.example)
+sha256sums=('cdcd69af4d49af1d3584d4a0b7fc52f14185d28fe5ab465f6432943678b801bc'
+            'a1146672de7084a1cddc5b7dab4d18b3530c194bd6e45a2b0ac04b579751ca30'
+            '1686e36d4dac6de1c97695fb07b6c58f62d1ff128cbc98e642cc8b6f5db3e2bc'
+            'd31232a7dbdab9d5723f12aa25c52d13fd46ef2e8837a85fb9a08c3a7f151541'
+            '13fcd2512391abef602ee1c5c232b8c8083f23bdd5af82640b98a46ef6cef050'
+            '7cbc620d908f1ffaece855db0a899dfcb3e47f4957a36dbb49bbde0bbac052bb')
+
+package() {
+  mkdir -p ${pkgdir}/usr/bin
+  mkdir -p ${pkgdir}/usr/share/{applications,pixmaps,${pkgname},doc/${pkgname}}
+
+  cd ${srcdir}
+  install -m644 ${pkgname}-${pkgver}.jar ${pkgdir}/usr/share/${pkgname}/${pkgname}.jar
+  install -m644 LICENSE ${pkgdir}/usr/share/doc/${pkgname}/copyright
+  install -m644 java-opts.sh.example ${pkgdir}/usr/share/doc/${pkgname}/
+  install -m644 burpsuite.desktop ${pkgdir}/usr/share/applications/
+  install -m644 icon64.png ${pkgdir}/usr/share/pixmaps/burpsuite.png
+  install -m755 burpsuite ${pkgdir}/usr/bin/
+}
+
+# vim:set ts=2 sw=2 et:
