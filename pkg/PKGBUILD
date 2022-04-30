@@ -1,0 +1,23 @@
+# Maintainer: Rafael "Auyer" Passos <auyer@rcpassos.me>
+pkgname=terraform-bin
+pkgver=1.0.11
+pkgrel=1
+pkgdesc="Tool for building, changing, and versioning infrastructure safely and efficiently"
+url='http://www.terraform.io/'
+arch=('x86_64' 'i686' 'arm' 'aarch64')
+depends=()
+license=('MPL 2.0')
+
+source_x86_64=("${pkgname}_${pkgver}_amd64.zip::https://releases.hashicorp.com/terraform/${pkgver}/terraform_${pkgver}_linux_amd64.zip")
+source_i686=("${pkgname}_${pkgver}_386.zip::https://releases.hashicorp.com/terraform/${pkgver}/terraform_${pkgver}_linux_386.zip")
+source_aarch64=("${pkgname}_${pkgver}_arm64.zip::https://releases.hashicorp.com/terraform/${pkgver}/terraform_${pkgver}_linux_arm64.zip")
+source_arm=("${pkgname}_${pkgver}_arm.zip::https://releases.hashicorp.com/terraform/${pkgver}/terraform_${pkgver}_linux_arm.zip")
+
+sha256sums_x86_64=('eeb46091a42dc303c3a3c300640c7774ab25cbee5083dafa5fd83b54c8aca664')
+sha256sums_i686=('143d01fb4bacf8dd97918fb2e1ad38d4489fbe9f5669a32d0adb69ce3e9aecea')
+sha256sums_arm=('cce11dd382af930ef20234d84695d187bf869e366e7d91337068719ff1a7c843')
+sha256sums_aarch64=('30c650f4bc218659d43e07d911c00f08e420664a3d12c812228e66f666758645')
+
+package() {
+	install -Dm755 "${srcdir}/terraform"  "${pkgdir}"/usr/local/bin/terraform 
+}
