@@ -1,0 +1,13 @@
+pkgbase = intel-undervolt-git
+	pkgdesc = Intel CPU undervolting tool
+	pkgver = 1.7.r0.gea0e74c
+	pkgrel = 1
+	url = https://github.com/kitsunyan/intel-undervolt
+	arch = x86_64
+	license = GPL3
+	provides = intel-undervolt
+	backup = etc/intel-undervolt.conf
+	source = git://github.com/kitsunyan/intel-undervolt
+	b2sums = SKIP
+
+pkgname = intel-undervolt-git
