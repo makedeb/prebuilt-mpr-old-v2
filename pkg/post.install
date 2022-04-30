@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+echo ':: Open default Eternal terminal server port'
+echo "   sudo iptables -I INPUT 1 -p tcp --dport 2022 -j ACCEPT"
+echo ':: Enable and start eternal-terminal server service with `systemctl`. e.g:'
+echo "   sudo systemctl enable --now et"
+
+
+
+

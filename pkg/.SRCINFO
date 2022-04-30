@@ -1,0 +1,29 @@
+generated-by = makedeb-makepkg
+
+pkgbase = eternal-terminal-git
+	pkgdesc = Re-Connectable Terminal connection. Includes both client and server.
+	pkgver = 6.0.2.r215.g8ec6b856
+	pkgrel = 1
+	url = https://mistertea.github.io/EternalTerminal/
+	arch = x86_64
+	license = Apache
+	makedepends = make
+	makedepends = git
+	makedepends = cmake
+	makedepends = autoconf
+	makedepends = automake
+	makedepends = libtool
+	makedepends = protobuf-compiler
+	depends = libprotobuf-dev
+	depends = libsodium-dev
+	depends = libssl-dev
+	depends = zlib1g-dev
+	depends = libcurl4-openssl-dev
+	depends = gcc
+	depends = g++
+	provides = eternal-terminal
+	conflicts = eternal-terminal
+	source = eternal-terminal::git+https://github.com/MisterTea/EternalTerminal.git
+	sha512sums = SKIP
+
+pkgname = eternal-terminal-git

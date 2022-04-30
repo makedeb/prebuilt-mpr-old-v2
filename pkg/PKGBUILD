@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# -- vim: filetype=sh syntax=sh softtabstop=2 tabstop=2 shiftwidth=2 fileencoding=utf-8 smartindent autoindent expandtab
+# Maintainer: alfador <contact@havi.dev>
+pkgname=("eternal-terminal-git")
+pkgver='6.0.2.r215.g8ec6b856'
+pkgrel=1
+pkgdesc='Re-Connectable Terminal connection. Includes both client and server.'
+arch=('x86_64')
+depends=(
+  'libprotobuf-dev'
+  'libsodium-dev'
+  'libssl-dev'
+  'zlib1g-dev'
+  "libcurl4-openssl-dev"
+  'gcc'
+  'g++'
+)
+makedepends=(
+  'make'
+  'git'
+  'cmake'
+  'autoconf'
+  'automake'
+  'libtool'
+  'protobuf-compiler'
+)
+url='https://mistertea.github.io/EternalTerminal/'
+license=('Apache')
+source=(
+  "${pkgname%-git}::git+https://github.com/MisterTea/EternalTerminal.git"
+)
+
+sha512sums=(
+  'SKIP'
+)
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+postinst=post.install
+# ──────────────────────────────────────────────────────────────────────
+pkgver() {
+  cd "$srcdir/${pkgname%-git}"
+  git describe --long --tags | sed 's/^.*v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+# ──────────────────────────────────────────────────────────────────────
+prepare() {
+  msg2 "${pkgname%-git} : Pulling and updating git submodules"
+  git -C "${srcdir}/${pkgname%-git}" submodule sync --recursive
+  git -C "${srcdir}/${pkgname%-git}" submodule update --init --force --recursive
+  msg2 'Preparing directories'
+  mkdir -p "${srcdir}/${pkgname%-git}/build"
+}
+build() {
+  # ╭────────────────────────────────────────────────────────────────────╮
+  # │                          eternal terminal                          │
+  # ╰────────────────────────────────────────────────────────────────────╯
+  msg2 "Building 'et-server' and 'et' with static linking enabled"
+  cd "${srcdir}/${pkgname%-git}/build" >/dev/null  2>&1 || exit 1
+  DISABLE_CRASH_LOG=${DISABLE_CRASH_LOG:-OFF}
+  cmake \
+      -DCMAKE_INSTALL_PREFIX="${pkgdir}" \
+      -DDISABLE_CRASH_LOG="${DISABLE_CRASH_LOG}" \
+      -DDISABLE_VCPKG:BOOL=ON \
+    "${srcdir}/${pkgname%-git}"
+}
+package() {
+  make -C "${srcdir}/${pkgname%-git}/build" -j"$(nproc)" install
+  # ──────────────────────────────────────────────────────────────────────
+  install -D -m 0644 "${srcdir}/${pkgname%-git}/systemctl/et.service" "${pkgdir}/usr/lib/systemd/system/et.service"
+  install -D -m 0644 "${srcdir}/${pkgname%-git}/etc/et.cfg" "${pkgdir}/etc/et.cfg"
+  # ──────────────────────────────────────────────────────────────────────
+  install -Dm644 "${srcdir}/${pkgname%-git}/LICENSE" "${pkgdir}/usr/share/doc/${pkgname}/copyright"
+  install -Dm644 "${srcdir}/${pkgname%-git}/README.md" "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+}
+# Based on:
+# https://github.com/MisterTea/EternalTerminal/blob/master/build_static.sh
