@@ -1,0 +1,32 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=siji-git
+_pkgname=siji
+pkgver=1c691f202019.02.18
+pkgrel=2
+pkgdesc='Iconic bitmap font based on stlarch with additional glyphs'
+arch=('any')
+url='https://github.com/stark/siji'
+license=('GPLv2')
+depends=('fontconfig')
+makedepends=('git')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+source=("${_pkgname}::git+https://github.com/stark/siji")
+postinst="${pkgname}.postinst"
+postrm="${pkgname}.postrm"
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/${_pkgname}"
+    _always=$(git rev-parse --short HEAD)
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}"
+  install -Dm644 "bdf/siji.bdf" "${pkgdir}/usr/share/fonts/misc/siji.bdf"
+  install -Dm755 "view.sh" "${pkgdir}/usr/share/${_pkgname}/view.sh"
+  install -Dm644 "LICENSE" "${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+}
