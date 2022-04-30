@@ -1,0 +1,35 @@
+generated-by = makedeb-makepkg
+
+pkgbase = planner
+	pkgdesc = Task manager with Todoist support designed for GNU/Linux rocket
+	pkgver = 2.7
+	pkgrel = 1
+	url = https://github.com/alainm23/planner
+	arch = any
+	license = GPL3
+	depends = libgtk-3-dev
+	depends = libgee-0.8-dev
+	depends = libjson-glib-dev
+	depends = libsqlite3-dev
+	depends = libsoup2.4-dev
+	depends = libgranite-dev
+	depends = libwebkit2gtk-4.0-dev
+	depends = libecal2.0-dev
+	depends = libedataserver1.2-dev
+	depends = libpeas-dev
+	depends = libical-dev
+	depends = libhandy-1-0
+	depends = meson
+	depends = valac
+	depends = libhandy-1-dev
+	depends = libgdata-dev
+	depends = gettext
+	depends = evolution-data-server
+	depends = gnome-settings-daemon
+	provides = planner
+	conflicts = planner
+	options = !strip
+	source = https://github.com/alainm23/planner/archive/refs/tags/2.7.tar.gz
+	sha512sums = 162e036166820e80e4cd28980670f09462fd608c3feb486e5d89b1073c7d4568595cf2373ddc3918c4cc80fb02ae123e3de7382643f19efe72b74380c851b9b2
+
+pkgname = planner
