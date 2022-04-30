@@ -1,0 +1,36 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=lemonbar-xft-git
+_pkgname=bar
+pkgver=2802020.12.13
+pkgrel=3
+pkgdesc="A lightweight xcb based bar with ported xft support."
+arch=('i686' 'amd64')
+url="https://gitlab.com/protesilaos/lemonbar-xft"
+license=('MIT')
+depends=('libxcb1' 'libxft2' 'libx11-6')
+makedepends=('git' 'libxft-dev')
+provides=('lemonbar')
+conflicts=('lemonbar')
+source=("${_pkgname}::git+https://gitlab.com/protesilaos/lemonbar-xft.git")
+sha256sums=('SKIP')
+MAKEFLAGS="-j$(nproc)"
+
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+    _always=$(git describe --always | sed -e 's:-:.:g' ) # tag is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+build() {
+  cd "${srcdir}/${_pkgname}"
+  make
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}"
+  make PREFIX=/usr DESTDIR="${pkgdir}" install
+  install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
