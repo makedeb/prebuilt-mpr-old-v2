@@ -1,0 +1,30 @@
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=lightspark
+pkgver=0.8.5
+pkgrel=1
+pkgdesc='An open source flash player implementation'
+url='https://github.com/lightspark/lightspark'
+arch=('x86_64' 'aarch64')
+license=('LGPL3')
+depends=('libcurl4' 'libsdl2-mixer-2.0-0' 'libsdl2-2.0-0' 'libpango-1.0-0' 'libcairo2' 'libavcodec58' 'libavformat58'
+        'libavresample4' 'libglew2.1' 'librtmp1' 'libjpeg9' 'liblzma5')
+makedepends=('git' 'nasm' 'cmake' 'ninja-build' 'gettext' 'libcurl4-gnutls-dev' 'libsdl2-mixer-dev' 'libsdl2-dev'
+        'libpango1.0-dev' 'libcairo2-dev' 'libavcodec-dev' 'libavresample-dev' 'libglew-dev' 'librtmp-dev' 'libjpeg-dev' 'libavformat-dev' 'liblzma-dev')
+conflicts=('pepper-flash')
+source=("https://github.com/lightspark/lightspark/archive/${pkgver}.tar.gz")
+
+sha256sums=('f4e29240aa56eced7d9f2eabc137cb5ba48808a39a6bcec8a11572b227dd23d8')
+
+build() {
+    cd "${pkgname}-${pkgver}"
+    mkdir -p build
+    cd build
+    cmake -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+    ninja
+}
+
+package() {
+    cd "${pkgname}-${pkgver}/build"
+    DESTDIR="${pkgdir}" ninja install
+}
