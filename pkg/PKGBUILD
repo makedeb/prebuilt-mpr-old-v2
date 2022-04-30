@@ -1,0 +1,28 @@
+# Maintainer: Guillaume Fournier-Mayer <giom@mailbox.org>
+pkgname=lightdm-mini-greeter
+pkgver=0.5.1
+pkgrel=1
+arch=('any')
+makedepends=('git' 'automake' 'pkg-config' 'liblightdm-gobject-dev' 'libgtk-3-dev')
+url="https://github.com/prikhi/lightdm-mini-greeter"
+pkgdesc="A Minimal, Configurable, Single-User GTK3 LightDM Greeter"
+sha256sums=('SKIP')
+source=("git+${url}/#tag=${pkgver}")
+
+build(){
+    cd lightdm-mini-greeter/
+    ./autogen.sh
+    ./configure --datadir /usr/share --bindir /usr/bin --sysconfdir /etc
+    make
+}
+
+package() {
+    mkdir -p "${pkgdir}/usr/bin"
+    mkdir -p "${pkgdir}/etc/lightdm"
+    mkdir -p "${pkgdir}/usr/share/xgreeters"
+
+    cd lightdm-mini-greeter/
+    cp lightdm-mini-greeter "${pkgdir}/usr/bin/"
+    cp data/lightdm-mini-greeter.conf "${pkgdir}/etc/lightdm/"
+    cp data/lightdm-mini-greeter.desktop "${pkgdir}/usr/share/xgreeters"
+}

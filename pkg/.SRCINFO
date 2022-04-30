@@ -1,0 +1,17 @@
+generated-by = makedeb-makepkg
+
+pkgbase = lightdm-mini-greeter
+	pkgdesc = A Minimal, Configurable, Single-User GTK3 LightDM Greeter
+	pkgver = 0.5.1
+	pkgrel = 1
+	url = https://github.com/prikhi/lightdm-mini-greeter
+	arch = any
+	makedepends = git
+	makedepends = automake
+	makedepends = pkg-config
+	makedepends = liblightdm-gobject-dev
+	makedepends = libgtk-3-dev
+	source = git+https://github.com/prikhi/lightdm-mini-greeter/#tag=0.5.1
+	sha256sums = SKIP
+
+pkgname = lightdm-mini-greeter

@@ -1,0 +1,4 @@
+*.deb
+lightdm-mini-greeter/
+pkg/
+src/
