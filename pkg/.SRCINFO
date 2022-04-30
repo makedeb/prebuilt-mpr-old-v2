@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = minikube-bin
+	pkgdesc = Local kubernetes cluster for testing
+	pkgver = 1.24.0
+	pkgrel = 1
+	url = https://github.com/kubernetes/minikube
+	arch = x86_64
+	license = Apache-2.0
+	provides = minikube
+	conflicts = minikube
+	source = https://github.com/kubernetes/minikube/releases/download/v1.24.0/minikube-linux-amd64
+	sha512sums = 653807330ea92be896ba262502d78c594a261c9eaea11d5fcfbf8928cbee70f468cebe3f4ede93b4d4d251fb8d6ed55bb4de06fec820e536837f6936c814812b
+
+pkgname = minikube-bin

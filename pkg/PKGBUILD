@@ -1,0 +1,24 @@
+# Maintainer: thesting <fxcw_vacilon@slmail.me>
+pkgname=minikube-bin
+_pkgname=minikube
+pkgver=1.24.0
+pkgrel=1
+pkgdesc="Local kubernetes cluster for testing"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=()
+makedepends=()
+url="https://github.com/kubernetes/minikube"
+provides=('minikube')
+conflicts=('minikube')
+
+source=(
+  https://github.com/kubernetes/minikube/releases/download/v${pkgver}/minikube-linux-amd64
+)
+sha512sums=(
+  653807330ea92be896ba262502d78c594a261c9eaea11d5fcfbf8928cbee70f468cebe3f4ede93b4d4d251fb8d6ed55bb4de06fec820e536837f6936c814812b
+)
+
+package() {
+  install -Dm755 "minikube-linux-amd64" "$pkgdir/usr/local/bin/minikube"
+}
