@@ -1,0 +1,45 @@
+pkgbase = gzdoom
+	pkgdesc = Feature centric port for all Doom engine games
+	pkgver = 4.6.1
+	pkgrel = 1
+	url = http://www.zdoom.org/
+	arch = i686
+	arch = x86_64
+	license = BSD
+	license = GPL3
+	license = LGPL3
+	makedepends = g++
+	makedepends = make
+	makedepends = cmake
+	makedepends = libsdl2-dev
+	makedepends = git
+	makedepends = zlib1g-dev
+	makedepends = libbz2-dev
+	makedepends = libjpeg-dev
+	makedepends = libfluidsynth-dev
+	makedepends = libgme-dev
+	makedepends = libopenal-dev
+	makedepends = libmpg123-dev
+	makedepends = libsndfile1-dev
+	makedepends = libgtk-3-dev
+	makedepends = timidity
+	makedepends = nasm
+	makedepends = libgl1-mesa-dev
+	makedepends = tar
+	makedepends = libsdl1.2-dev
+	makedepends = libglew-dev
+	depends = libgtk-3-0
+	depends = hicolor-icon-theme
+	depends = libgl1
+	depends = libjpeg8
+	depends = libopenal1
+	depends = libsdl2-2.0-0
+	depends = zmusic>=1.1.8
+	source = gzdoom::git://github.com/coelckers/gzdoom.git#tag=g4.6.1
+	source = gzdoom.desktop
+	source = 0001-Fix-file-paths.patch
+	sha256sums = SKIP
+	sha256sums = 59122e670f72aa2531aff370e7aaab2d886a7642e79e91f27a533d3b4cad4f6d
+	sha256sums = 9b6c37c6fc90080ceb4162673f23187210b083af7cd61294ece2711790eac186
+
+pkgname = gzdoom
