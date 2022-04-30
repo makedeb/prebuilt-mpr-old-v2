@@ -1,0 +1,32 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+_pkgname=tdrop
+pkgname=tdrop-git
+pkgver=1d4a7ec82022.04.23
+pkgrel=1
+pkgdesc="A WM-Independent dropdown window and terminal creator"
+arch=('any')
+url="https://github.com/noctuid/tdrop"
+license=('Simplified BSD')
+depends=('bash' 'xdotool' 'xorg')
+optdepends=('tmux: session starting support'
+            'tmuxinator: session starting support'
+            'sxhkd: for a tdrop keybinding'
+            'xorg-xrandr: multiple monitor resizing support')
+makedepends=('git')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+md5sums=('SKIP')
+source=("${_pkgname}::git+https://github.com/noctuid/${_pkgname}.git")
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+    _always=$(git describe --always | sed -e 's:-:.:g') # tag is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+}
