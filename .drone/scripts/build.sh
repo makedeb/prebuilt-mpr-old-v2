@@ -20,6 +20,6 @@ sudo chown 'makedeb:makedeb' ./ /var/tmp/prebuilt-mpr/ -R
 
 # Build the package.
 cd pkg/
-find ./ -mindepth 1 -maxdepth 1 -exec cp '{}' "${pkgdir}/{}"
+find ./ -mindepth 1 -maxdepth 1 -exec cp '{}' "${pkgdir}/{}" -R \;
 cd "/var/tmp/prebuilt-mpr/${pkgname}"
 makedeb -s --no-confirm --skip-pgp-check
