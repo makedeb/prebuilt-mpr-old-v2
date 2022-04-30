@@ -1,0 +1,30 @@
+# Maintainer: Guillaume Fournier-Mayer <giom@mailbox.org>
+
+pkgname=spotblock-git
+pkgver=15.18e2610
+pkgrel=2
+pkgdesc='A minimal spotify ad blocker'
+arch=('x86_64')
+url='https://github.com/mahkoh/spotblock'
+license=('GPL3')
+makedepends=('cmake' 'libsystemd-dev' 'libpulse-dev')
+source=("$pkgname::git+$url")
+md5sums=('SKIP')
+
+
+pkgver() {
+    cd "$pkgname"
+    printf "%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+    mkdir -p "$pkgname/build"
+    cd "$pkgname/build"
+    cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr ..
+    make
+}
+
+package() {
+    cd "$pkgname/build"
+    make DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,4 @@
+*.deb
+spotblock-git/
+pkg/
+src/

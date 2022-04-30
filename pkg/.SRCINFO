@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = spotblock-git
+	pkgdesc = A minimal spotify ad blocker
+	pkgver = 15.18e2610
+	pkgrel = 2
+	url = https://github.com/mahkoh/spotblock
+	arch = x86_64
+	license = GPL3
+	makedepends = cmake
+	makedepends = libsystemd-dev
+	makedepends = libpulse-dev
+	source = spotblock-git::git+https://github.com/mahkoh/spotblock
+	md5sums = SKIP
+
+pkgname = spotblock-git
