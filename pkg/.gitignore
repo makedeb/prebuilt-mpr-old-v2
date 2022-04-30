@@ -1,0 +1,5 @@
+nextcloud-*.tar.bz2
+nextcloud-*.tar.bz2.asc
+nextcloud_*.deb
+pkg/
+src/
