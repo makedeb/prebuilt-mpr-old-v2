@@ -1,0 +1,10 @@
+--- a/opt/ungoogled-chromium/chrome-wrapper
++++ b/opt/ungoogled-chromium/chrome-wrapper
+@@ -137,7 +137,6 @@
+ # vendor string or release channel information.
+ export CHROME_VERSION_EXTRA="custom"
+ 
+-exists_desktop_file || generate_desktop_file
+ 
+ CMD_PREFIX=
+ ARGS=()
