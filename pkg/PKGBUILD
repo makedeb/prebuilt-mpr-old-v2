@@ -1,0 +1,66 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+PGO=auto
+
+pkgname='foot-bin'
+pkgdesc="Wayland terminal emulator - fast, lightweight and minimalistic"
+_pkgname='foot'
+pkgver=1.12.0
+pkgrel=1
+arch=('amd64' 'aarch64')
+url='https://codeberg.org/dnkl/foot'
+license=('mit')
+#changelog=CHANGELOG.md
+depends=('libxkbcommon-dev' 'libwayland-dev' 'libpixman-1-dev' 'fontconfig' 'libutf8proc-dev')
+makedepends=('meson' 'ninja-build' 'scdoc' 'python3' 'libncurses-dev' 'wayland-protocols' 'libtllist-dev')  # ‘llvm’, for PGO with clang
+checkdepends=('check')
+provides=('foot')
+conflicts=('foot' 'foot-git')
+optdepends=('libnotify: desktop notifications'
+            'xdg-utils: URI launching'
+            'bash-completion: bash completions for foot itself'
+	    'foot-terminfo')
+source=(${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz)
+sha512sums=("067936dd0935c6e649cc8ea4f84e4b335dab65b7d768fa5df56efc2a5a68a10dfa93863f6494fb96ef16302b1ce53dcd6ae1aa3c937b85c8968d45bfbd0bd57f")
+
+build() {
+  cd foot
+  ./pgo/pgo.sh ${PGO} . build --prefix=/usr -Dterminfo=disabled  --force-fallback-for fcft
+}
+
+check() {
+  cd foot
+  ninja -C build test
+}
+
+package() {
+  cd foot
+  DESTDIR="${pkgdir}/" ninja -C build install
+  install -Dm 644 LICENSE "${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+}
+
+# Select PGO (Performance Guided Optimizations) build type.
+#
+#  - auto: choose best available option
+#
+#  - none: disable PGO
+#
+#  - full-current-session: run a “full” PGO build in an existing
+#    Wayland session. This will pop up a foot window running a script
+#    that generates random terminal output.
+#
+#  - full-headless-sway: run a “full” PGO build inside a headless Sway
+#    instance. Requires Sway >= 1.7.
+#
+#  - full-headless-cage: run a “full” PGO build inside a headless Cage
+#    instance. Requires cage to be installed. Will generate lots of
+#    Cage warnings, but seems to produce a fully working (and well
+#    optimized) foot build.
+#
+#  - partial: run a “partial” PGO build. This requires neither a
+#    running Wayland session, nor an installed Wayland compositor, but
+#    the resulting binary is slower compared to “full” PGO builds
+#    (though still faster than regular release builds).
+#
+# Note that “full-*” (which “auto” will prefer) requires an UTF-8
+# locale. Either make sure LC_CTYPE is set to an UTF-8 locale, or do a
+# “partial” PGO build (or disable PGO altoghether).
