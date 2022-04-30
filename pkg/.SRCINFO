@@ -1,0 +1,20 @@
+generated-by = makedeb-makepkg
+
+pkgbase = lens-bin
+	pkgdesc = The Kubernetes IDE
+	pkgver = 5.3.2
+	pkgrel = 1
+	url = https://k8slens.dev
+	arch = x86_64
+	license = MIT
+	depends = libgtk-3-0
+	depends = libxss1
+	depends = libnss3
+	provides = lens
+	conflicts = lens
+	source = lens-5.3.2.x86_64.AppImage::https://api.k8slens.dev/binaries/Lens-5.3.2-latest.20211201.1.x86_64.AppImage
+	source = lens.desktop
+	sha256sums = a9f102c54c6eed35928d9c48b1387e01e2f5e8c96639172160e44c3bccee006e
+	sha256sums = 09d155a8f8697dba7e718c22123c08af8b2b22605a9a1998d97ac72a9dacbe54
+
+pkgname = lens-bin
