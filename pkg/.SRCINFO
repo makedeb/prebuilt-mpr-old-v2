@@ -1,0 +1,26 @@
+generated-by = makedeb-makepkg
+
+pkgbase = nala-bin
+	pkgdesc = Commandline frontend for the apt package manager
+	pkgver = 0.7.1
+	pkgrel = 1
+	url = https://gitlab.com/volian/nala
+	arch = x86_64
+	license = GPL-3.0
+	depends = libc6>=2.29
+	depends = libexpat1>=2.1~beta3
+	depends = zlib1g>=1:1.2.0
+	depends = libpython3.9>=3.9.1
+	depends = apt
+	depends = python3-apt
+	depends = python3-pexpect
+	depends = python3-typing-extensions
+	depends = python3-rfc3986
+	depends = python3-sniffio
+	depends = python3-certifi
+	depends = python3-idna
+	depends = python3-jsbeautifier
+	source = https://deb.volian.org/volian/pool/main/n/nala/nala_0.7.1_amd64.deb
+	sha256sums = 23e2f476396f96787d86d88265d43bbd6ef345fa2edbfe9057a13540b5d38840
+
+pkgname = nala-bin

@@ -1,0 +1,23 @@
+# Maintainer: Blake Lee <blake@volian.org>
+
+pkgname=nala-bin
+pkgver=0.7.1
+pkgrel=1
+pkgdesc="Commandline frontend for the apt package manager"
+arch=('x86_64')
+depends=(
+	'libc6>=2.29' 'libexpat1>=2.1~beta3' 'zlib1g>=1:1.2.0' 'libpython3.9>=3.9.1'
+    'apt' 'python3-apt' 'python3-pexpect' 'python3-typing-extensions' 'python3-rfc3986' 
+    'python3-sniffio' 'python3-certifi' 'python3-idna' 'python3-jsbeautifier')
+
+url="https://gitlab.com/volian/nala"
+license=('GPL-3.0')
+source=("https://deb.volian.org/volian/pool/main/n/nala/nala_${pkgver}_amd64.deb")
+sha256sums=('23e2f476396f96787d86d88265d43bbd6ef345fa2edbfe9057a13540b5d38840')
+
+package() {
+    tar -xf 'data.tar.xz' -C "${pkgdir}"
+    mkdir -p "${pkgdir}/DEBIAN"
+    tar -xf 'control.tar.xz' -C "${pkgdir}/DEBIAN"
+    rm "${pkgdir}/DEBIAN/control"
+}
