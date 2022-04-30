@@ -1,0 +1,24 @@
+generated-by = makedeb-makepkg
+
+pkgbase = lazygit-bin
+	pkgdesc = A simple terminal UI for git commands, written in Go with the gocui library
+	pkgver = 0.34
+	pkgrel = 1
+	url = https://github.com/jesseduffield/lazygit
+	arch = aarch64
+	arch = armv6h
+	arch = i686
+	arch = x86_64
+	license = MIT
+	provides = lazygit
+	conflicts = lazygit
+	source_aarch64 = https://github.com/jesseduffield/lazygit/releases/download/v0.34/lazygit_0.34_Linux_arm64.tar.gz
+	sha256sums_aarch64 = 10a12ae1f59fb5b1877a650c9a2ce8c05b47d871dc210a16fd9bc31dedafad90
+	source_armv6h = https://github.com/jesseduffield/lazygit/releases/download/v0.34/lazygit_0.34_Linux_armv6.tar.gz
+	sha256sums_armv6h = 04b6f3ba79f7b726a5f14152ebfe342280f7381e03c2982aa9c5af294a148e65
+	source_i686 = https://github.com/jesseduffield/lazygit/releases/download/v0.34/lazygit_0.34_Linux_32-bit.tar.gz
+	sha256sums_i686 = 205298de0f8e36c744676b835b14713e5e783fedc49f830ac281e31583f2fb09
+	source_x86_64 = https://github.com/jesseduffield/lazygit/releases/download/v0.34/lazygit_0.34_Linux_x86_64.tar.gz
+	sha256sums_x86_64 = 4216b48d02884173f0f784235a5fee52c4ab344713b0b873e27321b3df421879
+
+pkgname = lazygit-bin

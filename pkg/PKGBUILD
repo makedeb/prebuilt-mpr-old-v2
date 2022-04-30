@@ -1,0 +1,25 @@
+# Maintainer: Edgar <Edgar{at}AnotherFoxGuy.com>
+
+pkgname=lazygit-bin
+pkgver=0.34
+pkgrel=1
+pkgdesc='A simple terminal UI for git commands, written in Go with the gocui library'
+url="https://github.com/jesseduffield/lazygit"
+license=('MIT')
+provides=("lazygit")
+conflicts=("lazygit")
+arch=('aarch64' 'armv6h' 'i686' 'x86_64')
+
+source_aarch64=("${url}/releases/download/v${pkgver}/lazygit_${pkgver}_Linux_arm64.tar.gz")
+source_armv6h=("${url}/releases/download/v${pkgver}/lazygit_${pkgver}_Linux_armv6.tar.gz")
+source_i686=("${url}/releases/download/v${pkgver}/lazygit_${pkgver}_Linux_32-bit.tar.gz")
+source_x86_64=("${url}/releases/download/v${pkgver}/lazygit_${pkgver}_Linux_x86_64.tar.gz")
+
+sha256sums_aarch64=('10a12ae1f59fb5b1877a650c9a2ce8c05b47d871dc210a16fd9bc31dedafad90')
+sha256sums_armv6h=('04b6f3ba79f7b726a5f14152ebfe342280f7381e03c2982aa9c5af294a148e65')
+sha256sums_i686=('205298de0f8e36c744676b835b14713e5e783fedc49f830ac281e31583f2fb09')
+sha256sums_x86_64=('4216b48d02884173f0f784235a5fee52c4ab344713b0b873e27321b3df421879')
+
+package() {
+    install -Dm755 "${srcdir}/lazygit" "${pkgdir}/usr/bin/lazygit"
+}
