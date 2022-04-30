@@ -1,0 +1,28 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org>
+
+pkgname=wp-desktop-bin
+pkgver=7.2.0
+pkgrel=1
+pkgdesc="Wordpress.com for Desktop"
+arch=('x86_64')
+depends=('gconf2'
+         'gconf-service'
+         'libnotify4'
+         'libxtst6'
+         'libnss3')
+url="https://apps.wordpress.com/desktop/"
+license=('GPL2')
+
+source=("https://github.com/Automattic/wp-desktop/releases/download/v${pkgver}/wordpress.com-linux-deb-${pkgver}.deb")
+sha256sums=('e4ec8e0e249b06b90180040cb4311a3bd8c45301503f8bb2e6674953d122f9c7')
+
+package() {
+  # Extract data.tar.xz
+  msg2 "Extracting data.tar.xz..."
+  tar -xf data.tar.xz -C "${pkgdir}"
+
+  # Symlink wpcom binary
+  msg2 "Setting up symlink from '/opt/WordPress.com/wpcom' to '/usr/bin/wpcom'..."
+  mkdir "${pkgdir}/usr/bin/"
+  ln -s "/opt/WordPress.com/wpcom" "${pkgdir}/usr/bin/wpcom"
+}

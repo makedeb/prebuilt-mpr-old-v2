@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = wp-desktop-bin
+	pkgdesc = Wordpress.com for Desktop
+	pkgver = 7.2.0
+	pkgrel = 1
+	url = https://apps.wordpress.com/desktop/
+	arch = x86_64
+	license = GPL2
+	depends = gconf2
+	depends = gconf-service
+	depends = libnotify4
+	depends = libxtst6
+	depends = libnss3
+	source = https://github.com/Automattic/wp-desktop/releases/download/v7.2.0/wordpress.com-linux-deb-7.2.0.deb
+	sha256sums = e4ec8e0e249b06b90180040cb4311a3bd8c45301503f8bb2e6674953d122f9c7
+
+pkgname = wp-desktop-bin
