@@ -1,0 +1,23 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname="buf-bin"
+_gitname="buf"
+provides=("buf")
+pkgver='1.4.0'
+pkgrel='1'
+pkgdesc="A new way of working with Protocol Buffers"
+arch=("x86_64")
+url="https://buf.build"
+license=('Apache')
+source=("buf.tar.gz"::"https://github.com/bufbuild/buf/releases/download/v${pkgver}/buf-Linux-x86_64.tar.gz")
+sha256sums=('826ad701db09805eb425723ad3ea0c13ce7ca8353d6a1fb473399db915dafdf9')
+conflicts=("${_gitname}-git" "${_gitname}")
+
+package() {
+    cd "${srcdir}/${_gitname}"
+	install -Dm755 "./bin/"* -t "${pkgdir}/usr/bin/"
+	install -Dm644 "./etc/bash_completion.d/"* -t "${pkgdir}/usr/share/bash-completion/completions/"
+	install -Dm644 "./share/fish/vendor_completions.d/"* -t "${pkgdir}/usr/share/fish/vendor_completions.d/"
+    install -Dm644 "./share/man/man1/"* -t "${pkgdir}/usr/share/man/man1/"
+    install -Dm644 "./share/zsh/site-functions/"* -t "${pkgdir}/usr/share/zsh/site-functions/"
+}
