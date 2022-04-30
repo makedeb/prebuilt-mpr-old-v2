@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = xnconvert
+	pkgdesc = XnConvert convert, resize, add effects on image files.
+	pkgver = 1.94.0
+	pkgrel = 1
+	url = https://www.xnconvert.com
+	arch = x86_64
+	arch = i386
+	license = custom
+	source_x86_64 = https://download.xnview.com/XnConvert-linux-x64.deb
+	sha256sums_x86_64 = c318842ea7605d352b4ea7ae218fd106a69e3dce4dce9ea167e51b0be034c562
+	source_i386 = https://download.xnview.com/XnConvert-linux.deb
+	sha256sums_i386 = 6332b5907100cebcfe71f63ee7dfea94cffc5b3cc369a0500aaedb7357a87445
+
+pkgname = xnconvert
