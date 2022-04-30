@@ -1,0 +1,44 @@
+# Maintainer: only_vip  <onlyme_vip@protonmail.com>
+pkgname=xfwm-effects
+pkgver=1.5
+pkgrel=4
+pkgdesc="Special Effects for the Xfce Window Manager,Works with Xfwm4 version 4.16.1 64 bit only, or Xubuntu 21.04 release version"
+arch=('amd64')
+url="https://www.kalideva.com/"
+license=( 'GPL3')
+depends=('libimlib2' 'make' 'xfce4-dev-tools' 'libglib2.0-dev' 'xorg-dev' 'libpango1.0-dev' 'libatk1.0-dev' 'libepoxy-dev' 'libatk-bridge2.0-dev' 'libgtk-3-dev' 'libxfce4util-dev' 'libxfce4ui-2-dev' 'libwnck-3-dev' 'gawk' 'libxpresent-dev')
+#buster_depends=(${depends[@]} 'libpcre2-posix0' 'libverto-libev1' )
+#focal_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+#groovy_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+#hirsute_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+provides=('xfwm-effects')
+conflicts=('xfwm-effects')
+# replaces=('xfwm-effects')
+install='.install'
+source=("${url}/releases/${pkgname}-install-${pkgver}.tar.gz")
+sha512sums=('76848b35bc98dd1588c62e9d4ad0fcd66246a28799fd6ecbbcffd8fe8b3bf0ea967eca6d28367b30e63cd96005c0594b92091188951c9401ce4d96efe2f5611d')
+#options=(!strip)
+
+package() {
+  cd ${srcdir}/${pkgname}-install-${pkgver}
+install -Dm755 "xfwm4" "${pkgdir}/usr/local/bin/xfwm4"
+# install 'xfwm-effects.xml' to '/home/user/.config/xfce4/xfconf/xfce-perchannel-xml/'
+install -Dm644 "xfwm-effects.xml" "${pkgdir}/$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm-effects.xml"
+chown $USER  "${pkgdir}/$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm-effects.xml"
+# copy /usr/share/xfwm4/defaults to /usr//share/xfwm4/defaults
+# since /usr/bin/xfwm4 will look there instead
+install -Dm644 "/usr/share/xfwm4/defaults" "${pkgdir}/usr/local/share/xfwm4/defaults"
+
+# install xfwm-effects panel app:
+
+# install 'xfwm-effects' binary to 'usr/bin/'
+install -Dm755 "xfwm-effects" "${pkgdir}/usr/local/bin/xfwm-effects"
+# install 'xfwm-effects.desktop' to 'usr/share/applications/'
+install -Dm644 "xfwm-effects.desktop" "${pkgdir}/usr/local/share/applications/xfwm-effects.desktop"
+# install 'xfwm-effects.glade' to 'usr/share/xfwm-effects/'
+install -Dm644 "xfwm-effects.glade" "${pkgdir}/usr/local/share/xfwm-effects/xfwm-effects.glade"
+# install 'xfwm-effects.svg' to 'usr/share/xfwm-effects/
+install -Dm644 "xfwm-effects.svg" "${pkgdir}/usr/local/share/xfwm-effects/xfwm-effects.svg"
+# the blur effects are created by Imlib2 library
+install -Dm644 "README.txt" "${pkgdir}/usr/local/share/xfwm-effects/docs/README.txt"
+}

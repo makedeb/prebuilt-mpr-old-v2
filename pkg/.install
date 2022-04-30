@@ -1,0 +1,20 @@
+
+## arg 1:  the new package version
+post_install() {
+  echo "
+                           ████     ██   ███████   ██████████ ████████   
+                          ░██░██   ░██  ██░░░░░██ ░░░░░██░░░ ░██░░░░░    
+                          ░██░░██  ░██ ██     ░░██    ░██    ░██         
+                          ░██ ░░██ ░██░██      ░██    ░██    ░███████    
+                          ░██  ░░██░██░██      ░██    ░██    ░██░░░░   ██
+                          ░██   ░░████░░██     ██     ░██    ░██      ░░ 
+                          ░██    ░░███ ░░███████      ░██    ░████████ ██
+                          ░░      ░░░   ░░░░░░░       ░░     ░░░░░░░░ ░░ "
+echo "----------------------------------------------------------
+To start modified xfwm4 window manager, run this command: 
+\"/usr/local/bin/xfwm4 --replace & disown\" from a terminal.
+Note: To switch back to original xfwm4, you can run:  
+\"/usr/bin/xfwm4 --replace & disown\" from a terminal.
+----------------------------------------------------------"
+}
+
