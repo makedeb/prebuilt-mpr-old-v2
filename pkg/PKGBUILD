@@ -1,0 +1,63 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=nnn-git
+_pkgname=nnn
+pkgver=16b9f8f32022.04.20
+pkgrel=2
+pkgdesc="The fastest terminal file manager ever written."
+arch=('amd64')
+url="https://github.com/jarun/${_pkgname}"
+license=(BSD)
+depends=('bash' 'libreadline-dev' 'libncursesw5-dev' 'pkg-config')
+optdepends=(
+  'atool: for more archive formats'
+  'libarchive: for more archive formats'
+  'zip: for zip archive format'
+  'unzip: for zip archive format'
+  'trash-cli: to trash files'
+  'sshfs: mount remotes'
+  'rclone: mount remotes'
+  'fuse2: unmount remotes'
+  'xdg-utils: desktop opener'
+  'nerd-font: any one of the nerd font for icons'
+  'plugins: refer https://github.com/jarun/nnn/tree/master/plugins#installation'
+)
+makedepends=(git)
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+# replaces=("${_pkgname}")
+source=("${_pkgname}::git+${url}.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd nnn
+  #git describe --long --always | sed -e 's/v//g;s/-/./g'
+    _always=$(git describe --always | sed -e 's:-:.:g' -e 's:v::') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+build() {
+  cd nnn
+  make PREFIX=/usr  O_NERD=1
+}
+
+package() {
+  #install the binary
+  install -Dm755 "${srcdir}/nnn/nnn" "${pkgdir}/usr/bin/nnn"
+  #install the man file
+  install -Dm644 "${srcdir}/nnn/nnn.1" "${pkgdir}/usr/share/man/man1/nnn.1"
+  # install auto-completion for fish,bash and zsh
+  install -Dm644 "${srcdir}/nnn/misc/auto-completion/fish/nnn.fish" "${pkgdir}/usr/share/fish/vendor_completions.d/nnn.fish"
+  install -Dm644 "${srcdir}/nnn/misc/auto-completion/bash/nnn-completion.bash" "${pkgdir}/usr/share/bash-completion/completions/nnn"
+  install -Dm644 "${srcdir}/nnn/misc/auto-completion/zsh/_nnn" "${pkgdir}/usr/share/zsh/site-functions/_nnn"
+  #install the desktop icons
+  install -Dm644 "${srcdir}/nnn/misc/desktop/nnn.desktop" "${pkgdir}/usr/share/applications/nnn.desktop"
+  install -Dm644 "${srcdir}/nnn/misc/logo/logo.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/nnn.svg"
+  install -Dm644 "${srcdir}/nnn/misc/logo/logo-64x64.png" "${pkgdir}/usr/share/icons/hicolor/64x64/apps/nnn.png"
+  #install the license
+  install -Dm644 "${srcdir}/nnn/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  #install plugins
+  install -d "${pkgdir}/usr/share/${pkgname}/plugins"
+  cp -vRf "${srcdir}/${_pkgname}/plugins" "${pkgdir}/usr/share/${pkgname}/"
+       }
