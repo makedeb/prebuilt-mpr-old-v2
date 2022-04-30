@@ -1,0 +1,20 @@
+generated-by = makedeb-makepkg
+
+pkgbase = opendoas-git
+	pkgdesc = Run commands as super user or another user
+	pkgver = 6.8.1.r4.g9a25a6d
+	pkgrel = 1
+	url = https://github.com/Duncaen/OpenDoas
+	arch = x86_64
+	arch = i686
+	license = custom:ISC
+	makedepends = git
+	depends = libpam-modules
+	provides = doas
+	conflicts = doas
+	source = opendoas::git+https://github.com/Duncaen/OpenDoas.git
+	source = doas.pam
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = opendoas-git

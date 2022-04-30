@@ -1,0 +1,41 @@
+# Maintainer: PWall <34860495+PWall2222@users.noreply.github.com>
+
+pkgname=opendoas-git
+pkgver=6.8.1.r4.g9a25a6d
+pkgrel=1
+pkgdesc='Run commands as super user or another user'
+arch=(x86_64 i686)
+url='https://github.com/Duncaen/OpenDoas'
+license=(custom:ISC)
+depends=(libpam-modules)
+provides=(doas)
+conflicts=(doas)
+makedepends=(git)
+
+source=(
+	'opendoas::git+https://github.com/Duncaen/OpenDoas.git'
+	'doas.pam'
+)
+
+sha256sums=(
+	SKIP
+	SKIP
+)
+
+pkgver() {
+	cd opendoas
+	git describe --long --tags | sed 's,^v,,; s|-\(.*\)-g|.r\1.g|'
+}
+
+build() {
+	cd opendoas
+	./configure --prefix=/usr --with-timestamp
+	make
+}
+
+package() {
+	cd opendoas
+	make DESTDIR="$pkgdir" install
+	install -Dm644 "$srcdir"/doas.pam "$pkgdir"/etc/pam.d/doas	
+	install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/opendoas-git/LICENSE
+}
