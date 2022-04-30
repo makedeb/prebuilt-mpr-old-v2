@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+  remove|deconfigure)
+    update-alternatives --remove editor /usr/bin/nvim
+    update-alternatives --remove vi /usr/bin/nvim
+    update-alternatives --remove vim /usr/bin/nvim
+    ;;
+
+  upgrade|failed-upgrade)
+    ;;
+
+  *)
+    echo "prerm called with unknown argument '$1'" >&2
+    exit 0
+    ;;
+esac
