@@ -1,0 +1,20 @@
+generated-by = makedeb-makepkg
+
+pkgbase = termius
+	pkgdesc = Desktop SSH Client
+	pkgver = 7.37.2
+	pkgrel = 1
+	arch = x86_64
+	depends = libgtk-3-0
+	depends = libnotify4
+	depends = libnss3
+	depends = libxss1
+	depends = libxtst6
+	depends = xdg-utils
+	depends = libatspi2.0-0
+	depends = libuuid1
+	depends = libsecret-1-0
+	source = https://deb.termius.com/pool/main/t/termius-app/termius-app_7.37.2_amd64.deb
+	sha256sums = SKIP
+
+pkgname = termius

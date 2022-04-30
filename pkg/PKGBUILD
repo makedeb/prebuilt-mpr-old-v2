@@ -1,0 +1,20 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org>
+pkgname=termius
+pkgver='7.37.2'
+pkgrel='1'
+pkgdesc="Desktop SSH Client"
+arch=('x86_64')
+depends=('libgtk-3-0' 'libnotify4' 'libnss3' 'libxss1' 'libxtst6' 'xdg-utils' 'libatspi2.0-0' 'libuuid1' 'libsecret-1-0')
+
+source=("https://deb.termius.com/pool/main/t/termius-app/termius-app_${pkgver}_amd64.deb")
+sha256sums=('SKIP')
+
+package() {
+        # Extract data.tar.gz to pkgdir
+        msg2 "Extracting data.tar.xz..."
+        tar -xf data.tar.xz -C "${pkgdir}"
+
+        # Remove cron entries
+        msg2 "Removing cron job used for repository updates..."
+        rm -r "${pkgdir}/etc/cron.daily"
+      }
