@@ -1,0 +1,30 @@
+# Maintainer: SZanko, szanko at protonmail dot com
+
+_pkgname=radontea
+pkgname=python3-${_pkgname}
+pkgver=0.4.9
+pkgrel=3
+pkgdesc="Algorithms to compute the inverse Radon transform (e.g. SART, backprojection, Fourier interpolation)."
+arch=('any')
+url="https://github.com/RI-imaging/radontea"
+license=('BSD')
+depends=(
+	'python3'
+	'python3-setuptools'
+	'python3-numpy'
+	'python3-scipy'
+	)
+source=("${url}/archive/${pkgver}.tar.gz")
+sha256sums=('bb08e109987ecd95b2c0699b536042314bb495d508fe794aba31146ca067015a')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	python3 setup.py build
+}
+
+package() {
+    cd "$srcdir/$_pkgname-$pkgver"
+    python3 setup.py install --root="$pkgdir/" --optimize=1 --skip-build --install-layout=deb
+    mv LICENSE copyright
+    install -Dm644 copyright -t "${pkgdir}/usr/share/doc/${pkgname}"
+}
