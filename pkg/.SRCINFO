@@ -1,0 +1,17 @@
+generated-by = makedeb-makepkg
+
+pkgbase = git-secret-git
+	pkgdesc = A bash-tool to store your private data inside a git repository
+	pkgver = 1.781.569f2e8
+	pkgrel = 2
+	url = https://github.com/sobolevn/git-secret
+	arch = any
+	license = MIT
+	depends = git
+	depends = gnupg
+	conflicts = git-secret
+	conflicts = git-secret-bin
+	source = git+https://github.com/sobolevn/git-secret.git
+	sha256sums = SKIP
+
+pkgname = git-secret-git
