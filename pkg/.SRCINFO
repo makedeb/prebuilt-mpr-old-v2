@@ -1,0 +1,22 @@
+generated-by = makedeb-makepkg
+
+pkgbase = ttf-migu
+	pkgdesc = Good looking Japanese TrueType font by mixing M+ and IPA.
+	pkgver = 20200307
+	pkgrel = 1
+	url = http://mix-mplus-ipa.osdn.jp/migu/
+	arch = any
+	license = custom
+	depends = fontconfig
+	provides = ttf-migu
+	conflicts = ttf-migu
+	source = https://osdn.net/projects/mix-mplus-ipa/downloads/72511/migu-1c-20200307.zip
+	source = https://osdn.net/projects/mix-mplus-ipa/downloads/72511/migu-1m-20200307.zip
+	source = https://osdn.net/projects/mix-mplus-ipa/downloads/72511/migu-1p-20200307.zip
+	source = https://osdn.net/projects/mix-mplus-ipa/downloads/72511/migu-2m-20200307.zip
+	sha256sums = 6324807e7a7a7738298d86a0b4fcbd3f5f0180416a98a15aa552bdf801b10e0e
+	sha256sums = a4770fca22410668d2747d7898ed4d7ef5d92330162ee428a6efd5cf247d9504
+	sha256sums = de3fb44777ec2d623db33fefd16e9ceb6caff793e08809cd2e35edb3ec9aa22d
+	sha256sums = dbfd177bf3d7645ba080b7b1e07c5b1966a2cd6e003c7586e3d53490377938be
+
+pkgname = ttf-migu
