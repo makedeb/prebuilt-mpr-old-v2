@@ -1,0 +1,23 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at protonmail dot com>
+
+pkgname='discord-ptb'
+pkgver='0.0.29'
+pkgrel='1'
+pkgdesc="Chat for Communities and Friends. PTB branch."
+arch=('x86_64')
+_base_depends=('libc6' 'libasound2' 'libatomic1' 'libgconf-2-4' 'libnotify4' 'libnspr4' 'libnss3' 'libstdc++6' 'libxss1'
+                'libxtst6' 'libc++1')
+depends=("${_base_depends[@]}" 'libappindicator1')
+bullseye_depends=("${_base_depends[@]}" 'libayatana-appindicator1')
+
+url="https://discord.com"
+license=('custom')
+source=("https://dl-ptb.discordapp.net/apps/linux/${pkgver}/${pkgname}-${pkgver}.deb")
+sha256sums=('4f6c91e71329025ed2fb25a54730868107771507f1192e7a08ca8f5dc4bd9571')
+
+package() {
+    tar -xf 'data.tar.gz' -C "${pkgdir}"
+    mkdir -p "${pkgdir}/DEBIAN"
+    tar -xf 'control.tar.gz' -C "${pkgdir}/DEBIAN"
+    rm "${pkgdir}/DEBIAN/control"
+}
