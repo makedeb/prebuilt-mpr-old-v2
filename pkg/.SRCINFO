@@ -1,0 +1,14 @@
+generated-by = makedeb-makepkg
+
+pkgbase = aws-cli
+	pkgdesc = The latest version of the AWS CLI.
+	pkgver = 2.4.7
+	pkgrel = 1
+	url = https://github.com/aws/aws-cli
+	arch = x86_64
+	license = Apache-2.0
+	makedepends = zip
+	source = https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.4.7.zip
+	sha512sums = d86d0db165931cc2106cdc091a652e6afa59703f3dec14101182ecb9ac137952e52de292d12c947bc07b704996d9f88d0ecaca17200a74f77f6fe3e4d059e06d
+
+pkgname = aws-cli
