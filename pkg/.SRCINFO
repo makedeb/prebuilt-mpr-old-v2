@@ -1,0 +1,21 @@
+generated-by = makedeb-makepkg
+
+pkgbase = xmrig-mo-nodonate
+	pkgdesc = Monero CPU/GPU miner (MoneroOcean fork)
+	pkgver = 6.16.4
+	pkgrel = 1
+	url = https://github.com/MoneroOcean/xmrig
+	arch = x86_64
+	license = GPL3
+	makedepends = cmake
+	makedepends = automake
+	makedepends = libtool
+	makedepends = autoconf
+	provides = xmrig-mo-nodonate
+	conflicts = xmrig-mo
+	source = https://github.com/MoneroOcean/xmrig/archive/refs/tags/v6.16.4-mo1.tar.gz
+	source = donate.patch
+	sha256sums = 17a09fdb5dce11489124be9655a704c012e634e8ed4fd3835fe251b1c2309e32
+	sha256sums = a4d97761b4196dbeddbef902062654bafc0f49c8f8fa59bd6d2ae703d355c01a
+
+pkgname = xmrig-mo-nodonate

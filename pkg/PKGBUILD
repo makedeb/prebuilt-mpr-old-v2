@@ -1,0 +1,43 @@
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=xmrig-mo-nodonate
+_pkgname=xmrig
+pkgver=6.16.4
+_pkgver=$pkgver-mo1
+pkgrel=1
+pkgdesc="Monero CPU/GPU miner (MoneroOcean fork)"
+arch=('x86_64')
+url="https://github.com/MoneroOcean/xmrig"
+license=('GPL3')
+depends=()
+makedepends=('cmake' 'automake' 'libtool' 'autoconf')
+provides=('xmrig-mo-nodonate')
+conflicts=('xmrig-mo')
+source=("$url/archive/refs/tags/v$_pkgver.tar.gz"
+        "donate.patch")
+sha256sums=('17a09fdb5dce11489124be9655a704c012e634e8ed4fd3835fe251b1c2309e32'
+            'a4d97761b4196dbeddbef902062654bafc0f49c8f8fa59bd6d2ae703d355c01a')
+
+prepare() {
+    # patch donate level to 0
+    patch -u -i donate.patch "$_pkgname-$_pkgver"/src/donate.h
+    
+    cd "$srcdir"/"$_pkgname-$_pkgver"
+    
+    mkdir -p build
+    cd scripts
+    # build libuv openssl hwloc statically linked
+    ./build_deps.sh
+}
+            
+build() {
+    cd "$srcdir"/"$_pkgname-$_pkgver"/build
+    cmake .. -DXMRIG_DEPS=scripts/deps
+    make -j$(nproc)
+}
+
+package() {
+    cd "$srcdir"/"$_pkgname-$_pkgver"/build
+    
+    install -D -m755 xmrig -t "$pkgdir"/usr/bin
+}
