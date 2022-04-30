@@ -1,0 +1,7 @@
+# Generated .debs
+*.deb
+
+# Clone directories
+/pkg
+/src
+/x52pro-linux

@@ -1,0 +1,30 @@
+generated-by = makedeb-makepkg
+
+pkgbase = libx52
+	pkgdesc = Application to control the MFD and LEDs of a Saitek X52/X52Pro HOTAS
+	pkgver = 0.2.3_4_gb45dc59
+	pkgrel = 1
+	url = https://github.com/nirenjan/x52pro-linux
+	arch = x86_64
+	license = GPL2
+	makedepends = autoconf
+	makedepends = automake
+	makedepends = libtool
+	makedepends = pkg-config
+	makedepends = python3
+	makedepends = gettext
+	makedepends = autopoint
+	makedepends = libusb-1.0-0-dev
+	makedepends = libhidapi-dev
+	makedepends = libevdev-dev
+	makedepends = doxygen
+	makedepends = rsync
+	makedepends = libcmocka-dev
+	makedepends = git
+	depends = libusb-1.0-0
+	depends = libhidapi-hidraw0
+	depends = libevdev2
+	source = git+https://github.com/nirenjan/x52pro-linux.git
+	sha256sums = SKIP
+
+pkgname = libx52
