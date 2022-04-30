@@ -1,0 +1,23 @@
+generated-by = makedeb-makepkg
+
+pkgbase = ytfzf
+	pkgdesc = A posix script to find and watch youtube videos from the terminal Without API
+	pkgver = 2.3
+	pkgrel = 2
+	url = https://github.com/pystardust/ytfzf
+	arch = any
+	license = GPL3
+	makedepends = make
+	depends = jq
+	depends = mpv
+	optdepends = dmenu: use dmenu for search prompts and results
+	optdepends = rofi: use rofi for search prompts and results
+	optdepends = fzf: use fzf for results.Get it from the MPR as thumbnails works only with the latest fzf version
+	optdepends = ueberzug: thumbnails image preview
+	optdepends = yt-dlp: to download videos
+	provides = ytfzf
+	conflicts = ytfzf
+	source = https://github.com/pystardust/ytfzf/archive/v2.3.tar.gz
+	sha512sums = a282f578459ec53e725d1089a5b5efb78dcc66684ce572d0318f6bfd6e222b706418c77eeeca34d4015ed2bae1cb54de10edaab36522d6012c2ac421796ef34b
+
+pkgname = ytfzf

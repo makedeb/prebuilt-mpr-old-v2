@@ -1,0 +1,29 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=ytfzf
+pkgver=2.3
+pkgrel=2
+pkgdesc="A posix script to find and watch youtube videos from the terminal Without API"
+arch=('any')
+url="https://github.com/pystardust/ytfzf"
+license=('GPL3')
+depends=('jq' 'mpv')
+provides=('ytfzf')
+conflicts=('ytfzf')
+# replaces=('ytfzf')
+makedepends=('make')
+optdepends=(
+    'dmenu: use dmenu for search prompts and results'
+    'rofi:  use rofi for search prompts and results'
+    'fzf:   use fzf for results.Get it from the MPR as thumbnails works only with the latest fzf version'
+    'ueberzug: thumbnails image preview '
+     'yt-dlp: to download videos'
+)
+source=("https://github.com/pystardust/ytfzf/archive/v${pkgver}.tar.gz")
+sha512sums=("a282f578459ec53e725d1089a5b5efb78dcc66684ce572d0318f6bfd6e222b706418c77eeeca34d4015ed2bae1cb54de10edaab36522d6012c2ac421796ef34b")
+
+package() {
+    cd "$srcdir/${pkgname}-${pkgver}"
+        make  PREFIX="/usr" \
+        DESTDIR="$pkgdir/"  \
+        install "doc" "addons"
+}
