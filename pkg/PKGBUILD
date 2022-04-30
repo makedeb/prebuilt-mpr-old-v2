@@ -1,0 +1,32 @@
+# Maintainer: rei_k <sousuke20xx at gmail.com>
+# Contributor: Nicola Squartini <tensor5@gmail.com>
+
+pkgname=modclean
+pkgver=3.0.0beta.1
+pkgrel=3
+pkgdesc='Remove unwanted files and directories from your node_modules folder'
+arch=('any')
+url='https://github.com/ModClean/modclean'
+license=('MIT')
+depends=('nodejs')
+provides=('modclean')
+conflicts=('modclean-nodesource')
+makedepends=('npm') #If you use NODESOURCE, please comment out. 
+options=(!emptydirs)
+
+package() {
+    npm install -g --prefix="${pkgdir}/usr" ${pkgname}@3.0.0-beta.1
+
+    cd "${pkgdir}/usr/lib/node_modules/${pkgname}"
+    install -dm755 "${pkgdir}/usr/share/licenses/${pkgname}"
+    ln -s \
+        $(realpath --relative-to="${pkgdir}/usr/share/licenses/${pkgname}" LICENSE) \
+        "${pkgdir}/usr/share/licenses/${pkgname}"
+    sed -e "s|${srcdir}|/|" -i package.json
+    find node_modules -name 'package.json' -exec sed -e "s|${pkgdir}||" -i {} \;
+    ./bin/modclean.js -r -a '.bin,bin.js' --ignore='license'
+
+    # npm gives ownership of ALL FILES to build user
+    # https://bugs.archlinux.org/task/63396
+    chown -R root:root "${pkgdir}"
+}

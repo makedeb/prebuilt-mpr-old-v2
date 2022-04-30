@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = modclean
+	pkgdesc = Remove unwanted files and directories from your node_modules folder
+	pkgver = 3.0.0beta.1
+	pkgrel = 3
+	url = https://github.com/ModClean/modclean
+	arch = any
+	license = MIT
+	makedepends = npm
+	depends = nodejs
+	provides = modclean
+	conflicts = modclean-nodesource
+	options = !emptydirs
+
+pkgname = modclean
