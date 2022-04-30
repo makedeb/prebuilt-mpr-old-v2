@@ -1,0 +1,38 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+
+pkgname=libfragmentzip-git
+pkgver=1.64.aaf6fae
+pkgrel=1
+pkgdesc="A library allowing to download single files from a remote zip archive"
+arch=(i686 x86_64)
+url="https://github.com/tihmstar/libfragmentzip"
+license=('LGPL3')
+groups=()
+depends=('curl' 'libzip-dev' 'zlib1g' 'zlib1g-dev' 'libcurl4-openssl-dev')
+focal_depends=("${depends[@]}" 'libzip5')
+hirsute_depends=("${depends[@]}" 'libzip4')
+makedepends=('git' 'libgeneral-fr-git')
+provides=(libfragmentzip)
+conflicts=(libfragmentzip)
+source=("git+https://github.com/tihmstar/libfragmentzip")
+md5sums=('SKIP')
+
+function pkgver() {
+  cd libfragmentzip
+
+  printf "1.%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd libfragmentzip
+
+  ./autogen.sh
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd libfragmentzip
+
+  make DESTDIR="$pkgdir" install
+}

@@ -1,0 +1,35 @@
+generated-by = makedeb-makepkg
+
+pkgbase = libfragmentzip-git
+	pkgdesc = A library allowing to download single files from a remote zip archive
+	pkgver = 1.64.aaf6fae
+	pkgrel = 1
+	url = https://github.com/tihmstar/libfragmentzip
+	arch = i686
+	arch = x86_64
+	license = LGPL3
+	makedepends = git
+	makedepends = libgeneral-fr-git
+	depends = curl
+	depends = libzip-dev
+	depends = zlib1g
+	depends = zlib1g-dev
+	depends = libcurl4-openssl-dev
+	provides = libfragmentzip
+	conflicts = libfragmentzip
+	source = git+https://github.com/tihmstar/libfragmentzip
+	md5sums = SKIP
+	focal_depends = curl
+	focal_depends = libzip-dev
+	focal_depends = zlib1g
+	focal_depends = zlib1g-dev
+	focal_depends = libcurl4-openssl-dev
+	focal_depends = libzip5
+	hirsute_depends = curl
+	hirsute_depends = libzip-dev
+	hirsute_depends = zlib1g
+	hirsute_depends = zlib1g-dev
+	hirsute_depends = libcurl4-openssl-dev
+	hirsute_depends = libzip4
+
+pkgname = libfragmentzip-git
