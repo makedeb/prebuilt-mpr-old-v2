@@ -1,0 +1,29 @@
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=onlyoffice-bin
+pkgver=7.0.2
+pkgrel=1
+pkgdesc="An office suite that combines text, spreadsheet and presentation editors allowing to create, view and edit local documents."
+arch=('x86_64')
+depends=('x11-common' 'libasound2' 'wget' 'gstreamer1.0-libav' 'gstreamer1.0-plugins-ugly'
+            'libxss1' 'libatk1.0-0' 'libgtk-3-0' 'libcairo2' 'libgconf-2-4' 'libstdc++6'
+            'fonts-dejavu' 'fonts-opensymbol' 'fonts-liberation' 'fonts-crosextra-carlito' 'xdg-utils')
+optdepends=('ttf-dejavu' 'fonts-takao-gothic')
+makedepends=('xz-utils')
+license=('AGPL-3.0')
+conflicts=('onlyoffice')
+provides=('onlyoffice')
+url="https://www.onlyoffice.com"
+source=("$pkgname-$pkgver::https://github.com/ONLYOFFICE/DesktopEditors/releases/download/v${pkgver}/onlyoffice-desktopeditors_amd64.deb")
+sha256sums=('70ddaef2773f19e24dd8d474b98aba2bdfa9191d81dccc787bf13bd877f2e898')
+
+package() {
+    cd $srcdir
+    msg2 "Extracting data.tar.xz..."
+    tar -xf 'data.tar.xz' -C "${pkgdir}"
+    
+    msg2 "Extracting control.tar.xz..."
+    mkdir -p "${pkgdir}/DEBIAN"
+    tar -xf 'control.tar.gz' -C "${pkgdir}/DEBIAN"
+    rm "${pkgdir}/DEBIAN/control"
+}

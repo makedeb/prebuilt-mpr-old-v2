@@ -1,0 +1,34 @@
+generated-by = makedeb-makepkg
+
+pkgbase = onlyoffice-bin
+	pkgdesc = An office suite that combines text, spreadsheet and presentation editors allowing to create, view and edit local documents.
+	pkgver = 7.0.2
+	pkgrel = 1
+	url = https://www.onlyoffice.com
+	arch = x86_64
+	license = AGPL-3.0
+	makedepends = xz-utils
+	depends = x11-common
+	depends = libasound2
+	depends = wget
+	depends = gstreamer1.0-libav
+	depends = gstreamer1.0-plugins-ugly
+	depends = libxss1
+	depends = libatk1.0-0
+	depends = libgtk-3-0
+	depends = libcairo2
+	depends = libgconf-2-4
+	depends = libstdc++6
+	depends = fonts-dejavu
+	depends = fonts-opensymbol
+	depends = fonts-liberation
+	depends = fonts-crosextra-carlito
+	depends = xdg-utils
+	optdepends = ttf-dejavu
+	optdepends = fonts-takao-gothic
+	provides = onlyoffice
+	conflicts = onlyoffice
+	source = onlyoffice-bin-7.0.2::https://github.com/ONLYOFFICE/DesktopEditors/releases/download/v7.0.2/onlyoffice-desktopeditors_amd64.deb
+	sha256sums = 70ddaef2773f19e24dd8d474b98aba2bdfa9191d81dccc787bf13bd877f2e898
+
+pkgname = onlyoffice-bin
