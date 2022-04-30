@@ -1,0 +1,23 @@
+# Maintainer: cindrmon <cindrmon@protonmail.com>
+pkgname=linked-bin
+provides=('linked')
+conflicts=('linked')
+pkgdesc="Forget less by daily journaling - when note taking meets a calendar."
+pkgver=1.4.8
+pkgrel=1
+arch=('x86_64')
+url="https://github.com/lostdesign/linked"
+license=('GPL-3.0')
+depends=(
+    'bash'
+    'libgtk-3-0' 
+    'libgtk-3-dev'
+)
+source=("${pkgname}-${pkgver}-${arch}.deb"::"${url}/releases/download/v${pkgver}/linked_${pkgver}_amd64.deb")
+sha256sums=('SKIP')
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.xz..."
+    tar -xf 'data.tar.xz' -C "${pkgdir}"
+}

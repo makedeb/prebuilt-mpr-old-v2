@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = linked-bin
+	pkgdesc = Forget less by daily journaling - when note taking meets a calendar.
+	pkgver = 1.4.8
+	pkgrel = 1
+	url = https://github.com/lostdesign/linked
+	arch = x86_64
+	license = GPL-3.0
+	depends = bash
+	depends = libgtk-3-0
+	depends = libgtk-3-dev
+	provides = linked
+	conflicts = linked
+	source = linked-bin-1.4.8-x86_64.deb::https://github.com/lostdesign/linked/releases/download/v1.4.8/linked_1.4.8_amd64.deb
+	sha256sums = SKIP
+
+pkgname = linked-bin
