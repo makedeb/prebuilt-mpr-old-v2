@@ -1,0 +1,22 @@
+generated-by = makedeb-makepkg
+
+pkgbase = gdm-tools-git
+	pkgdesc = Tools for theming Gnome Login Manager (GDM)
+	pkgver = 73.d20c840
+	pkgrel = 1
+	url = https://github.com/realmazharhussain/gdm-tools
+	arch = any
+	license = GPL3
+	depends = bash
+	depends = dconf-cli
+	depends = libglib2.0-dev
+	depends = gdm3
+	provides = gdm-tools
+	provides = set-gdm-theme
+	provides = gnomeconf2gdm
+	backup = etc/gdm-tools/set-gdm-theme.conf
+	backup = etc/gdm-tools/custom.css
+	source = gdm-tools-git::git+https://github.com/realmazharhussain/gdm-tools.git
+	md5sums = SKIP
+
+pkgname = gdm-tools-git
