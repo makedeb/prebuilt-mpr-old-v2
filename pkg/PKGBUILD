@@ -1,0 +1,23 @@
+# Maintainer: Rudra Saraswat <rs2009@ubuntu.com>
+pkgname=gamebuntu-bin
+pkgver=1.0.6
+pkgrel=1
+url='https://gitlab.com/rswat09/gamebuntu'
+pkgdesc='Transform an Ubuntu install into a complete game-ready (!) setup'
+arch=('any')
+depends=('libnotify4' 'libxtst6' 'libnss3' 'una-bin')
+makedepends=('unzip')
+provides=('gamebuntu')
+
+source=('https://gitlab.com/rswat09/gamebuntu/-/jobs/artifacts/main/download?job=build')
+sha256sums=('SKIP')
+
+prepare() {
+    mv 'download?job=build' 'artifacts.zip'
+    unzip -o artifacts.zip
+}
+
+package() {
+    cd dist
+    ar p gamebuntu*.deb data.tar.xz | tar xJ -C "$pkgdir"
+}

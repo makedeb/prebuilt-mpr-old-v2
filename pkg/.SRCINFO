@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = gamebuntu-bin
+	pkgdesc = Transform an Ubuntu install into a complete game-ready (!) setup
+	pkgver = 1.0.6
+	pkgrel = 1
+	url = https://gitlab.com/rswat09/gamebuntu
+	arch = any
+	makedepends = unzip
+	depends = libnotify4
+	depends = libxtst6
+	depends = libnss3
+	depends = una-bin
+	provides = gamebuntu
+	source = https://gitlab.com/rswat09/gamebuntu/-/jobs/artifacts/main/download?job=build
+	sha256sums = SKIP
+
+pkgname = gamebuntu-bin
