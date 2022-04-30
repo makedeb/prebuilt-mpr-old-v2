@@ -1,0 +1,24 @@
+generated-by = makedeb-makepkg
+
+pkgbase = lazydocker-bin
+	pkgdesc = A simple terminal UI for docker and docker-compose, written in Go with the gocui library
+	pkgver = 0.12
+	pkgrel = 1
+	url = https://github.com/jesseduffield/lazydocker
+	arch = aarch64
+	arch = armv7h
+	arch = i686
+	arch = x86_64
+	license = MIT
+	provides = lazydocker
+	conflicts = lazydocker
+	source_aarch64 = https://github.com/jesseduffield/lazydocker/releases/download/v0.12/lazydocker_0.12_Linux_arm64.tar.gz
+	sha256sums_aarch64 = 46a236c55ac143f72b7c01eedfb9317942b743f6fc1d6d00d80ca9b31b2eb5ab
+	source_armv7h = https://github.com/jesseduffield/lazydocker/releases/download/v0.12/lazydocker_0.12_Linux_armv7.tar.gz
+	sha256sums_armv7h = 1a4d523d71c9cf3541271c90e2f08873e980da1cf1c474ea9256f45d4ca5aae5
+	source_i686 = https://github.com/jesseduffield/lazydocker/releases/download/v0.12/lazydocker_0.12_Linux_x86.tar.gz
+	sha256sums_i686 = 031b97a34efa178db7ca3979e0285be2cd0e8a8692db6c627ceb959d053173de
+	source_x86_64 = https://github.com/jesseduffield/lazydocker/releases/download/v0.12/lazydocker_0.12_Linux_x86_64.tar.gz
+	sha256sums_x86_64 = a52d6e33aceb88099ccecca76fce1122a0bda29aae704c1a727a98379d0271fc
+
+pkgname = lazydocker-bin
