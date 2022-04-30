@@ -1,0 +1,17 @@
+generated-by = makedeb-makepkg
+
+pkgbase = heroic-bin
+	pkgdesc = HGL, a Native alternative Linux Launcher for Epic Games
+	pkgver = 2.2.3
+	pkgrel = 1
+	url = https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
+	arch = x86_64
+	license = GPL3
+	depends = gawk
+	depends = zstd
+	noextract = heroic-2.2.3.pacman
+	options = !strip
+	source = https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.2.3/heroic-2.2.3.pacman
+	md5sums = 89380998afd83c41e0df104be443be81
+
+pkgname = heroic-bin
