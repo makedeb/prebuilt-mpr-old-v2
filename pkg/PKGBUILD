@@ -1,0 +1,33 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname="jgmenu-git"
+_pkgname=${pkgname%-git}
+pkgver=4.3.0
+pkgrel=2
+arch=('amd64' 'i686' )
+pkgdesc="Simple, independent, contemporary-looking X11 menu, designed for scripting, ricing and tweaking"
+url="https://www.github.com/johanmalm/jgmenu"
+depends=()
+makedepends=('pkg-config' 'libxml2-dev' 'libx11-6' 'libx11-dev' 'libxrandr-dev' 'libcairo2-dev' 'libpangocairo-1.0-0' 'libpango-1.0-0' 'librsvg2-dev' 'gir1.2-glib-2.0' 'libmenu-cache-dev') 
+license=('GPL')
+provides=('jgmenu')
+conflicts=('jgmenu')
+# replaces=('jgmenu' )
+
+source=("${_pkgname}::git+https://github.com/johanmalm/${_pkgname}.git")
+sha256sums=('SKIP')
+
+build() {
+	cd "${_pkgname}"
+	./configure --prefix=/usr --with-lx --with-pmenu
+	make
+}
+
+check(){
+	cd "${_pkgname}"
+	make test
+}
+
+package() {
+	cd "${_pkgname}"
+	make DESTDIR="${pkgdir}" prefix=/usr install
+}
