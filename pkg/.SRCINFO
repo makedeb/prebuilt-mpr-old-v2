@@ -1,0 +1,16 @@
+pkgbase = python3-docutils-stubs
+	pkgdesc = PEP 561 based Type information for docutils
+	pkgver = 0.0.21
+	pkgrel = 1
+	url = https://github.com/tk0miya/docutils-stubs
+	arch = any
+	license = custom:Unlicense
+	makedepends = python3-setuptools
+	depends = python3
+	depends = python3-docutils
+	source = https://pypi.org/packages/source/d/docutils-stubs/docutils-stubs-0.0.21.tar.gz
+	source = https://raw.githubusercontent.com/tk0miya/docutils-stubs/1f13dcdbebb06bc742b797bc5765a70d734a7fbc/LICENSE
+	sha512sums = b469dd35cd9934fc9c53ec3a62b473fbcfb230d42dc501d202da4c8be0e1ee2aef8c2722824cb191f9814aa3f12f773113bda96e4aa35d0b28efd1a6d76656f1
+	sha512sums = f23a3f3ec79340594ea40d731087e8586326a96c6cb9675c7a58687255885148286aa73cee087a5a3c976ea901fde16e229d00e98c65188cce3f0d75c8390a10
+
+pkgname = python3-docutils-stubs
