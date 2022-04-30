@@ -1,0 +1,14 @@
+pkgbase = cutefish-wallpapers
+	pkgdesc = CutefishOS system wallpaper
+	pkgver = 0.4
+	pkgrel = 1
+	url = https://github.com/cutefishos/wallpapers
+	arch = any
+	groups = cutefish
+	license = GPL
+	makedepends = cmake
+	makedepends = ninja-build
+	source = cutefish-wallpapers::git+https://github.com/cutefishos/wallpapers.git
+	md5sums = SKIP
+
+pkgname = cutefish-wallpapers
