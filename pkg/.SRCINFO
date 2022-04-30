@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = viper-browser-appimage
+	pkgdesc = Viper Browser - A powerful yet lightweight web browser built with the Qt framework - Appimage version
+	pkgver = 1
+	pkgrel = 1
+	url = https://github.com/LeFroid/Viper-Browser
+	arch = x86_64
+	license = MIT
+	depends = fuse2fs
+	provides = viper-browser
+	conflicts = viper-browser
+	options = !strip
+	source = https://github.com/LeFroid/Viper-Browser/releases/download/continuous/Viper_Browser-1-x86_64.AppImage
+	source = https://raw.githubusercontent.com/LeFroid/Viper-Browser/master/LICENSE
+	sha512sums = SKIP
+	sha512sums = SKIP
+
+pkgname = viper-browser-appimage
