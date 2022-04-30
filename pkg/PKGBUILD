@@ -1,0 +1,23 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at protonmail dot com>
+
+pkgname='discord-canary'
+pkgver='0.0.135'
+pkgrel='1'
+pkgdesc="Chat for Communities and Friends"
+arch=('x86_64')
+_base_depends=('libc6' 'libasound2' 'libatomic1' 'libgconf-2-4' 'libnotify4' 'libnspr4' 'libnss3' 'libstdc++6' 'libxss1'
+                'libxtst6' 'libc++1')
+depends=("${_base_depends[@]}" 'libappindicator1')
+bullseye_depends=("${_base_depends[@]}" 'libayatana-appindicator1')
+
+url="https://discord.com"
+license=('custom')
+source=("https://dl-canary.discordapp.net/apps/linux/${pkgver}/${pkgname}-${pkgver}.deb")
+sha256sums=('111fb8b7e416f5af95a6eafc884d8bcaa9853b0883400a7ceba6fc610128edef')
+
+package() {
+    tar -xf 'data.tar.gz' -C "${pkgdir}"
+    mkdir -p "${pkgdir}/DEBIAN"
+    tar -xf 'control.tar.gz' -C "${pkgdir}/DEBIAN"
+    rm "${pkgdir}/DEBIAN/control"
+}
