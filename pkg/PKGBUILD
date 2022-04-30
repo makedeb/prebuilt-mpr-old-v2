@@ -1,0 +1,40 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=castero-git
+pkgver=1813c2372022.04.02
+pkgrel=2
+pkgdesc="Podcast client for the command line"
+arch=('any')
+url="https://github.com/xgi/castero"
+license=('MIT')
+depends=('python3-lxml' 'python3-mpv' 'python3-requests' 'python3-vlc' 'python3-gevent' 'python3-bs4')
+checkdepends=('python3-coverage' 'python3-pytest')
+#'python3-beautifulsoup4' 'python3-cjkwrap' 'python3-grequests' 'python3-codacy-coverage' 
+makedepends=('git')
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+source=(${pkgname}::git+https://github.com/xgi/castero.git)
+sha256sums=('SKIP')
+
+pkgver() {
+  cd ${pkgname}
+    _always=$(git describe --always | sed -e 's:-:.:g' -e 's:v::') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+#build() {
+#  cd ${pkgname}
+#  python3 setup.py build
+#}
+
+check() {
+  cd ${pkgname}
+  python3 -m pytest tests
+}
+
+package() {
+  cd ${pkgname}
+  python3 setup.py install --root="${pkgdir}/" --optimize=1
+}
+
