@@ -14,8 +14,8 @@ curl -q "https://${proget_url}/debian-feeds/prebuilt-mpr.pub" | gpg --dearmor | 
 echo "deb [signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://${proget_url} prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
 sudo apt update
 
-# Set perms on current directory, since Drone CI clones under 'root' by default.
-sudo chown 'makedeb:makedeb' ./ -R
+# Set perms on current directory and pkgdir, since Drone CI clones under 'root' by default.
+sudo chown 'makedeb:makedeb' ./ /var/tmp/prebuilt-mpr/ -R
 
 # Build the package.
 cd pkg/
