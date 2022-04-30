@@ -1,0 +1,21 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at protonmail dot com>
+
+pkgname='moar-bin'
+_gitname='moar'
+pkgver='1.9.2'
+pkgrel='1'
+pkgdesc="A pager designed to just do the right thing without any configuration."
+arch=('x86_64')
+url='https://github.com/walles/moar'
+license=('BSD')
+optdepends=('highlight')
+checkdepends=('highlight')
+source=("moar"::"${url}/releases/download/v${pkgver}/moar-v${pkgver}-linux-386")
+sha256sums=('a31a71b8d1b004aed3afe7ed4919033c717292cd3b8c7d8baa12e3345bad3aab')
+provides=('moar')
+conflicts=("${_gitname}-git" "${_gitname}")
+
+package() {
+    cd "${srcdir}"
+    install -Dm 755 "moar" "${pkgdir}/usr/bin/moar"
+}
