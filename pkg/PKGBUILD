@@ -1,6 +1,6 @@
 # Maintainer:  only_vip <onlyme_vip@protonmail.com>
 pkgname=zotero
-pkgver=6.0.5
+pkgver=6.0.6
 pkgrel=3
 pkgdesc="Zotero Standalone. Is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources."
 arch=('amd64')
@@ -11,7 +11,7 @@ depends=('libdbus-glib-1-2' 'libgtk-3-0' 'libnss3' 'libxt6')
 source=("Zotero-${pkgver}_linux_$CARCH.tar.bz2::https://www.zotero.org/download/client/dl?channel=release&platform=linux-$CARCH&version=${pkgver}"
     "zotero.desktop"
         "zotero.install")
-sha512sums=("568583c44436d9830e0b9271bfaedf7380556498c757de0bcea07ba97202aa853f92501c9aa755637ba4810d266a43c2ee17a1eedef564d22821e7f4ee337ff0"
+sha512sums=("b38990497ff1471e763f4bbc96c09aaa89fc0d10a0e55a584edd3bb35f9d446d359eac1d8637a9af4bb8585870bbb27393ffb12379dab1b04dab3469c68b4741"
     "e1a0a4ff5cc1b53f13776ca11927d671426b0691e78e74a4adf2166d57bb2ae8ac409cc11a37ce5e2f680fdf05d5bc3849c33a9717aca1bb62d03ae5231a67fb"
             "f5155d464a1e8fab71b92b62eebe9001788f7baf792413a08634c897c9ff35daadb418a0c11f2980d45ef2c00c0223062b58f46c450b962208e2ccca4d4d6f9e")
 #source_amd64=()
