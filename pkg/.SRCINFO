@@ -1,0 +1,17 @@
+generated-by = makedeb-makepkg
+
+pkgbase = apt-fast
+	pkgdesc = shellscript wrapper for apt-get or aptitude
+	pkgver = 1.9.12
+	pkgrel = 1
+	url = https://github.com/ilikenwf/apt-fast
+	arch = any
+	license = GPL3
+	depends = debconf
+	depends = aria2
+	optdepends = aptitude
+	conflicts = apt-fast-git
+	source = git+https://github.com/ilikenwf/apt-fast.git#tag=1.9.12
+	sha256sums = SKIP
+
+pkgname = apt-fast

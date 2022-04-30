@@ -1,0 +1,27 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname="apt-fast"
+_gitname="apt-fast"
+pkgver="1.9.12"
+pkgrel="1"
+pkgdesc="shellscript wrapper for apt-get or aptitude"
+arch=('any')
+url="https://github.com/ilikenwf/apt-fast"
+license=('GPL3')
+depends=('debconf' 'aria2')
+optdepends=('aptitude')
+source=("git+${url}.git#tag=${pkgver}")
+sha256sums=('SKIP')
+conflicts=("${_gitname}-git")
+
+package() {
+    cd "${srcdir}/${_gitname}"
+    install -vDm 644 "./apt-fast.conf" -t "${pkgdir}/etc/"
+    install -vDm 755 "./apt-fast" -t "${pkgdir}/usr/bin/"
+    install -vDm 644 "./man/apt-fast.8" -t "${pkgdir}/usr/share/man/man8/"
+    install -vDm 644 "./man/apt-fast.conf.5" -t "${pkgdir}/usr/share/man/man5/"
+    # installing completions
+    install -vDm 644 "./completions/bash/apt-fast" -t "${pkgdir}/usr/share/bash-completion/completions/"
+    install -vDm 644 "./completions/fish/apt-fast.fish" -t "${pkgdir}/usr/share/fish/completions/"
+    install -vDm 644 "./completions/zsh/_apt-fast" -t "${pkgdir}/usr/share/zsh/functions/Completion/Debian/"
+}
