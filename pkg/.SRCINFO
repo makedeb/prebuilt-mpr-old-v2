@@ -1,0 +1,18 @@
+generated-by = makedeb
+pkgname = urxvt-config-git
+pkgbase = urxvt-config-git
+pkgdesc = A graphical user interface tool for configuration of the rxvt-unicode terminal emulator.
+pkgrel = 2
+pkgver = 1f5140f92017.11.30
+url = https://github.com/daedreth/URXVTConfig
+arch = amd64
+conflicts = urxvt-config-git
+depends = libqt5charts5
+license = LGPL-3.0
+makedepends = qt5-qmake
+makedepends = libqt5charts5-dev
+provides = urxvt-config-git
+source = URXVTConfig::git+https://github.com/daedreth/URXVTConfig.git#branch=master
+md5sums = SKIP
+makedepends = qt5-qmake
+makedepends = libqt5charts5-dev
