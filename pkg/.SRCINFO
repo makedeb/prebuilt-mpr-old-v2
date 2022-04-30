@@ -1,0 +1,43 @@
+generated-by = makedeb-makepkg
+
+pkgbase = keepassxc-git
+	pkgdesc = Cross-platform community-driven port of KeePass Password Safe
+	pkgver = 2.6.3.r300.g7efaca6f
+	pkgrel = 1
+	url = https://github.com/keepassxreboot/keepassxc
+	arch = i686
+	arch = x86_64
+	license = GPL2
+	checkdepends = xvfb
+	checkdepends = xclip
+	makedepends = git
+	makedepends = intltool
+	makedepends = cmake
+	makedepends = qttools5-dev
+	makedepends = asciidoctor
+	depends = qtbase5-dev
+	depends = qtbase5-private-dev
+	depends = libqt5x11extras5-dev
+	depends = qttranslations5-l10n
+	depends = qt5-image-formats-plugins
+	depends = libxtst6
+	depends = shared-mime-info
+	depends = hicolor-icon-theme
+	depends = desktop-file-utils
+	depends = libusb-1.0
+	depends = libpcsclite-dev
+	depends = libqt5svg5-dev
+	depends = libqrencode-dev
+	depends = libminizip-dev
+	depends = zlib1g
+	depends = libbotan-2-dev
+	provides = org.freedesktop.secrets
+	provides = keepassxc=2.6.3.r300.g7efaca6f
+	conflicts = keepassxc
+	replaces = keepassx-http
+	replaces = keepassx-reboot-git
+	options = !emptydirs
+	source = git+https://github.com/keepassxreboot/keepassxc.git#branch=develop
+	sha256sums = SKIP
+
+pkgname = keepassxc-git

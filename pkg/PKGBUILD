@@ -1,0 +1,60 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+# Contributor: zocker_160 <zocker1600 at posteo dot net>
+
+# AUR Maintainer: Chih-Hsuan Yen <yan12125@gmail.com>
+# AUR Contributor: Daniel Landau <daniel@landau.fi>
+# AUR Contributor: Maxqia <contrib@maxqia.com>
+
+# The following people have contributed to the AUR keepassx-git package
+# AUR Contributor: Lev Lybin <aur@devtrue.net>
+# AUR Contributor: Jamie Macdonald <jamie.alban@gmail.com>
+# AUR Contributor: Alucryd <alucryd at gmail dot com>
+# AUR Contributor: Paolo Stivanin <admin at polslinux dot it>
+
+pkgname=keepassxc-git
+_gitname=keepassxc
+pkgver=2.6.3.r300.g7efaca6f
+pkgrel=1
+pkgdesc="Cross-platform community-driven port of KeePass Password Safe"
+arch=('i686' 'x86_64')
+url="https://github.com/keepassxreboot/keepassxc"
+license=('GPL2')
+depends=('qtbase5-dev' 'qtbase5-private-dev' 'libqt5x11extras5-dev' 'qttranslations5-l10n' 'qt5-image-formats-plugins' 'libxtst6' 'shared-mime-info' 'hicolor-icon-theme' 'desktop-file-utils' 'libusb-1.0' 'libpcsclite-dev' 'libqt5svg5-dev' 'libqrencode-dev' 'libminizip-dev' 'zlib1g' 'libbotan-2-dev')
+makedepends=('git' 'intltool' 'cmake' 'qttools5-dev' 'asciidoctor')
+checkdepends=('xvfb' 'xclip')
+provides=('org.freedesktop.secrets' "keepassxc=$pkgver")
+conflicts=('keepassxc')
+replaces=('keepassx-http' 'keepassx-reboot-git')
+options=(!emptydirs)
+source=("git+https://github.com/keepassxreboot/keepassxc.git#branch=develop")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "${_gitname}"
+    git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+    cd "${_gitname}"
+    cmake -B build \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_BINDIR=/usr/bin \
+        -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+        -DCMAKE_VERBOSE_MAKEFILE=OFF \
+        -DWITH_GUI_TESTS=ON \
+        -DWITH_XC_ALL=ON \
+        -DWITH_XC_KEESHARE_SECURE=ON \
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    make -C build -j$(nproc)
+}
+
+#check() {
+#    cd "${_gitname}/build"
+#    xvfb-run --auto-display make test
+#}
+
+package() {
+    cd "${_gitname}/build"
+    make DESTDIR="${pkgdir}" install
+}
+
