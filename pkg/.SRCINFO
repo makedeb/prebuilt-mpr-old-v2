@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = dtc-git
+	pkgdesc = Device Tree Compiler
+	pkgver = 1.6.1.r43.gc001fc0
+	pkgrel = 1
+	url = http://jdl.com/software/
+	arch = i686
+	arch = x86_64
+	license = GPL2
+	makedepends = git
+	provides = dtc
+	conflicts = dtc
+	replaces = dtc
+	source = git://git.kernel.org/pub/scm/utils/dtc/dtc.git
+	md5sums = SKIP
+
+pkgname = dtc-git
