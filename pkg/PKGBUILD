@@ -1,0 +1,22 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname='starship-bin'
+pkgdesc='The cross-shell prompt for astronauts'
+pkgver='1.6.3'
+pkgrel=2
+arch=('amd64')
+url="https://starship.rs/"
+license=('ISC')
+depends=('openssl' 'zlib1g')
+buster_depends=(${depends[@]} 'zlibc')
+optdepends=('fonts-powerline: powerline symbols for terminals'
+            'fonts-noto-color-emoji: emoji support for terminals')
+#makedepends=()
+#checkdepends=()
+provides=('starship')
+conflicts=('starship')
+# replaces=('starship')
+source=("${pkgname}-v${pkgver}.tar.gz::https://github.com/starship/starship/releases/download/v${pkgver}/starship-x86_64-unknown-linux-gnu.tar.gz")
+sha512sums=("aa30606060b1ce0116438b04635ee1c89ec57c70ba4cbb14f8b71cbab5a5d2e9df7fefbdac82a299cf73ebe1fad93929fef2a40df1138f4b89485653db99ce8c")
+package() {
+    install -Dm755 "starship" "$pkgdir/usr/bin/starship"
+}
