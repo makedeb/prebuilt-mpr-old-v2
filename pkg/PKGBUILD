@@ -1,0 +1,29 @@
+# Maintainer: rei_k <sousuke20xx at gmail.com>
+# Contributor: Nicola Squartini <tensor5@gmail.com>
+
+pkgname=asar
+pkgver=3.1.0
+pkgrel=1
+pkgdesc='Creating Electron app packages'
+arch=('any')
+url='https://github.com/electron/asar'
+license=('MIT')
+depends=('nodejs')
+makedepends=('modclean' 'npm') #If you use NODESOURCE, please comment out.
+#makedepends=('modclean')
+options=(!emptydirs)
+
+package() {
+    npm install -g --prefix="${srcdir}/usr" ${pkgname}@${pkgver}
+    cp -r "${srcdir}/usr" "${pkgdir}"
+
+    cd "${pkgdir}/usr/lib/node_modules/${pkgname}"
+    install -dm755 "${pkgdir}/usr/share/licenses/${pkgname}"
+    ln -s \
+        $(realpath --relative-to="${pkgdir}"/usr/share/licenses/${pkgname} LICENSE.md) \
+        "${pkgdir}/usr/share/licenses/${pkgname}"
+
+    sed -e "s|${srcdir}|/|" -i package.json
+    find node_modules -name 'package.json' -exec sed -e "s|${srcdir}||" -i {} \;
+    modclean -r -a "*.ts,.bin,.github,.vscode,bin.js" --ignore='license'  # --ignore='license*'
+}

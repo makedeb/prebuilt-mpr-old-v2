@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = asar
+	pkgdesc = Creating Electron app packages
+	pkgver = 3.1.0
+	pkgrel = 1
+	url = https://github.com/electron/asar
+	arch = any
+	license = MIT
+	makedepends = modclean
+	makedepends = npm
+	depends = nodejs
+	options = !emptydirs
+
+pkgname = asar
