@@ -1,0 +1,21 @@
+# Maintainer: cindrmon <cindrmon@protonmail.com>
+pkgname=hugo-bin
+provides=('hugo')
+conflicts=('hugo')
+pkgdesc="The world's fastest framework for building websites."
+pkgver=0.93.2
+pkgrel=1
+arch=('x86_64')
+url="https://github.com/gohugoio/hugo"
+license=('Apache 2.0')
+depends=(
+    'bash'
+)
+source=("${pkgname}-${pkgver}-${arch}.deb"::"${url}/releases/download/v${pkgver}/hugo_${pkgver}_Linux-64bit.deb")
+sha256sums=('SKIP')
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.xz..."
+    tar -xf 'data.tar.gz' -C "${pkgdir}"
+}

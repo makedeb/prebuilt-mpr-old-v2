@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = hugo-bin
+	pkgdesc = The world's fastest framework for building websites.
+	pkgver = 0.93.2
+	pkgrel = 1
+	url = https://github.com/gohugoio/hugo
+	arch = x86_64
+	license = Apache 2.0
+	depends = bash
+	provides = hugo
+	conflicts = hugo
+	source = hugo-bin-0.93.2-x86_64.deb::https://github.com/gohugoio/hugo/releases/download/v0.93.2/hugo_0.93.2_Linux-64bit.deb
+	sha256sums = SKIP
+
+pkgname = hugo-bin
