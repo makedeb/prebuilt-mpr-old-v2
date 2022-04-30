@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = nerd-fonts-victor-mono
+	pkgdesc = A Nerd Font patched version of Victor Mono
+	pkgver = 2.1.0
+	pkgrel = 1
+	url = https://www.nerdfonts.com
+	install = nerd-fonts-victor-mono.install
+	arch = any
+	license = MIT
+	depends = fontconfig
+	provides = nerd-fonts-victor-mono
+	conflicts = nerd-fonts-victor-mono
+	source = https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/VictorMono.zip
+	source = https://github.com/ryanoasis/nerd-fonts/raw/v2.1.0/LICENSE
+	sha512sums = 394e823ed12fc3975d26dfcf3a3c1a0df3150b7160675c7c64d6756a67e695f6ae4b1daabbcaaac4f5abaaaa3cc71a0f3b635f93cd93b4a9801d7b32c8f3b949
+	sha512sums = 95712651fb58ad5f5ee1b796b1891e5cb6c62532699c08d3cd9255df46c10336faa170b4ec5a920be44d2cba68ab7726907c800e4a9b0060483437569cfe6fd3
+
+pkgname = nerd-fonts-victor-mono
