@@ -1,0 +1,28 @@
+# Contributor: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Maksym Titenko <titenko.m@gmail.com>
+
+pkgname=cutefish-screenlocker
+pkgver=0.4
+pkgrel=1
+pkgdesc="CutefishOS system screen locker"
+arch=('x86_64')
+url="https://github.com/cutefishos/screenlocker"
+control_fields=("MPR-Package: ${pkgname}")
+license=('GPL')
+groups=('cutefish')
+depends=('fishui' 'libcutefish')
+makedepends=('extra-cmake-modules' 'qttools5-dev' 'qttools5-dev-tools')
+source=("${pkgname}::git+https://github.com/cutefishos/screenlocker.git")
+md5sums=('SKIP')
+
+build() {
+  cd cutefish-screenlocker
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr .
+  make
+}
+
+package() {
+  cd cutefish-screenlocker
+  make DESTDIR="$pkgdir" install
+}
