@@ -1,0 +1,39 @@
+# Maintainer: Leo Puvilland <lpuvilla0001@mymail.lausd.net>
+# Contributor: prg <prg@xannode.com>
+
+pkgname=kitty-bin
+pkgver=0.23.1
+pkgrel=1
+pkgdesc="Cross-platform, fast, feature-rich, GPU based terminal."
+arch=('x86_64')
+url="https://sw.kovidgoyal.net/kitty"
+license=('GPL3')
+provides=('kitty')
+conflicts=('kitty' 'kitty-doc')
+replaces=('kitty')
+depends=('kitty-terminfo')
+
+source=("https://github.com/kovidgoyal/kitty/releases/download/v${pkgver}/kitty-${pkgver}-x86_64.txz")
+sha256sums=("a82c30fd77c1ccb90df1a26a75cbfe7c97b3f969a7d6bd754edfc20ee8279b24")
+
+package() {
+    # Make folders
+    mkdir "$pkgdir/usr"
+    mkdir "$pkgdir/usr/bin"
+    mkdir "$pkgdir/usr/lib"
+    mkdir "$pkgdir/usr/share"
+
+    cd "$srcdir"
+    usrdir="$pkgdir/usr"
+
+    libdir="$usrdir/lib/"
+    bindir="$usrdir/bin/"
+    sharedir="$usrdir/share/"
+    # Copy everything to where it should be
+    cp -a bin/* "$bindir"
+    cp -a lib/* "$libdir"
+    cp -a share/* "$sharedir"
+    # Don't include terminfo; use kitty-terminfo
+    rm -rf "$sharedir/terminfo"
+}
+

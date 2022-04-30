@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = kitty-bin
+	pkgdesc = Cross-platform, fast, feature-rich, GPU based terminal.
+	pkgver = 0.23.1
+	pkgrel = 1
+	url = https://sw.kovidgoyal.net/kitty
+	arch = x86_64
+	license = GPL3
+	depends = kitty-terminfo
+	provides = kitty
+	conflicts = kitty
+	conflicts = kitty-doc
+	replaces = kitty
+	source = https://github.com/kovidgoyal/kitty/releases/download/v0.23.1/kitty-0.23.1-x86_64.txz
+	sha256sums = a82c30fd77c1ccb90df1a26a75cbfe7c97b3f969a7d6bd754edfc20ee8279b24
+
+pkgname = kitty-bin
