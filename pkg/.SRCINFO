@@ -1,0 +1,15 @@
+generated-by = makedeb-makepkg
+
+pkgbase = python3-pypresence
+	pkgdesc = A complete Discord RPC and Rich Presence wrapper library in Python
+	pkgver = 4.2.1
+	pkgrel = 1
+	url = https://qwertyquerty.github.io/pypresence/html/index.html
+	arch = any
+	license = MIT
+	makedepends = python3-setuptools
+	depends = python3
+	source = https://files.pythonhosted.org/packages/source/p/pypresence/pypresence-4.2.1.tar.gz
+	sha256sums = 691daf98c8189fd216d988ebfc67779e0f664211512d9843f37ab0d51d4de066
+
+pkgname = python3-pypresence

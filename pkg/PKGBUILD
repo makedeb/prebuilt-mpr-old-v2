@@ -1,0 +1,29 @@
+# Contributor: Luis Martinez <luis dot martinez at tuta dot io>
+# Contributor: Ronan Pigott <rpigott@berkeley.edu>
+# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+
+pkgname=python3-pypresence
+pkgver=4.2.1
+pkgrel=1
+pkgdesc='A complete Discord RPC and Rich Presence wrapper library in Python'
+url='https://qwertyquerty.github.io/pypresence/html/index.html'
+arch=('any')
+license=('MIT')
+depends=('python3')
+makedepends=('python3-setuptools')
+source=("https://files.pythonhosted.org/packages/source/p/pypresence/pypresence-$pkgver.tar.gz")
+sha256sums=('691daf98c8189fd216d988ebfc67779e0f664211512d9843f37ab0d51d4de066')
+
+build() {
+  cd "${srcdir}/pypresence-${pkgver}"
+  python3 setup.py build
+}
+
+package() {
+  cd "${srcdir}/pypresence-${pkgver}"
+  python3 setup.py install --prefix=/usr --root="${pkgdir}" --install-layout=deb --optimize=1 --skip-build
+  
+  # dirty fix for Ubuntu
+  #mv "$pkgdir"/usr/lib/python3.* "$pkgdir"/usr/lib/python3
+  #mv "$pkgdir"/usr/lib/python3/site-packages "$pkgdir"/usr/lib/python3/dist-packages
+}
