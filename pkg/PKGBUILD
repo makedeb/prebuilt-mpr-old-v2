@@ -1,0 +1,33 @@
+# Maintainer: only_vip  <onlyme_vip@protonmail.com>
+pkgname=elementary-stylesheet
+_pkgname=stylesheet
+pkgver=6.1.1
+pkgrel=1
+pkgdesc="The GTK Stylesheet for elementary OS"
+arch=('any')
+url="https://github.com/elementary/stylesheet"
+license=('GPL3')
+depends=()
+#buster_depends=(${depends[@]} 'libpcre2-posix0' 'libverto-libev1' )
+#focal_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+#groovy_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+#hirsute_depends=(${depends[@]} 'libpcre2-posix2' 'libverto-libevent1')
+makedepends=('meson' 'sassc')
+provides=('elementary-stylesheet')
+conflicts=('elementary-stylesheet')
+# replaces=('elementary-stylesheet')
+source=("${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha512sums=('7c39748acedfeedcea68b772a7046860b98a117a3829db380934ac10a42e8d5f23f3e9c1c470568f87f003e2bd8e764417bff96db8ecbb7c4771a6a3255a25e2')
+options=(!strip)
+
+build() {
+  cd ${srcdir}/${_pkgname}-${pkgver}
+  meson build --prefix=/usr
+  cd build 
+  ninja
+}
+
+package() {
+  cd ${srcdir}/${_pkgname}-${pkgver}/build
+  DESTDIR=${pkgdir} ninja install
+}

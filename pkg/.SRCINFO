@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = elementary-stylesheet
+	pkgdesc = The GTK Stylesheet for elementary OS
+	pkgver = 6.1.1
+	pkgrel = 1
+	url = https://github.com/elementary/stylesheet
+	arch = any
+	license = GPL3
+	makedepends = meson
+	makedepends = sassc
+	provides = elementary-stylesheet
+	conflicts = elementary-stylesheet
+	options = !strip
+	source = https://github.com/elementary/stylesheet/archive/refs/tags/6.1.1.tar.gz
+	sha512sums = 7c39748acedfeedcea68b772a7046860b98a117a3829db380934ac10a42e8d5f23f3e9c1c470568f87f003e2bd8e764417bff96db8ecbb7c4771a6a3255a25e2
+
+pkgname = elementary-stylesheet
