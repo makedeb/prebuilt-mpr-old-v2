@@ -1,0 +1,32 @@
+# Maintainer: only_vip  <onlyme_vip@protonmail.com>
+pkgname="exa-bin"
+_pkgname="exa"
+pkgver=0.10.1
+pkgrel=3
+pkgdesc="Replacement for ls written in Rust"
+arch=("amd64" "armv7")
+depends=("unzip")
+provides=("exa")
+conflicts=("exa")
+# replaces=("exa")
+url="https://github.com/ogham/${_pkgname}"
+license=("MIT")
+
+source_amd64=("https://github.com/ogham/${_pkgname}/releases/download/v${pkgver}/${_pkgname}-linux-x86_64-v${pkgver}.zip"
+                  "https://github.com/ogham/exa/blob/master/LICENCE")
+source_armv7=("https://github.com/ogham/${_pkgname}/releases/download/v${pkgver}/${_pkgname}-linux-armv7-v${pkgver}.zip"
+                  "https://github.com/ogham/exa/blob/master/LICENCE")
+sha512sums_amd64=("6897aae29da9f6aa4a16ce14d8d7a00c9c292cef447b0d1c973465533f144d43b259b907c152637b0835f74b7c421650c23e3321579bb703b0a1a33979e46faa"
+                        "SKIP")
+sha256sums_armv7=("5b2c80e142a40b6c3146e99ca22c28befb43c9bf94a61efc34e06efc07b8af960fc829e444854af26c7fe69b4da6e1b445c3d9511db7cfe43c8eb628def447b7"
+                        "SKIP")
+
+package() {
+		install -Dm755 "${srcdir}/bin/${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
+		install -Dm644 "${srcdir}/man/${_pkgname}.1" "${pkgdir}/usr/man/man1/${_pkgname}.1"
+		install -Dm644 "${srcdir}/man/${_pkgname}_colors.5" "${pkgdir}/usr/man/man1/${_pkgname}_colors.5"
+		install -Dm644 "$srcdir/completions/${_pkgname}.bash" "${pkgdir}/etc/bash_completion.d/${_pkgname}.bash"
+		install -Dm644 "${srcdir}/completions/${_pkgname}.zsh" "${pkgdir}/usr/share/zsh/site-functions/${_pkgname}.zsh"
+		install -Dm644 "${srcdir}/completions/${_pkgname}.fish" "${pkgdir}/usr/share/fish/vendor_completions.d/${_pkgname}.fish"
+		install -Dm644 "LICENCE" "${pkgdir}/usr/share/licenses/${_pkgname}"
+}
