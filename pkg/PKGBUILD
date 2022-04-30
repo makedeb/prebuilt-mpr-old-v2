@@ -1,0 +1,34 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+_pkgname=sxhkd
+pkgname=${_pkgname}-git
+pkgver=1870.6.22020.08.02
+pkgrel=2
+pkgdesc='A simple X hotkey daemon'
+arch=('i686' 'amd64' 'armv7h')
+url="https://github.com/baskerville/${_pkgname}"
+license=('custom:BSD')
+depends=('libxcb1' 'libxcb-keysyms1')
+makedepends=('git' 'libxcb-keysyms1-dev' 'libxcb-util-dev' 'libxcb-icccm4-dev' 'libxcb-ewmh-dev')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+source=("${_pkgname}::git+https://github.com/baskerville/${_pkgname}.git")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/${_pkgname}"
+    _always=$(git describe --always | sed -e 's:-:.:g') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+build() {
+    cd "${srcdir}/${_pkgname}"
+    make PREFIX=/usr
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}"
+    make PREFIX=/usr DESTDIR="${pkgdir}" install
+    install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
