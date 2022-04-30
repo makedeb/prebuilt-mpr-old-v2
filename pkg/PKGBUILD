@@ -1,0 +1,21 @@
+# Maintainer: Ege Öz <ege.oz@tutanota.com> 
+pkgname=hardened-malloc
+pkgver=11
+pkgrel=1
+pkgdesc="Hardened memory allocator from GraphaneOS project"
+arch=('any')
+makedepends=('gcc')
+
+source=("https://github.com/GrapheneOS/hardened_malloc/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('14331990899b91f9323230c280d66f0d1a77c386eb5d206d4cd0d8b5683098da')
+
+build() {
+	cd hardened_malloc-${pkgver}
+	make -j$(nproc)
+}
+
+package() {
+	cd hardened_malloc-${pkgver}
+	mkdir -p "${pkgdir}/usr/local/lib/"
+	install -Dm775 out/libhardened_malloc.so "${pkgdir}/usr/local/lib/"
+}
