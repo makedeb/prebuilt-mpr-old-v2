@@ -1,0 +1,44 @@
+# Maintainer: steiner <daimarstein@pm.me>
+# AUR Maintainer: Nocifer <apmichalopoulos at gmail dot com>
+# AUR Contributor: david0
+
+pkgname=reaper-bin
+pkgver=6.51
+pkgrel=1
+pkgdesc="A complete digital audio production application for computers, offering a full multitrack audio and MIDI recording, editing, processing, mixing and mastering toolset"
+arch=('x86_64' 'i686' 'aarch64' 'armv7l')
+url="https://reaper.fm"
+license=('custom')
+depends=('libgtk-3-0' 'desktop-file-utils' 'xdg-utils' 'libaribb24-0')
+optdepends=('jackd2' 'pulseaudio')
+provides=("reaper=${pkgver}" 'lv2-host' 'vst-host' 'vst3-host')
+source_x86_64=("https://reaper.fm/files/6.x/reaper${pkgver//.}_linux_x86_64.tar.xz")
+source_i686=("https://reaper.fm/files/6.x/reaper${pkgver//.}_linux_i686.tar.xz")
+source_aarch64=("https://reaper.fm/files/6.x/reaper${pkgver//.}_linux_aarch64.tar.xz")
+source_armv7l=("https://reaper.fm/files/6.x/reaper${pkgver//.}_linux_armv7l.tar.xz")
+sha256sums_x86_64=('2ceb7c77d2100a2efbc823f6f47d9d138cf53ba451e0fba6d873e8cc6e7c47c8')
+sha256sums_i686=('2d31e4417aa08ed6b447586ee2c2ca4c69e99cc5de6f9d6bb13978f0c12c5a08')
+sha256sums_aarch64=('77dc28dcce619ba6771c46fee10317a6fb53b8fc1d4a23b314a2bdbfe6c4a26f')
+sha256sums_armv7l=('bb4fe04bfba5091600df570d7873828d39b57e596d284cfdf76d3b2a1ef1c47e')
+CARCH=$(uname -m)
+
+package() {
+    XDG_DATA_HOME="${srcdir}/desktop" sh "${srcdir}/reaper_linux_${CARCH}/install-reaper.sh" --install "${pkgdir}/opt" --integrate-user-desktop
+
+    rm "${pkgdir}/opt/REAPER/uninstall-reaper.sh"
+
+    mkdir -p "${pkgdir}/usr/bin"
+    ln -s /opt/REAPER/reaper "${pkgdir}/usr/bin/reaper"
+
+    mkdir -p "${pkgdir}/usr/share/licenses/reaper"
+    ln -s /opt/REAPER/EULA.txt "${pkgdir}/usr/share/licenses/reaper/LICENSE"
+
+    sed -i 's#^Exec.*#Exec="/opt/REAPER/reaper" %F#g' "${srcdir}/desktop/applications/cockos-reaper.desktop"
+
+    install -Dm644 "${srcdir}/desktop/applications/cockos-reaper.desktop" "${pkgdir}/usr/share/applications/cockos-reaper.desktop"
+
+    install -d "${pkgdir}/usr/share/icons/hicolor/256x256/apps"
+    install -m644 "${srcdir}/desktop/icons/hicolor/256x256/apps/"*.png "${pkgdir}/usr/share/icons/hicolor/256x256/apps"
+
+    install -Dm644 "${srcdir}/desktop/mime/packages/application-x-reaper.xml" "${pkgdir}/usr/share/mime/packages/application-x-reaper.xml"
+}
