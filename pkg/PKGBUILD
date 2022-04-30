@@ -1,0 +1,41 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=spotify-adblock-git
+_pkgname=${pkgname%-*}
+pkgver=105793f62022.03.15
+pkgrel=2
+#epoch=1
+license=("GPL3")
+pkgdesc="Adblocker for Spotify"
+depends=("spotify")
+makedepends=("git" "rustc" "cargo")
+arch=("amd64")
+provides=("spotify-adblock")
+conflicts=("spotify-adblock")
+url=https://github.com/abba23/spotify-adblock
+
+backup=("/etc/spotify-adblock/config.toml")
+
+source=("${_pkgname}::git+${url}.git"
+		"${_pkgname}.desktop")
+
+sha512sums=('SKIP'
+			'69f497a0b869e855b7c6c733c73ee3f285000d56543bf5083382fe1957a9be9a27f8e7eff6e3ef5ccaf5c12ee7750c7e8561bef54e688e5b8b738b320f5cf90a')
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+    _always=$(git describe --always | sed -e 's:-:.:g' -e 's:v::') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	make DESTDIR="${pkgdir}" PREFIX=/usr install
+	install -D --mode=644 "../${_pkgname}.desktop" "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
+}
