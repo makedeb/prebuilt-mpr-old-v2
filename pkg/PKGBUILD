@@ -1,0 +1,43 @@
+# Maintainer: Matt Spaulding <matt@mattops.io>
+ 
+_pkgname=simple-tpm-pk11
+
+pkgname=${_pkgname}-git
+pkgver=0.06.29.g3302ccd
+pkgrel=1
+pkgdesc="Simple PKCS11 provider for TPM chips"
+url="http://blog.habets.se/2013/11/TPM-chip-protecting-SSH-keys---properly"
+arch=('x86_64')
+license=('APACHE')
+depends=('tpm-tools' 'libopencryptoki0')
+conflicts=('simple-tpm-pk11')
+provides=("simple-tpm-pk11=$pkgver")
+makedepends=('git')
+source=("git+https://github.com/ThomasHabets/simple-tpm-pk11.git")
+md5sums=('SKIP')
+ 
+
+pkgver() {
+  cd ${_pkgname}
+  git describe --tags | sed -E 's/\([\^\-\]\*-g\)/r/;s/-/./g;s/simple\.tpm\.pk11.//g'
+}
+
+prepare() {
+  cd ${_pkgname}
+  ./bootstrap.sh
+}
+
+build() {
+  cd ${_pkgname}
+  ./configure -prefix=/usr
+  make
+}
+
+package() {
+  cd ${_pkgname}
+  make DESTDIR=${pkgdir} install
+  install -dm755 ${pkgdir}/usr/share/doc/${_pkgname}
+  install -m644 LICENSE ${pkgdir}/usr/share/doc/${_pkgname}/copyright
+  install -m644 README.md TPM-TROUBLESHOOTING ${pkgdir}/usr/share/doc/${_pkgname}/
+}
+

@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = simple-tpm-pk11-git
+	pkgdesc = Simple PKCS11 provider for TPM chips
+	pkgver = 0.06.29.g3302ccd
+	pkgrel = 1
+	url = http://blog.habets.se/2013/11/TPM-chip-protecting-SSH-keys---properly
+	arch = x86_64
+	license = APACHE
+	makedepends = git
+	depends = tpm-tools
+	depends = libopencryptoki0
+	provides = simple-tpm-pk11=0.06.29.g3302ccd
+	conflicts = simple-tpm-pk11
+	source = git+https://github.com/ThomasHabets/simple-tpm-pk11.git
+	md5sums = SKIP
+
+pkgname = simple-tpm-pk11-git
