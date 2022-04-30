@@ -1,0 +1,47 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org> 
+
+pkgname=thunderbird-en-us-bin-wayland 
+_pkgname=thunderbird 
+pkgdesc="Web Browser - wayland enabled - (English (American))" 
+pkgrel=2 
+pkgver=91.8.1 
+arch=('amd64') 
+url="https://www.mozilla.org/thunderbird" 
+license=('Mozilla Public License 2.0') 
+provides=('thunderbird') 
+conflicts=('thunderbird') 
+source=("https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/en-US/thunderbird-$pkgver.tar.bz2" 
+        "thunderbird.desktop" 
+        "https://style.thunderbird.net/images/product-identity-assets/thunderbird-logo.svg") 
+sha256sums=('SKIP' 
+            'SKIP' 
+            'SKIP') 
+ 
+ 
+package() { 
+
+
+    cd "$srcdir" 
+    mkdir -p "$pkgdir/usr/bin" 
+    install -d -m755 "$pkgdir/usr/lib/$pkgname" 
+    install -Dm644 "$_pkgname.desktop" -t "$pkgdir/usr/share/applications" 
+    cp -r ./thunderbird/* "$pkgdir/usr/lib/$pkgname" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/thunderbird" "$pkgdir/usr/bin/thunderbird" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/16x16/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/22x22/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/24x24/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/32x32/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/48x48/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/64x64/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/128x128/apps" 
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/256x256/apps" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default16.png" "$pkgdir/usr/share/icons/hicolor/16x16/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default22.png" "$pkgdir/usr/share/icons/hicolor/22x22/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default24.png" "$pkgdir/usr/share/icons/hicolor/24x24/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default32.png" "$pkgdir/usr/share/icons/hicolor/32x32/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default48.png" "$pkgdir/usr/share/icons/hicolor/48x48/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default64.png" "$pkgdir/usr/share/icons/hicolor/64x64/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default128.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/$_pkgname.png" 
+    ln -rs "$pkgdir/usr/lib/$pkgname/chrome/icons/default/default256.png" "$pkgdir/usr/share/icons/hicolor/256x256/apps/$_pkgname.png" 
+    install -D -m644 thunderbird-logo.svg "$pkgdir"/usr/share/icons/hicolor/scalable/apps/$_pkgname.svg 
+}
