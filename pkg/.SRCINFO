@@ -1,0 +1,25 @@
+generated-by = makedeb-makepkg
+
+pkgbase = bitwise-git
+	pkgdesc = Terminal based bit manipulator in ncurses
+	pkgver = 0.40.r27.gf8d5ade
+	pkgrel = 1
+	url = https://github.com/mellowcandle/bitwise
+	arch = i686
+	arch = x86_64
+	license = GPL3
+	makedepends = git
+	makedepends = libreadline-dev
+	makedepends = libcunit1-dev
+	makedepends = libncurses5-dev
+	makedepends = build-essential
+	depends = ncurses-base
+	depends = ncurses-bin
+	depends = ncurses-doc
+	depends = readline-common
+	conflicts = bitwise
+	replaces = bitwise
+	source = bitwise-git::git+https://github.com/mellowcandle/bitwise
+	md5sums = SKIP
+
+pkgname = bitwise-git
