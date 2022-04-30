@@ -1,0 +1,13 @@
+generated-by = makedeb-makepkg
+
+pkgbase = unsnap
+	pkgdesc = Quickly migrate from using snap packages to flatpaks
+	pkgver = 0.0.1
+	pkgrel = 1
+	url = https://github.com/popey/unsnap
+	arch = x86_64
+	arch = arm64
+	depends = git
+	depends = curl
+
+pkgname = unsnap

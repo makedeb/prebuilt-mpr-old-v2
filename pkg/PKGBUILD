@@ -1,0 +1,16 @@
+# Maintainer: Rudra Saraswat <rs2009@ubuntu.com>
+pkgname=unsnap
+pkgver=0.0.1
+pkgrel=1
+pkgdesc='Quickly migrate from using snap packages to flatpaks'
+arch=(x86_64 arm64)
+depends=(git curl)
+focal_depends=()
+url='https://github.com/popey/unsnap'
+
+package() {
+    mkdir -p "${pkgdir}/usr/bin"
+    echo '#!/bin/bash' > "${pkgdir}/usr/bin/unsnap"
+    echo 'git clone https://github.com/popey/unsnap /tmp/unsnap; cd /tmp/unsnap; chmod +x unsnap; ./unsnap' >> "${pkgdir}/usr/bin/unsnap"
+    chmod 755 "${pkgdir}/usr/bin/unsnap"
+}
