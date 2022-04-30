@@ -1,0 +1,8 @@
+*
+!.gitignore
+!PKGBUILD
+!.SRCINFO
+!*.install
+!Makefile
+!sysinit.vim
+!debian.vim
