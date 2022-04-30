@@ -1,0 +1,26 @@
+# Maintainer: Giovanni Ivan Alberotanza <ivan81@disroot.org>
+# Developer: Timofey Titovets <nefelim4ag@gmail.com>
+
+pkgname=ananicy
+pkgver=2.2.1
+pkgrel=1
+pkgdesc="Another auto nice daemon, with community rules support"
+arch=('any')
+url="https://github.com/Nefelim4ag/Ananicy.git"
+license=('GPL3')
+depends=('bash' 'schedtool' 'python3')
+optdepends=('systemd: systemd service')
+makedepends=('git' 'make')
+source=("$pkgname"::"git+https://github.com/Nefelim4ag/Ananicy.git#tag=${pkgver}")
+sha256sums=('SKIP')
+backup=('etc/ananicy.d/ananicy.conf')
+
+package() {
+  cd "$srcdir/${pkgname}/"
+  make install PREFIX="$pkgdir"
+  mkdir -p "$pkgdir/usr/"
+  mv -v "$pkgdir/lib" "$pkgdir/usr/"
+	echo "To enable:"
+	echo "\$ sudo systemctl enable ananicy"
+	echo "Configs in /etc/ananicy.d/"
+}
