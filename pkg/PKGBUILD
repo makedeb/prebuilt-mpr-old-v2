@@ -1,0 +1,27 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=nerd-fonts-jetbrains-mono
+_name=JetBrainsMono
+pkgver=2.1.0
+pkgrel=1
+pkgdesc="A Nerd Font patched version of JetBrains Mono"
+arch=('any')
+url="https://www.nerdfonts.com"
+license=('MIT')
+makedepends=('fontconfig')
+provides=(${pkgname})
+conflicts=(${pkgname})
+# replaces=(${pkgname})
+install="${pkgname}.install"
+source=("${_name}-${pkgver}.zip::https://github.com/ryanoasis/nerd-fonts/releases/download/v${pkgver}/${_name}.zip"
+        "https://github.com/ryanoasis/nerd-fonts/raw/v$pkgver/LICENSE"
+)
+sha512sums=('effc1a81670c37b07f17f1c756a480091c777f6074b59cd6eefd09c8d5210b529de3c41e9cedf4992aacd9fe5bb3a5b331411bfe5b2b6f0eb8680a8e852247c2'
+            '95712651fb58ad5f5ee1b796b1891e5cb6c62532699c08d3cd9255df46c10336faa170b4ec5a920be44d2cba68ab7726907c800e4a9b0060483437569cfe6fd3'
+  )
+
+
+package() {
+        find . -iname "*.otf" -not -iname "*Windows Compatible.otf" -execdir install -Dm644 {} "$pkgdir/usr/share/fonts/OTF/{}" \;
+        find . -iname "*.ttf" -not -iname "*Windows Compatible.ttf" -execdir install -Dm644 {} "$pkgdir/usr/share/fonts/TTF/{}" \;
+        install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
