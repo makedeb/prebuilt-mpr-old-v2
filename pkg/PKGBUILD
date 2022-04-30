@@ -1,0 +1,23 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+
+_pkgver='2021-09-24'
+
+pkgname=matcha-gtk-theme
+pkgver=${_pkgver//-/.}
+pkgrel='1'
+pkgdesc="A flat Design theme for GTK 3, GTK 2 and Gnome-Shell"
+arch=('any')
+depends=('gtk2-engines-murrine' 'gtk2-engines-pixbuf')
+license=('GPL3')
+url="https://github.com/vinceliuice/Matcha-gtk-theme"
+options=('!strip')
+
+source=("${url}/archive/refs/tags/${_pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+	mkdir -p "${pkgdir}/usr/share/themes/"
+
+	cd "Matcha-gtk-theme-${_pkgver}"
+	./install.sh -d "${pkgdir}/usr/share/themes/"
+}

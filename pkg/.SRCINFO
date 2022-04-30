@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = matcha-gtk-theme
+	pkgdesc = A flat Design theme for GTK 3, GTK 2 and Gnome-Shell
+	pkgver = 2021.09.24
+	pkgrel = 1
+	url = https://github.com/vinceliuice/Matcha-gtk-theme
+	arch = any
+	license = GPL3
+	depends = gtk2-engines-murrine
+	depends = gtk2-engines-pixbuf
+	options = !strip
+	source = https://github.com/vinceliuice/Matcha-gtk-theme/archive/refs/tags/2021-09-24.tar.gz
+	sha256sums = SKIP
+
+pkgname = matcha-gtk-theme
