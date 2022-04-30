@@ -1,0 +1,18 @@
+generated-by = makedeb-makepkg
+
+pkgbase = intellij-idea-ce
+	pkgdesc = Intellij Idea IDE community version with Intellij JDK
+	pkgver = 2021.2.3
+	pkgrel = 1
+	url = http://www.jetbrains.com/idea/
+	arch = any
+	license = Apache2
+	depends = giflib-tools
+	depends = libxtst6
+	options = !strip
+	source = https://download.jetbrains.com/idea/ideaIC-2021.2.3.tar.gz
+	source = intellij-idea-ce.desktop
+	sha256sums = 582eb0b6dc9cb3c181d179638ccae54a89cfe73bd59fac6806c4fee8b586d998
+	sha256sums = b38188c0533db6861cf5193deebd58731ad93647ae3c03b3fae6f7748b4ff849
+
+pkgname = intellij-idea-ce
