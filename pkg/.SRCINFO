@@ -1,0 +1,23 @@
+generated-by = makedeb-makepkg
+
+pkgbase = glslang
+	pkgdesc = OpenGL and OpenGL ES shader front end and validator
+	pkgver = 11.6.0
+	pkgrel = 1
+	url = https://github.com/KhronosGroup/glslang
+	arch = x86_64
+	license = BSD
+	makedepends = cmake
+	makedepends = ninja-build
+	makedepends = git
+	depends = python3
+	conflicts = glslang
+	options = staticlibs
+	source = glslang-11.6.0.tar.gz::https://github.com/KhronosGroup/glslang/archive/11.6.0.tar.gz
+	source = git+https://github.com/KhronosGroup/SPIRV-Tools#commit=1fbed83c8aab8517d821fcb4164c08567951938f
+	source = git+https://github.com/KhronosGroup/SPIRV-Headers#commit=449bc986ba6f4c5e10e32828783f9daef2a77644
+	sha256sums = 99ecd3a0c2c2219293d76723846f762a9f3e7dd0dc2a4f346d0fc3a05a0ce000
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = glslang
