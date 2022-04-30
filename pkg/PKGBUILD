@@ -1,0 +1,29 @@
+# Maintainer: Nico <d3sox at protonmail dot com>
+pkgname=pipewire-full
+pkgver=0.3.44
+pkgrel=1
+pkgdesc="PipeWire is a server and user space API to deal with multimedia pipelines"
+arch=('x86_64')
+replaces=("pipewire" "pipewire-bin" "libpipewire-0.3-0" "libpipewire-0.3-modules" "libpipewire-0.3-dev" "libspa-0.2-modules" "libspa-0.2-dev")
+provides=("pipewire=$pkgver" "pipewire-bin=$pkgver" "libpipewire-0.3-0=$pkgver" "libpipewire-0.3-modules=$pkgver" "libpipewire-0.3-dev=$pkgver" "libspa-0.2-modules=$pkgver" "libspa-0.2-dev=$pkgver")
+url="https://pipewire.org"
+license=('MIT')
+makedepends=('meson>=0.59.0' 'ninja-build' 'libdbus-1-dev' 'libasound2-dev' 'libudev-dev')
+source=("https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/$pkgver/pipewire-$pkgver.zip")
+sha256sums=('3ddb9a246fa7c048284851081e08d1b106df491e3b1fcd2bdc9d76460c245f04')
+
+prepare() {
+  cd "$srcdir/pipewire-$pkgver"
+  meson setup builddir
+}
+
+build() {
+  cd "$srcdir/pipewire-$pkgver"
+  meson configure builddir -Dprefix=/usr
+  ninja -C builddir
+}
+
+package() {
+  cd "$srcdir/pipewire-$pkgver/builddir"
+  DESTDIR="$pkgdir" meson install
+}

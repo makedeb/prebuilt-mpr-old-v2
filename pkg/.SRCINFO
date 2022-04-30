@@ -1,0 +1,30 @@
+pkgbase = pipewire-full
+	pkgdesc = PipeWire is a server and user space API to deal with multimedia pipelines
+	pkgver = 0.3.44
+	pkgrel = 1
+	url = https://pipewire.org
+	arch = x86_64
+	license = MIT
+	makedepends = meson>=0.59.0
+	makedepends = ninja-build
+	makedepends = libdbus-1-dev
+	makedepends = libasound2-dev
+	makedepends = libudev-dev
+	provides = pipewire=0.3.44
+	provides = pipewire-bin=0.3.44
+	provides = libpipewire-0.3-0=0.3.44
+	provides = libpipewire-0.3-modules=0.3.44
+	provides = libpipewire-0.3-dev=0.3.44
+	provides = libspa-0.2-modules=0.3.44
+	provides = libspa-0.2-dev=0.3.44
+	replaces = pipewire
+	replaces = pipewire-bin
+	replaces = libpipewire-0.3-0
+	replaces = libpipewire-0.3-modules
+	replaces = libpipewire-0.3-dev
+	replaces = libspa-0.2-modules
+	replaces = libspa-0.2-dev
+	source = https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/0.3.44/pipewire-0.3.44.zip
+	sha256sums = 3ddb9a246fa7c048284851081e08d1b106df491e3b1fcd2bdc9d76460c245f04
+
+pkgname = pipewire-full
