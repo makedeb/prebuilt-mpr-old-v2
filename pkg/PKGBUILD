@@ -1,0 +1,29 @@
+# Maintainer: Matt Spaulding <matt@mattops.io>
+
+pkgname=xow-git
+_pkgname=xow
+pkgver=0.5.r44.g75e3b5d
+pkgrel=1
+pkgdesc="Linux driver for the Xbox One wireless dongle"
+arch=(x86_64)
+url=https://github.com/medusalix/xow
+license=('GPL2')
+depends=('libusb-1.0-0')
+makedepends=('git' 'cabextract' 'libusb-1.0-0-dev')
+source=('git+https://github.com/mspaulding06/xow.git#branch=develop')
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "$srcdir/$_pkgname"
+  make PREFIX=/usr BUILD=RELEASE
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+  make PREFIX=/usr DESTDIR=$pkgdir/ SYSDDIR=/usr/lib/systemd/system install
+}
