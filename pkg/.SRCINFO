@@ -1,0 +1,13 @@
+generated-by = makedeb-makepkg
+
+pkgbase = drone-cli-bin
+	pkgdesc = Command Line Tools for Drone CI
+	pkgver = 1.4.0
+	pkgrel = 2
+	url = https://github.com/drone/drone-cli
+	arch = x86_64
+	license = Apache-2.0
+	source_x86_64 = https://github.com/drone/drone-cli/releases/download/v1.4.0/drone_linux_amd64.tar.gz
+	sha256sums_x86_64 = cc16d7ea7bf1faff2a15a352acb9f7d9223cd4f888a285c31ed226023f34642c
+
+pkgname = drone-cli-bin

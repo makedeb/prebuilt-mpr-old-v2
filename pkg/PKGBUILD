@@ -1,0 +1,16 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+
+pkgname=drone-cli-bin
+pkgver='1.4.0'
+pkgrel=2
+pkgdesc="Command Line Tools for Drone CI"
+arch=('x86_64')
+license=('Apache-2.0')
+url="https://github.com/drone/drone-cli"
+
+source_x86_64=("${url}/releases/download/v${pkgver}/drone_linux_amd64.tar.gz")
+sha256sums_x86_64=('cc16d7ea7bf1faff2a15a352acb9f7d9223cd4f888a285c31ed226023f34642c')
+
+package() {
+    install -Dm 555 "${srcdir}/drone" "${pkgdir}/usr/bin/drone"
+}
