@@ -1,0 +1,19 @@
+generated-by = makedeb
+pkgname = code-bin
+pkgbase = code-bin
+pkgdesc = Code editing. Redefined.
+pkgrel = 1
+pkgver = 1.66.2
+url = https://code.visualstudio.com
+arch = x86_64
+depends = libnss3>=2:3.26
+depends = gnupg
+depends = apt
+depends = libxkbfile1
+depends = libsecret-1-0
+depends = libgtk-3-0>=3.10.0
+depends = libxss1
+depends = libgbm1
+provides = visual-studio-code
+source = code-1.66.2.deb::https://update.code.visualstudio.com/1.66.2/linux-deb-x64/stable
+sha512sums = 582ccef7724021941b0dea4022117e9990d9a6233bbd5591359864bfa73c677188b5244b831be2f7b098cb9cc828811c68607322da353bf26bcd47978c2b1ba8
