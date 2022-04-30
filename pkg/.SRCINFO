@@ -1,0 +1,16 @@
+generated-by = makedeb-makepkg
+
+pkgbase = lzfse-git
+	pkgdesc = The LZFSE compression library and command line tool
+	pkgver = 1.55.e634ca5
+	pkgrel = 1
+	url = https://github.com/lzfse/lzfse
+	arch = i686
+	arch = x86_64
+	license = BSD
+	makedepends = git
+	provides = lzfse
+	source = git+https://github.com/lzfse/lzfse
+	sha1sums = SKIP
+
+pkgname = lzfse-git
