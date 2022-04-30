@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = gh-git
+	pkgdesc = The GitHub CLI
+	pkgver = 1.5258.c2a9c5a7
+	pkgrel = 2
+	url = https://github.com/cli/cli
+	arch = any
+	license = MIT
+	makedepends = golang-go
+	makedepends = git
+	depends = libc6-dev
+	optdepends = git: To interact with repositories
+	conflicts = gh
+	conflicts = gh-bin
+	source = git+https://github.com/cli/cli.git
+	sha256sums = SKIP
+
+pkgname = gh-git
