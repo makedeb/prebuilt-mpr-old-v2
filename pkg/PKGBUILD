@@ -1,0 +1,36 @@
+# Maintainer: only_vip <onlyme_vip@protonmail.com>
+pkgname=epy-git
+_pkgname=epy
+pkgver=150dd4fa2022.04.18
+pkgrel=2
+pkgdesc="CLI Ebook Reader, fork of epr with minor improvements"
+arch=('any')
+url='https://github.com/wustho/epy'
+license=('MIT')
+depends=('python3')
+provides=('epy')
+conflicts=('epy')
+makedepends=( 'git' 'python3-setuptools')
+optdepends=('libttspico-utils:  Small Footprint TTS '
+            'sox:  Swiss army knife of sound processing')
+source=("${_pkgname}::git+https://github.com/wustho/${_pkgname}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+    _always=$(git describe --always | sed -e 's:-:.:g' -e 's:v::') # always is mobile, and switches between numbers and letters, can't use it for versioning
+    _commits=$(git rev-list --count HEAD | sed 's:-:.:g') # total commits is the most sane way of getting incremental pkgver
+    _date=$(git log -1 --date=short --pretty=format:%cd)
+    printf "%s%s%s\n" "${_commits}" "${_always}" "${_date}" | sed -e 's:-:.:g'  -e 's:_:.:g'
+}
+
+build() {
+    cd ${_pkgname}
+    python3 setup.py build
+}
+
+package() {
+    install -D "$srcdir/${_pkgname}/LICENSE" "$pkgdir/usr/share/licenses/$pkgname"
+    cd ${_pkgname}
+    python3 setup.py install --root="$pkgdir" --optimize=1 --skip-build
+}
