@@ -1,0 +1,34 @@
+# Maintainer: canony <canony@protonmail.ch>
+
+pkgname=nebula-bin
+_pkgname=nebula
+pkgver=1.5.2
+pkgrel=1
+pkgdesc='A scalable overlay networking tool with a focus on performance, simplicity and security'
+arch=('x86_64' 'arm64' 'i386')
+url='https://github.com/slackhq/nebula'
+license=('MIT')
+provides=('nebula')
+conflicts=('nebula')
+
+source=("https://raw.githubusercontent.com/slackhq/nebula/v${pkgver}/examples/config.yml"
+        "https://raw.githubusercontent.com/slackhq/nebula/v${pkgver}/examples/service_scripts/nebula.service")
+source_x86_64=("${url}/releases/download/v${pkgver}/nebula-linux-amd64.tar.gz")
+source_arm64=("${url}/releases/download/v${pkgver}/nebula-linux-arm64.tar.gz")
+source_i386=("${url}/releases/download/v${pkgver}/nebula-linux-386.tar.gz")
+sha256sums=('83b5b1b2ecad0e6fc3f494c6cb4998876f404e51b2cfba6b7e1b4a40537bd45c'
+            '59b0a955b98022f1e8707993bbfbc4710661013233ed59567aef4803ae8f8c41')
+sha256sums_x86_64=('76816e3bab815ed07600a541f96e4093b911aca310bb74d2c72085a9a605af60')
+sha256sums_arm64=('1f9f817a3a8139c783626f61341ecff521e2a759126d2938768897d5e8152a09')
+sha256sums_i386=('edf1f06481e64b962531c7c6741e199822f41dd15858b446103ff83f810a8d1c')
+
+prepare() {
+  tar xvf "${srcdir}/nebula-linux-amd64.tar.gz"
+}
+
+package() {
+  install -Dm755 nebula -t "${pkgdir}/usr/local/bin/"
+  install -Dm755 nebula-cert -t "${pkgdir}/usr/local/bin/"
+  install -Dm644 config.yml "${pkgdir}/etc/nebula/config.example.yml"
+  install -Dm644 nebula.service -t "${pkgdir}/usr/lib/systemd/system/"
+}
