@@ -1,0 +1,25 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname="pngoptimizer"
+_gitname="pngoptimizer"
+pkgver="2.7"
+pkgrel="6"
+pkgdesc="Optimize PNGs and convert other lossless formats to PNG"
+arch=('x86_64')
+url="https://github.com/hadrien-psydk/pngoptimizer"
+license=('GPL')
+makedepends=('build-essential' 'libgtk-3-dev')
+
+source=("git+${url}.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+conflicts=("${_gitname}-git" "${_gitname}-bin")
+
+build() {
+    cd ${srcdir}/${_gitname}
+    make -j$(nproc)
+}
+
+package() {
+    cd ${srcdir}/${_gitname}
+    make DESTDIR="${pkgdir}" prefix="/usr" install
+}

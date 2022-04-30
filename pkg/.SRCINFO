@@ -1,0 +1,17 @@
+generated-by = makedeb-makepkg
+
+pkgbase = pngoptimizer
+	pkgdesc = Optimize PNGs and convert other lossless formats to PNG
+	pkgver = 2.7
+	pkgrel = 6
+	url = https://github.com/hadrien-psydk/pngoptimizer
+	arch = x86_64
+	license = GPL
+	makedepends = build-essential
+	makedepends = libgtk-3-dev
+	conflicts = pngoptimizer-git
+	conflicts = pngoptimizer-bin
+	source = git+https://github.com/hadrien-psydk/pngoptimizer.git#tag=v2.7
+	sha256sums = SKIP
+
+pkgname = pngoptimizer
