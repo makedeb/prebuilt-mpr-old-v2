@@ -1,0 +1,21 @@
+# Maintainer: Edgar <Edgar{at}AnotherFoxGuy.com>
+
+pkgname=miniserve-bin
+pkgver=0.19.3
+pkgrel=1
+pkgdesc='miniserve is a small, self-contained cross-platform CLI tool that allows you to just grab the binary and serve some file(s) via HTTP'
+url="https://github.com/svenstaro/miniserve"
+license=('MIT')
+provides=("miniserve")
+conflicts=("miniserve")
+options=("!strip")
+arch=('x86_64' 'aarch64')
+_filename="miniserve-v${pkgver}-${arch}"
+source_aarch64=("${_filename}::${url}/releases/download/v${pkgver}/miniserve-v${pkgver}-aarch64-unknown-linux-musl")
+source_x86_64=("${_filename}::${url}/releases/download/v${pkgver}/miniserve-v${pkgver}-x86_64-unknown-linux-musl")
+sha256sums_aarch64=('f45c6b3a55621454726704f7dcf41c026b7884c7440a287ca3d083b8a44cecfb')
+sha256sums_x86_64=('e40ff75066e89458d62dca1091f2370e935c872baf7aaa7cf4c3cc29939e5a5e')
+
+package() {
+    install -Dm755 "${srcdir}/${_filename}" "${pkgdir}/usr/bin/miniserve"
+}
