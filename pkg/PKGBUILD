@@ -1,0 +1,40 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+_pkgname=sieve
+pkgname=sieve-bin
+pkgver=0.6.1
+pkgrel=1
+pkgdesc='Sieve Script Editor'
+arch=('x86_64')
+makedepends=('findutils')
+license=('AGPL-3.0')
+url='https://github.com/thsmi/sieve'
+
+source=("${pkgname}-${pkgver}.AppImage::${url}/releases/download/${pkgver}/${_pkgname}-${pkgver}-linux-x64.AppImage")
+sha256sums=('SKIP')
+
+prepare() {
+    cd "${srcdir}/"
+
+    chmod +x "${pkgname}-${pkgver}.AppImage"
+    "./${pkgname}-${pkgver}.AppImage" --appimage-extract
+}
+
+package() {
+    cd "${srcdir}/squashfs-root/"
+    
+    # Install Sieve files.
+    install -d "${pkgdir}/opt/${pkgname}/"
+    find ./ -mindepth 1 -maxdepth 1 -exec cp -r '{}' "${pkgdir}/opt/${pkgname}/" \;
+
+    # Set up Sieve for desktop integration.
+    install -d "${pkgdir}/usr/bin/"
+    ln -s "/opt/${pkgname}/${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
+
+    install -d "${pkgdir}/usr/share/applications"
+    ln -s "/opt/${pkgname}/${_pkgname}.desktop" "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
+
+    install -d "${pkgdir}/usr/share/icons/hicolor/64x64/apps/"
+    ln -s "/opt/${pkgname}/${_pkgname}.png" "${pkgdir}/usr/share/icons/hicolor/64x64/apps/${_pkgname}.png"
+}
+
+# vim: set sw=4 expandtab:

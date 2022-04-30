@@ -1,0 +1,14 @@
+generated-by = makedeb-makepkg
+
+pkgbase = sieve-bin
+	pkgdesc = Sieve Script Editor
+	pkgver = 0.6.1
+	pkgrel = 1
+	url = https://github.com/thsmi/sieve
+	arch = x86_64
+	license = AGPL-3.0
+	makedepends = findutils
+	source = sieve-bin-0.6.1.AppImage::https://github.com/thsmi/sieve/releases/download/0.6.1/sieve-0.6.1-linux-x64.AppImage
+	sha256sums = SKIP
+
+pkgname = sieve-bin
