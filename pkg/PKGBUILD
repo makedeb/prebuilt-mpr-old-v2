@@ -1,0 +1,75 @@
+# Contributor: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Maksym Titenko <titenko.m@gmail.com>
+# Maintainer: Aryan Pathania <aynp>
+
+pkgname=cutefish-settings
+pkgver=0.4
+pkgrel=1
+pkgdesc="System Settings application for Cutefish Desktop"
+arch=('x86_64')
+url="https://github.com/cutefishos/settings"
+control_fields=("MPR-Package: ${pkgname}")
+license=('GPL')
+groups=('cutefish')
+depends=(
+'fishui'
+'libcutefish'
+'qml-module-qtquick-controls2'
+'qml-module-qtquick2'
+'qml-module-qtquick-layouts'
+'qml-module-qt-labs-platform'
+'qml-module-qt-labs-settings'
+'qml-module-qtqml'
+'qml-module-qtquick-window2'
+'qml-module-qtquick-shapes'
+'qml-module-qtquick-dialogs'
+'qml-module-qtquick-particles2'
+'kscreen'
+'libc6'
+'libcrypt1'
+'libfontconfig1'
+'libfreetype6'
+'libgcc-s1'
+'libicu67'
+'libqt5core5a'
+'libqt5dbus5'
+'libqt5gui5'
+'libqt5qml5'
+'libqt5widgets5'
+'libqt5x11extras5'
+'libqt5xml5'
+'libstdc++6'
+'libx11-6'
+'libxcursor1'
+'libxfixes3'
+'bluedevil'
+'libqt5quickcontrols2-5')
+makedepends=(
+'extra-cmake-modules'
+'ninja-build'
+'libicu-dev'
+'libcrypt-dev'
+'libfreetype6-dev'
+'libfontconfig1-dev'
+'libkf5networkmanagerqt-dev'
+'modemmanager-qt-dev'
+'qtbase5-dev'
+'libqt5x11extras5-dev'
+'qtdeclarative5-dev'
+'qtquickcontrols2-5-dev'
+'qttools5-dev'
+'qttools5-dev-tools')
+source=("${pkgname}::git+https://github.com/cutefishos/settings.git")
+md5sums=('SKIP')
+
+build() {
+  cd ${pkgname}
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr .
+  make
+}
+
+package() {
+  cd ${pkgname}
+  make DESTDIR="$pkgdir" install
+}
