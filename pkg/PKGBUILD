@@ -1,0 +1,21 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname="electronmail-bin"
+provides=('electron-mail')
+pkgver='4.15.0'
+pkgrel='1'
+pkgdesc="Unofficial ProtonMail Desktop App"
+arch=('x86_64')
+depends=('libgtk-3-0' 'libnotify4' 'libnss3' 'libxss1' 'libxtst6' 'xdg-utils' 'libatspi2.0-0' 'libuuid1' 'libsecret-1-0')
+license=('GPL')
+url="https://github.com/vladimiry/ElectronMail"
+
+source=("${url}/releases/download/v${pkgver}/electron-mail-${pkgver}-linux-amd64.deb")
+sha256sums=('f937527751a2a67280ff7c47c069e9e8c0a3bfa320d18cc4bb088ac1159a6e43')
+conflicts=("electronmail-git" "electronmail")
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.xz..."
+    tar -xf 'data.tar.xz' -C "${pkgdir}"
+}
