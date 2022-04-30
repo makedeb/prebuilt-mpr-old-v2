@@ -1,0 +1,34 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+pkgname=black
+pkgver='22.1.0'
+pkgrel=1
+pkgdesc='The uncompromising Python code formatter'
+arch=('x86_64')
+license=('MIT')
+makedepends=('git' 'python3-pip' 'python3-venv')
+url='https://black.readthedocs.io/en/stable/'
+
+source=("${pkgname}-${pkgver}::git+https://github.com/psf/black/#tag=${pkgver}")
+sha256sums=('SKIP')
+
+_build() {
+    cd "${pkgname}-${pkgver}/"
+    python3 -m venv ./env
+    source env/bin/activate
+
+    pip install --upgrade pip wheel setuptools pyinstaller
+    pip install ./
+    pyinstaller -F --name "${pkgname}" --add-data 'src/blib2to3:blib2to3' src/black/__main__.py
+    deactivate
+}
+
+build() {
+    export -f _build
+    export pkgname pkgver
+    bash -c '_build'
+}
+
+package() {
+    cd "${pkgname}-${pkgver}/"
+    install -Dm 755 "dist/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+}
