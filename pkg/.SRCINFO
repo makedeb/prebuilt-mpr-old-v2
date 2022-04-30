@@ -1,0 +1,29 @@
+generated-by = makedeb-makepkg
+
+pkgbase = scrcpy
+	pkgdesc = Display and control your Android device
+	pkgver = 1.18
+	pkgrel = 1
+	url = https://github.com/Genymobile/scrcpy
+	arch = i686
+	arch = x86_64
+	license = Apache
+	makedepends = meson
+	makedepends = gcc
+	makedepends = pkg-config
+	makedepends = meson
+	makedepends = ninja-build
+	makedepends = libsdl2-dev
+	makedepends = libavcodec-dev
+	makedepends = libavdevice-dev
+	makedepends = libavformat-dev
+	makedepends = libavutil-dev
+	depends = adb
+	depends = ffmpeg
+	depends = libsdl2-2.0-0
+	source = https://github.com/Genymobile/scrcpy/archive/v1.18.tar.gz
+	source = https://github.com/Genymobile/scrcpy/releases/download/v1.18/scrcpy-server-v1.18
+	sha256sums = 2995d74409e9a486e4f69d0f623299ebf615d9427d8e974dfd82355538a313e9
+	sha256sums = 641c5c6beda9399dfae72d116f5ff43b5ed1059d871c9ebc3f47610fd33c51a3
+
+pkgname = scrcpy
