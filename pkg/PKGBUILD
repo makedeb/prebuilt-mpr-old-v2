@@ -1,0 +1,20 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname="autokey-common-bin"
+pkgver='0.95.10'
+pkgrel='1'
+pkgdesc="desktop automation utility - common data"
+arch=('any')
+depends=('python3-dbus' 'python3-pyinotify' 'python3-xlib' 'wmctrl' 'python3')
+license=('GPL3')
+url="https://github.com/autokey/autokey"
+provides=('autokey-common')
+
+source=("${url}/releases/download/v${pkgver}/autokey-common_${pkgver}-0_all.deb")
+sha256sums=('45eddd55a17b89afa0d37446fc332f453d97d208ef2b26ac6f0a9753756eb9e5')
+
+package() {
+    # Extract data.tar.xz to pkgdir
+    msg2 "Extracting data.tar.gz..."
+    tar -xf 'data.tar.gz' -C "${pkgdir}"
+}

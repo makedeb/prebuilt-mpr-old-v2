@@ -1,0 +1,19 @@
+generated-by = makedeb-makepkg
+
+pkgbase = autokey-common-bin
+	pkgdesc = desktop automation utility - common data
+	pkgver = 0.95.10
+	pkgrel = 1
+	url = https://github.com/autokey/autokey
+	arch = any
+	license = GPL3
+	depends = python3-dbus
+	depends = python3-pyinotify
+	depends = python3-xlib
+	depends = wmctrl
+	depends = python3
+	provides = autokey-common
+	source = https://github.com/autokey/autokey/releases/download/v0.95.10/autokey-common_0.95.10-0_all.deb
+	sha256sums = 45eddd55a17b89afa0d37446fc332f453d97d208ef2b26ac6f0a9753756eb9e5
+
+pkgname = autokey-common-bin
