@@ -1,0 +1,33 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+# Contributor: Hunter Wittenborn <hunter@hunterwittenborn.com>
+pkgname="bookworm-git"
+_gitname="bookworm"
+pkgver=1.936.f3df858
+pkgrel=1
+pkgdesc="A simple and focused eBook reader"
+arch=('any')
+url="https://github.com/babluboy/bookworm"
+makedepends=('unzip' 'poppler-utils' 'unar' 'html2text' 'python2.7' 'libgtk-3-dev' 'libgee-0.8-dev' 'libgranite-dev' 'libsqlite3-dev' 'libxml2-dev' 'webkit2gtk-4.0' 'libwebkit2gtk-4.0-37' 'libpoppler-glib-dev' 'meson' 'valac' 'gettext' 'curl' 'ninja-build' 'appstream' 'git')
+
+source=("git+${url}.git")
+sha256sums=('SKIP')
+conflicts=("${_gitname}" "${_gitname}-bin")
+
+pkgver() {
+  cd "${_gitname}"
+
+  printf "1.%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)" | sed 's|^v||'
+}
+
+build() {
+    cd "${_gitname}"
+    meson build --prefix=/usr
+    cd build/
+    ninja
+}
+
+package() {
+    cd "${_gitname}/build"
+    DESTDIR="${pkgdir}" ninja install
+}
