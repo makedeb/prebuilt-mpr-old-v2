@@ -1,0 +1,22 @@
+generated-by = makedeb
+pkgname = gh
+pkgbase = gh
+pkgdesc = The GitHub CLI
+pkgrel = 2
+pkgver = 2.9.0
+url = https://github.com/cli/cli
+arch = any
+conflicts = gh-git
+conflicts = gh-bin
+depends = libc6-dev
+license = MIT
+makedepends = golang-go
+makedepends = git
+makedepends = build-essential
+optdepends = git: To interact with repositories
+source = git+https://github.com/cli/cli.git#tag=v2.9.0
+sha256sums = SKIP
+makedepends = golang-go
+makedepends = git
+makedepends = build-essential
+optdepends = git: To interact with repositories
