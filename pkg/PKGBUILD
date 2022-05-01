@@ -3,12 +3,12 @@ _release=beta
 _target=mpr
 
 pkgname=makedeb-beta
-pkgver=14.0.5
+pkgver=14.1.1
 pkgrel=beta
 pkgdesc="A simplicity-focused packaging tool for Debian archives (${_release} release)"
 arch=('all')
 license=('GPL3')
-depends=('apt' 'binutils' 'curl' 'fakeroot' 'file' 'gettext' 'gawk' 'libarchive-tools' 'lsb-release' 'python3' 'python3-apt' 'zstd')
+depends=('apt' 'binutils' 'build-essential' 'curl' 'fakeroot' 'file' 'gettext' 'gawk' 'libarchive-tools' 'lsb-release' 'python3' 'python3-apt' 'zstd')
 makedepends=('asciidoctor' 'git' 'make' 'jq')
 conflicts=('makedeb-makepkg' 'makedeb-makepkg-beta' 'makedeb-makepkg-alpha')
 provides=('makedeb-makepkg' 'makedeb-makepkg-beta' 'makedeb-makepkg-alpha')
