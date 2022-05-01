@@ -22,6 +22,7 @@ def _pipeline(ctx, distro_codename, docker_image):
                 "name": "build",
                 "image": docker_image,
                 "pull": "always",
+                "failure": "ignore",
                 "environment": {
                     "distro_codename": distro_codename
                 },
@@ -48,6 +49,7 @@ def _pipeline(ctx, distro_codename, docker_image):
                 "name": "publish",
                 "image": docker_image,
                 "pull": "always",
+                "failure": "ignore",
                 "environment": {
                     "proget_api_key": {"from_secret": "proget_api_key"},
                     "distro_codename": distro_codename
