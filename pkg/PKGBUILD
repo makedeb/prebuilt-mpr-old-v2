@@ -1,0 +1,25 @@
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+
+pkgname='moonlight-qt'
+pkgver='4.0.0'
+pkgrel='1'
+pkgdesc='GameStream client for PCs (Windows, Mac, and Linux)'
+arch=('x86_64')
+license=('GPL')
+url='https://moonlight-stream.org'
+depends=('libegl1-mesa-dev' 'libgl1-mesa-dev' 'libopus-dev' 'libqt5svg5-dev' 'libsdl2-dev' 'libsdl2-ttf-dev' 'libssl-dev' 'libavcodec-dev' 'libva-dev' 'libvdpau-dev' 'libxkbcommon-dev' 'qt5-default' 'qt5-qmake' 'qtbase5-dev' 'qtdeclarative5-dev' 'qtquickcontrols2-5-dev' 'wayland-protocols' 'qml-module-qtquick-controls2' 'qml-module-qtquick-layouts' 'qml-module-qtquick-window2' 'qml-module-qtquick2' 'ffmpeg')
+makedepends=('git')
+source=("https://github.com/moonlight-stream/${pkgname}/releases/download/v${pkgver}/MoonlightSrc-${pkgver}.tar.gz")
+sha256sums=('18ae8bc7b699a9bdcbb1ae31f7b7a7d90e3140ddfc1951659e11aca41b71ad70')
+
+prepare() {
+    qmake PREFIX="${pkgdir}/usr" moonlight-qt.pro
+}
+
+build() {
+    make release
+}
+
+package() {
+    make install
+}
