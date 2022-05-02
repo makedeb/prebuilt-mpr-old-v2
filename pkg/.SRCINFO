@@ -3,7 +3,7 @@ pkgname = moar
 pkgbase = moar
 pkgdesc = A pager designed to just do the right thing without any configuration.
 pkgrel = 1
-pkgver = 1.9.2
+pkgver = 1.9.3
 url = https://github.com/walles/moar
 arch = any
 checkdepends = highlight
@@ -12,7 +12,7 @@ conflicts = moar-bin
 license = BSD
 makedepends = golang-go
 optdepends = highlight
-source = git+https://github.com/walles/moar.git#tag=v1.9.2
+source = git+https://github.com/walles/moar.git#tag=v1.9.3
 sha256sums = SKIP
 checkdepends = highlight
 makedepends = golang-go
