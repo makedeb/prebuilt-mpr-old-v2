@@ -5,7 +5,7 @@
 
 pkgname=nouveau-fw
 pkgver=340.32
-pkgrel=1
+pkgrel=2
 pkgdesc="This package provides video & pgraph firmwares for some NVIDIA Chips"
 url='https://nouveau.freedesktop.org/VideoAcceleration.html'
 arch=('any')
@@ -20,12 +20,13 @@ sha256sums=('SKIP'
 
 build() {
   sh NVIDIA-Linux-x86-${pkgver}.run --extract-only
+  # Only python2
   python2 extract_firmware.py
 }
 
 package() {
-  install -dm 0755 "${pkgdir}"/usr/lib/firmware/nouveau/
-  cp -a nv* vuc-* "${pkgdir}"/usr/lib/firmware/nouveau/
+  install -dm 0755 "${pkgdir}"/lib/firmware/nouveau/
+  cp -a nv* vuc-* "${pkgdir}"/lib/firmware/nouveau/
 }
 
 # vim:set ts=2 sw=2 et:

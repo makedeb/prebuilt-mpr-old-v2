@@ -1,18 +1,17 @@
-generated-by = makedeb-makepkg
-
-pkgbase = nouveau-fw
-	pkgdesc = This package provides video & pgraph firmwares for some NVIDIA Chips
-	pkgver = 340.32
-	pkgrel = 1
-	url = https://nouveau.freedesktop.org/VideoAcceleration.html
-	arch = any
-	license = custom
-	makedepends = python2
-	source = https://raw.github.com/imirkin/re-vp2/master/extract_firmware.py
-	source = http://us.download.nvidia.com/XFree86/Linux-x86/340.32/NVIDIA-Linux-x86-340.32.run
-	md5sums = SKIP
-	md5sums = 423ea1a6938dbf226bb84504746fc646
-	sha256sums = SKIP
-	sha256sums = 1d0489c35c5b332c9b949d9de3c3cbab4ac3a94385aa41e7a7b62ef23f4395f5
-
+generated-by = makedeb
 pkgname = nouveau-fw
+pkgbase = nouveau-fw
+pkgdesc = This package provides video & pgraph firmwares for some NVIDIA Chips
+pkgrel = 2
+pkgver = 340.32
+url = https://nouveau.freedesktop.org/VideoAcceleration.html
+arch = any
+license = custom
+makedepends = python2
+source = https://raw.github.com/imirkin/re-vp2/master/extract_firmware.py
+source = http://us.download.nvidia.com/XFree86/Linux-x86/340.32/NVIDIA-Linux-x86-340.32.run
+md5sums = SKIP
+md5sums = 423ea1a6938dbf226bb84504746fc646
+sha256sums = SKIP
+sha256sums = 1d0489c35c5b332c9b949d9de3c3cbab4ac3a94385aa41e7a7b62ef23f4395f5
+makedepends = python2
