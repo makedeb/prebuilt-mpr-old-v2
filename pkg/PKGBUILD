@@ -1,9 +1,9 @@
 # Maintainer: only_vip <onlyme_vip@protonmail.com>
 pkgname="ungoogled-chromium-linchrome-bin"
 _pkgname="ungoogled-chromium"
-pkgver='101.0.4951.41.r982481'
-__pkgver='101.0.4951.41-r982481'
-_pkgver='101.0.4951.41_1'
+pkgver='101.0.4951.54.r982481'
+__pkgver='101.0.4951.54-r982481'
+_pkgver='101.0.4951.54_1'
 pkgrel=1
 arch=('amd64')
 pkgdesc="Portable Chromium ungoogled (A lightweight approach to removing Google web service dependency) for 64-bit Linux prebuilt binary by macchrome"
@@ -15,7 +15,7 @@ options=(!strip)
 source=("${_pkgname}-${_pkgver}.tar.xz::${url}/releases/download/v${__pkgver}-portable-ungoogled-Lin64/${_pkgname}_${_pkgver}.vaapi_linux.tar.xz"
         "ungoogled-chromium.desktop"
         "desktop-icon.patch")
-sha512sums=("ff32e04b5aae7ce73c39c1b9ed4c73d80cbffb0aefacdec3747a7df8df1a26ee68edb977d111dbce51b56eaa454e17b41ee89f96ba52de2202efafd55ec69466"
+sha512sums=("993ac810875ad75366c91dc54ece66c7b97daaf7dd10887f031a78bd12e211e6eb7ffd359a5d5f06f94a07c00df43da92d9b309664fbf1fcf0cad5b4637afe7f"
             "5ef6de325e3fdc363d4e7049b6f91e85b36c9d38a6c48da619314b172250e3e7d6a7fc4f1e29af9b9e86f8b4e51a72087deb79452fdb7083291f035ec6e61b68"
             "48439ea12897b6c1182704f3395948146497b43be8d3f746dd95292793172e2f7ba191edbbd6dacaff6291ec7abd920071ddb5b1ed9ca0531f1ed34d8c8a365b")
 package() {
