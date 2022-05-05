@@ -4,7 +4,7 @@
 
 # Notice: This PKGBUILD may break often! See https://github.com/stakira/OpenUtau/issues/293
 pkgname='openutau-bin'
-pkgver='0.0.755'
+pkgver='0.0.761'
 pkgrel='1'
 pkgdesc="Open source UTAU successor"
 arch=("x86_64")
@@ -15,7 +15,7 @@ source=("https://github.com/stakira/OpenUtau/releases/download/OpenUtau-Latest/O
         "openutau.sh"
         "openutau.svg"
         "openutau.desktop")
-sha256sums=('c7d178e5535a6d1fed57eec8eebb2fa87fdaf40988a516eadba6f1146994a7c9'
+sha256sums=('d3e80c28e9d074534a2849b2f764c726d5075b6317cb86b7cc6d223bb7314c03'
             'b7e1f13f15367a039f915b290db43d6cbb33903836cd8d73cc16d036fde3342a'
             '490fd7489bb3c4225c3f2d1e96ba8320bd481da6eb031b97229dcf06997c2f5b'
             'fb3ac0c32bf7ea057fbb4655c3aaefcee45302026d8dfff401eac86948fed950')
