@@ -3,7 +3,7 @@
 pkgname='signal-desktop-bin'
 _gitname='signal-desktop'
 provides=('signal-desktop')
-pkgver='5.41.0'
+pkgver='5.42.0'
 pkgrel='1'
 pkgdesc="Private messaging from your desktop"
 arch=('x86_64')
@@ -14,7 +14,7 @@ url="https://signal.org"
 conflicts=("${_gitname}-git" "${_gitname}" "${_gitname}-beta" "${_gitname}-beta-bin")
 
 source=("https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_${pkgver}_amd64.deb")
-sha256sums=('43dc5f0d23a29ff8a3c39c01d22f7c798c6c10853cc80e379159db6f80f49b12')
+sha256sums=('c634a3ede29a0d5f160744a23dbe28af128af265766b611688c04aec113c9a05')
 
 package() {
     # Extract data.tar.xz to pkgdir
