@@ -2,7 +2,7 @@
 
 pkgname=kas
 pkgver=3.0.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Setup tool for bitbake based projects "
 arch=(any)
 url="https://github.com/siemens/kas"
@@ -15,5 +15,5 @@ sha512sums=('4d6502442c5343cdb492c3857d0ebbab78666fc816d6060401fb0571b1db7bda68c
 
 package() {
   cd "$srcdir/$pkgname-$pkgver"
-  python setup.py install --root="$pkgdir/" --optimize=1
+  python3 setup.py install --root="$pkgdir/" --optimize=1
 }

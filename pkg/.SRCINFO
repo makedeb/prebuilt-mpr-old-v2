@@ -1,8 +1,8 @@
 generated-by = makedeb
 pkgname = kas
 pkgbase = kas
-pkgdesc = Setup tool for bitbake based projects 
-pkgrel = 1
+pkgdesc = Setup tool for bitbake based projects
+pkgrel = 2
 pkgver = 3.0.2
 url = https://github.com/siemens/kas
 arch = any
