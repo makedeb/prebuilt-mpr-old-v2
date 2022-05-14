@@ -1,0 +1,15 @@
+bats
+bitwarden-bin
+code-bin
+discord
+docker-compose
+element-desktop-bin
+golang-go
+hugo
+gh
+glow
+makedeb
+makedeb-beta
+makedeb-alpha
+neovim
+tap

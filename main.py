@@ -60,6 +60,9 @@ GIT_REPO_PATH = "/prebuilt-mpr"
 
 TEMPLATE_DIRECTORY = "/usr/local/share/prebuilt-mpr/templates/packages"
 
+with open("/usr/local/share/prebuilt-mpr/packages.txt") as file:
+    PKGLIST = file.read().splitlines()
+
 # Set up GitHub client.
 owner, repo_name = GITHUB_REPO.split("/")
 gh = github3.login(token=GITHUB_PAT)
@@ -148,7 +151,13 @@ def main():
 
     # Fetch current archive from MPR.
     logger.info("Fetching MPR package list...")
-    mpr_packages = requests.get(MPR_ARCHIVE_URL).json()
+    mpr_packages = []
+
+    _mpr_packages = requests.get(MPR_ARCHIVE_URL).json()
+
+    for pkg in _mpr_packages:
+        if pkg["Name"] in PKGLIST:
+            mpr_packages += [pkg]
 
     # If TESTING_PACKAGE is not None, use that.
     # We use it during local development testing.
