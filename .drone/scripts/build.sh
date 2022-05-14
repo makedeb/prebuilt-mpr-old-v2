@@ -4,6 +4,7 @@ set -eu
 # Drone exec runner doesn't support env extensions right now, which this variable is sources from.
 hw_url='hunterwittenborn.com'
 
+touch prebuilt-mpr-override.env
 docker login -u api -p "${proget_api_key}" "proget.${hw_url}"
 docker compose build --no-cache
 docker compose push
