@@ -9,8 +9,6 @@ pkgdir="/var/tmp/prebuilt-mpr/${pkgname}/${distro_codename}"
 # Install needed packages.
 sudo apt update
 sudo apt install jq git gpg curl lsb-release -y
-sudo apt-get install wget sudo apt-utils ca-certificates apt-transport-https -y
-sudo apt-get install lsb-release gettext wget curl build-essential cmake g++ sudo gpg git autoconf automake libtool pkg-config libpthread-stubs0-dev libssl-dev libevent-pthreads-2.1-7 zstd -y
 
 # Add Prebuilt-MPR repository to system so we can access packages from there during builds.
 if [[ "${exclude_pbmpr:-x}" == 'x' ]]; then
