@@ -1,0 +1,14 @@
+---
+name: Package request
+description: Requests for package additions to the Prebuilt-MPR repository
+
+body:
+  - type: input
+    attributes:
+      label: Package name
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: List any other notes that might aid in the inclusion of this package (Is the upstream/MPR package popular? Is the upstream well-known or from a reputable source?).
