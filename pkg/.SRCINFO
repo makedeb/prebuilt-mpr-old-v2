@@ -1,0 +1,25 @@
+generated-by = makedeb-makepkg
+
+pkgbase = atom-bin
+	pkgdesc = A hackable text editor for the 21st Century
+	pkgver = 1.60.0
+	pkgrel = 1
+	url = https://github.com/atom/atom
+	arch = x86_64
+	license = MIT
+	depends = git
+	depends = libgtk-3-0>=3.9.10
+	depends = libgcrypt20
+	depends = libnotify4
+	depends = libxtst6
+	depends = libnss3>=2:3.22
+	depends = libglib2.0-bin
+	depends = xdg-utils
+	depends = libx11-xcb1
+	depends = libxss1
+	depends = libxkbfile1
+	depends = libcurl4
+	source = atom-bin-1.60.0-x86_64.deb::https://github.com/atom/atom/releases/download/v1.60.0/atom-amd64.deb
+	sha256sums = 5c7c0259062b9d4911d2537bfceaff5316f9de111698840a90d7cd497df891a6
+
+pkgname = atom-bin
