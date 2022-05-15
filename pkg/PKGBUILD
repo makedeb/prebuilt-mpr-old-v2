@@ -1,10 +1,10 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=hugo
-pkgver=0.97.3
+pkgver=0.98.0
 pkgrel=1
 pkgdesc="The world's fastest framework for building websites"
 arch=('any')
-makedepends=('git' 'golang-go>=1.16')
+makedepends=('git' 'golang-go>=1.18')
 license=('Apache-2.0')
 url='https://gohugo.io/'
 
