@@ -303,6 +303,7 @@ while True:
         logger.info("Beginning package check...")
         main()
         logger.info("Succesfully finished package checks.")
+        time.sleep(60*5) # Five minutes.
     except Exception:
         logger.error(f"Got exception. Restoring Git repository to origin's state and continuing loop.")
         logger.error(traceback.format_exc())
