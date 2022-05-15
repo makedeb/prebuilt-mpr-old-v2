@@ -4,8 +4,8 @@ epoch = 2
 preinst = ./preinst
 pkgbase = golang-go
 pkgdesc = The Go programming language
-pkgrel = 3
-pkgver = 1.18.1
+pkgrel = 1
+pkgver = 1.18.2
 url = https://go.dev/
 arch = any
 makedepends = gcc
@@ -15,7 +15,7 @@ optdepends = r!gcc
 optdepends = r!libc6-dev
 optdepends = r!pkg-config
 options = !strip
-source = golang-go-1.18.1::git+https://go.googlesource.com/go/#tag=go1.18.1
+source = golang-go-1.18.2::git+https://go.googlesource.com/go/#tag=go1.18.2
 sha256sums = SKIP
 makedepends = gcc
 makedepends = golang-go
