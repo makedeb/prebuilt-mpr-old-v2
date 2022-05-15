@@ -273,19 +273,18 @@ def main():
                 run_command(["git", "push", "--set-upstream", "origin", pr_branch_name])
 
             # If no PR is open for this package and there's a diff between the 'pkg/{pkgname}' and 'pkg-update/{pkg}' branches, create it.
-            pr_titles = [pull.title for pull in repo.pull_requests()]
-            git_diff = run_command(["git", "diff", target_branch_name, pr_branch_name]).stdout.decode()
-            new_changes = run_command(["git", "diff", pr_branch_name, target_branch_name]).stdout.decode() != ""
-
             try:
+                pr_titles = [pull.title for pull in repo.pull_requests()]
+                git_diff = run_command(["git", "diff", target_branch_name, pr_branch_name]).stdout.decode()
+                new_changes = run_command(["git", "diff", pr_branch_name, target_branch_name]).stdout.decode() != ""
                 if new_changes and commit_message not in pr_titles:
-                    # If we get a ForbiddenError, we've probably encountered a
-                    # secondary rate limit and need to wait a bit
-                    # before making another request.
                     repo.create_pull(commit_message, target_branch_name, pr_branch_name, maintainer_can_modify=True)
                     # Sleep a few seconds so we don't spam the GitHub API really quickly.
                     time.sleep(5)
 
+            # If we get a ForbiddenError, we've probably encountered a
+            # secondary rate limit and need to wait a bit
+            # before making another request.
             except github3.exceptions.ForbiddenError as exc:
                     logger.error("Encountered a rate limit. Waiting five minutes before processing more requests...")
                     time.sleep(60*5) # Five minutes.
