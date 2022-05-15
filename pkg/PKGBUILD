@@ -7,8 +7,8 @@
 
 pkgname="gh"
 _gitname="cli"
-pkgver='2.9.0'
-pkgrel='2'
+pkgver='2.10.1'
+pkgrel='1'
 pkgdesc="The GitHub CLI"
 arch=("any")
 url="https://github.com/cli/cli"
