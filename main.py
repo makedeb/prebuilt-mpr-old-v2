@@ -167,24 +167,44 @@ def main():
 
     # Make sure the Git repository is up to date.
     logger.info("Making sure Prebuilt-MPR Git repository is up to date...")
+    run_command(["git", "checkout", "main"])
     run_command(["git", "fetch", "origin"])
     run_command(["git", "pull", "--all"])
 
+    # Delete all local copies of a branch in case they're out of date from
+    # pushes created by external sources.
+    logger.info("Purging local package branches...")
+    local_pkg_branches = (
+        run_command(["git", "branch", "--list", "pkg/*"])
+        .stdout.decode()
+        .splitlines()
+    )
+
+    local_pkg_branches += (
+        run_command(["git", "branch", "--list", "pkg-update/*"])
+        .stdout.decode()
+        .splitlines()
+    )
+
+    local_pkg_branches = [branch.lstrip("* ") for branch in local_pkg_branches]
+
+    for branch in local_pkg_branches:
+        run_command(["git", "branch", "-D", branch])
+
     # 'git branch' doesn't format things nicely to be processed here, so we use 'for-each-ref' instead.
-    git_branches = (
+    remote_git_branches = (
         run_command(["git", "for-each-ref", "--format=%(refname:short)", "refs/remotes/origin/"])
         .stdout.decode()
         .splitlines()
     )
 
     # Remove the 'origin/' prefix on the branches.
-    git_branches = [branch.replace("origin/", "") for branch in git_branches]
+    remote_git_branches = [branch.replace("origin/", "") for branch in remote_git_branches]
 
     for pkg in mpr_packages:
         check_for_interrupt()
         # Run the entire code block in a 'try-except' block so that we can process the next package if an error pops up.
         try:
-            # Make sure we start from the 'main' branch, so things like new branches are based on that one.
             pkgname = pkg["Name"]
             version = pkg["Version"]
             tag_version = version.replace(":", "!")
@@ -194,16 +214,13 @@ def main():
             logger.info(f"Checking %s for updates..." % repr(pkgname))
         
             # If the Git branch doesn't exist, initialize it and push it to the origin.
-            if target_branch_name not in git_branches:
+            if target_branch_name not in remote_git_branches:
                 run_command(["git", "switch", "--orphan", target_branch_name])
 
-                # We have to have some kind of file in the repository for PRs to work,
-                # as otherwise GitHub thinks the new empty branch will be a separate
-                # Git history from that of any other branch.
-                pathlib.Path(".gitignore").touch()
-                run_command(["git", "add", ".gitignore"])
-
-                run_command(["git", "commit", "-m", "Initial commit"])
+                # Add template files.
+                shutil.copytree(TEMPLATE_DIRECTORY, "./", dirs_exist_ok=True)
+                run_command(["git", "add", "."])
+                run_command(["git", "commit", "-m", "Initial commit [CI SKIP]"])
                 run_command(["git", "push", "--set-upstream", "origin", target_branch_name])
             else:
                 run_command(["git", "checkout", target_branch_name])
@@ -213,10 +230,17 @@ def main():
             # It's important that this is done from the 'pkg/{pkgname}' branch
             # from the previous step, as we need a similar Git history in order
             # for PRs to work properly.
-            if pr_branch_name not in git_branches:
+            if pr_branch_name not in remote_git_branches:
                 run_command(["git", "branch", pr_branch_name])
         
             run_command(["git", "checkout", pr_branch_name])
+
+            # First merge the 'pkg/' branch into this branch in case there's been updates to it.
+            #
+            # This would need to happen if both 'pkg/' and 'pkg-update/' exist, and pushes
+            # to 'pkg/' have been done outside of this script, but not to 'pkg-update/'
+            # (such is the case when running 'scripts/update-templates.sh').
+            run_command(["git", "merge", target_branch_name])
 
             # If 'pkg/' exists, delete it.
             if os.path.exists("pkg/"):
@@ -229,34 +253,42 @@ def main():
             shutil.copytree(mpr_dir.name, "./pkg")
             shutil.rmtree(mpr_dir.name)
 
-            # Set up needed files for the commit.
+            # Add new packaging files.
             commit_message = f"pkg-update: {pkgname}"
-            shutil.copytree(TEMPLATE_DIRECTORY, "./", dirs_exist_ok=True)
-        
-            # Add files.
-            run_command(["git", "add", "."])
+            run_command(["git", "add", "pkg/"])
 
-            # If there's a diff, commit and push.
-            if run_command(["git", "diff", "--cached", "--name-only"]).stdout.decode() != "":
+            # If there's a diff, commit.
+            if run_command(["git", "diff", "--staged", "--name-only", "pkg/"]).stdout.decode() != "":
                 run_command(["git", "commit", "-m", commit_message])
+            
+            # If 'pkg-update/' didn't exist in the origin, or we have some new commits compared to the upstream, push the changes.
+            if (
+                    pr_branch_name not in remote_git_branches
+                    or (
+                        run_command(["git", "log", f"{pr_branch_name}...origin/{pr_branch_name}", "--oneline"])
+                        .stdout.decode()
+                        .splitlines()
+                    ) != []
+            ):
                 run_command(["git", "push", "--set-upstream", "origin", pr_branch_name])
 
             # If no PR is open for this package and there's a diff between the 'pkg/{pkgname}' and 'pkg-update/{pkg}' branches, create it.
-            prs = [pull.title for pull in repo.pull_requests()]
+            pr_titles = [pull.title for pull in repo.pull_requests()]
             git_diff = run_command(["git", "diff", target_branch_name, pr_branch_name]).stdout.decode()
+            new_changes = run_command(["git", "diff", pr_branch_name, target_branch_name]).stdout.decode() != ""
 
-            if git_diff != "" and commit_message not in prs:
-                # If we get a ForbiddenError, we've probably encountered a
-                # secondary rate limit and need to wait a bit
-                # before making another request.
-                try:
+            try:
+                if new_changes and commit_message not in pr_titles:
+                    # If we get a ForbiddenError, we've probably encountered a
+                    # secondary rate limit and need to wait a bit
+                    # before making another request.
                     repo.create_pull(commit_message, target_branch_name, pr_branch_name, maintainer_can_modify=True)
                     # Sleep a few seconds so we don't spam the GitHub API really quickly.
                     time.sleep(5)
-                except github3.exceptions.ForbiddenError as exc:
+
+            except github3.exceptions.ForbiddenError as exc:
                     logger.error("Encountered a rate limit. Waiting five minutes before processing more requests...")
                     time.sleep(60*5) # Five minutes.
-
 
         except Exception as exc:
             logger.error(f"Got exception. Restoring Git repository to origin's state and continuing loop.")
