@@ -5,7 +5,7 @@ This is the source for the code that powers the Prebuilt-MPR. Here lies the need
 A few things happen from a package being upload to the MPR to the package making it to the Prebuilt-MPR's APT repositories. We'll use the [`docker-compose`](https://mpr.makedeb.org/packages/docker-compose) package as an example.
 
 1. `docker-compose` gets updated on the MPR.
-2. The Prebuilt-MPR [updater](/main.py) noticices that the package is out of date, and creates a pull request to update the package's version in the Prebuilt-MPR.
+2. The Prebuilt-MPR [updater](/main.py) notices that the package is out of date, and creates a pull request to update the package's version in the Prebuilt-MPR.
 3. The pull request gets merged, triggering a CI job to build and deploy the package.
 
 And assuming all goes sound, you then get the new version of the package ready to be installed on your system!
