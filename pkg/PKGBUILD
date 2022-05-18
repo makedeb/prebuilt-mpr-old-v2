@@ -1,0 +1,68 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
+pkgname=rustc
+pkgver=1.60.0
+pkgrel=1
+pkgdesc='The Rust programming language toolchain'
+arch=('any')
+makedepends=(
+    'g++>=5.1'
+    'python3'
+    'make>=3.81'
+    'cmake>=3.13.4'
+    'ninja-build'
+    'curl'
+    'git'
+    'libssl-dev'
+    'pkg-config'
+)
+# Debian has all the packages for Rust packaged as separate packages. That's
+# not how Rust itself distributes everything though, and quite frankly I
+# prefer how Rust does it too, so we're sticking with that.
+#
+# Likewise, we have to make sure this package properly replaces all of
+# the needed packages.
+conflicts=(
+    'cargo'
+    'libstd-rust-dev'
+    'rust-all'
+    'rust-clippy'
+    'rust-doc'
+    'rust-gdb'
+    'rust-lldb'
+    'rust-src'
+    'rustfmt'
+)
+provides=(
+    'cargo'
+    "libstd-rust-dev=${pkgver}"
+    "rust-all=${pkgver}"
+    "rust-clippy=${pkgver}"
+    "rust-doc=${pkgver}"
+    "rust-gdb=${pkgver}"
+    "rust-lldb=${pkgver}"
+    "rust-src=${pkgver}"
+    "rustfmt=${pkgver}"
+)
+url='https://www.rust-lang.org'
+options=('!strip' '!lto')
+
+source=(
+    "https://static.rust-lang.org/dist/rustc-${pkgver}-src.tar.gz"
+    'config.toml'
+)
+sha256sums=(
+    'SKIP'
+    'SKIP'
+)
+
+build() {
+    cd "rustc-${pkgver}-src/"
+    python3 x.py --config "${srcdir}/config.toml" build -j "$(nproc)"
+}
+
+package() {
+    cd "rustc-${pkgver}-src/"
+    DESTDIR="${pkgdir}" python3 x.py --config "${srcdir}/config.toml" install -j "$(nproc)"
+}
+
+# vim: set sw=4 expandtab:

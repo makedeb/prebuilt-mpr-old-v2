@@ -1,0 +1,27 @@
+changelog-seen = 2
+
+[llvm]
+
+[build]
+extended = true
+tools = ["cargo", "rls", "clippy", "rustfmt", "analysis", "src", "rust-demangler"]
+sanitizers = false
+profiler = true
+
+[install]
+prefix = "/usr"
+
+[rust]
+debuginfo-level = 2
+debuginfo-level-std = 2
+channel = "stable"
+description = "makedeb Package Repository"
+rpath = false
+verbose-tests = true
+dist-src = false
+deny-warnings = false
+backtrace-on-ice = true
+remap-debuginfo = true
+jemalloc = false
+
+[dist]
