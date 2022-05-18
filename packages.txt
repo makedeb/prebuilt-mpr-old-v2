@@ -12,4 +12,5 @@ makedeb
 makedeb-beta
 makedeb-alpha
 neovim
+rustc
 tap
