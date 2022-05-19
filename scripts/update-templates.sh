@@ -3,6 +3,9 @@
 # This script updates package branches with the template files in templates/.
 # Pass in the 'CI_SKIP' environment variable (set to any non-empty value) to append
 # '[CI SKIP]' to the generated commit message.
+#
+# You can also pass in the 'PKGNAME' environment variable to only update
+# templates files for a single package.
 set -eu
 
 # Get needed information.
@@ -11,6 +14,11 @@ cd "$(git rev-parse --show-toplevel)"
 curdir="$(pwd)"
 tmpdir="$(mktemp -d)"
 mapfile -t packages < <(cat packages.txt)
+
+# If the user passes the 'PKGNAME' env var, only update that package.
+if [[ "${PKGNAME:+x}" == "x" ]]; then
+    packages=("${PKGNAME}")
+fi
 
 cp ./ "${tmpdir}" -R
 cd "${tmpdir}"
