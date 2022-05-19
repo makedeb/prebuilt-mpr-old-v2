@@ -61,7 +61,35 @@ def _pipeline(ctx, distro_codename, docker_image):
 		    ".drone/scripts/publish.py"
                 ]
             }]
-        }
+        },
+
+	{
+	    "name": distro_codename + "-cleanup",
+            "kind": "pipeline",
+            "type": "docker",
+            "trigger": {
+                "event": event_triggers,
+                "branch": ["pkg/*"],
+		"status": ["success", "failure"]
+            },
+            "depends_on": [distro_codename + "-publish"],
+            "volumes": [{"name": "pkgdir", "host": {"path": volume_path}}],
+            "node": {"server": "prebuilt-mpr"},
+            "steps": [{
+                "name": "publish",
+                "image": docker_image,
+                "pull": "always",
+                "environment": {
+                    "proget_api_key": {"from_secret": "proget_api_key"},
+                    "distro_codename": distro_codename
+                },
+		"volumes": [{
+                    "name": "pkgdir",
+                    "path": volume_path
+                }],
+                "commands": ["find " + volume_path + " -mindepth 1 -maxdepth 1 -exec sudo rm -rfv {} +"]
+            }]
+	}
     ]
 
 def main(ctx):
