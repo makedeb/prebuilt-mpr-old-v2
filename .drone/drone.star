@@ -87,7 +87,7 @@ def _pipeline(ctx, distro_codename, docker_image):
                     "name": "pkgdir",
                     "path": volume_path
                 }],
-                "commands": ["rm -rf " + volume_path]
+                "commands": ["find " + volume_path + " -mindepth 1 -maxdepth 1 -exec sudo rm -rfv {} +"]
             }]
 	}
     ]
