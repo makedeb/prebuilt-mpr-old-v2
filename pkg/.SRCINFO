@@ -3,7 +3,7 @@ pkgname = rustc
 pkgbase = rustc
 pkgdesc = The Rust programming language toolchain
 pkgrel = 1
-pkgver = 1.60.0
+pkgver = 1.61.0
 url = https://www.rust-lang.org
 arch = any
 conflicts = cargo
@@ -27,15 +27,15 @@ makedepends = pkg-config
 options = !strip
 options = !lto
 provides = cargo
-provides = libstd-rust-dev=1.60.0
-provides = rust-all=1.60.0
-provides = rust-clippy=1.60.0
-provides = rust-doc=1.60.0
-provides = rust-gdb=1.60.0
-provides = rust-lldb=1.60.0
-provides = rust-src=1.60.0
-provides = rustfmt=1.60.0
-source = https://static.rust-lang.org/dist/rustc-1.60.0-src.tar.gz
+provides = libstd-rust-dev=1.61.0
+provides = rust-all=1.61.0
+provides = rust-clippy=1.61.0
+provides = rust-doc=1.61.0
+provides = rust-gdb=1.61.0
+provides = rust-lldb=1.61.0
+provides = rust-src=1.61.0
+provides = rustfmt=1.61.0
+source = https://static.rust-lang.org/dist/rustc-1.61.0-src.tar.gz
 source = config.toml
 sha256sums = SKIP
 sha256sums = SKIP
