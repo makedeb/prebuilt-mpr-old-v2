@@ -4,7 +4,7 @@ set -eu
 # Env vars.
 proget_url='proget.hunterwittenborn.com'
 pkgname="$(echo "${DRONE_BRANCH}" | sed 's|pkg/||')"
-pkgdir="/var/tmp/prebuilt-mpr/${pkgname}/${distro_codename}"
+pkgdir="/mnt/prebuilt-mpr/${pkgname}/${distro_codename}"
 
 # Install needed packages.
 sudo apt update
@@ -20,7 +20,7 @@ if [[ "${exclude_pbmpr:-x}" == 'x' ]]; then
 fi
 
 # Set perms on current directory and pkgdir, since Drone CI clones under 'root' by default.
-sudo chown 'makedeb:makedeb' ./ /var/tmp/prebuilt-mpr/ -R
+sudo chown 'makedeb:makedeb' ./ /mnt/prebuilt-mpr/ -R
 
 # Destroy all files in pkgdir.
 find "${pkgdir}" -mindepth 1 -maxdepth 1 -exec rm -rf '{}' +

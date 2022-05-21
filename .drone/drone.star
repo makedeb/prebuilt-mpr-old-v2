@@ -2,7 +2,7 @@ def _pipeline(ctx, distro_codename, docker_image):
     event_triggers = ["push", "custom"]
     branch = ctx.build.branch
     pkgname = branch.replace("pkg/", "")
-    volume_path = "/var/tmp/prebuilt-mpr/" + pkgname + "/" + distro_codename
+    volume_path = "/mnt/prebuilt-mpr/" + pkgname + "/" + distro_codename
 
     if branch.endswith("-git"):
         event_triggers += ["cron"]
