@@ -16,7 +16,7 @@ branch = os.environ["DRONE_BRANCH"]
 distro_codename = os.environ["distro_codename"]
 pkgname = branch.replace("pkg/", "")
 
-os.chdir(f"/var/tmp/prebuilt-mpr/{pkgname}/{distro_codename}/pkg")
+os.chdir(f"/mnt/prebuilt-mpr/{pkgname}/{distro_codename}/pkg")
 
 packages = []
 
