@@ -1,8 +1,8 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=bitwarden-bin
-pkgver=1.32.1
+pkgver=1.33.0
 pkgrel=1
-pkgdesc="A secure and free password manager for all of your devices."
+pkgdesc='A secure and free password manager for all of your devices.'
 arch=('x86_64')
 depends=('libnotify4' 'libxtst6' 'libnss3' 'libsecret-1-0' 'libxss1')
 license=('GPL-3.0')
