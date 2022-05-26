@@ -1,0 +1,19 @@
+generated-by = makedeb
+pkgname = exa
+pkgbase = exa
+pkgdesc = A modern replacement for 'ls'
+pkgrel = 1
+pkgver = 0.10.1
+url = https://the.exa.website
+arch = any
+license = MIT
+makedepends = cargo
+makedepends = pandoc
+makedepends = libgit2-dev
+makedepends = cmake
+source = exa-0.10.1::git+https://github.com/ogham/exa/#tag=v0.10.1
+sha256sums = SKIP
+makedepends = cargo
+makedepends = pandoc
+makedepends = libgit2-dev
+makedepends = cmake
