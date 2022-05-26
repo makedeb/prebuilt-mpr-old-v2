@@ -1,7 +1,19 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
-pkgname=rustc
+pkgbase=rustc
+pkgname=(
+    'rustc'
+    'cargo'
+    'libstd-rust-dev'
+    'rust-all'
+    'rust-clippy'
+    'rust-doc'
+    'rust-gdb'
+    'rust-lldb'
+    'rust-src'
+    'rustfmt'
+)
 pkgver=1.61.0
-pkgrel=1
+pkgrel=2
 pkgdesc='The Rust programming language toolchain'
 arch=('any')
 makedepends=(
@@ -14,34 +26,6 @@ makedepends=(
     'git'
     'libssl-dev'
     'pkg-config'
-)
-# Debian has all the packages for Rust packaged as separate packages. That's
-# not how Rust itself distributes everything though, and quite frankly I
-# prefer how Rust does it too, so we're sticking with that.
-#
-# Likewise, we have to make sure this package properly replaces all of
-# the needed packages.
-conflicts=(
-    'cargo'
-    'libstd-rust-dev'
-    'rust-all'
-    'rust-clippy'
-    'rust-doc'
-    'rust-gdb'
-    'rust-lldb'
-    'rust-src'
-    'rustfmt'
-)
-provides=(
-    'cargo'
-    "libstd-rust-dev=${pkgver}"
-    "rust-all=${pkgver}"
-    "rust-clippy=${pkgver}"
-    "rust-doc=${pkgver}"
-    "rust-gdb=${pkgver}"
-    "rust-lldb=${pkgver}"
-    "rust-src=${pkgver}"
-    "rustfmt=${pkgver}"
 )
 url='https://www.rust-lang.org'
 options=('!strip' '!lto')
@@ -60,9 +44,54 @@ build() {
     python3 x.py --config "${srcdir}/config.toml" build -j "$(nproc)"
 }
 
-package() {
+package_rustc() {
     cd "rustc-${pkgver}-src/"
     DESTDIR="${pkgdir}" python3 x.py --config "${srcdir}/config.toml" install -j "$(nproc)"
+}
+
+package_cargo() {
+    pkgdesc='Transitional package - cargo -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
+}
+
+package_libstd-rust-dev() {
+    pkgdesc='Transitional package - libstd-rust-dev -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
+}
+
+package_rust-all() {
+    pkgdesc='Transitional package - rust-all -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
+}
+
+package_rust-clippy() {
+    pkgdesc='Transitional package - rust-clippy -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
+}
+
+package_rust-doc() {
+    pkgdesc='Transitional package - rust-doc -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
+}
+
+package_rust-gdb() {
+    pkgdesc='Transitional package - rust-gdb -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
+}
+
+package_rust-lldb() {
+    pkgdesc='Transitional package - rust-lldb -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
+}
+
+package_rust-src() {
+    pkgdesc='Transitional package - rust-src -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
+}
+
+package_rustfmt() {
+    pkgdesc='Transitional package - rustfmt -> rustc'
+    depends=("rustc=${pkgver}-${pkgrel}")
 }
 
 # vim: set sw=4 expandtab:
