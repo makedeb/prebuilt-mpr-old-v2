@@ -1,0 +1,14 @@
+generated-by = makedeb
+pkgname = hyperfine
+pkgbase = hyperfine
+pkgdesc = A command-line benchmarking tool
+pkgrel = 1
+pkgver = 1.14.0
+url = https://github.com/sharkdp/hyperfine
+arch = any
+makedepends = cargo
+makedepends = rustc>=1.57
+source = hyperfine-1.14.0::git+https://github.com/sharkdp/hyperfine/#tag=v1.14.0
+sha256sums = SKIP
+makedepends = cargo
+makedepends = rustc>=1.57
