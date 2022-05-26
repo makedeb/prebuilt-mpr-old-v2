@@ -1,0 +1,17 @@
+generated-by = makedeb
+pkgname = fd
+pkgbase = fd
+pkgdesc = A simple, fast and user-friendly alternative to 'find'
+pkgrel = 1
+pkgver = 8.3.2
+url = https://github.com/sharkdp/fd
+arch = any
+conflicts = fdclone
+license = Apache-2.0
+license = MIT
+makedepends = rustc>=1.56.0
+makedepends = cargo
+source = fd-8.3.2::git+https://github.com/sharkdp/fd/#tag=v8.3.2
+sha256sums = SKIP
+makedepends = rustc>=1.56.0
+makedepends = cargo
