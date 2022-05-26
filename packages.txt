@@ -11,6 +11,7 @@ golang-go
 gh
 glow
 hugo
+hyperfine
 makedeb
 makedeb-beta
 makedeb-alpha
