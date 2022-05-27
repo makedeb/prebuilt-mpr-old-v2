@@ -1,0 +1,18 @@
+generated-by = makedeb
+pkgname = airshipper
+pkgbase = airshipper
+pkgdesc = The official launcher for Veloren - an open-world, open-source multiplayer voxel RPG
+pkgrel = 1
+pkgver = 0.7.0
+url = https://gitlab.com/veloren/airshipper
+arch = any
+makedepends = cargo
+makedepends = git
+makedepends = git-lfs
+makedepends = libxkbcommon-dev
+source = airshipper-0.7.0::git+https://gitlab.com/veloren/airshipper/#tag=v0.7.0
+sha256sums = SKIP
+makedepends = cargo
+makedepends = git
+makedepends = git-lfs
+makedepends = libxkbcommon-dev
