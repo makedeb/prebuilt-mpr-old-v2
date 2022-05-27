@@ -1,3 +1,4 @@
+airshipper
 bat
 bats
 bitwarden-bin
