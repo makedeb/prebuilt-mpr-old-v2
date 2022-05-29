@@ -5,6 +5,8 @@ bitwarden-bin
 code-bin
 discord
 docker-compose
+drone-cli
+drone-runner-exec
 element-desktop-bin
 exa
 fd
