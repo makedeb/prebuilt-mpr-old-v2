@@ -1,0 +1,19 @@
+generated-by = makedeb
+pkgname = drone-runner-exec
+pkgbase = drone-runner-exec
+pkgdesc = Execute Drone CI pipelines directly on a host machine
+pkgrel = 1
+pkgver = 1.0.0
+url = https://docs.drone.io/runner/exec/overview
+arch = any
+backup = /etc/systemd/system/drone-runner-exec.service
+license = Polyform-Small-Business-1.0.0
+license = Polyform-Free-Trial-1.0.0
+makedepends = git
+makedepends = golang-go
+source = drone-runner-exec-1.0.0::git+https://github.com/drone-runners/drone-runner-exec/#tag=v1.0.0-beta.9
+source = drone-runner-exec.service
+sha256sums = SKIP
+sha256sums = SKIP
+makedepends = git
+makedepends = golang-go

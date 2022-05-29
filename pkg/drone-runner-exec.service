@@ -1,0 +1,13 @@
+[Unit]
+Description=Drone Exec Runner
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/env drone-runner-exec service run --config /etc/drone-runner-exec/config
+
+[Install]
+WantedBy=multi-user.target
