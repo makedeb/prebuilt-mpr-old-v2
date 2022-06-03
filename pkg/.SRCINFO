@@ -1,22 +1,26 @@
-generated-by = makedeb-makepkg
-
-pkgbase = tap
-	pkgdesc = MPR in your pocket
-	pkgver = 2.0.4
-	pkgrel = 1
-	url = https://github.com/hwittenborn/tap
-	arch = any
-	license = GPL3
-	makedepends = python3-setuptools
-	makedepends = asciidoctor
-	makedepends = make
-	depends = python3
-	depends = python3-requests
-	depends = python3-apt
-	depends = less
-	optdepends = r!bash-completion
-	conflicts = node-tap
-	source = git+https://github.com/hwittenborn/tap/#tag=v2.0.4-1
-	sha256sums = SKIP
-
+generated-by = makedeb
 pkgname = tap
+postinst = tap.postinst
+pkgbase = tap
+pkgdesc = MPR in your pocket
+pkgrel = 1
+pkgver = 2.0.5
+url = https://github.com/hwittenborn/tap
+arch = any
+conflicts = node-tap
+depends = python3
+depends = python3-requests
+depends = python3-apt
+depends = less
+license = GPL3
+makedepends = python3-setuptools
+makedepends = asciidoctor
+makedepends = make
+optdepends = r!bash-completion
+source = git+https://github.com/hwittenborn/tap/#tag=v2.0.5-1
+control_fields = MPR-Package: tap
+sha256sums = SKIP
+makedepends = python3-setuptools
+makedepends = asciidoctor
+makedepends = make
+optdepends = r!bash-completion
