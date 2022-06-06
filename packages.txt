@@ -19,6 +19,7 @@ makedeb
 makedeb-beta
 makedeb-alpha
 neovim
+parse-changelog
 polybar
 polymc
 ripgrep
