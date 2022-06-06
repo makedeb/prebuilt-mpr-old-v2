@@ -1,0 +1,17 @@
+generated-by = makedeb
+pkgname = mpr-cli
+pkgbase = mpr-cli
+pkgdesc = The official command-line interface for the makedeb Package Repository
+pkgrel = 1
+pkgver = 0.1.1
+url = https://github.com/makedeb/mpr-cli
+arch = any
+license = GPL3
+makedepends = cargo
+makedepends = libssl-dev
+makedepends = pkg-config
+source = https://github.com/makedeb/mpr-cli/archive/refs/tags/v0.1.1.tar.gz
+sha256sums = SKIP
+makedepends = cargo
+makedepends = libssl-dev
+makedepends = pkg-config
