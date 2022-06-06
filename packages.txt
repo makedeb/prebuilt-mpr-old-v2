@@ -18,6 +18,7 @@ hyperfine
 makedeb
 makedeb-beta
 makedeb-alpha
+mpr-cli
 neovim
 parse-changelog
 polybar
