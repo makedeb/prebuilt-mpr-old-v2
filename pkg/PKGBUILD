@@ -3,7 +3,7 @@ _release=beta
 _target=mpr
 
 pkgname=makedeb-beta
-pkgver=15.0.1
+pkgver=15.0.2
 pkgrel=beta
 pkgdesc="A simplicity-focused packaging tool for Debian archives (${_release} release)"
 arch=('all')
