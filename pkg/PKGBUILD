@@ -1,20 +1,20 @@
-# Maintainer: zocker_160 <zocker1600 at posteo dot net>
+# Maintainer: hiddeninthesand <hiddeninthesand at pm dot me>
+# Contributor: zocker_160 <zocker1600 at posteo dot net>
 # Contributor: Hunter Wittenborn <hunter@hunterwittenborn.com>
 
-pkgname=discord
-pkgver=0.0.17
-pkgrel=3
+pkgname='discord'
+pkgver='0.0.18'
+pkgrel='1'
 pkgdesc="Chat for Communities and Friends"
 arch=('x86_64')
 _base_depends=('libc6' 'libasound2' 'libatomic1' 'libgconf-2-4' 'libnotify4' 'libnspr4' 'libnss3' 'libstdc++6' 'libxss1'
                 'libxtst6' 'libc++1')
 depends=("${_base_depends[@]}" 'libappindicator1')
 bullseye_depends=("${_base_depends[@]}" 'libayatana-appindicator1')
-
 url="https://discord.com"
 license=('custom')
 source=("${pkgname}::https://dl.discordapp.net/apps/linux/${pkgver}/discord-${pkgver}.deb")
-sha256sums=('cd08f5a06d2b1b04304df1151e66005c609a34b87f830182a9c8c6301b4f3cf6')
+sha256sums=('30758697cb4a6c6074fdfd05e827f52d1daeecb426ff2d468d4c65e75673931a')
 
 package() {
     tar -xf 'data.tar.gz' -C "${pkgdir}"
