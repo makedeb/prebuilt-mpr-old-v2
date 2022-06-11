@@ -1,28 +1,26 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=golang-go
-pkgver=1.18.2
+pkgver=1.18.3
 pkgrel=1
 epoch=2
 pkgdesc='The Go programming language'
 arch=('any')
 optdepends=('r!g++' 'r!gcc' 'r!libc6-dev' 'r!pkg-config')
 makedepends=('gcc' 'golang-go')
-url='https://go.dev/'
+url='https://go.dev'
 options=('!strip')
 preinst='./preinst'
 
-source=("${pkgname}-${pkgver}::git+https://go.googlesource.com/go/#tag=go${pkgver}")
+source=("${url}/dl/go${pkgver}.src.tar.gz")
 sha256sums=('SKIP')
 
 build() {
-    cd "${pkgname}-${pkgver}/src/"
-
-    export GOROOT_FINAL='/usr/lib/go'
-    ./make.bash
+    cd go/src
+    GOROOT_FINAL='/usr/lib/go' ./make.bash
 }
 
 package() {
-    cd "${pkgname}-${pkgver}"
+    cd go/src
     
     # Create needed directories.
     install -d "${pkgdir}/usr/bin/" "${pkgdir}/usr/lib/go"
