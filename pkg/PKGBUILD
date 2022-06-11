@@ -1,7 +1,7 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=golang-go
 pkgver=1.18.3
-pkgrel=1
+pkgrel=2
 epoch=2
 pkgdesc='The Go programming language'
 arch=('any')
@@ -20,7 +20,7 @@ build() {
 }
 
 package() {
-    cd go/src
+    cd go/
     
     # Create needed directories.
     install -d "${pkgdir}/usr/bin/" "${pkgdir}/usr/lib/go"
