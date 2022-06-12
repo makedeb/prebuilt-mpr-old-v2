@@ -6,6 +6,8 @@ proget_url='proget.hunterwittenborn.com'
 pkgname="$(echo "${DRONE_BRANCH}" | sed 's|pkg/||')"
 pkgdir="/mnt/prebuilt-mpr/${pkgname}/${distro_codename}"
 
+export LANG='C.UTF-8'
+
 # Install needed packages.
 sudo apt update
 sudo apt install jq git gpg curl lsb-release -y
