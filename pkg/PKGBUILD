@@ -1,10 +1,10 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=drone-cli
 pkgver=1.5.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Command Line Tools for Drone CI'
 arch=('any')
-depends=('golang-go>=1.16')
+makedepends=('golang-go>=1.16')
 conflicts=('drone-cli-bin')
 license=('Apache-2.0')
 url='https://docs.drone.io/cli'
