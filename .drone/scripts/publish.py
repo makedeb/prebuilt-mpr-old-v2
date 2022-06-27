@@ -31,9 +31,10 @@ stages = json.loads(response.text)["stages"]
 
 for stage in stages:
     if stage["name"] == f"{distro_codename}-build":
+        # The second stage of a build, a.k.a. the 'build' step.
         if stage["steps"][1]["status"] != "success":
             logging.warning("Skipping publishing, as build stage for %s failed." % repr(distro_codename))
-            exit(1)
+            exit()
         break
 
 # If we specified a list of distros to build on and the current distro isn't in that, skip the build.
