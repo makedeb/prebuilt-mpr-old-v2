@@ -95,5 +95,6 @@ def _pipeline(ctx, distro_codename, docker_image):
 def main(ctx):
     return (
         _pipeline(ctx, "focal", "proget.hunterwittenborn.com/docker/makedeb/makedeb:ubuntu-focal") +
+        _pipeline(ctx, "jammy", "proget.hunterwittenborn.com/docker/makedeb/makedeb:ubuntu-jammy") +
         _pipeline(ctx, "bullseye", "proget.hunterwittenborn.com/docker/makedeb/makedeb:debian-bullseye")
     )
