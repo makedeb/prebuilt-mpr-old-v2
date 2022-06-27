@@ -21,7 +21,7 @@ def _pipeline(ctx, event_triggers, distro_codename, docker_image):
                 "pull": "always",
                 "environment": {
                     "distro_codename": distro_codename,
-                    "LANG": "C.utf8"
+                    "LANG": "en_US.UTF-8"
                 },
     	        "volumes": [{
                     "name": "pkgdir",
