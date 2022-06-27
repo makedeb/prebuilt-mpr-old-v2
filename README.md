@@ -22,3 +22,17 @@ This section is for use by maintainers of the Prebuilt-MPR. Normals users won't 
 The main task of maintainers in the Prebuilt-MPR is to review pull requests for package updates and merge them as needed.
 
 All user-provided files will be contained in the `pkg/` folder of each branch. All other files are generated and managed by the updater itself, so you're safe to not review them.
+
+### Adding a new distribution
+Adding a new distribution to the Prebuilt-MPR APT repositories entails the following:
+
+1. Add the relevant entry in `templates/packages/.drone/drone.star` at the bottom of the file.
+
+2. Update packaging scripts by running `CI_SKIP=1 scripts/scripts/update-templates.sh` from the root of the repository.
+
+3. Rerun builds for all packages against the new distribution. This currently entails creating a new build run for each package manually, as certain packages depend on other Prebuilt-MPR packages (*TODO:* this needs to be automated in the future).
+
+    3a. You can selectively run builds for a certain distribution by passing in the `distros` environment variable, which should contain a comma-separated list of distros to build for (i.e. `distros=jammy,bullseye`). With the Drone CLI tools, you can run the following (replace `{pkgbase}` with the package you're running the build for, and `{distro}` with the distribution to build for):
+    ```sh
+    drone build create makedeb/prebuilt-mpr --branch 'pkg/{pkgbase}' -p 'distros={distro}'
+    ```
