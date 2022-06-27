@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 set -eu
 
+# If we specified a list of distros to build on and the current distro isn't in that, skip the build.
+if [[ "${distros:+x}" == 'x' ]]; then
+    if ! echo "${distros}" | sed 's|,|\n|g' | grep -q "${distro_codename}"; then
+        echo "Skipping build for '${distro_codename}'..."
+        exit 0
+    fi
+fi
+
 # Env vars.
 proget_url='proget.hunterwittenborn.com'
 pkgname="$(echo "${DRONE_BRANCH}" | sed 's|pkg/||')"
 pkgdir="/mnt/prebuilt-mpr/${pkgname}/${distro_codename}"
-
-export LANG='C.UTF-8'
 
 # Install needed packages.
 sudo apt update
