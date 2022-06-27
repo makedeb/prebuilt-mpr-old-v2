@@ -18,9 +18,7 @@ distros = os.environ.get("distros")
 pkgname = branch.replace("pkg/", "")
 
 # If we specified a list of distros to build on and the current distro isn't in that, skip the build.
-logging.warning("%s/%s" % (distro_codename, distros))
-
-if distros != None and distro_codename in distros.split(","):
+if distros != None and distro_codename not in distros.split(","):
     logging.warning("Skipping build for %s..." % repr(distro_codename))
     exit()
 
