@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 import os
 import pathlib
 import requests
@@ -13,9 +14,27 @@ apt_pkg.init()
 proget_api_key = os.environ["proget_api_key"]
 hw_url = os.environ["hw_url"]
 branch = os.environ["DRONE_BRANCH"]
+build_number = os.environ["DRONE_BUILD_NUMBER"]
+repo = os.environ["DRONE_REPO"]
 distro_codename = os.environ["distro_codename"]
 distros = os.environ.get("distros")
 pkgname = branch.replace("pkg/", "")
+
+# If the build for the current distribution is failed, abort.
+response = requests.get(f"https://drone.{hw_url}/api/repos/{repo}/builds/{build_number}")
+
+if response.status_code != 200:
+    logging.error("Failed to fetch build status from Drone CI.")
+    exit(1)
+
+stages = json.loads(response.text)["stages"]
+
+for stage in stages:
+    if stage["name"] == f"{distro_codename}-build":
+        if stage["status"] != "success":
+            logging.warning("Skipping publishing, as build stage for %s failed." % repr(distro_codename))
+            exit(1)
+        break
 
 # If we specified a list of distros to build on and the current distro isn't in that, skip the build.
 if distros != None and distro_codename not in distros.split(","):

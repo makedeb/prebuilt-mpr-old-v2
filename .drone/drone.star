@@ -12,6 +12,7 @@ def _pipeline(ctx, distro_codename, docker_image):
             "name": distro_codename + "-build",
             "kind": "pipeline",
             "type": "docker",
+            "failure": "ignore",
             "trigger": {
                 "event": event_triggers,
                 "branch": ["pkg/*"]
@@ -76,7 +77,7 @@ def _pipeline(ctx, distro_codename, docker_image):
             "volumes": [{"name": "pkgdir", "host": {"path": volume_path}}],
             "node": {"server": "prebuilt-mpr"},
             "steps": [{
-                "name": "publish",
+                "name": "cleanup",
                 "image": docker_image,
                 "pull": "always",
                 "environment": {
