@@ -14,7 +14,13 @@ proget_api_key = os.environ["proget_api_key"]
 hw_url = os.environ["hw_url"]
 branch = os.environ["DRONE_BRANCH"]
 distro_codename = os.environ["distro_codename"]
+distros = os.environ.get("distros")
 pkgname = branch.replace("pkg/", "")
+
+# If we specified a list of distros to build on and the current distro isn't in that, skip the build.
+if distros != None and distro_codename in distros.split(","):
+    logging.info("Skipping build for %s..." % repr(distro_codename))
+    exit()
 
 os.chdir(f"/mnt/prebuilt-mpr/{pkgname}/{distro_codename}/pkg")
 
