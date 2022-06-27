@@ -22,7 +22,7 @@ success = True
 
 for stage in stages:
     for step in stage["steps"]:
-        if step["status"] != "success":
+        if step["status"] not in ("success", "running"):
             logging.error(
                 "Build failed on %s/%s." % (
                     step["name"],
