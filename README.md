@@ -28,7 +28,7 @@ Adding a new distribution to the Prebuilt-MPR APT repositories entails the follo
 
 1. Add the relevant entry in `templates/packages/.drone/drone.star` at the bottom of the file.
 
-2. Update packaging scripts by running `CI_SKIP=1 scripts/scripts/update-templates.sh` from the root of the repository.
+2. Update packaging scripts by running `CI_SKIP=1 scripts/update-templates.sh` from the root of the repository.
 
 3. Rerun builds for all packages against the new distribution. This currently entails creating a new build run for each package manually, as certain packages depend on other Prebuilt-MPR packages (*TODO:* this needs to be automated in the future).
 
