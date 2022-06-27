@@ -20,7 +20,8 @@ def _pipeline(ctx, event_triggers, distro_codename, docker_image):
                 "failure": "ignore",
                 "pull": "always",
                 "environment": {
-                    "distro_codename": distro_codename
+                    "distro_codename": distro_codename,
+                    "LANG": "C.utf8"
                 },
     	        "volumes": [{
                     "name": "pkgdir",
