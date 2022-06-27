@@ -12,7 +12,6 @@ def _pipeline(ctx, distro_codename, docker_image):
             "name": distro_codename + "-build",
             "kind": "pipeline",
             "type": "docker",
-            "failure": "ignore",
             "trigger": {
                 "event": event_triggers,
                 "branch": ["pkg/*"]
@@ -22,6 +21,7 @@ def _pipeline(ctx, distro_codename, docker_image):
             "steps": [{
                 "name": "build",
                 "image": docker_image,
+                "failure": "ignore",
                 "pull": "always",
                 "environment": {
                     "distro_codename": distro_codename

@@ -31,7 +31,7 @@ stages = json.loads(response.text)["stages"]
 
 for stage in stages:
     if stage["name"] == f"{distro_codename}-build":
-        if stage["status"] != "success":
+        if stage["steps"][1]["status"] != "success":
             logging.warning("Skipping publishing, as build stage for %s failed." % repr(distro_codename))
             exit(1)
         break
