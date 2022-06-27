@@ -105,9 +105,7 @@ def main(ctx):
     # Get the JSON object to return.
     output = []
     for distro, image in distros.items():
-        output += [
-            _pipeline(ctx, event_triggers, distro, "proget.makedeb.org/docker/makedeb/makedeb:" + image)
-        ]
+        output += _pipeline(ctx, event_triggers, distro, "proget.makedeb.org/docker/makedeb/makedeb:" + image)
 
     output += [{
             "name": "set-build-status",
