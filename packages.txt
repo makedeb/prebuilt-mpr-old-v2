@@ -23,6 +23,7 @@ neovim
 parse-changelog
 polybar
 polymc
+proton-ge-custom-bin
 ripgrep
 rustc
 starship
