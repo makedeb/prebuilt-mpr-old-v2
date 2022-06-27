@@ -1,11 +1,7 @@
-def _pipeline(ctx, distro_codename, docker_image):
-    event_triggers = ["push", "custom"]
+def _pipeline(ctx, event_triggers, distro_codename, docker_image):
     branch = ctx.build.branch
     pkgname = branch.replace("pkg/", "")
     volume_path = "/mnt/prebuilt-mpr/" + pkgname + "/" + distro_codename
-
-    if branch.endswith("-git"):
-        event_triggers += ["cron"]
 
     return [
         {
@@ -21,6 +17,7 @@ def _pipeline(ctx, distro_codename, docker_image):
             "steps": [{
                 "name": "build",
                 "image": docker_image,
+                "failure": "ignore",
                 "pull": "always",
                 "environment": {
                     "distro_codename": distro_codename
@@ -76,7 +73,7 @@ def _pipeline(ctx, distro_codename, docker_image):
             "volumes": [{"name": "pkgdir", "host": {"path": volume_path}}],
             "node": {"server": "prebuilt-mpr"},
             "steps": [{
-                "name": "publish",
+                "name": "cleanup",
                 "image": docker_image,
                 "pull": "always",
                 "environment": {
@@ -93,8 +90,42 @@ def _pipeline(ctx, distro_codename, docker_image):
     ]
 
 def main(ctx):
-    return (
-        _pipeline(ctx, "focal", "proget.hunterwittenborn.com/docker/makedeb/makedeb:ubuntu-focal") +
-        _pipeline(ctx, "jammy", "proget.hunterwittenborn.com/docker/makedeb/makedeb:ubuntu-jammy") +
-        _pipeline(ctx, "bullseye", "proget.hunterwittenborn.com/docker/makedeb/makedeb:debian-bullseye")
-    )
+    # A list of distros to build for.
+    distros = {
+        "focal": "ubuntu-focal",
+        "jammy": "ubuntu-jammy",
+        "bullseye": "debian-bullseye"
+    }
+    
+    # If the package ends in '-git' we want to build it nightly via Drone CI cron jobs.
+    event_triggers = ["push", "custom"]
+    if ctx.build.branch.endswith("-git"):
+        event_triggers += ["cron"]
+
+    # Get the JSON object to return.
+    output = []
+    for distro, image in distros.items():
+        output += _pipeline(ctx, event_triggers, distro, "proget.makedeb.org/docker/makedeb/makedeb:" + image)
+
+    output += [{
+            "name": "set-build-status",
+            "kind": "pipeline",
+            "type": "docker",
+            "trigger": {
+                "event": event_triggers,
+                "branch": ["pkg/*"]
+            },
+            "depends_on": [distro + "-cleanup" for distro in distros],
+            "steps": [{
+                "name": "set-build-status",
+                "image": "ubuntu",
+                "pull": "always",
+                "commands": [
+                    "apt update",
+                    "apt install python3 python3-requests -y",
+                    ".drone/scripts/set-build-status.py"
+                ]
+            }]
+        }]
+
+    return output
