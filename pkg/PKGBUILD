@@ -1,11 +1,11 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=starship
-pkgver=1.6.3
+pkgver=1.9.1
 pkgrel=1
 pkgdesc='The minimal, blazing-fast, and infinitely customizable prompt for any shell!'
 arch=('any')
 makedepends=('cargo')
-url='starship.rs'
+url='https://starship.rs'
 
 source=("${pkgname}-${pkgver}::git+https://github.com/starship/starship/#tag=v${pkgver}")
 sha256sums=('SKIP')
