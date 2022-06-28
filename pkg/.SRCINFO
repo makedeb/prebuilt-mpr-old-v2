@@ -3,10 +3,10 @@ pkgname = starship
 pkgbase = starship
 pkgdesc = The minimal, blazing-fast, and infinitely customizable prompt for any shell!
 pkgrel = 1
-pkgver = 1.6.3
-url = starship.rs
+pkgver = 1.9.1
+url = https://starship.rs
 arch = any
 makedepends = cargo
-source = starship-1.6.3::git+https://github.com/starship/starship/#tag=v1.6.3
+source = starship-1.9.1::git+https://github.com/starship/starship/#tag=v1.9.1
 sha256sums = SKIP
 makedepends = cargo
