@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=bitwarden-bin
-pkgver=1.33.0
+pkgver=2022.5.1
 pkgrel=1
 pkgdesc='A secure and free password manager for all of your devices.'
 arch=('x86_64')
@@ -8,7 +8,7 @@ depends=('libnotify4' 'libxtst6' 'libnss3' 'libsecret-1-0' 'libxss1')
 license=('GPL-3.0')
 url="https://bitwarden.com"
 
-source=("https://github.com/bitwarden/desktop/releases/download/v${pkgver}/Bitwarden-${pkgver}-amd64.deb")
+source=("https://github.com/bitwarden/clients/releases/download/desktop-v${pkgver}/Bitwarden-${pkgver}-amd64.deb")
 sha256sums=('SKIP')
 
 package() {
