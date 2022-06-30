@@ -20,6 +20,7 @@ makedeb-beta
 makedeb-alpha
 mcrcon
 mpr-cli
+mprocs
 neovim
 parse-changelog
 polybar
