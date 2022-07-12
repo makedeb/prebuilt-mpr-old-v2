@@ -31,3 +31,4 @@ rustc
 starship
 tap
 toast
+zoxide
