@@ -1,0 +1,13 @@
+generated-by = makedeb
+pkgname = zoxide
+pkgbase = zoxide
+pkgdesc = A smarter cd command.
+pkgrel = 1
+pkgver = 0.8.2
+arch = any
+makedepends = cargo
+makedepends = findutils
+source = zoxide-0.8.2::git+https://github.com/ajeetdsouza/zoxide/#tag=v0.8.2
+sha256sums = SKIP
+makedepends = cargo
+makedepends = findutils
