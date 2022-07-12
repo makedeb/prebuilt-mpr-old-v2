@@ -12,6 +12,7 @@ exa
 fd
 golang-go
 gh
+glab
 glow
 hugo
 hyperfine
