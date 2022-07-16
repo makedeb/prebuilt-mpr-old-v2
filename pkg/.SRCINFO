@@ -3,11 +3,11 @@ pkgname = toast
 pkgbase = toast
 pkgdesc = Containerize your development and continuous integration environments
 pkgrel = 1
-pkgver = 0.45.4
+pkgver = 0.45.5
 url = https://github.com/stepchowfun/toast
 arch = any
 depends = docker.io>=17.06.0
 makedepends = cargo
-source = toast-0.45.4::git+https://github.com/stepchowfun/toast/#tag=v0.45.4
+source = toast-0.45.5::git+https://github.com/stepchowfun/toast/#tag=v0.45.5
 sha256sums = SKIP
 makedepends = cargo
