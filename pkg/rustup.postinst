@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+echo "You may need to run 'rustup update stable' and 'rustup self upgrade-data' on every account that uses rustup."
