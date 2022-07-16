@@ -29,6 +29,7 @@ polymc
 proton-ge-custom-bin
 ripgrep
 rustc
+rustup
 starship
 tap
 toast
