@@ -16,6 +16,7 @@ glab
 glow
 hugo
 hyperfine
+just
 makedeb
 makedeb-beta
 makedeb-alpha
