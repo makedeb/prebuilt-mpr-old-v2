@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=parse-changelog
-pkgver=0.4.8
+pkgver=0.5.0
 pkgrel=1
 pkgdesc='Simple changelog parser, written in Rust'
 arch=('any')
