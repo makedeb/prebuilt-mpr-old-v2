@@ -3,14 +3,14 @@ pkgname = parse-changelog
 pkgbase = parse-changelog
 pkgdesc = Simple changelog parser, written in Rust
 pkgrel = 1
-pkgver = 0.4.8
+pkgver = 0.5.0
 url = https://docs.rs/parse-changelog
 arch = any
 license = Apache-2.0
 license = MIT
 makedepends = cargo
 makedepends = rustc>=1.51
-source = https://github.com/taiki-e/parse-changelog/archive/refs/tags/v0.4.8.tar.gz
+source = https://github.com/taiki-e/parse-changelog/archive/refs/tags/v0.5.0.tar.gz
 sha256sums = SKIP
 makedepends = cargo
 makedepends = rustc>=1.51
