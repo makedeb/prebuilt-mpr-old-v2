@@ -1,20 +1,20 @@
 # Maintainer: dada513 <dada513@protonmail.com>
 
 pkgname=polymc
-pkgver=1.3.2
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Minecraft launcher with ability to manage multiple instances."
-arch=('i686' 'x86_64')
+arch=('i686' 'amd64')
 url="https://github.com/PolyMC/PolyMC"
 license=('GPL3')
-depends=('libqt5xml5' 'libqt5core5a' 'libqt5network5' 'libqt5gui5')
+depends=('libqt5svg5' 'qt5-image-formats-plugins' 'libqt5xml5' 'libqt5core5a' 'libqt5network5' 'libqt5gui5')
 conflicts=('polymc')
 makedepends=('cmake' 'git' 'openjdk-17-jdk' 'zlib1g-dev' 'libgl1-mesa-dev' 'qtbase5-dev' 'qtchooser' 'qt5-qmake' 'qtbase5-dev-tools' 'gcc' 'g++')
 optdepends=('java-runtime=8: support for Minecraft versions < 1.17'
             'java-runtime=17: support for Minecraft versions >= 1.17')	    
 source=("https://github.com/PolyMC/PolyMC/releases/download/$pkgver/PolyMC-$pkgver.tar.gz")
 
-sha256sums=("c33484ae20c912d3dde2e55f64f24d8b86a9a9547631cd3b10481ddbf90f4735")
+sha256sums=("91b67bd4415f288399f824d9dc83a537d69e66f7ace93de4f62c3dd531a729a9")
 
 build() {
   cd "${srcdir}/PolyMC-$pkgver"
@@ -24,7 +24,7 @@ build() {
     -DCMAKE_INSTALL_PREFIX="/usr" \
     -DLauncher_BUILD_PLATFORM="debian" \
     -DLauncher_APP_BINARY_NAME="${pkgname}" \
-    -DLauncher_LTO=ON \
+    -DENABLE_LTO=ON \
     ..
   cmake --build .
 }
