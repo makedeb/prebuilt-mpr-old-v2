@@ -2,7 +2,7 @@ generated-by = makedeb
 pkgname = polymc
 pkgbase = polymc
 pkgdesc = Minecraft launcher with ability to manage multiple instances.
-pkgrel = 1
+pkgrel = 2
 pkgver = 1.4.0
 url = https://github.com/PolyMC/PolyMC
 arch = i686
@@ -15,6 +15,8 @@ depends = libqt5core5a
 depends = libqt5network5
 depends = libqt5gui5
 license = GPL3
+makedepends = scdoc
+makedepends = extra-cmake-modules
 makedepends = cmake
 makedepends = git
 makedepends = openjdk-17-jdk
@@ -30,6 +32,8 @@ optdepends = java-runtime=8: support for Minecraft versions < 1.17
 optdepends = java-runtime=17: support for Minecraft versions >= 1.17
 source = https://github.com/PolyMC/PolyMC/releases/download/1.4.0/PolyMC-1.4.0.tar.gz
 sha256sums = 91b67bd4415f288399f824d9dc83a537d69e66f7ace93de4f62c3dd531a729a9
+makedepends = scdoc
+makedepends = extra-cmake-modules
 makedepends = cmake
 makedepends = git
 makedepends = openjdk-17-jdk
