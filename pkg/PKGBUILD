@@ -8,7 +8,7 @@
 ## pkginfo
 pkgdesc='A fancy custom distribution of Valves Proton with various patches'
 pkgname='proton-ge-custom-bin'
-pkgver='7.27'
+pkgver='7.28'
 pkgrel='1'
 arch=('x86_64')
 license=('BSD' 'LGPL' 'zlib' 'MIT' 'MPL' 'custom')
@@ -47,9 +47,9 @@ url='https://github.com/GloriousEggroll/proton-ge-custom'
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/releases/download/${_srcdir}/${_srcdir}.tar.gz"
 	'user_settings.py'
 	'launcher.sh')
-sha512sums=('b741594fbc062bf7e5b5228273680807fb3eb20cfa04993b2e4ce9442ebed18f3e84ca5d59ee19381165d595932fe54b720526bd1f41b2bf74b13a20308de5ee'
-            'cd70fa35e8565197148c6135628ea4c751c7dc4d7eba6e59cf8a8f2315e79f45e80fc3adce68c8ca2c195a18aaa2a8b2b346e8843b369f3d0ac97e752dbb5399'
-            '33efb407e47140a72f1024bec67f2d718eec56e13ca76bcc18e03471b2c64f2b04034eb1e20b0da79afb727e59672fd3539fecc8131da88a8a1330f48a1c8424')
+b2sums=('8be4361f8ee4c596cd0ccc7451d204f011c4ddc253822c23e0c411f545fad9f56ce8e5fcdb7ac606e2a2e679c4a09ac488246b909106f89730744db43a909458'
+        'c0f466bc55ea4aadda12800d1a2b55fe2bae75a6f547f8275115913f5c6da1728a64a5269d938e315fba9518dd0b7e1ac41ecf5fc3109b316399a1ecfbb87492'
+        'f2df30593cc5a72959dc14236e5958006f9c64d51fcea48de38df19da1428446fe6a2f0bd080736f60a4b40816f929559667d49c888b4a3793af88c9c12a6df4')
 
 build() {
 	## patches
