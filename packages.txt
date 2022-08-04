@@ -21,6 +21,7 @@ makedeb
 makedeb-beta
 makedeb-alpha
 mcrcon
+mist
 mpr-cli
 mprocs
 neovim
