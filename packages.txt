@@ -20,6 +20,7 @@ just
 makedeb
 makedeb-beta
 makedeb-alpha
+mari
 mcrcon
 mist
 mpr-cli
