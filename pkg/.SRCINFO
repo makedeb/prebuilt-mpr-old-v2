@@ -1,0 +1,14 @@
+generated-by = makedeb
+pkgname = maturin
+pkgbase = maturin
+pkgdesc = Build and publish crates with pyo3, rust-cpython and cffi bindings
+pkgrel = 1
+pkgver = 0.13.1
+url = https://maturin.rs/
+arch = any
+license = Apache-2.0
+license = MIT
+makedepends = cargo
+source = https://github.com/PyO3/maturin/archive/refs/tags/v0.13.1.tar.gz
+sha256sums = SKIP
+makedepends = cargo
