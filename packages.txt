@@ -21,6 +21,7 @@ makedeb
 makedeb-beta
 makedeb-alpha
 mari
+maturin
 mcrcon
 mist
 mpr-cli
