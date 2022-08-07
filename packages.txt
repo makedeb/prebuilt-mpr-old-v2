@@ -27,6 +27,7 @@ mist
 mpr-cli
 mprocs
 neovim
+nodejs
 parse-changelog
 polybar
 polymc
