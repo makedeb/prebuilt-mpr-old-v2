@@ -28,6 +28,7 @@ mpr-cli
 mprocs
 neovim
 nodejs
+npm
 parse-changelog
 polybar
 polymc
