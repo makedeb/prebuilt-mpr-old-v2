@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=docker-compose
-pkgver=2.9.0
+pkgver=2.10.0
 pkgrel=1
 pkgdesc='Define and run multi-container applications with Docker'
 arch=('any')
@@ -13,7 +13,7 @@ sha256sums=('SKIP')
 
 build() {
     cd "compose-${pkgver}/"
-    go build -trimpath -o "${pkgname}" ./cmd
+    go build -trimpath -o "${pkgname}" -ldflags="-X=github.com/docker/compose/v2/internal.Version=v${pkgver}" ./cmd
 }
 
 package() {
