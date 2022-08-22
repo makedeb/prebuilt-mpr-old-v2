@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=maturin
-pkgver=0.13.1
+pkgver=0.13.2
 pkgrel=1
 pkgdesc='Build and publish crates with pyo3, rust-cpython and cffi bindings'
 arch=('any')
