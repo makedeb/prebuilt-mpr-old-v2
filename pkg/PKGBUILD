@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=mprocs
-pkgver=0.6.1
+pkgver=0.6.3
 pkgrel=1
 pkgdesc='Run multiple commands in parallel'
 arch=('any')
