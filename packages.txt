@@ -3,7 +3,9 @@ bat
 bats
 bitwarden-bin
 code-bin
+deno
 discord
+docuum
 docker-compose
 drone-cli
 drone-runner-exec
