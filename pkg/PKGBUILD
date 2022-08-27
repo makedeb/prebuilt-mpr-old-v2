@@ -1,7 +1,7 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=tokei
 pkgver=12.1.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Count your code, quickly'
 arch=('any')
 makedepends=('cargo')
@@ -13,7 +13,7 @@ sha256sums=('SKIP')
 
 build() {
     cd "${pkgname}-${pkgver}/"
-    cargo build --release
+    cargo build --release --all-features
 }
 
 package() {
