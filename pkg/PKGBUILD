@@ -1,7 +1,7 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 _pkgname='node'
 pkgname=nodejs
-pkgver=18.7.0
+pkgver=18.8.0
 pkgrel=1
 pkgdesc='Node.js JavaScript runtime'
 arch=('any')
