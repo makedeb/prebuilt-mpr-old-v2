@@ -2,6 +2,7 @@ airshipper
 bat
 bats
 bitwarden-bin
+chezmoi
 code-bin
 deno
 discord
@@ -16,8 +17,7 @@ golang-go
 gh
 glab
 glow
-hugo
-hyperfine
+hugo hyperfine
 just
 makedeb
 makedeb-beta
@@ -41,4 +41,5 @@ rustup
 starship
 tap
 toast
+tokei
 zoxide
