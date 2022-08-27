@@ -1,8 +1,8 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 _pkgname='node'
 pkgname=nodejs
-pkgver=18.7.0
-pkgrel=1
+pkgver=18.8.0
+pkgrel=2
 pkgdesc='Node.js JavaScript runtime'
 arch=('any')
 depends=(
@@ -43,6 +43,11 @@ package() {
     cd "${_pkgname}-${pkgver}/"
     make DESTDIR="${pkgdir}" install
     "${pkgdir}/usr/bin/${_pkgname}" --completion-bash | install -Dm 644 /dev/stdin "${pkgdir}/usr/share/bash-completion/completions/${_pkgname}"
+
+    (
+        PATH="${pkgdir}/usr/bin:${PATH}"
+        "${pkgdir}/usr/bin/corepack" enable --install-directory "${pkgdir}/usr/bin"
+    )
 }
 
 # vim: set sw=4 expandtab:
