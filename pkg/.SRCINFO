@@ -1,0 +1,13 @@
+generated-by = makedeb
+pkgname = npm
+pkgbase = npm
+pkgdesc = A JavaScript package manager
+pkgrel = 1
+pkgver = 8.18.0
+url = https://docs.npmjs.com/cli
+arch = all
+depends = nodejs
+makedepends = git
+source = cli-8.18.0::git+https://github.com/npm/cli/#tag=v8.18.0
+sha256sums = SKIP
+makedepends = git
