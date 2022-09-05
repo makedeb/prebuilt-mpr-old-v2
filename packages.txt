@@ -4,6 +4,7 @@ bats
 bitwarden-bin
 chezmoi
 code-bin
+comb
 deno
 discord
 docuum
