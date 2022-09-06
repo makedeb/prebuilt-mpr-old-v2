@@ -1,0 +1,29 @@
+# Maintainer: TwilightBlood <hwengerstickel@pm.me>
+pkgname=pacstall
+pkgver=2.0.1
+pkgrel=69
+pkgdesc="Pacstall is the AUR alternative for Ubuntu"
+arch=('x86_64')
+provides=("pacstall" "pacstall-bin")
+url="https://pacstall.dev"
+license=('GPL-3.0-only')
+makedepends=('wget' 'stow' 'build-essential' 'unzip' 'bc' 'tree')
+optdepends=('axel')
+source=("https://github.com/pacstall/pacstall/archive/refs/tags/${pkgver}.zip")
+sha256sums=('d02d47135c3555ce3bd0a81397390f099b8be9e409eaccf205bcc8e3810532b0')
+
+package() {
+  cd "$srcdir"
+  cd pacstall-"${pkgver}"
+  mv pacstall "${pkgdir}/bin"
+  mkdir -p "${pkgdir}/usr/share/pacstall/scripts/"
+  mkdir -p "${pkgdir}/usr/share/pacstall/repo/"
+  mv misc/scripts/* "${pkgdir}/usr/share/pacstall/scripts/"
+  mkdir -p "${pkgdir}/usr/share/bash-completion/completions/"
+  mkdir -p "${pkgdir}/usr/share/fish/vendor_completions.d/"
+  mv misc/completion/bash "${pkgdir}/usr/share/bash-completion/completions/"
+  mv misc/completion/fish "${pkgdir}/usr/share/fish/vendor_completions.d/"
+  mkdir -p "${pkgdir}/usr/share/man/man8/"
+  mv misc/pacstall.8.gz "${pkgdir}/usr/share/man/man8/"
+  echo "https://raw.githubusercontent.com/pacstall/pacstall-programs/master" > "${pkgdir}/usr/share/pacstall/repo/pacstallrepo.txt"
+}
