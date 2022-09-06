@@ -33,13 +33,22 @@ sudo chown 'makedeb:makedeb' ./ /mnt/prebuilt-mpr/ -R
 # Destroy all files in pkgdir.
 find "${pkgdir}" -mindepth 1 -maxdepth 1 -exec rm -rf '{}' +
 
-# Copy files to the packaging directory and build the package.
+# Copy files to the packaging directory.
+cd pkg/
+find ./ -mindepth 1 -maxdepth 1 -exec cp '{}' "${pkgdir}/{}" -R \;
+
+# Build the package.
+#
 # We pass '--pass-env' so that the DEBIAN_FRONTEND variable (which is set in
 # the Drone CI environment automatically in our instance) is exposed to
 # 'sudo apt-get' calls.
-cd pkg/
-find ./ -mindepth 1 -maxdepth 1 -exec cp '{}' "${pkgdir}/{}" -R \;
+#
+# makedeb doesn't like Pacstall, so we have to check if we're building it and convince makedeb that we really do want to add such an atrocious package to the Prebuilt-MPR repositories.
 cd "${pkgdir}"
-makedeb -s --no-confirm --skip-pgp-check --pass-env
+makedeb_opts=('-s' '--no-confirm' '--skip-pgp-check' '--pass-env')
+if [[ "${pkgname}" == 'pacstall' ]]; then
+    makedeb_opts+=('--why-yes-please-i-would-very-much-like-to-use-pacstall-why-would-i-want-to-use-anything-else-i-know-my-taste-is-absolutely-hideous-but-im-fine-with-that-as-i-like-my-programs-being-absolutely-atrocious')
+fi
+makedeb "${makedeb_opts[@]}"
 
 # vim: set sw=4 expandtab:
