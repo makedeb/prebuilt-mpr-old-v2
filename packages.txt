@@ -5,6 +5,7 @@ bitwarden-bin
 chezmoi
 code-bin
 comb
+dasel
 deno
 discord
 docuum
@@ -40,6 +41,7 @@ proton-ge-custom-bin
 ripgrep
 rustc
 rustup
+sentry-cli
 starship
 tap
 toast
