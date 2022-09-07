@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=comb
-pkgver=0.1.0
+pkgver=0.2.0
 pkgrel=1
 pkgdesc='CLI for the Handlebars templating engine'
 arch=('any')
