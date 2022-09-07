@@ -3,14 +3,14 @@ pkgname = bat
 pkgbase = bat
 pkgdesc = A cat(1) clone with wings
 pkgrel = 1
-pkgver = 0.21.0
+pkgver = 0.22.0
 url = https://github.com/sharkdp/bat
 arch = any
 conflicts = bacula-console-qt
 license = Apache-2.0
 makedepends = rustc>=1.51
 makedepends = cargo
-source = bat-0.21.0::git+https://github.com/sharkdp/bat/#tag=v0.21.0
+source = bat-0.22.0::git+https://github.com/sharkdp/bat/#tag=v0.22.0
 sha256sums = SKIP
 makedepends = rustc>=1.51
 makedepends = cargo
