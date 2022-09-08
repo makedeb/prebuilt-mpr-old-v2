@@ -1,0 +1,14 @@
+generated-by = makedeb
+pkgname = tokei
+pkgbase = tokei
+pkgdesc = Count your code, quickly
+pkgrel = 2
+pkgver = 12.1.2
+url = https://github.com/XAMPPRocky/tokei
+arch = any
+license = MIT
+license = Apache-2.0
+makedepends = cargo
+source = https://github.com/XAMPPRocky/tokei/archive/refs/tags/v12.1.2.tar.gz
+sha256sums = SKIP
+makedepends = cargo
