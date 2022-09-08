@@ -1,0 +1,15 @@
+generated-by = makedeb
+pkgname = docuum
+pkgbase = docuum
+pkgdesc = Perform least recently used (LRU) eviction of Docker images
+pkgrel = 1
+pkgver = 0.21.1
+url = https://github.com/stepchowfun/docuum
+arch = any
+depends = docker.io>=17.03.0
+makedepends = cargo
+source = https://github.com/stepchowfun/docuum/archive/refs/tags/v0.21.1.tar.gz
+source = docuum.service
+sha256sums = SKIP
+sha256sums = SKIP
+makedepends = cargo
