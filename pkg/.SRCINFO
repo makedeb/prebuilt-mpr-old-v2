@@ -1,0 +1,15 @@
+generated-by = makedeb
+pkgname = sentry-cli
+pkgbase = sentry-cli
+pkgdesc = A command line utility to work with Sentry.
+pkgrel = 1
+pkgver = 2.5.2
+url = https://docs.sentry.io/cli
+arch = any
+license = BSD-3
+makedepends = cargo
+makedepends = cmake
+source = https://github.com/getsentry/sentry-cli/archive/refs/tags/2.5.2.tar.gz
+sha256sums = SKIP
+makedepends = cargo
+makedepends = cmake
