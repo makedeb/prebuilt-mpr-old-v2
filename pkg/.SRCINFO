@@ -1,0 +1,13 @@
+generated-by = makedeb
+pkgname = dasel
+pkgbase = dasel
+pkgdesc = Select, put and delete data from JSON, TOML, YAML, XML and CSV files with a single tool
+pkgrel = 1
+pkgver = 1.26.1
+url = https://daseldocs.tomwright.me
+arch = any
+license = MIT
+makedepends = golang-go
+source = https://github.com/TomWright/dasel/archive/refs/tags/v1.26.1.tar.gz
+sha256sums = SKIP
+makedepends = golang-go
