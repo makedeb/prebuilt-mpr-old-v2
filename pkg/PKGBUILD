@@ -9,7 +9,7 @@
 pkgdesc='A fancy custom distribution of Valves Proton with various patches'
 pkgname='proton-ge-custom-bin'
 pkgver='7.35'
-pkgrel='1'
+pkgrel='2'
 arch=('x86_64')
 license=('BSD' 'LGPL' 'zlib' 'MIT' 'MPL' 'custom')
 changelog='changelog.md'
@@ -48,8 +48,8 @@ source=("${_pkgname}-${pkgver}.tar.gz::${url}/releases/download/${_srcdir}/${_sr
 	'user_settings.py'
 	'launcher.sh')
 b2sums=('b907c95c3d7dd2277542347a6d7296bb23dad40d075a56d23e1688d9b3abebec2e1986d42e5ced540874854da19c6d1033636abb03af3f3d77c2fc3aafc5799b'
-        'c0f466bc55ea4aadda12800d1a2b55fe2bae75a6f547f8275115913f5c6da1728a64a5269d938e315fba9518dd0b7e1ac41ecf5fc3109b316399a1ecfbb87492'
-        'f2df30593cc5a72959dc14236e5958006f9c64d51fcea48de38df19da1428446fe6a2f0bd080736f60a4b40816f929559667d49c888b4a3793af88c9c12a6df4')
+        'd39460c4d5aada5a30c9fb7d9d7bd14c59a5c71d5af0d9ab7f3a6d2ee4e3dcc80026cf4bfc3682318ae5aeea5d318270bad21b8a6b88c978df5f4a325da39f84'
+        '1c7f252e2f1229140bb628e820266137fd16b503bdf80680db8bd463ad60327217023b65c8080829d6354f8ce0bc673eabb95b7fd409c65650cf163dd16f8884')
 
 build() {
 	## patches
