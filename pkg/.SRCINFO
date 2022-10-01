@@ -2,7 +2,7 @@ generated-by = makedeb
 pkgname = makedeb-alpha
 pkgbase = makedeb-alpha
 pkgdesc = A simplicity-focused packaging tool for Debian archives (alpha release)
-pkgrel = alpha6
+pkgrel = alpha7
 pkgver = 16.0.0
 url = https://github.com/makedeb/makedeb
 arch = all
@@ -33,7 +33,7 @@ provides = makedeb-makepkg-alpha
 replaces = makedeb-makepkg
 replaces = makedeb-makepkg-beta
 replaces = makedeb-makepkg-alpha
-source = makedeb::git+https://github.com/makedeb/makedeb/#tag=v16.0.0-alpha6
+source = makedeb::git+https://github.com/makedeb/makedeb/#tag=v16.0.0-alpha7
 sha256sums = SKIP
 makedepends = asciidoctor
 makedepends = git
