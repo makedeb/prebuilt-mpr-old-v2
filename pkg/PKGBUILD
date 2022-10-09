@@ -3,7 +3,7 @@
 # Contributor: Hunter Wittenborn <hunter@hunterwittenborn.com>
 
 pkgname='code-bin'
-pkgver='1.71.2'
+pkgver='1.72.0'
 pkgrel='1'
 pkgdesc="Code editing. Redefined."
 arch=('x86_64')
@@ -13,7 +13,7 @@ _base_url='code.visualstudio.com'
 url="https://${_base_url}"
 
 source=("code-${pkgver}.deb::https://update.${_base_url}/${pkgver}/linux-deb-x64/stable")
-b2sums=('d26eba099dc51a7dd02f5637f4c76a4d95dbf2a4b6fbc1b23fdcaac7cb4ff90b04a128af590686822a14a841bedf1c95bcd8d7a5e350cba632b8d7d90d82a03d')
+b2sums=('93766687f69ef1d4a72ed14cd715cdfb3e9635c0a91e4a8fdaf15dba18442c0ee595d0fd21ef17f930445a29bd824dce0325ed82b4073b567fa7ccffcc56a9de')
 
 package() {
   msg2 "Extracting data.tar.xz..."
