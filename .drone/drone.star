@@ -1,6 +1,5 @@
-def _pipeline(ctx, event_triggers, distro_codename, docker_image):
+def _pipeline(ctx, pkgname, event_triggers, distro_codename, docker_image):
     branch = ctx.build.branch
-    pkgname = branch.replace("pkg/", "")
     volume_path = "/mnt/prebuilt-mpr/" + pkgname + "/" + distro_codename
 
     return [
@@ -91,12 +90,20 @@ def _pipeline(ctx, event_triggers, distro_codename, docker_image):
     ]
 
 def main(ctx):
+    pkgname = ctx.build.branch.replace("pkg/", "")
+
     # A list of distros to build for.
     distros = {
         "focal": "ubuntu-focal",
         "jammy": "ubuntu-jammy",
         "bullseye": "debian-bullseye"
     }
+
+    # A list of packages that should only have one build ran at a time.
+    singular_builds = [
+        "deno",
+        "rustc"
+    ]
     
     # If the package ends in '-git' we want to build it nightly via Drone CI cron jobs.
     event_triggers = ["push", "custom"]
@@ -106,7 +113,7 @@ def main(ctx):
     # Get the JSON object to return.
     output = []
     for distro, image in distros.items():
-        output += _pipeline(ctx, event_triggers, distro, "proget.makedeb.org/docker/makedeb/makedeb:" + image)
+        output += _pipeline(ctx, pkgname, event_triggers, distro, "proget.makedeb.org/docker/makedeb/makedeb:" + image)
 
     output += [{
             "name": "set-build-status",
@@ -116,7 +123,6 @@ def main(ctx):
                 "event": event_triggers,
                 "branch": ["pkg/*"]
             },
-            "depends_on": [distro + "-cleanup" for distro in distros],
             "steps": [{
                 "name": "set-build-status",
                 "image": "ubuntu",
@@ -128,5 +134,8 @@ def main(ctx):
                 ]
             }]
         }]
+
+    if (pkgname in singular_builds) == False:
+        output[-1]["depends_on"] = [distro + "-cleanup" for distro in distros]
 
     return output
