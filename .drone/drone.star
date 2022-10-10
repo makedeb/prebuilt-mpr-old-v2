@@ -123,6 +123,7 @@ def main(ctx):
                 "event": event_triggers,
                 "branch": ["pkg/*"]
             },
+            "depends_on": [distro + "-cleanup" for distro in distros],
             "steps": [{
                 "name": "set-build-status",
                 "image": "ubuntu",
@@ -135,7 +136,15 @@ def main(ctx):
             }]
         }]
 
-    if (pkgname in singular_builds) == False:
-        output[-1]["depends_on"] = [distro + "-cleanup" for distro in distros]
+    # If we only want to run a single build at a time, make each `-build` stage depend on the `-cleanup` stage before it.
+    if pkgname in singular_builds:
+        for (index, item) in enumerate(output[3::]):
+            if item["name"].endswith("-build") == False:
+                continue
+
+            # Get the actual index position since we don't start at the beginning. 
+            position = index + 3
+            
+            output[position]["depends_on"] = [output[position - 1]["name"]]
 
     return output
