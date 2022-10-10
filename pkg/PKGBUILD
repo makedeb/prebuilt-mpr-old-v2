@@ -1,7 +1,7 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=element-desktop-bin
-pkgver=1.11.4
-pkgrel=2
+pkgver=1.11.8
+pkgrel=1
 pkgdesc="A feature-rich client for Matrix.org"
 arch=('amd64')
 url="https://element.io/"
@@ -11,8 +11,7 @@ optdepends=('libappindicator3-1')
 conflicts=('riot-desktop<1.7.0' 'riot-web<1.7.0')
 replaces=('riot-desktop<1.7.0' 'riot-web<1.7.0')
 
-# Temporarily having `${pkgver}-1` instead of just `${pkgver}`, see https://github.com/vector-im/element-web/issues/23174#issuecomment-1233444593.
-source=("https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_${pkgver}-1_amd64.deb")
+source=("https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_${pkgver}_amd64.deb")
 sha256sums=('SKIP')
 
 package() {
