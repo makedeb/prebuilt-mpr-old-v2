@@ -1,15 +1,14 @@
-generated-by = makedeb-makepkg
-
-pkgbase = bats
-	pkgdesc = Bash Automated Testing System
-	pkgver = 1.6.0
-	pkgrel = 1
-	url = https://bats-core.readthedocs.io/
-	arch = all
-	license = MIT
-	source = bats-1.6.0::git+https://github.com/bats-core/bats-core/#tag=v1.6.0
-	source = bats.profile
-	sha256sums = SKIP
-	sha256sums = SKIP
-
+generated-by = makedeb
 pkgname = bats
+preinst = bats.preinst
+pkgbase = bats
+pkgdesc = Bash Automated Testing System
+pkgrel = 1
+pkgver = 1.8.0
+url = https://bats-core.readthedocs.io/
+arch = all
+license = MIT
+source = bats-1.8.0::git+https://github.com/bats-core/bats-core/#tag=v1.8.0
+source = bats.profile
+sha256sums = SKIP
+sha256sums = SKIP
