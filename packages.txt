@@ -19,7 +19,8 @@ golang-go
 gh
 glab
 glow
-hugo hyperfine
+hugo
+hyperfine
 just
 makedeb
 makedeb-beta
