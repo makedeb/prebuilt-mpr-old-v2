@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=bats
-pkgver=1.6.0
+pkgver=1.8.0
 pkgrel=1
 pkgdesc='Bash Automated Testing System'
 arch=('all')
