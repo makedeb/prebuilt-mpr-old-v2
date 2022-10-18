@@ -3,8 +3,8 @@ _release=alpha
 _target=mpr
 
 pkgname=makedeb-alpha
-pkgver=16.0.0
-pkgrel=alpha10
+pkgver=16.1.0
+pkgrel=alpha
 pkgdesc="A simplicity-focused packaging tool for Debian archives"
 arch=('all')
 license=('GPL3')
