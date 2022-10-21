@@ -37,7 +37,7 @@ npm
 pacstall
 parse-changelog
 polybar
-polymc
+prismlauncher
 proton-ge-custom-bin
 ripgrep
 rustc
