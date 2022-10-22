@@ -3,7 +3,7 @@ generated-by = makedeb-makepkg
 pkgbase = prismlauncher
 	pkgdesc = Minecraft launcher with ability to manage multiple instances.
 	pkgver = 5.0
-	pkgrel = 2
+	pkgrel = 3
 	url = https://prismlauncher.org
 	arch = i686
 	arch = amd64
@@ -29,6 +29,7 @@ pkgbase = prismlauncher
 	depends = libqt5gui5
 	optdepends = java-runtime=8: support for Minecraft versions < 1.17
 	optdepends = java-runtime=17: support for Minecraft versions >= 1.17
+	conflicts = polymc
 	source = https://github.com/PrismLauncher/PrismLauncher/releases/download/5.0/PrismLauncher-5.0.tar.gz
 	sha256sums = 27c2c7e0c9aaa3450b7449683cfd2a9a941b7118ab83947de09285438e03c495
 
