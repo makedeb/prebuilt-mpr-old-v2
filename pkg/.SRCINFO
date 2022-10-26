@@ -2,10 +2,11 @@ generated-by = makedeb
 pkgname = makedeb-alpha
 pkgbase = makedeb-alpha
 pkgdesc = A simplicity-focused packaging tool for Debian archives
-pkgrel = alpha9
+pkgrel = alpha11
 pkgver = 16.1.0
 url = https://github.com/makedeb/makedeb
 arch = any
+backup = /etc/makepkg.conf
 conflicts = makedeb
 depends = apt
 depends = binutils
@@ -25,7 +26,7 @@ makedepends = git
 makedepends = make
 makedepends = jq
 provides = makedeb=16.1.0
-source = makedeb::git+https://github.com/makedeb/makedeb/#tag=v16.1.0-alpha9
+source = makedeb::git+https://github.com/makedeb/makedeb/#tag=v16.1.0-alpha11
 sha256sums = SKIP
 makedepends = asciidoctor
 makedepends = cargo
