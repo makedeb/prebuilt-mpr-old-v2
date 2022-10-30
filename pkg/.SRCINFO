@@ -2,13 +2,13 @@ generated-by = makedeb
 pkgname = drone-cli
 pkgbase = drone-cli
 pkgdesc = Command Line Tools for Drone CI
-pkgrel = 2
-pkgver = 1.5.0
+pkgrel = 1
+pkgver = 1.6.1
 url = https://docs.drone.io/cli
 arch = any
 conflicts = drone-cli-bin
 license = Apache-2.0
 makedepends = golang-go>=1.16
-source = https://github.com/harness/drone-cli/archive/refs/tags/v1.5.0.tar.gz
+source = https://github.com/harness/drone-cli/archive/refs/tags/v1.6.1.tar.gz
 sha256sums = SKIP
 makedepends = golang-go>=1.16
