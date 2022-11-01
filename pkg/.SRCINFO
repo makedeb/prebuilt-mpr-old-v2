@@ -1,36 +1,50 @@
-generated-by = makedeb-makepkg
-
-pkgbase = prismlauncher
-	pkgdesc = Minecraft launcher with ability to manage multiple instances.
-	pkgver = 5.0
-	pkgrel = 3
-	url = https://prismlauncher.org
-	arch = i686
-	arch = amd64
-	license = GPL3
-	makedepends = scdoc
-	makedepends = extra-cmake-modules
-	makedepends = cmake
-	makedepends = git
-	makedepends = openjdk-17-jdk
-	makedepends = zlib1g-dev
-	makedepends = libgl1-mesa-dev
-	makedepends = qtbase5-dev
-	makedepends = qtchooser
-	makedepends = qt5-qmake
-	makedepends = qtbase5-dev-tools
-	makedepends = gcc
-	makedepends = g++
-	depends = libqt5svg5
-	depends = qt5-image-formats-plugins
-	depends = libqt5xml5
-	depends = libqt5core5a
-	depends = libqt5network5
-	depends = libqt5gui5
-	optdepends = java-runtime=8: support for Minecraft versions < 1.17
-	optdepends = java-runtime=17: support for Minecraft versions >= 1.17
-	conflicts = polymc
-	source = https://github.com/PrismLauncher/PrismLauncher/releases/download/5.0/PrismLauncher-5.0.tar.gz
-	sha256sums = 27c2c7e0c9aaa3450b7449683cfd2a9a941b7118ab83947de09285438e03c495
-
+generated-by = makedeb
 pkgname = prismlauncher
+pkgbase = prismlauncher
+pkgdesc = Minecraft launcher with ability to manage multiple instances.
+pkgrel = 1
+pkgver = 5.1
+url = https://prismlauncher.org
+arch = i686
+arch = amd64
+arch = arm64
+arch = armhf
+depends = libqt5svg5
+depends = qt5-image-formats-plugins
+depends = libqt5xml5
+depends = libqt5core5a
+depends = libqt5network5
+depends = libqt5gui5
+license = GPL3
+makedepends = scdoc
+makedepends = extra-cmake-modules
+makedepends = cmake
+makedepends = git
+makedepends = openjdk-17-jdk
+makedepends = zlib1g-dev
+makedepends = libgl1-mesa-dev
+makedepends = qtbase5-dev
+makedepends = qtchooser
+makedepends = qt5-qmake
+makedepends = qtbase5-dev-tools
+makedepends = gcc
+makedepends = g++
+optdepends = java-runtime=8: support for Minecraft versions < 1.17
+optdepends = java-runtime=17: support for Minecraft versions >= 1.17
+source = https://github.com/PrismLauncher/PrismLauncher/releases/download/5.1/PrismLauncher-5.1.tar.gz
+sha256sums = d5774911c2fde98f6b663c76084e49e8f664a0f21e13da9196072d38191a7d1e
+makedepends = scdoc
+makedepends = extra-cmake-modules
+makedepends = cmake
+makedepends = git
+makedepends = openjdk-17-jdk
+makedepends = zlib1g-dev
+makedepends = libgl1-mesa-dev
+makedepends = qtbase5-dev
+makedepends = qtchooser
+makedepends = qt5-qmake
+makedepends = qtbase5-dev-tools
+makedepends = gcc
+makedepends = g++
+optdepends = java-runtime=8: support for Minecraft versions < 1.17
+optdepends = java-runtime=17: support for Minecraft versions >= 1.17
