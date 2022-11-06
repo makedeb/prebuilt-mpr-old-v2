@@ -1,5 +1,5 @@
 # Prebuilt-MPR
-This is the source for the code that powers the Prebuilt-MPR. Here lies the needed components that allow for continuous deployments of MPR packages to the Prebuilt-MPR APT repositories.
+This is the source for the code that powers the Prebuilt-MPR. This repository contains the needed components that allow for continuous deployments of MPR packages to the Prebuilt-MPR APT repositories.
 
 ## The Prebuilt-MPR update flow
 A few things happen from a package being upload to the MPR to the package making it to the Prebuilt-MPR's APT repositories. We'll use the [`docker-compose`](https://mpr.makedeb.org/packages/docker-compose) package as an example.
