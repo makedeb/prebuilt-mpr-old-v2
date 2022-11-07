@@ -4,7 +4,7 @@ _target=mpr
 
 pkgname=makedeb-alpha
 pkgver=16.1.0
-pkgrel=alpha13
+pkgrel=alpha14
 pkgdesc="A simplicity-focused packaging tool for Debian archives"
 arch=('any')
 depends=(
@@ -49,7 +49,7 @@ build() {
 	local no_worker_sizes_distros=('bionic')
 	export DPKG_ARCHITECTURE="${MAKEDEB_DPKG_ARCHITECTURE}"
 
-	if in_array "${MAKEDEB_DISTRO_CODENAME}" "${no_worker_sizes_distros[@]}"; then
+	if ! in_array "${MAKEDEB_DISTRO_CODENAME}" "${no_worker_sizes_distros[@]}"; then
 		export RUST_APT_WORKER_SIZES=1
 	fi
 
