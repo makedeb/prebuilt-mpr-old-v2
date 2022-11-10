@@ -4,15 +4,33 @@ _target=mpr
 
 pkgname=makedeb-beta
 pkgver=16.0.0
-pkgrel=beta
-pkgdesc="A simplicity-focused packaging tool for Debian archives (${_release} release)"
+pkgrel=beta1
+pkgdesc="A simplicity-focused packaging tool for Debian archives"
 arch=('all')
 license=('GPL3')
-depends=('apt' 'binutils' 'build-essential' 'curl' 'fakeroot' 'file' 'gettext' 'gawk' 'libarchive-tools' 'lsb-release' 'python3' 'python3-apt' 'zstd')
-makedepends=('asciidoctor' 'git' 'make' 'jq')
-conflicts=('makedeb-makepkg' 'makedeb-makepkg-beta' 'makedeb-makepkg-alpha')
-provides=('makedeb-makepkg' 'makedeb-makepkg-beta' 'makedeb-makepkg-alpha')
-replaces=('makedeb-makepkg' 'makedeb-makepkg-beta' 'makedeb-makepkg-alpha')
+depends=(
+	'apt'
+	'binutils'
+	'build-essential'
+	'curl'
+	'fakeroot'
+	'file'
+	'gettext'
+	'gawk'
+	'libarchive-tools'
+	'lsb-release'
+	'python3'
+	'python3-apt'
+	'zstd'
+)
+makedepends=(
+	'asciidoctor'
+	'git'
+	'make'
+	'jq'
+)
+conflicts=('makedeb')
+provides=("makedeb=${pkgver}")
 url="https://github.com/makedeb/makedeb"
 
 source=("makedeb::git+${url}/#tag=v${pkgver}-${pkgrel}")
@@ -20,7 +38,7 @@ sha256sums=('SKIP')
 
 prepare() {
 	cd makedeb/
-	make prepare PKGVER="${pkgver}" RELEASE="${_release}" TARGET="${_target}"
+	make prepare PKGVER="${pkgver}" RELEASE="${_release}" TARGET="${_target}" CURRENT_VERSION="${pkgver}-${pkgrel}"
 }
 
 package() {
