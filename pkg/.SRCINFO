@@ -1,14 +1,11 @@
 generated-by = makedeb
 pkgname = makedeb
 pkgbase = makedeb
-pkgdesc = A simplicity-focused packaging tool for Debian archives (stable release)
+pkgdesc = A simplicity-focused packaging tool for Debian archives
 pkgrel = stable
-pkgver = 14.1.3
+pkgver = 16.0.0
 url = https://github.com/makedeb/makedeb
 arch = all
-conflicts = makedeb-makepkg
-conflicts = makedeb-makepkg-beta
-conflicts = makedeb-makepkg-alpha
 depends = apt
 depends = binutils
 depends = build-essential
@@ -27,13 +24,7 @@ makedepends = asciidoctor
 makedepends = git
 makedepends = make
 makedepends = jq
-provides = makedeb-makepkg
-provides = makedeb-makepkg-beta
-provides = makedeb-makepkg-alpha
-replaces = makedeb-makepkg
-replaces = makedeb-makepkg-beta
-replaces = makedeb-makepkg-alpha
-source = makedeb::git+https://github.com/makedeb/makedeb/#tag=v14.1.3-stable
+source = makedeb::git+https://github.com/makedeb/makedeb/#tag=v16.0.0-stable
 sha256sums = SKIP
 makedepends = asciidoctor
 makedepends = git
