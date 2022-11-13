@@ -4,7 +4,7 @@ _target=mpr
 
 pkgname=makedeb-alpha
 pkgver=16.1.0
-pkgrel=alpha16
+pkgrel=alpha17
 pkgdesc="A simplicity-focused packaging tool for Debian archives"
 arch=('any')
 depends=(
