@@ -2,10 +2,11 @@ generated-by = makedeb
 pkgname = makedeb-beta
 pkgbase = makedeb-beta
 pkgdesc = A simplicity-focused packaging tool for Debian archives
-pkgrel = beta1
-pkgver = 16.0.0
+pkgrel = beta
+pkgver = 16.1.0
 url = https://github.com/makedeb/makedeb
-arch = all
+arch = any
+backup = /etc/makepkg.conf
 conflicts = makedeb
 depends = apt
 depends = binutils
@@ -17,18 +18,18 @@ depends = gettext
 depends = gawk
 depends = libarchive-tools
 depends = lsb-release
-depends = python3
-depends = python3-apt
 depends = zstd
 license = GPL3
 makedepends = asciidoctor
+makedepends = cargo
 makedepends = git
 makedepends = make
 makedepends = jq
-provides = makedeb=16.0.0
-source = makedeb::git+https://github.com/makedeb/makedeb/#tag=v16.0.0-beta1
+provides = makedeb=16.1.0
+source = makedeb::git+https://github.com/makedeb/makedeb/#tag=v16.1.0-beta
 sha256sums = SKIP
 makedepends = asciidoctor
+makedepends = cargo
 makedepends = git
 makedepends = make
 makedepends = jq
