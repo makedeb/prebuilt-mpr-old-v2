@@ -2,7 +2,7 @@
 # Contributor: Sefa Eyeoglu <conctact@scrumplex.net>
 
 pkgname=prismlauncher
-pkgver=5.1
+pkgver=5.2
 pkgrel=1
 pkgdesc="Minecraft launcher with ability to manage multiple instances."
 arch=('i686' 'amd64' 'arm64' 'armhf')
@@ -13,7 +13,7 @@ makedepends=('scdoc' 'extra-cmake-modules' 'cmake' 'git' 'openjdk-17-jdk' 'zlib1
 optdepends=('java-runtime=8: support for Minecraft versions < 1.17'
             'java-runtime=17: support for Minecraft versions >= 1.17')	    
 source=("https://github.com/PrismLauncher/PrismLauncher/releases/download/$pkgver/PrismLauncher-$pkgver.tar.gz")
-sha256sums=('d5774911c2fde98f6b663c76084e49e8f664a0f21e13da9196072d38191a7d1e')
+sha256sums=('307257f34ddf664d1cf33ad5ba6ad2e08cf23392f58065a223e90448235ad556')
 
 build() {
   cd "${srcdir}/PrismLauncher-$pkgver"
