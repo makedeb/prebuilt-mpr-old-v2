@@ -3,7 +3,7 @@ pkgname = prismlauncher
 pkgbase = prismlauncher
 pkgdesc = Minecraft launcher with ability to manage multiple instances.
 pkgrel = 1
-pkgver = 6.0
+pkgver = 6.1
 url = https://prismlauncher.org
 arch = i686
 arch = amd64
@@ -31,8 +31,8 @@ makedepends = gcc
 makedepends = g++
 optdepends = java-runtime=8: support for Minecraft versions < 1.17
 optdepends = java-runtime=17: support for Minecraft versions >= 1.17
-source = https://github.com/PrismLauncher/PrismLauncher/releases/download/6.0/PrismLauncher-6.0.tar.gz
-sha256sums = 4b8845186e509f62564f47f48b04f8abb3e35523ba8b33c5413475724e49e1dc
+source = https://github.com/PrismLauncher/PrismLauncher/releases/download/6.1/PrismLauncher-6.1.tar.gz
+sha256sums = d89171a982af0f93208b25c33f5f890ca9674bd0573e685da969d6436103da9c
 makedepends = scdoc
 makedepends = extra-cmake-modules
 makedepends = cmake
