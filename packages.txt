@@ -26,6 +26,7 @@ makedeb
 makedeb-beta
 makedeb-alpha
 mari
+matrix-commander-rs
 maturin
 mcrcon
 mist
