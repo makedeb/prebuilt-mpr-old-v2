@@ -96,6 +96,7 @@ def main(ctx):
     distros = {
         "focal": "ubuntu-focal",
         "jammy": "ubuntu-jammy",
+	"kinetic": "ubuntu-kinetic",
         "bullseye": "debian-bullseye"
     }
 
