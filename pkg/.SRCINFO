@@ -3,7 +3,7 @@ pkgname = fd
 pkgbase = fd
 pkgdesc = A simple, fast and user-friendly alternative to 'find'
 pkgrel = 1
-pkgver = 8.4.0
+pkgver = 8.6.0
 url = https://github.com/sharkdp/fd
 arch = any
 conflicts = fdclone
@@ -11,7 +11,7 @@ license = Apache-2.0
 license = MIT
 makedepends = rustc>=1.56.0
 makedepends = cargo
-source = fd-8.4.0::git+https://github.com/sharkdp/fd/#tag=v8.4.0
+source = fd-8.6.0::git+https://github.com/sharkdp/fd/#tag=v8.6.0
 sha256sums = SKIP
 makedepends = rustc>=1.56.0
 makedepends = cargo
