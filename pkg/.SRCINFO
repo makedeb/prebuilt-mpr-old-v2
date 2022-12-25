@@ -3,13 +3,13 @@ pkgname = hugo
 pkgbase = hugo
 pkgdesc = The world's fastest framework for building websites
 pkgrel = 1
-pkgver = 0.106.0
+pkgver = 0.109.0
 url = https://gohugo.io/
 arch = any
 license = Apache-2.0
 makedepends = git
 makedepends = golang-go>=2:1.18
-source = hugo-0.106.0::git+https://github.com/gohugoio/hugo/#tag=v0.106.0
+source = hugo-0.109.0::git+https://github.com/gohugoio/hugo/#tag=v0.109.0
 sha256sums = SKIP
 makedepends = git
 makedepends = golang-go>=2:1.18
