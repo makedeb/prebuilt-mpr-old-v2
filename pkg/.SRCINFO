@@ -1,0 +1,12 @@
+generated-by = makedeb
+pkgname = appimage-builder
+pkgbase = appimage-builder
+pkgdesc = GNU/Linux packaging solution using the AppImage format
+pkgrel = 2
+pkgver = 1.1.0
+url = https://appimage-builder.readthedocs.io/
+arch = amd64
+depends = libfuse2
+license = MIT
+source = https://github.com/AppImageCrafters/appimage-builder/releases/download/v1.1.0/appimage-builder-1.1.0-x86_64.AppImage
+sha256sums = 4b4f99cae9291d78ba12dbdabca7c0a67c72aa61eb2e5d424089171a9485e96f
