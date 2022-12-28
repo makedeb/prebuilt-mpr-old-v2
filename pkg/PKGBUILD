@@ -1,7 +1,7 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=glab
 pkgver=1.24.1
-pkgrel=1
+pkgrel=2
 pkgdesc='A GitLab CLI tool bringing GitLab to your command line'
 arch=('any')
 makedepends=('golang-go>=2:1.13')
@@ -13,13 +13,13 @@ sha256sums=('SKIP')
 
 build() {
     cd "${pkgname}-${pkgver}/"
-    go build -trimpath -ldflags "-X main.version=v${pkgver} -X main.debugMode=false" -o "${pkgname}" github.com/profclems/glab/cmd/glab
+    make
 }
 
 package() {
     cd "${pkgname}-${pkgver}/"
-    install -Dm 755 "${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
-    "./${pkgname}" completion -s bash | install -Dm 644 /dev/stdin "${pkgdir}/usr/share/bash-completion/completions/${pkgname}"
+    install -Dm 755 "bin/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+    "bin/${pkgname}" completion -s bash | install -Dm 644 /dev/stdin "${pkgdir}/usr/share/bash-completion/completions/${pkgname}"
 }
 
 # vim: set sw=4 expandtab:
