@@ -103,6 +103,7 @@ def main(ctx):
     # A list of packages that should only have one build ran at a time.
     singular_builds = [
         "deno",
+	"matrix-commander-rs",
         "rustc"
     ]
     
