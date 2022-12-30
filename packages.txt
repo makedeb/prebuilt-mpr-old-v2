@@ -3,6 +3,7 @@ appimage-builder
 bat
 bats
 bitwarden-bin
+celeste
 chezmoi
 code-bin
 comb
