@@ -3,13 +3,13 @@ pkgname = chezmoi
 pkgbase = chezmoi
 pkgdesc = Manage your dotfiles across multiple diverse machines, securely.
 pkgrel = 1
-pkgver = 2.28.0
+pkgver = 2.29.0
 url = https://chezmoi.io
 arch = any
 license = MIT
 makedepends = git
 makedepends = golang-go>=2:1.17
-source = chezmoi-2.28.0::git+https://github.com/twpayne/chezmoi/#tag=v2.28.0
+source = chezmoi-2.29.0::git+https://github.com/twpayne/chezmoi/#tag=v2.29.0
 sha256sums = SKIP
 makedepends = git
 makedepends = golang-go>=2:1.17
