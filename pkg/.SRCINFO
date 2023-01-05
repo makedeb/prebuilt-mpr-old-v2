@@ -3,7 +3,7 @@ pkgname = code-bin
 pkgbase = code-bin
 pkgdesc = Code editing. Redefined.
 pkgrel = 1
-pkgver = 1.74.1
+pkgver = 1.74.2
 url = https://code.visualstudio.com
 arch = x86_64
 depends = libnss3>=2:3.26
@@ -15,5 +15,5 @@ depends = libgtk-3-0>=3.10.0
 depends = libxss1
 depends = libgbm1
 provides = visual-studio-code
-source = code-1.74.1.deb::https://update.code.visualstudio.com/1.74.1/linux-deb-x64/stable
-b2sums = 92fd6eeb7d5b1b2bdb43b9948cf9297426624a615f4ecbf0463911d216f0cc49d40b4086ea37fde29c40012c3780546c2d42792b4e5d8fb4bb26a86070e1194a
+source = code-1.74.2.deb::https://update.code.visualstudio.com/1.74.2/linux-deb-x64/stable
+b2sums = afb4a73ea2246fb9517d44a6e1b094051db736f4ab3c331c0913435405fa6e00be00b9a93f22f9bf4b4ca40efaa82c0666765db7250b0cfef21ea26ba8f1e8b6
