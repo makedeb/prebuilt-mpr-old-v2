@@ -4,7 +4,7 @@ changelog = changelog.md
 pkgbase = proton-ge-custom-bin
 pkgdesc = A fancy custom distribution of Valves Proton with various patches
 pkgrel = 1
-pkgver = 7.47
+pkgver = 7.48
 url = https://github.com/GloriousEggroll/proton-ge-custom
 arch = x86_64
 backup = /usr/share/steam/compatibilitytools.d/proton-ge-custom/user_settings.py
@@ -39,11 +39,11 @@ optdepends = xboxdrv: gamepad driver service
 options = !strip
 options = emptydirs
 provides = proton
-provides = proton-ge-custom=7.47
-source = proton-ge-custom-7.47.tar.gz::https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton7-47/GE-Proton7-47.tar.gz
+provides = proton-ge-custom=7.48
+source = proton-ge-custom-7.48.tar.gz::https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton7-48/GE-Proton7-48.tar.gz
 source = user_settings.py
 source = launcher.sh
-b2sums = 6c9faf8111e1737ef5427fd2805bef040eb754448140e81df0c502e17e99f79fc13ac577890fad98e943805011635b625a929abdfe7acb9c96d7fe26e0a3378d
+b2sums = 052173c4a685f1be23573a4e9ce089244fc145a08dc9ade5f4ce39c7915d80173d45dd4cfd4e09bf2b538f3e65f7c1c3dd6b68d355699c2bf3694b0eed070276
 b2sums = d39460c4d5aada5a30c9fb7d9d7bd14c59a5c71d5af0d9ab7f3a6d2ee4e3dcc80026cf4bfc3682318ae5aeea5d318270bad21b8a6b88c978df5f4a325da39f84
 b2sums = 1c7f252e2f1229140bb628e820266137fd16b503bdf80680db8bd463ad60327217023b65c8080829d6354f8ce0bc673eabb95b7fd409c65650cf163dd16f8884
 makedepends = patch
