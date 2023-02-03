@@ -3,7 +3,7 @@ pkgname = celeste
 pkgbase = celeste
 pkgdesc = GUI file synchronization client that can sync with any cloud provider
 pkgrel = 1
-pkgver = 0.3.3
+pkgver = 0.3.4
 url = https://github.com/hwittenborn/celeste
 arch = any
 depends = libadwaita-1-0
@@ -25,7 +25,7 @@ makedepends = libpango1.0-dev
 makedepends = golang-go>=2:1.17
 makedepends = pkg-config
 makedepends = rustup
-source = https://github.com/hwittenborn/celeste/archive/refs/tags/v0.3.3.tar.gz
+source = https://github.com/hwittenborn/celeste/archive/refs/tags/v0.3.4.tar.gz
 sha256sums = SKIP
 makedepends = just
 makedepends = libadwaita-1-dev
