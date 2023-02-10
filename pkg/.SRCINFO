@@ -2,12 +2,12 @@ generated-by = makedeb
 pkgname = glab
 pkgbase = glab
 pkgdesc = A GitLab CLI tool bringing GitLab to your command line
-pkgrel = 2
-pkgver = 1.24.1
+pkgrel = 1
+pkgver = 1.25.3
 url = https://gitlab.com/gitlab-org/cli
 arch = any
 license = MIT
 makedepends = golang-go>=2:1.13
-source = glab-1.24.1::git+https://gitlab.com/gitlab-org/cli/#tag=v1.24.1
+source = glab-1.25.3::git+https://gitlab.com/gitlab-org/cli/#tag=v1.25.3
 sha256sums = SKIP
 makedepends = golang-go>=2:1.13
