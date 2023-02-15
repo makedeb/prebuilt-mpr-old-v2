@@ -4,7 +4,7 @@ postinst = rustup.postinst
 pkgbase = rustup
 pkgdesc = The rust toolchain installer
 pkgrel = 1
-pkgver = 1.25.1
+pkgver = 1.25.2
 url = https://rust-lang.github.io/rustup
 arch = any
 conflicts = rustc
@@ -30,6 +30,6 @@ provides = rust-gdb=2.0.0
 provides = rust-lldb=2.0.0
 provides = rust-src=2.0.0
 provides = rustfmt=2.0.0
-source = https://github.com/rust-lang/rustup/archive/refs/tags/1.25.1.tar.gz
+source = https://github.com/rust-lang/rustup/archive/refs/tags/1.25.2.tar.gz
 sha256sums = SKIP
 makedepends = cargo

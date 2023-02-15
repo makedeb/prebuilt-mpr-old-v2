@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=rustup
-pkgver=1.25.1
+pkgver=1.25.2
 pkgrel=1
 pkgdesc='The rust toolchain installer'
 arch=('any')
@@ -44,7 +44,7 @@ package() {
     cd "${pkgname}-${pkgver}/"
     install -Dm 755 target/release/rustup-init "${pkgdir}/usr/bin/${pkgname}"
 
-    for bin in 'cargo' 'rustc' 'rustdoc' 'rust-gdb' 'rust-lldb' 'rls' 'rustfmt' 'cargo-fmt' 'cargo-clippy' 'clippy-driver' 'cargo-miri'; do
+    for bin in 'cargo' 'cargo-clippy' 'cargo-fmt' 'clippy-driver' 'rustc' 'rustdoc' 'rustfmt' 'rust-gdb' 'rust-gdbgui' 'rust-lldb'; do
         ln -s "/usr/bin/${pkgname}" "${pkgdir}/usr/bin/${bin}"
     done
 
