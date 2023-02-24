@@ -1,0 +1,13 @@
+generated-by = makedeb
+pkgname = xtr
+pkgbase = xtr
+pkgdesc = Extract strings from a rust crate to be translated with gettext
+pkgrel = 1
+pkgver = 0.1.6
+url = https://github.com/woboq/tr#about-xtr
+arch = any
+license = AGPL-3.0
+makedepends = cargo
+source = https://github.com/woboq/tr/archive/refs/tags/v0.1.6.tar.gz
+sha256sums = SKIP
+makedepends = cargo
