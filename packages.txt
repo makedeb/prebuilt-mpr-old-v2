@@ -50,4 +50,5 @@ starship
 tap
 toast
 tokei
+xtr
 zoxide
