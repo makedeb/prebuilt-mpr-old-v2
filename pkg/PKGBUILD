@@ -1,8 +1,8 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=celeste
-pkgver=0.3.5
+pkgver=0.4.6
 pkgrel=1
-pkgdesc='GUI file synchronization client that can sync with any cloud provider'
+pkgdesc='Sync your cloud files'
 arch=('any')
 depends=(
     'libadwaita-1-0'
