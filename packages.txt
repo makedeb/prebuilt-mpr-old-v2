@@ -42,6 +42,7 @@ parse-changelog
 polybar
 prismlauncher
 proton-ge-custom-bin
+rclone
 ripgrep
 rustc
 rustup
