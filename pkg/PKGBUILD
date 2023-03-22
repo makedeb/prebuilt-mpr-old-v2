@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=docker-compose
-pkgver=2.16.0
+pkgver=2.17.0
 pkgrel=1
 pkgdesc='Define and run multi-container applications with Docker'
 arch=('any')
