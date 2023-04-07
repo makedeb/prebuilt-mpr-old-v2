@@ -5,7 +5,7 @@ prerm = neovim.prerm
 pkgbase = neovim
 pkgdesc = Vim-fork focused on extensibility and usability
 pkgrel = 1
-pkgver = 0.8.3
+pkgver = 0.9.0
 url = https://neovim.io/
 arch = any
 conflicts = neovim-runtime
@@ -22,7 +22,7 @@ makedepends = pkg-config
 makedepends = unzip
 makedepends = curl
 makedepends = doxygen
-source = neovim-0.8.3::git+https://github.com/neovim/neovim/#tag=v0.8.3
+source = neovim-0.9.0::git+https://github.com/neovim/neovim/#tag=v0.9.0
 sha256sums = SKIP
 makedepends = ninja-build
 makedepends = gettext
