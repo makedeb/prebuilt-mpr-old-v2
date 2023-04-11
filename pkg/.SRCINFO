@@ -3,12 +3,12 @@ pkgname = rclone
 pkgbase = rclone
 pkgdesc = rsync for cloud storage
 pkgrel = 1
-pkgver = 1.60.1
+pkgver = 1.62.2
 url = https://rclone.org
 arch = any
 depends = libfuse-dev
 license = MIT
 makedepends = golang-go>=2:1.17
-source = https://github.com/rclone/rclone/archive/refs/tags/v1.60.1.tar.gz
+source = https://github.com/rclone/rclone/archive/refs/tags/v1.62.2.tar.gz
 sha256sums = b0037124c04fd1c31a1d9ae1c80e25555da3a22d7ab1ae714ed2c02247fbdac5
 makedepends = golang-go>=2:1.17

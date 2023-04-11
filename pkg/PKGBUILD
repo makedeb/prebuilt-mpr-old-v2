@@ -1,6 +1,6 @@
 # Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=rclone
-pkgver=1.60.1
+pkgver=1.62.2
 pkgrel=1
 pkgdesc='rsync for cloud storage'
 arch=('any')
