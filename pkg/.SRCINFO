@@ -3,11 +3,11 @@ pkgname = docker-compose
 pkgbase = docker-compose
 pkgdesc = Define and run multi-container applications with Docker
 pkgrel = 1
-pkgver = 2.17.2
+pkgver = 2.17.3
 url = https://docs.docker.com/compose/
 arch = any
 license = Apache-2.0
 makedepends = golang-go>=1.17
-source = https://github.com/docker/compose/archive/refs/tags/v2.17.2.tar.gz
+source = https://github.com/docker/compose/archive/refs/tags/v2.17.3.tar.gz
 sha256sums = SKIP
 makedepends = golang-go>=1.17
